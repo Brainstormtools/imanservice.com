@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary: #056D67;
+    --primary-dark: #034F4B;
+    --teal-dark: #096F67;
+    --accent: #C1F24F;
+    --accent-light: #D8FA8A;
+    --bg-light: #F4FAF8;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #F4FAF8;
+    color: #1E293B;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
+
