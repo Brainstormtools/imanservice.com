@@ -49,7 +49,7 @@ export const ConsultancySection: React.FC<ConsultancySectionProps> = ({ onOpenQu
               Strategic IT Consultancy
             </h2>
             <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
-              IT consulting is strategic advice that helps organizations improve the performance, scalability, and strategic value of their technology functions. IMAN provides expert guidance that harmonizes technology with your most important business goals.
+              IT consulting is strategic advice that helps organizations improve the performance, scalability, and strategic value of their technology functions. i Man Service provides expert guidance that harmonizes technology with your most important business goals.
             </p>
           </div>
 
@@ -134,14 +134,14 @@ export const ConsultancySection: React.FC<ConsultancySectionProps> = ({ onOpenQu
           </div>
         </div>
 
-        {/* Section 2: Why IMAN SERVICE COMPANY for IT Consulting? */}
+        {/* Section 2: Why i Man Service for IT Consulting? */}
         <div className="mt-16 bg-[#F4FAF8] rounded-3xl p-8 sm:p-10 border border-[#056D67]/20">
           <div className="max-w-3xl mb-8">
             <span className="text-xs font-bold text-[#056D67] uppercase tracking-wider bg-white px-3 py-1 rounded-full border border-[#056D67]/20">
               Our Advisory Advantage
             </span>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display mt-2">
-              Why IMAN SERVICE COMPANY for IT Consulting?
+              Why i Man Service for IT Consulting?
             </h3>
             <p className="text-slate-600 text-sm mt-1">
               We bring an objective, real-world perspective that bridges the gap between executive leadership and technical execution.

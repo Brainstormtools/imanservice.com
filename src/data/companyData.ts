@@ -9,17 +9,17 @@ import {
 } from '../types';
 
 export const COMPANY_INFO = {
-  name: "IMAN SERVICE COMPANY",
+  name: "i Man Service",
   tagline: "Your Single Point of Accountability for Enterprise IT Infrastructure",
   phone: "042-37455670",
   phoneFormatted: "+92 42 37455670",
   email: "info@imanservice.com",
   supportEmail: "support@imanservice.com",
   website: "imanservice.com",
-  address: "181 STREET 5 , BLOCK C , OPF LAHORE",
+  address: "P-120, Siddique Trade Center, Gulberg ll Lahore",
   city: "Lahore, Pakistan",
   hours: "Monday – Saturday: 9:00 AM – 7:00 PM (Emergency SLA Support 24/7/365)",
-  overview: "IMAN SERVICE COMPANY is a trusted IT infrastructure and technology services provider committed to delivering excellence across the entire IT lifecycle. We empower businesses with reliable, secure, and future-ready technology solutions through three specialized service pillars: Existing Networks Audit, IT-AMC/SLA and IT Consultancy. With a comprehensive portfolio spanning hardware and software, we serve as a single point of accountability for all your technology needs. Our mission is to transform IT from a cost center into a strategic business enabler—ensuring your systems are always available, always secure, and always aligned with your business goals."
+  overview: "i Man Service is a trusted IT infrastructure and technology services provider committed to delivering excellence across the entire IT lifecycle. We empower businesses with reliable, secure, and future-ready technology solutions through three specialized service pillars: Existing Networks Audit, IT-AMC/SLA and IT Consultancy. With a comprehensive portfolio spanning hardware and software, we serve as a single point of accountability for all your technology needs. Our mission is to transform IT from a cost center into a strategic business enabler—ensuring your systems are always available, always secure, and always aligned with your business goals."
 };
 
 export const BRAND_COLORS = {

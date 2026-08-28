@@ -47,7 +47,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
 
             {/* Sub-headline / Core Description */}
             <p className="text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl font-light">
-              <strong className="font-semibold text-white">IMAN SERVICE COMPANY</strong> delivers reliable, secure, and future-ready IT infrastructure across the entire lifecycle. Your single point of accountability for <span className="text-white font-medium underline decoration-[#C1F24F] decoration-2 underline-offset-4">Existing Networks Audit</span>, <span className="text-white font-medium underline decoration-[#C1F24F] decoration-2 underline-offset-4">IT-AMC/SLA Maintenance</span>, and <span className="text-white font-medium underline decoration-[#C1F24F] decoration-2 underline-offset-4">IT Consultancy</span>.
+              <strong className="font-semibold text-white">i Man Service</strong> delivers reliable, secure, and future-ready IT infrastructure across the entire lifecycle. Your single point of accountability for <span className="text-white font-medium underline decoration-[#C1F24F] decoration-2 underline-offset-4">Existing Networks Audit</span>, <span className="text-white font-medium underline decoration-[#C1F24F] decoration-2 underline-offset-4">IT-AMC/SLA Maintenance</span>, and <span className="text-white font-medium underline decoration-[#C1F24F] decoration-2 underline-offset-4">IT Consultancy</span>.
             </p>
 
             {/* Value Pillars Quick Chips */}

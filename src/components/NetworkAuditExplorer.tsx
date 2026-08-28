@@ -314,7 +314,7 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
               <span>Business Value & ROI</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
-              Why Audit Your Network with IMAN?
+              Why Audit Your Network with i Man Service?
             </h3>
             <p className="text-slate-200 text-sm sm:text-base mt-2">
               Auditing isn't an academic exercise—it is a critical protective measure that saves millions in downtime, eliminates wasteful hardware spend, and secures sensitive corporate assets.

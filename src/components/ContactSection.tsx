@@ -48,7 +48,7 @@ export const ContactSection: React.FC = () => {
             <span>Lahore Technology Operations Hub</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-display">
-            Contact IMAN SERVICE COMPANY
+            Contact i Man Service
           </h2>
           <p className="text-slate-600 text-sm sm:text-base mt-2">
             Speak directly with our infrastructure specialists, book an on-site network audit, or activate emergency IT maintenance dispatch.
@@ -257,7 +257,7 @@ export const ContactSection: React.FC = () => {
                   ) : (
                     <>
                       <Send className="w-4 h-4 text-[#C1F24F]" />
-                      <span>Send Direct Message to IMAN Engineers</span>
+                      <span>Send Direct Message to i Man Engineers</span>
                     </>
                   )}
                 </button>

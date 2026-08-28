@@ -41,9 +41,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenQuote }) => {
           
           {/* Left Column: Company Story & Mission (Col 1-6) */}
           <div className="lg:col-span-6 space-y-6">
+            
+            {/* Full Corporate Brand Logo Banner */}
+            <div className="p-4 rounded-2xl bg-[#F4FAF8] border border-[#056D67]/15 inline-block">
+              <Logo type="full" size="lg" />
+            </div>
+
             <div className="inline-flex items-center gap-2 text-xs font-bold text-[#056D67] uppercase tracking-wider">
               <span className="w-6 h-0.5 bg-[#C1F24F]" />
-              <span>About IMAN SERVICE COMPANY</span>
+              <span>About i Man Service</span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-display leading-tight">
@@ -51,7 +57,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenQuote }) => {
             </h2>
 
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-light">
-              <strong className="text-slate-900 font-semibold">IMAN SERVICE COMPANY</strong> is a comprehensive IT infrastructure and technology services provider dedicated to helping businesses leverage technology for sustainable growth.
+              <strong className="text-slate-900 font-semibold">i Man Service</strong> is a comprehensive IT infrastructure and technology services provider dedicated to helping businesses leverage technology for sustainable growth.
             </p>
 
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-light">
@@ -67,7 +73,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenQuote }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <div className="flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
                 <MapPin className="w-4 h-4 text-[#056D67] flex-shrink-0" />
-                <span className="truncate">OPF Lahore, Pakistan</span>
+                <span className="truncate">Gulberg ll, Lahore</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
                 <Phone className="w-4 h-4 text-[#056D67] flex-shrink-0" />
@@ -82,7 +88,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenQuote }) => {
             <div className="bg-[#F4FAF8] rounded-3xl p-6 sm:p-8 border border-[#056D67]/20 shadow-xs">
               <div className="mb-6">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#056D67]">
-                  The IMAN Standard
+                  The i Man Standard
                 </span>
                 <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-display">
                   Our 4 Core Commitments to Every Client

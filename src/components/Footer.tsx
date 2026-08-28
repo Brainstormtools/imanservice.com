@@ -40,7 +40,7 @@ export const Footer: React.FC<FooterProps> = ({
             <Logo variant="dark" size="lg" showTagline={true} />
             
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm pt-2">
-              <strong>IMAN SERVICE COMPANY</strong> is your single point of accountability for enterprise IT infrastructure, fixed-fee SLA-backed maintenance, independent audits, and strategic technology consulting.
+              <strong>i Man Service</strong> is your single point of accountability for enterprise IT infrastructure, fixed-fee SLA-backed maintenance, independent audits, and strategic technology consulting.
             </p>
 
             {/* Location & Phone */}
@@ -147,7 +147,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Bottom Copyright Row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            © {new Date().getFullYear()} <strong>IMAN SERVICE COMPANY</strong>. All Rights Reserved. 181 Street 5, Block C, OPF Lahore.
+            © {new Date().getFullYear()} <strong>i Man Service</strong>. All Rights Reserved. {COMPANY_INFO.address}.
           </div>
 
           <div className="flex items-center gap-4">

@@ -33,7 +33,7 @@ export const KeyThemes: React.FC<KeyThemesProps> = ({ onOpenQuote }) => {
             <span>Our Operational Philosophy</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
-            Why Leading Enterprises Choose <span className="text-[#056D67]">IMAN SERVICE COMPANY</span>
+            Why Leading Enterprises Choose <span className="text-[#056D67]">i Man Service</span>
           </h2>
           <p className="text-slate-600 text-sm sm:text-base mt-2">
             Five core differentiators that transform your IT infrastructure from a chaotic cost center into a predictable, high-performance competitive engine.
