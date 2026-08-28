@@ -45,40 +45,40 @@ export const Footer: React.FC<FooterProps> = ({
             </p>
 
             {/* Location & Phone */}
-            <div className="space-y-1 text-xs sm:text-sm pt-2">
-              <div className="flex items-center gap-2.5 text-slate-200 min-h-[36px]">
+            <div className="space-y-0.5 text-xs sm:text-sm pt-2">
+              <div className="inline-flex items-center gap-2.5 text-slate-200 min-h-[36px] py-1.5">
                 <MapPin className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
                 <span>{COMPANY_INFO.address}, {COMPANY_INFO.city}</span>
               </div>
-              <div className="flex items-center gap-2.5 text-slate-200">
-                <Phone className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
+              <div>
                 <a 
                   href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`} 
-                  className="min-h-[44px] inline-flex items-center font-bold text-white hover:text-[#C1F24F] py-1"
+                  className="inline-flex items-center gap-2.5 min-h-[44px] py-2.5 font-bold text-white hover:text-[#C1F24F] transition-colors"
                 >
-                  {COMPANY_INFO.phone} (Direct & 24/7 SLA)
+                  <Phone className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
+                  <span>{COMPANY_INFO.phone} (Direct & 24/7 SLA)</span>
                 </a>
               </div>
-              <div className="flex items-center gap-2.5 text-slate-200">
-                <MessageSquare className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
+              <div>
                 <a 
                   href={COMPANY_INFO.whatsappLink || 'https://wa.me/923149020008'} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="min-h-[44px] inline-flex items-center font-bold text-[#C1F24F] hover:underline py-1"
+                  className="inline-flex items-center gap-2.5 min-h-[44px] py-2.5 font-bold text-[#C1F24F] hover:underline transition-colors"
                 >
-                  WhatsApp: {COMPANY_INFO.whatsapp || '+92 314 9020008'}
+                  <MessageSquare className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
+                  <span>WhatsApp: {COMPANY_INFO.whatsapp || '+92 314 9020008'}</span>
                 </a>
               </div>
-              <div className="flex items-center gap-2.5 text-slate-200 min-h-[44px]">
-                <Globe className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
+              <div>
                 <a 
                   href={`https://${COMPANY_INFO.website}`} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="min-h-[44px] inline-flex items-center text-slate-200 hover:text-[#C1F24F] transition-colors"
+                  className="inline-flex items-center gap-2.5 min-h-[44px] py-2.5 text-slate-200 hover:text-[#C1F24F] transition-colors"
                 >
-                  {COMPANY_INFO.website}
+                  <Globe className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
+                  <span>{COMPANY_INFO.website}</span>
                 </a>
               </div>
             </div>
