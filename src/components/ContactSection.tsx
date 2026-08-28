@@ -135,7 +135,7 @@ export const ContactSection: React.FC = () => {
               <div className="mt-6 pt-5 border-t border-white/15 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <a
                   href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`}
-                  className="w-full py-2.5 px-3 rounded-xl bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 text-center"
+                  className="w-full min-h-[44px] py-2.5 px-3 rounded-xl bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 text-center"
                 >
                   <Phone className="w-4 h-4" />
                   <span>Call {COMPANY_INFO.phone}</span>
@@ -144,7 +144,7 @@ export const ContactSection: React.FC = () => {
                   href={COMPANY_INFO.whatsappLink || 'https://wa.me/923149020008'}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-2.5 px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs sm:text-sm border border-white/30 transition-all flex items-center justify-center gap-2 text-center"
+                  className="w-full min-h-[44px] py-2.5 px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs sm:text-sm border border-white/30 transition-all flex items-center justify-center gap-2 text-center"
                 >
                   <MessageSquare className="w-4 h-4 text-[#C1F24F]" />
                   <span>Chat on WhatsApp</span>
@@ -191,7 +191,7 @@ export const ContactSection: React.FC = () => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Bilal Liaqat"
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67]"
+                      className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67]"
                     />
                   </div>
 
@@ -205,7 +205,7 @@ export const ContactSection: React.FC = () => {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="e.g. +92 314 9020008 or 0314-9020008"
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67]"
+                      className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67]"
                     />
                   </div>
                 </div>
@@ -221,7 +221,7 @@ export const ContactSection: React.FC = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="name@company.com"
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67]"
+                      className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67]"
                     />
                   </div>
 
@@ -232,7 +232,7 @@ export const ContactSection: React.FC = () => {
                     <select
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] bg-white"
+                      className="w-full min-h-[44px] px-3 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] bg-white"
                     >
                       <option value="Existing Networks Audit">1. Existing Networks Audit</option>
                       <option value="IT-AMC / SLA Contract">2. IT-AMC / SLA Maintenance</option>
@@ -259,7 +259,7 @@ export const ContactSection: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 px-4 rounded-xl bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-xs disabled:opacity-50"
+                  className="w-full min-h-[44px] py-3 px-4 rounded-xl bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-xs disabled:opacity-50"
                 >
                   {loading ? (
                     <span>Sending Message...</span>

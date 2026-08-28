@@ -180,7 +180,7 @@ export const Logo: React.FC<LogoProps> = ({
 
   // Default Standard Mark + Typography (Matches the uploaded Engineer Icon & Brand text)
   return (
-    <div className={`inline-flex items-center gap-3 select-none ${className}`}>
+    <div className={`inline-flex items-center gap-2 sm:gap-3 select-none flex-nowrap whitespace-nowrap ${className}`}>
       {/* Precision Vector Icon matching logo.jpeg */}
       <div className={`relative ${sizeStyles.iconWidth} ${sizeStyles.height} flex-shrink-0 flex items-center justify-center`}>
         <svg
@@ -262,24 +262,24 @@ export const Logo: React.FC<LogoProps> = ({
       </div>
 
       {/* Brand Name Typography */}
-      <div className="flex flex-col">
-        <div className="flex items-center tracking-tight font-extrabold font-display leading-tight">
-          <span className={`text-xl sm:${sizeStyles.text} ${isDark ? 'text-white' : 'text-[#056D67]'}`}>
+      <div className="flex flex-col flex-shrink-0">
+        <div className="flex items-center tracking-tight font-extrabold font-display leading-tight whitespace-nowrap">
+          <span className={`${size === 'sm' ? 'text-sm sm:text-base' : size === 'lg' ? 'text-xl sm:text-2xl' : size === 'xl' ? 'text-2xl sm:text-3xl' : 'text-base sm:text-xl'} ${isDark ? 'text-white' : 'text-[#056D67]'}`}>
             i Man
           </span>
-          <span className={`ml-1.5 font-light text-xl sm:${sizeStyles.text} ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+          <span className={`ml-1 font-light ${size === 'sm' ? 'text-sm sm:text-base' : size === 'lg' ? 'text-xl sm:text-2xl' : size === 'xl' ? 'text-2xl sm:text-3xl' : 'text-base sm:text-xl'} ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
             Service
           </span>
-          <span className="ml-2 text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#C1F24F] text-[#034F4B] tracking-wider uppercase">
+          <span className="ml-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#C1F24F] text-[#034F4B] tracking-wider uppercase flex-shrink-0">
             IT
           </span>
         </div>
         {showTagline ? (
-          <span className={`text-[10px] tracking-widest font-semibold uppercase ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>
+          <span className={`text-[11px] sm:text-xs tracking-widest font-semibold uppercase ${isDark ? 'text-slate-300' : 'text-slate-500'} whitespace-nowrap`}>
             Enterprise Infrastructure & SLA
           </span>
         ) : (
-          <span className={`text-[10px] tracking-wider font-medium ${isDark ? 'text-slate-300' : 'text-[#056D67]/80'}`}>
+          <span className={`text-[11px] sm:text-xs tracking-wider font-medium ${isDark ? 'text-slate-300' : 'text-[#056D67]/80'} whitespace-nowrap`}>
             Enterprise IT Solutions
           </span>
         )}

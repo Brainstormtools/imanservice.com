@@ -95,12 +95,13 @@ export const KeyThemes: React.FC<KeyThemesProps> = ({ onOpenQuote }) => {
                   </span>
                   <button
                     onClick={() => onOpenQuote('all')}
-                    className={`inline-flex items-center gap-1 font-semibold hover:underline ${
+                    className={`min-h-[44px] inline-flex items-center gap-1 font-bold text-xs sm:text-sm hover:underline px-2 py-1 -mr-2 rounded transition-colors ${
                       isFeatured ? 'text-[#C1F24F]' : 'text-[#056D67]'
                     }`}
+                    aria-label={`Inquire about ${theme.title}`}
                   >
                     <span>Inquire</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
+                    <ArrowUpRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -123,7 +124,7 @@ export const KeyThemes: React.FC<KeyThemesProps> = ({ onOpenQuote }) => {
             <div className="mt-4 pt-3">
               <button
                 onClick={() => onOpenQuote('all')}
-                className="w-full py-2.5 px-4 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-semibold text-xs sm:text-sm transition-colors text-center"
+                className="w-full min-h-[44px] py-2.5 px-4 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-semibold text-xs sm:text-sm transition-colors text-center flex items-center justify-center"
               >
                 Schedule Executive Consultation
               </button>

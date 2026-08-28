@@ -100,7 +100,7 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
             <button
               onClick={onOpenChecklist}
               id="audit-view-checklist-btn"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#056D67]/30 text-[#056D67] hover:bg-[#F4FAF8] font-semibold text-sm transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg border border-[#056D67]/30 text-[#056D67] hover:bg-[#F4FAF8] font-semibold text-sm transition-all"
             >
               <FileText className="w-4 h-4 text-[#056D67]" />
               <span>View Audit Checklist</span>
@@ -108,7 +108,7 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
             <button
               onClick={() => onOpenQuote('audit')}
               id="audit-book-audit-btn"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-semibold text-sm transition-all shadow-xs"
+              className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-semibold text-sm transition-all shadow-xs"
             >
               <span>Book Network Audit</span>
               <ArrowRight className="w-4 h-4 text-[#C1F24F]" />
@@ -214,7 +214,11 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
                       <div
                         key={item}
                         onClick={() => toggleCheck(item)}
-                        className={`cursor-pointer p-3 rounded-lg border transition-all flex items-start gap-3 select-none ${
+                        role="checkbox"
+                        aria-checked={isChecked}
+                        tabIndex={0}
+                        onKeyDown={(e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleCheck(item); } }}
+                        className={`cursor-pointer min-h-[44px] p-3 rounded-lg border transition-all flex items-start gap-3 select-none ${
                           isChecked 
                             ? 'bg-emerald-50 border-emerald-300 text-emerald-900' 
                             : 'bg-white border-slate-200 text-slate-700 hover:border-[#056D67]/40'
@@ -243,7 +247,7 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
                 </span>
                 <button
                   onClick={() => onOpenQuote('audit')}
-                  className="text-xs font-bold text-[#056D67] hover:text-[#034F4B] underline"
+                  className="min-h-[44px] inline-flex items-center text-xs sm:text-sm font-bold text-[#056D67] hover:text-[#034F4B] underline py-1"
                 >
                   Request Scope for this Area &rarr;
                 </button>
@@ -354,7 +358,7 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
               </div>
               <button
                 onClick={() => onOpenQuote('audit')}
-                className="mt-4 w-full py-2 px-3 rounded-lg bg-[#C1F24F] text-[#034F4B] font-bold text-xs hover:bg-[#D8FA8A] transition-colors text-center"
+                className="mt-4 w-full min-h-[44px] py-2.5 px-3 rounded-lg bg-[#C1F24F] text-[#034F4B] font-bold text-xs sm:text-sm hover:bg-[#D8FA8A] transition-colors text-center flex items-center justify-center"
               >
                 Schedule Onsite Walkthrough
               </button>

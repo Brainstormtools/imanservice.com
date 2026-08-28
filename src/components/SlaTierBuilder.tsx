@@ -86,7 +86,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
           <div className="flex flex-wrap items-center gap-3">
             <a
               href="#sla-matrix"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-300 hover:border-[#056D67] bg-white text-slate-700 font-semibold text-sm transition-all shadow-xs"
+              className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg border border-slate-300 hover:border-[#056D67] bg-white text-slate-700 font-semibold text-sm transition-all shadow-xs"
             >
               <Clock className="w-4 h-4 text-[#056D67]" />
               <span>View Escalation Matrix</span>
@@ -94,7 +94,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
             <button
               onClick={() => onOpenQuote('amc')}
               id="amc-get-quote-btn"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-semibold text-sm transition-all shadow-xs"
+              className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-semibold text-sm transition-all shadow-xs"
             >
               <span>Get Custom AMC Quote</span>
               <ArrowRight className="w-4 h-4 text-[#C1F24F]" />
@@ -205,9 +205,10 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                     step="5"
                     value={workstations}
                     onChange={(e) => setWorkstations(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#056D67]"
+                    aria-label="Desktops and Laptops count"
+                    className="w-full h-3 py-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#056D67]"
                   />
-                  <div className="flex justify-between text-[11px] text-slate-500 mt-1">
+                  <div className="flex justify-between text-xs text-slate-500 mt-1.5">
                     <span>5 Units</span>
                     <span>50 Units</span>
                     <span>100 Units</span>
@@ -233,9 +234,10 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                     step="1"
                     value={servers}
                     onChange={(e) => setServers(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#056D67]"
+                    aria-label="Physical and Virtual Servers count"
+                    className="w-full h-3 py-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#056D67]"
                   />
-                  <div className="flex justify-between text-[11px] text-slate-500 mt-1">
+                  <div className="flex justify-between text-xs text-slate-500 mt-1.5">
                     <span>1 Server</span>
                     <span>5 Servers</span>
                     <span>15 Servers</span>
@@ -261,9 +263,10 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                     step="2"
                     value={networkDevices}
                     onChange={(e) => setNetworkDevices(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#056D67]"
+                    aria-label="Network Devices count"
+                    className="w-full h-3 py-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#056D67]"
                   />
-                  <div className="flex justify-between text-[11px] text-slate-500 mt-1">
+                  <div className="flex justify-between text-xs text-slate-500 mt-1.5">
                     <span>2 Devices</span>
                     <span>15 Devices</span>
                     <span>30 Devices</span>
@@ -284,7 +287,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                           key={tier.id}
                           type="button"
                           onClick={() => setSelectedTierId(tier.id)}
-                          className={`p-3.5 rounded-xl border text-left transition-all relative ${
+                          className={`p-3.5 min-h-[44px] rounded-xl border text-left transition-all relative ${
                             isSelected 
                               ? 'bg-[#056D67] text-white border-[#056D67] shadow-md ring-2 ring-[#056D67]/20' 
                               : 'bg-white text-slate-800 border-slate-200 hover:border-slate-300'
@@ -298,7 +301,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                           <div className="font-bold text-sm leading-tight">
                             {tier.name.split('(')[0]}
                           </div>
-                          <div className={`text-[11px] mt-1 ${isSelected ? 'text-[#D8FA8A]' : 'text-[#056D67] font-semibold'}`}>
+                          <div className={`text-xs mt-1 ${isSelected ? 'text-[#D8FA8A]' : 'text-[#056D67] font-semibold'}`}>
                             P1: {tier.responseCritical}
                           </div>
                         </button>

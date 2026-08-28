@@ -71,7 +71,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
               <button
                 onClick={() => onOpenQuote('all')}
                 id="hero-request-quote-btn"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] font-bold text-sm sm:text-base transition-all transform hover:-translate-y-0.5 shadow-lg shadow-[#034F4B]/30"
+                className="min-h-[44px] inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] font-bold text-sm sm:text-base transition-all transform hover:-translate-y-0.5 shadow-lg shadow-[#034F4B]/30"
               >
                 <span>Request Custom IT Proposal</span>
                 <ArrowRight className="w-4 h-4" />
@@ -80,16 +80,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
               <button
                 onClick={onOpenQuiz}
                 id="hero-health-check-btn"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg bg-white/15 hover:bg-white/25 border border-white/30 text-white font-semibold text-sm sm:text-base transition-all backdrop-blur-xs"
+                className="min-h-[44px] inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg bg-white/15 hover:bg-white/25 border border-white/30 text-white font-semibold text-sm sm:text-base transition-all backdrop-blur-xs"
               >
                 <Activity className="w-4 h-4 text-[#C1F24F]" />
                 <span>Instant Infrastructure Health Check</span>
               </button>
 
               <a
-                href={`tel:${COMPANY_INFO.phone}`}
+                href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`}
                 id="hero-call-direct-btn"
-                className="inline-flex items-center gap-2 text-sm text-slate-200 hover:text-[#C1F24F] transition-colors py-2 px-1"
+                className="min-h-[44px] inline-flex items-center gap-2 text-sm text-slate-200 hover:text-[#C1F24F] transition-colors py-2 px-2"
               >
                 <PhoneCall className="w-4 h-4 text-[#C1F24F]" />
                 <span>Direct Line: <strong>{COMPANY_INFO.phone}</strong></span>

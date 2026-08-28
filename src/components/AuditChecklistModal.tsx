@@ -106,15 +106,17 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrint}
-              className="p-2 rounded-lg text-slate-600 hover:text-[#056D67] hover:bg-slate-100 transition-colors flex items-center gap-1.5 text-xs font-semibold"
+              className="min-h-[44px] p-2.5 rounded-lg text-slate-600 hover:text-[#056D67] hover:bg-slate-100 transition-colors flex items-center justify-center gap-1.5 text-xs font-semibold"
               title="Print Checklist"
+              aria-label="Print Checklist"
             >
               <Printer className="w-4 h-4" />
               <span className="hidden sm:inline">Print / Save PDF</span>
             </button>
             <button
               onClick={onClose}
-              className="p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+              aria-label="Close checklist"
             >
               <X className="w-5 h-5" />
             </button>
@@ -153,7 +155,7 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
                     <div
                       key={item.id}
                       onClick={() => toggleItem(item.id)}
-                      className={`cursor-pointer p-2.5 rounded-lg border transition-all flex items-start gap-3 select-none ${
+                      className={`min-h-[44px] cursor-pointer p-3 rounded-lg border transition-all flex items-start gap-3 select-none ${
                         isChecked 
                           ? 'bg-emerald-50/70 border-emerald-300 text-emerald-900' 
                           : 'bg-white border-slate-100 text-slate-700 hover:border-slate-300'
@@ -187,7 +189,7 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
               onClose();
               onOpenQuote();
             }}
-            className="px-5 py-2.5 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs sm:text-sm transition-colors"
+            className="min-h-[44px] px-5 py-2.5 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs sm:text-sm transition-colors flex items-center justify-center"
           >
             Schedule Professional Onsite Audit
           </button>

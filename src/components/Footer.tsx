@@ -121,35 +121,35 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="space-y-2 pt-1">
               <button
                 onClick={onOpenQuiz}
-                className="w-full text-left p-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white transition-all flex items-center justify-between"
+                className="w-full min-h-[44px] text-left p-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white transition-all flex items-center justify-between"
               >
                 <span className="flex items-center gap-2">
                   <Activity className="w-3.5 h-3.5 text-[#C1F24F]" />
                   <span>IT Health Readiness Quiz</span>
                 </span>
-                <span className="text-[10px] text-[#C1F24F]">&rarr;</span>
+                <span className="text-xs text-[#C1F24F]">&rarr;</span>
               </button>
 
               <button
                 onClick={onOpenChecklist}
-                className="w-full text-left p-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white transition-all flex items-center justify-between"
+                className="w-full min-h-[44px] text-left p-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white transition-all flex items-center justify-between"
               >
                 <span className="flex items-center gap-2">
                   <FileCheck className="w-3.5 h-3.5 text-[#C1F24F]" />
                   <span>Download Audit Checklist</span>
                 </span>
-                <span className="text-[10px] text-[#C1F24F]">&rarr;</span>
+                <span className="text-xs text-[#C1F24F]">&rarr;</span>
               </button>
 
               <button
                 onClick={() => onOpenQuote('all')}
-                className="w-full text-left p-2.5 rounded-lg bg-[#056D67] hover:bg-[#096F67] border border-[#C1F24F]/30 text-xs font-bold text-[#C1F24F] transition-all flex items-center justify-between"
+                className="w-full min-h-[44px] text-left p-2.5 rounded-lg bg-[#056D67] hover:bg-[#096F67] border border-[#C1F24F]/30 text-xs font-bold text-[#C1F24F] transition-all flex items-center justify-between"
               >
                 <span className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5" />
                   <span>Request Instant Proposal</span>
                 </span>
-                <span className="text-[10px] text-white">&rarr;</span>
+                <span className="text-xs text-white">&rarr;</span>
               </button>
             </div>
           </div>
@@ -163,13 +163,14 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="text-[11px] text-[#D8FA8A]">
+            <span className="text-xs text-[#D8FA8A]">
               Single Point of Accountability for Enterprise IT
             </span>
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white transition-colors"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-lg bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white transition-colors"
               title="Scroll to top"
+              aria-label="Scroll to top"
             >
               <ArrowUp className="w-4 h-4" />
             </button>

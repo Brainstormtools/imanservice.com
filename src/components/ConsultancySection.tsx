@@ -57,7 +57,7 @@ export const ConsultancySection: React.FC<ConsultancySectionProps> = ({ onOpenQu
             <button
               onClick={() => onOpenQuote('consultancy')}
               id="consulting-book-session-btn"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-semibold text-sm transition-all shadow-xs"
+              className="inline-flex items-center gap-2 px-5 py-3 min-h-[44px] rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-semibold text-sm transition-all shadow-xs"
             >
               <span>Book Strategy Session</span>
               <ArrowRight className="w-4 h-4 text-[#C1F24F]" />
@@ -126,7 +126,7 @@ export const ConsultancySection: React.FC<ConsultancySectionProps> = ({ onOpenQu
 
               <button
                 onClick={() => onOpenQuote('consultancy')}
-                className="mt-6 w-full py-2.5 px-4 rounded-lg bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] font-bold text-xs sm:text-sm transition-colors text-center"
+                className="mt-6 w-full min-h-[44px] py-2.5 px-4 rounded-lg bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] font-bold text-xs sm:text-sm transition-colors text-center flex items-center justify-center"
               >
                 Schedule 30-Min Strategy Call
               </button>

@@ -43,7 +43,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenQuote }) => {
           <div className="lg:col-span-6 space-y-6">
             
             {/* Full Corporate Brand Logo Banner */}
-            <div className="p-4 rounded-2xl bg-[#F4FAF8] border border-[#056D67]/15 inline-block">
+            <div className="p-3 sm:p-4 rounded-2xl bg-[#F4FAF8] border border-[#056D67]/15 inline-block max-w-full overflow-hidden">
               <Logo type="full" size="lg" />
             </div>
 
@@ -123,7 +123,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenQuote }) => {
                 </span>
                 <button
                   onClick={() => onOpenQuote('all')}
-                  className="px-4 py-2 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs transition-colors flex items-center gap-1.5"
+                  className="min-h-[44px] px-4 py-2.5 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs sm:text-sm transition-colors flex items-center justify-center gap-1.5"
                 >
                   <span>Start Conversation</span>
                   <ArrowRight className="w-3.5 h-3.5 text-[#C1F24F]" />

@@ -103,7 +103,8 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+          className="absolute top-4 right-4 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+          aria-label="Close modal"
         >
           <X className="w-5 h-5" />
         </button>
@@ -111,7 +112,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
         {!showResults ? (
           <div>
             {/* Header */}
-            <div className="mb-6">
+            <div className="mb-6 pr-10">
               <div className="flex items-center justify-between text-xs font-bold text-[#056D67] uppercase tracking-wider mb-2">
                 <span className="flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
@@ -145,7 +146,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
                 <button
                   key={idx}
                   onClick={() => handleSelectOption(option.points, idx)}
-                  className="w-full text-left p-4 rounded-xl border border-slate-200 hover:border-[#056D67] bg-[#F4FAF8]/60 hover:bg-[#F4FAF8] text-slate-800 text-sm font-medium transition-all flex items-center justify-between group"
+                  className="w-full min-h-[48px] text-left p-4 rounded-xl border border-slate-200 hover:border-[#056D67] bg-[#F4FAF8]/60 hover:bg-[#F4FAF8] text-slate-800 text-sm font-medium transition-all flex items-center justify-between group"
                 >
                   <span className="pr-4">{option.label}</span>
                   <div className="w-6 h-6 rounded-full border border-slate-300 group-hover:border-[#056D67] group-hover:bg-[#056D67] group-hover:text-white flex items-center justify-center flex-shrink-0 transition-colors text-xs font-bold">
@@ -160,7 +161,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
               <div className="mt-6 pt-4 border-t border-slate-100 flex justify-start">
                 <button
                   onClick={() => setCurrentStep(currentStep - 1)}
-                  className="text-xs text-slate-500 hover:text-slate-800 font-medium"
+                  className="min-h-[44px] inline-flex items-center text-xs text-slate-500 hover:text-slate-800 font-medium"
                 >
                   &larr; Previous Question
                 </button>
@@ -174,7 +175,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
               {riskStatus.icon}
             </div>
 
-            <div className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border mb-2" {...{ className: `inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border mb-2 ${riskStatus.badgeColor}` }}>
+            <div className={`inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border mb-2 ${riskStatus.badgeColor}`}>
               {riskStatus.level}
             </div>
 
@@ -188,8 +189,8 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
 
             {/* Recommendations Box */}
             <div className="mt-6 p-4 rounded-xl bg-[#F4FAF8] border border-[#056D67]/20 text-left text-xs text-slate-700 space-y-2">
-              <div className="font-bold text-[#056D67] uppercase text-[11px]">
-                Recommended Next Steps from IMAN SERVICE COMPANY:
+              <div className="font-bold text-[#056D67] uppercase text-xs">
+                Recommended Next Steps from i Man Service:
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#056D67] flex-shrink-0 mt-0.5" />
@@ -205,14 +206,14 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
             <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
               <button
                 onClick={handleRequestRemediation}
-                className="w-full py-3 px-4 rounded-xl bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-sm transition-all shadow-md flex items-center justify-center gap-2"
+                className="w-full min-h-[44px] py-3 px-4 rounded-xl bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-sm transition-all shadow-md flex items-center justify-center gap-2"
               >
                 <span>Request Free Audit Review</span>
                 <ArrowRight className="w-4 h-4 text-[#C1F24F]" />
               </button>
               <button
                 onClick={handleReset}
-                className="w-full sm:w-auto py-3 px-4 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-xs transition-colors flex items-center justify-center gap-1.5"
+                className="w-full sm:w-auto min-h-[44px] py-3 px-4 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-xs transition-colors flex items-center justify-center gap-1.5"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Retake Quiz</span>

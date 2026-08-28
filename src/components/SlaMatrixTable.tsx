@@ -39,10 +39,10 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
 
         {/* Interactive View Selector */}
         <div className="flex justify-center mb-8">
-          <div className="inline-flex p-1 rounded-xl bg-[#F4FAF8] border border-slate-200 text-xs sm:text-sm font-semibold">
+          <div className="inline-flex flex-wrap sm:flex-nowrap p-1.5 rounded-xl bg-[#F4FAF8] border border-slate-200 text-xs sm:text-sm font-semibold gap-1">
             <button
               onClick={() => setActiveTab('matrix')}
-              className={`px-4 py-2 rounded-lg transition-all ${
+              className={`min-h-[44px] px-4 py-2.5 rounded-lg transition-all flex items-center justify-center ${
                 activeTab === 'matrix' 
                   ? 'bg-[#056D67] text-white shadow-xs' 
                   : 'text-slate-600 hover:text-slate-900'
@@ -52,7 +52,7 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
             </button>
             <button
               onClick={() => setActiveTab('preventive')}
-              className={`px-4 py-2 rounded-lg transition-all ${
+              className={`min-h-[44px] px-4 py-2.5 rounded-lg transition-all flex items-center justify-center ${
                 activeTab === 'preventive' 
                   ? 'bg-[#056D67] text-white shadow-xs' 
                   : 'text-slate-600 hover:text-slate-900'
@@ -62,7 +62,7 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
             </button>
             <button
               onClick={() => setActiveTab('flow')}
-              className={`px-4 py-2 rounded-lg transition-all ${
+              className={`min-h-[44px] px-4 py-2.5 rounded-lg transition-all flex items-center justify-center ${
                 activeTab === 'flow' 
                   ? 'bg-[#056D67] text-white shadow-xs' 
                   : 'text-slate-600 hover:text-slate-900'
@@ -256,7 +256,7 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
           </div>
           <button
             onClick={() => onOpenQuote('amc')}
-            className="px-4 py-2 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white text-xs font-bold transition-colors"
+            className="min-h-[44px] px-4 py-2.5 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white text-xs sm:text-sm font-bold transition-colors flex items-center justify-center"
           >
             Request Priority Dispatch
           </button>

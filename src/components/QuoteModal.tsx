@@ -80,7 +80,8 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+          className="absolute top-4 right-4 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+          aria-label="Close modal"
         >
           <X className="w-5 h-5" />
         </button>
@@ -88,7 +89,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
         {!isSubmitted ? (
           <div>
             {/* Header */}
-            <div className="mb-6 border-b border-slate-100 pb-4">
+            <div className="mb-6 border-b border-slate-100 pb-4 pr-10">
               <div className="flex items-center gap-2 text-xs font-bold text-[#056D67] uppercase tracking-wider mb-1">
                 <ShieldCheck className="w-4 h-4 text-[#056D67]" />
                 <span>Executive IT Proposal Request</span>
@@ -120,7 +121,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                       type="button"
                       key={s.id}
                       onClick={() => setServiceInterest(s.id)}
-                      className={`p-2.5 rounded-lg border text-xs font-bold transition-all text-center ${
+                      className={`min-h-[44px] p-2.5 rounded-lg border text-xs font-bold transition-all text-center flex items-center justify-center ${
                         serviceInterest === s.id
                           ? 'bg-[#056D67] text-white border-[#056D67] shadow-xs'
                           : 'bg-[#F4FAF8] text-slate-700 border-slate-200 hover:bg-slate-100'
@@ -139,14 +140,14 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                     Company Name *
                   </label>
                   <div className="relative">
-                    <Building className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                    <Building className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
                     <input
                       type="text"
                       required
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
                       placeholder="e.g. Acme Enterprises Ltd."
-                      className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
+                      className="w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
                     />
                   </div>
                 </div>
@@ -156,14 +157,14 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                     Contact Person Name *
                   </label>
                   <div className="relative">
-                    <User className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                    <User className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
                     <input
                       type="text"
                       required
                       value={contactPerson}
                       onChange={(e) => setContactPerson(e.target.value)}
                       placeholder="e.g. Zeeshan Usmani / IT Manager"
-                      className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
+                      className="w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
                     />
                   </div>
                 </div>
@@ -173,14 +174,14 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                     Business Email Address *
                   </label>
                   <div className="relative">
-                    <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                    <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
                     <input
                       type="email"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="it@yourcompany.com"
-                      className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
+                      className="w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
                     />
                   </div>
                 </div>
@@ -190,14 +191,14 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                     Phone / Mobile Number *
                   </label>
                   <div className="relative">
-                    <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                    <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
                     <input
                       type="tel"
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="e.g. +92 314 9020008 or 0314-9020008"
-                      className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
+                      className="w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
                     />
                   </div>
                 </div>
@@ -206,7 +207,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               {/* Asset Numbers & Timeline */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-[#F4FAF8] p-3.5 rounded-xl border border-slate-200/80">
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Approx. Workstations
                   </label>
                   <input
@@ -214,12 +215,12 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                     min="1"
                     value={workstations}
                     onChange={(e) => setWorkstations(Number(e.target.value))}
-                    className="w-full px-3 py-1.5 rounded-md border border-slate-200 bg-white text-slate-800 font-semibold text-sm"
+                    className="w-full min-h-[44px] px-3 py-2 rounded-md border border-slate-200 bg-white text-slate-800 font-semibold text-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Approx. Servers
                   </label>
                   <input
@@ -227,18 +228,18 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                     min="0"
                     value={servers}
                     onChange={(e) => setServers(Number(e.target.value))}
-                    className="w-full px-3 py-1.5 rounded-md border border-slate-200 bg-white text-slate-800 font-semibold text-sm"
+                    className="w-full min-h-[44px] px-3 py-2 rounded-md border border-slate-200 bg-white text-slate-800 font-semibold text-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Implementation Timeline
                   </label>
                   <select
                     value={urgency}
                     onChange={(e) => setUrgency(e.target.value)}
-                    className="w-full px-2 py-1.5 rounded-md border border-slate-200 bg-white text-slate-800 text-xs font-semibold"
+                    className="w-full min-h-[44px] px-2 py-2 rounded-md border border-slate-200 bg-white text-slate-800 text-xs font-semibold"
                   >
                     <option value="urgent">Immediate / Emergency</option>
                     <option value="planned">Within 30 Days</option>
@@ -317,17 +318,17 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               <div>• Direct Phone: <strong>{COMPANY_INFO.phone}</strong></div>
             </div>
 
-            <div className="mt-6 flex items-center justify-center gap-3">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <a
-                href={`tel:${COMPANY_INFO.phone}`}
-                className="py-2.5 px-4 rounded-lg bg-[#056D67] text-white font-bold text-xs flex items-center gap-2"
+                href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`}
+                className="min-h-[44px] py-2.5 px-4 rounded-lg bg-[#056D67] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2"
               >
-                <PhoneCall className="w-3.5 h-3.5 text-[#C1F24F]" />
+                <PhoneCall className="w-4 h-4 text-[#C1F24F]" />
                 <span>Call Dispatch Desk Now</span>
               </a>
               <button
                 onClick={handleReset}
-                className="py-2.5 px-4 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-xs transition-colors"
+                className="min-h-[44px] py-2.5 px-4 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-xs sm:text-sm transition-colors flex items-center justify-center"
               >
                 Close Window
               </button>
