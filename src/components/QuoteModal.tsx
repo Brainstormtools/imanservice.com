@@ -196,7 +196,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="e.g. 0300-1234567 or 042-37455670"
+                      placeholder="e.g. +92 314 9020008 or 0314-9020008"
                       className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
                     />
                   </div>

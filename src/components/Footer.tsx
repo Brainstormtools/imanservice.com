@@ -10,7 +10,8 @@ import {
   ArrowUp,
   FileCheck,
   Calculator,
-  Activity
+  Activity,
+  MessageSquare
 } from 'lucide-react';
 
 interface FooterProps {
@@ -44,15 +45,26 @@ export const Footer: React.FC<FooterProps> = ({
             </p>
 
             {/* Location & Phone */}
-            <div className="space-y-2 text-xs pt-2">
+            <div className="space-y-2.5 text-xs pt-2">
               <div className="flex items-center gap-2.5 text-slate-200">
                 <MapPin className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
                 <span>{COMPANY_INFO.address}, {COMPANY_INFO.city}</span>
               </div>
               <div className="flex items-center gap-2.5 text-slate-200">
                 <Phone className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
-                <a href={`tel:${COMPANY_INFO.phone}`} className="font-bold text-white hover:text-[#C1F24F]">
-                  {COMPANY_INFO.phone}
+                <a href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`} className="font-bold text-white hover:text-[#C1F24F]">
+                  {COMPANY_INFO.phone} (Direct & 24/7 SLA)
+                </a>
+              </div>
+              <div className="flex items-center gap-2.5 text-slate-200">
+                <MessageSquare className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
+                <a 
+                  href={COMPANY_INFO.whatsappLink || 'https://wa.me/923149020008'} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="font-bold text-[#C1F24F] hover:underline"
+                >
+                  WhatsApp: {COMPANY_INFO.whatsapp || '+92 314 9020008'}
                 </a>
               </div>
               <div className="flex items-center gap-2.5 text-slate-200">

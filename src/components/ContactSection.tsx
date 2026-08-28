@@ -71,20 +71,20 @@ export const ContactSection: React.FC = () => {
 
               <div className="space-y-4 text-xs sm:text-sm">
                 
-                {/* Phone */}
+                {/* Mobile / WhatsApp */}
                 <div className="flex items-start gap-3.5">
                   <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 text-[#C1F24F]">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[10px] uppercase font-bold text-slate-300">Direct Phone Line</div>
+                    <div className="text-[10px] uppercase font-bold text-slate-300">Mobile & WhatsApp Helpline</div>
                     <a 
-                      href={`tel:${COMPANY_INFO.phone}`} 
-                      className="text-base font-extrabold text-[#C1F24F] hover:underline"
+                      href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`} 
+                      className="text-base font-extrabold text-[#C1F24F] hover:underline block"
                     >
                       {COMPANY_INFO.phone}
                     </a>
-                    <div className="text-[11px] text-slate-200">International: {COMPANY_INFO.phoneFormatted}</div>
+                    <div className="text-[11px] text-slate-200">Available 24/7 for Onsite & SLA Dispatch</div>
                   </div>
                 </div>
 
@@ -131,14 +131,23 @@ export const ContactSection: React.FC = () => {
 
               </div>
 
-              {/* Direct WhatsApp / Hotline CTA */}
-              <div className="mt-6 pt-5 border-t border-white/15">
+              {/* Direct WhatsApp / Hotline Dual Action CTAs */}
+              <div className="mt-6 pt-5 border-t border-white/15 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <a
-                  href={`tel:${COMPANY_INFO.phone}`}
-                  className="w-full py-3 px-4 rounded-xl bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 text-center"
+                  href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`}
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 text-center"
                 >
                   <Phone className="w-4 h-4" />
-                  <span>Call {COMPANY_INFO.phone} Now</span>
+                  <span>Call {COMPANY_INFO.phone}</span>
+                </a>
+                <a
+                  href={COMPANY_INFO.whatsappLink || 'https://wa.me/923149020008'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs sm:text-sm border border-white/30 transition-all flex items-center justify-center gap-2 text-center"
+                >
+                  <MessageSquare className="w-4 h-4 text-[#C1F24F]" />
+                  <span>Chat on WhatsApp</span>
                 </a>
               </div>
 
@@ -195,7 +204,7 @@ export const ContactSection: React.FC = () => {
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="e.g. 0300-1234567"
+                      placeholder="e.g. +92 314 9020008 or 0314-9020008"
                       className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67]"
                     />
                   </div>

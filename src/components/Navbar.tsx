@@ -11,7 +11,8 @@ import {
   Calculator, 
   FileText, 
   ArrowRight,
-  Sparkles
+  Sparkles,
+  MessageSquare
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -57,22 +58,28 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-4 flex-wrap">
             <a 
-              href={`tel:${COMPANY_INFO.phone}`} 
+              href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`} 
               className="flex items-center gap-1.5 font-medium hover:text-[#C1F24F] transition-colors"
               id="topbar-phone-link"
             >
               <Phone className="w-3.5 h-3.5 text-[#C1F24F]" />
               <span>{COMPANY_INFO.phone}</span>
             </a>
+            <span className="text-slate-500">•</span>
+            <a 
+              href={COMPANY_INFO.whatsappLink || 'https://wa.me/923149020008'} 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 font-medium text-[#C1F24F] hover:underline transition-colors"
+              id="topbar-whatsapp-link"
+            >
+              <MessageSquare className="w-3.5 h-3.5 text-[#C1F24F]" />
+              <span>WhatsApp</span>
+            </a>
             <span className="hidden sm:inline text-slate-500">•</span>
             <div className="hidden md:flex items-center gap-1.5 text-slate-300">
               <MapPin className="w-3.5 h-3.5 text-[#C1F24F]" />
               <span>{COMPANY_INFO.address}</span>
-            </div>
-            <span className="hidden md:inline text-slate-500">•</span>
-            <div className="hidden lg:flex items-center gap-1.5 text-slate-300">
-              <Globe className="w-3.5 h-3.5 text-[#C1F24F]" />
-              <span>{COMPANY_INFO.website}</span>
             </div>
           </div>
 
