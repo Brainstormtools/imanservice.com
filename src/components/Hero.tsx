@@ -105,7 +105,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
               {/* Header inside card */}
               <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
                 <div>
-                  <div className="text-[11px] uppercase tracking-wider font-bold text-[#056D67]">
+                  <div className="text-xs uppercase tracking-wider font-bold text-[#056D67]">
                     Enterprise Service Framework
                   </div>
                   <h3 className="text-xl font-bold text-slate-900 font-display">
@@ -135,7 +135,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
                         <span className="font-bold text-sm text-slate-900 group-hover:text-[#056D67] transition-colors">
                           1. Existing Networks Audit
                         </span>
-                        <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-white text-[#056D67] border border-slate-200">
+                        <span className="text-xs font-semibold uppercase px-2 py-0.5 rounded bg-white text-[#056D67] border border-slate-200">
                           Assessment
                         </span>
                       </div>
@@ -162,7 +162,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
                         <span className="font-bold text-sm text-slate-900 group-hover:text-[#056D67] transition-colors">
                           2. IT-AMC / SLA Contracts
                         </span>
-                        <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-[#C1F24F] text-[#034F4B]">
+                        <span className="text-xs font-bold uppercase px-2 py-0.5 rounded bg-[#C1F24F] text-[#034F4B]">
                           Fixed-Fee
                         </span>
                       </div>
@@ -188,7 +188,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
                         <span className="font-bold text-sm text-slate-900 group-hover:text-[#056D67] transition-colors">
                           3. IT Consultancy Service
                         </span>
-                        <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-white text-[#056D67] border border-slate-200">
+                        <span className="text-xs font-semibold uppercase px-2 py-0.5 rounded bg-white text-[#056D67] border border-slate-200">
                           Strategy
                         </span>
                       </div>

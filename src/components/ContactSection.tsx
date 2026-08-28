@@ -77,14 +77,14 @@ export const ContactSection: React.FC = () => {
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[10px] uppercase font-bold text-slate-300">Mobile & WhatsApp Helpline</div>
+                    <div className="text-xs uppercase font-bold text-slate-300">Mobile & WhatsApp Helpline</div>
                     <a 
                       href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`} 
                       className="text-base font-extrabold text-[#C1F24F] hover:underline block"
                     >
                       {COMPANY_INFO.phone}
                     </a>
-                    <div className="text-[11px] text-slate-200">Available 24/7 for Onsite & SLA Dispatch</div>
+                    <div className="text-xs text-slate-200">Available 24/7 for Onsite & SLA Dispatch</div>
                   </div>
                 </div>
 
@@ -94,9 +94,9 @@ export const ContactSection: React.FC = () => {
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[10px] uppercase font-bold text-slate-300">Physical Address</div>
+                    <div className="text-xs uppercase font-bold text-slate-300">Physical Address</div>
                     <div className="font-bold text-white leading-snug">{COMPANY_INFO.address}</div>
-                    <div className="text-[11px] text-slate-200">{COMPANY_INFO.city}</div>
+                    <div className="text-xs text-slate-200">{COMPANY_INFO.city}</div>
                   </div>
                 </div>
 
@@ -106,7 +106,7 @@ export const ContactSection: React.FC = () => {
                     <Globe className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[10px] uppercase font-bold text-slate-300">Official Web Portal</div>
+                    <div className="text-xs uppercase font-bold text-slate-300">Official Web Portal</div>
                     <a 
                       href={`https://${COMPANY_INFO.website}`} 
                       target="_blank" 
@@ -124,7 +124,7 @@ export const ContactSection: React.FC = () => {
                     <Clock className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[10px] uppercase font-bold text-slate-300">Operating Hours</div>
+                    <div className="text-xs uppercase font-bold text-slate-300">Operating Hours</div>
                     <div className="font-medium text-slate-100">{COMPANY_INFO.hours}</div>
                   </div>
                 </div>

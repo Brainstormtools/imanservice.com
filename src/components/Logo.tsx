@@ -275,11 +275,11 @@ export const Logo: React.FC<LogoProps> = ({
           </span>
         </div>
         {showTagline ? (
-          <span className={`text-[11px] sm:text-xs tracking-widest font-semibold uppercase ${isDark ? 'text-slate-300' : 'text-slate-500'} whitespace-nowrap`}>
+          <span className={`text-xs tracking-wider sm:tracking-widest font-semibold uppercase ${isDark ? 'text-slate-300' : 'text-slate-500'} whitespace-nowrap`}>
             Enterprise Infrastructure & SLA
           </span>
         ) : (
-          <span className={`text-[11px] sm:text-xs tracking-wider font-medium ${isDark ? 'text-slate-300' : 'text-[#056D67]/80'} whitespace-nowrap`}>
+          <span className={`text-xs tracking-wider font-medium ${isDark ? 'text-slate-300' : 'text-[#056D67]/80'} whitespace-nowrap`}>
             Enterprise IT Solutions
           </span>
         )}

@@ -78,7 +78,7 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
           <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden animate-in fade-in duration-200">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs sm:text-sm">
-                <thead className="bg-[#056D67] text-white uppercase text-[11px] font-bold tracking-wider">
+                <thead className="bg-[#056D67] text-white uppercase text-xs font-bold tracking-wider">
                   <tr>
                     <th className="py-4 px-4 sm:px-6">Severity Level</th>
                     <th className="py-4 px-4 sm:px-6">Example Scenario</th>
@@ -100,7 +100,7 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
                             }`} />
                             <span className="text-slate-900 font-display">{row.severity}</span>
                           </div>
-                          <span className="text-[10px] text-slate-500 font-mono">Priority: {row.level}</span>
+                          <span className="text-xs text-slate-500 font-mono">Priority: {row.level}</span>
                         </td>
                         <td className="py-4 px-4 sm:px-6 text-slate-600 max-w-xs">
                           {row.example}

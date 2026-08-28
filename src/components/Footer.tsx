@@ -45,14 +45,17 @@ export const Footer: React.FC<FooterProps> = ({
             </p>
 
             {/* Location & Phone */}
-            <div className="space-y-2.5 text-xs pt-2">
-              <div className="flex items-center gap-2.5 text-slate-200">
+            <div className="space-y-1 text-xs sm:text-sm pt-2">
+              <div className="flex items-center gap-2.5 text-slate-200 min-h-[36px]">
                 <MapPin className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
                 <span>{COMPANY_INFO.address}, {COMPANY_INFO.city}</span>
               </div>
               <div className="flex items-center gap-2.5 text-slate-200">
                 <Phone className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
-                <a href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`} className="font-bold text-white hover:text-[#C1F24F]">
+                <a 
+                  href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`} 
+                  className="min-h-[44px] inline-flex items-center font-bold text-white hover:text-[#C1F24F] py-1"
+                >
                   {COMPANY_INFO.phone} (Direct & 24/7 SLA)
                 </a>
               </div>
@@ -62,14 +65,21 @@ export const Footer: React.FC<FooterProps> = ({
                   href={COMPANY_INFO.whatsappLink || 'https://wa.me/923149020008'} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="font-bold text-[#C1F24F] hover:underline"
+                  className="min-h-[44px] inline-flex items-center font-bold text-[#C1F24F] hover:underline py-1"
                 >
                   WhatsApp: {COMPANY_INFO.whatsapp || '+92 314 9020008'}
                 </a>
               </div>
-              <div className="flex items-center gap-2.5 text-slate-200">
+              <div className="flex items-center gap-2.5 text-slate-200 min-h-[44px]">
                 <Globe className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
-                <span>{COMPANY_INFO.website}</span>
+                <a 
+                  href={`https://${COMPANY_INFO.website}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="min-h-[44px] inline-flex items-center text-slate-200 hover:text-[#C1F24F] transition-colors"
+                >
+                  {COMPANY_INFO.website}
+                </a>
               </div>
             </div>
           </div>
@@ -79,33 +89,33 @@ export const Footer: React.FC<FooterProps> = ({
             <h4 className="text-sm font-bold uppercase tracking-wider text-white font-display">
               Core Service Pillars
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-1 text-xs sm:text-sm">
               <li>
-                <a href="#network-audit" className="hover:text-[#C1F24F] transition-colors flex items-center gap-1.5">
+                <a href="#network-audit" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C1F24F]" />
                   <span>1. Existing Networks Audit</span>
                 </a>
               </li>
               <li>
-                <a href="#it-amc" className="hover:text-[#C1F24F] transition-colors flex items-center gap-1.5">
+                <a href="#it-amc" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C1F24F]" />
                   <span>2. IT-AMC / SLA Contracts</span>
                 </a>
               </li>
               <li>
-                <a href="#it-consultancy" className="hover:text-[#C1F24F] transition-colors flex items-center gap-1.5">
+                <a href="#it-consultancy" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C1F24F]" />
                   <span>3. Strategic IT Consultancy</span>
                 </a>
               </li>
               <li>
-                <a href="#sla-matrix" className="hover:text-[#C1F24F] transition-colors flex items-center gap-1.5">
+                <a href="#sla-matrix" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C1F24F]" />
                   <span>SLA Severity & Escalation Matrix</span>
                 </a>
               </li>
               <li>
-                <a href="#sla-calculator" className="hover:text-[#C1F24F] transition-colors flex items-center gap-1.5">
+                <a href="#sla-calculator" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C1F24F]" />
                   <span>Interactive Fleet & SLA Estimator</span>
                 </a>

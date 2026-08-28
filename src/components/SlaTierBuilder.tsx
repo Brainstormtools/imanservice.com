@@ -131,7 +131,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                       <div className="w-11 h-11 rounded-xl bg-[#F4FAF8] border border-[#056D67]/20 flex items-center justify-center">
                         {getCoverageIcon(item.icon)}
                       </div>
-                      <span className="text-[10px] uppercase font-bold text-[#056D67] bg-[#F4FAF8] px-2 py-0.5 rounded border border-[#056D67]/15">
+                      <span className="text-xs uppercase font-bold text-[#056D67] bg-[#F4FAF8] px-2 py-0.5 rounded border border-[#056D67]/15">
                         Domain 0{idx + 1}
                       </span>
                     </div>
@@ -146,7 +146,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
 
                   {/* Included Tasks Checklist */}
                   <div className="pt-3 border-t border-slate-100">
-                    <div className="text-[10px] uppercase font-bold text-slate-500 tracking-wider mb-2">
+                    <div className="text-xs uppercase font-bold text-slate-500 tracking-wider mb-2">
                       Core Maintenance Deliverables:
                     </div>
                     <ul className="space-y-1.5">
@@ -317,7 +317,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                 
                 <div className="flex items-center justify-between border-b border-white/15 pb-4 mb-4">
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#C1F24F]">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#C1F24F]">
                       Contractual Specification
                     </span>
                     <h4 className="text-xl font-bold font-display text-white">
@@ -377,7 +377,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                   <span>Request Official Proposal for this Configuration</span>
                 </button>
 
-                <div className="mt-3 text-center text-[11px] text-slate-300">
+                <div className="mt-3 text-center text-xs text-slate-300">
                   Fixed annual pricing with flexible quarterly billing available for Lahore businesses.
                 </div>
 

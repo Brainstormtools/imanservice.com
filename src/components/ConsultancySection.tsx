@@ -95,7 +95,7 @@ export const ConsultancySection: React.FC<ConsultancySectionProps> = ({ onOpenQu
                 </div>
 
                 <div className="mt-5 pt-4 border-t border-slate-200/80">
-                  <div className="text-[10px] uppercase font-bold text-[#056D67] tracking-wider mb-2">
+                  <div className="text-xs uppercase font-bold text-[#056D67] tracking-wider mb-2">
                     Key Consulting Deliverables:
                   </div>
                   <ul className="space-y-1.5">
@@ -113,7 +113,7 @@ export const ConsultancySection: React.FC<ConsultancySectionProps> = ({ onOpenQu
             {/* Free Advisory Session Card */}
             <div className="bg-gradient-to-br from-[#056D67] to-[#034F4B] text-white rounded-2xl p-6 flex flex-col justify-between border border-[#096F67]">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#C1F24F]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#C1F24F]">
                   Executive Advisory
                 </span>
                 <h4 className="text-xl font-bold font-display mt-2">

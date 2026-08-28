@@ -54,29 +54,29 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="sticky top-0 z-40 w-full transition-all duration-200">
       {/* Top Corporate Info Bar */}
-      <div className="bg-[#034F4B] text-white text-xs py-1.5 sm:py-2 px-3 sm:px-4 border-b border-[#056D67]">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 sm:gap-3">
-          <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
+      <div className="bg-[#034F4B] text-white text-xs py-1 px-3 sm:px-4 border-b border-[#056D67]">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-1 sm:gap-3">
+          <div className="flex items-center gap-1 sm:gap-3 flex-wrap">
             <a 
               href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`} 
-              className="inline-flex items-center gap-1.5 font-medium hover:text-[#C1F24F] transition-colors py-1 px-1 rounded"
+              className="min-h-[44px] inline-flex items-center gap-1.5 font-medium hover:text-[#C1F24F] transition-colors px-2 py-1 rounded"
               id="topbar-phone-link"
               aria-label="Call i Man Service"
             >
               <Phone className="w-3.5 h-3.5 text-[#C1F24F] flex-shrink-0" />
-              <span className="text-xs sm:text-xs font-semibold">{COMPANY_INFO.phone}</span>
+              <span className="text-xs font-semibold">{COMPANY_INFO.phone}</span>
             </a>
-            <span className="text-slate-500 hidden xs:inline">•</span>
+            <span className="text-slate-500 hidden sm:inline">•</span>
             <a 
               href={COMPANY_INFO.whatsappLink || 'https://wa.me/923149020008'} 
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-medium text-[#C1F24F] hover:underline transition-colors py-1 px-1 rounded"
+              className="min-h-[44px] inline-flex items-center gap-1.5 font-medium text-[#C1F24F] hover:underline transition-colors px-2 py-1 rounded"
               id="topbar-whatsapp-link"
               aria-label="Chat on WhatsApp"
             >
               <MessageSquare className="w-3.5 h-3.5 text-[#C1F24F] flex-shrink-0" />
-              <span className="text-xs sm:text-xs font-semibold">WhatsApp</span>
+              <span className="text-xs font-semibold">WhatsApp</span>
             </a>
             <span className="hidden md:inline text-slate-500">•</span>
             <div className="hidden md:flex items-center gap-1.5 text-slate-300 text-xs">
@@ -89,16 +89,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onOpenQuiz}
               id="nav-readiness-quiz-btn"
-              className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-[#034F4B] bg-[#C1F24F] hover:bg-[#D8FA8A] px-3 py-1.5 rounded-md transition-colors shadow-xs"
+              className="min-h-[44px] inline-flex items-center justify-center gap-1.5 text-xs font-bold text-[#034F4B] bg-[#C1F24F] hover:bg-[#D8FA8A] px-3 py-1.5 rounded-md transition-colors shadow-xs"
               aria-label="Free IT Health Check"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#034F4B] flex-shrink-0" />
-              <span>Free IT Health Check</span>
+              <span className="hidden xs:inline">Free IT Health Check</span>
+              <span className="xs:hidden">Health Check</span>
             </button>
             <button
               onClick={onOpenChecklist}
               id="nav-audit-checklist-btn"
-              className="hidden lg:inline-flex items-center gap-1.5 text-xs font-medium text-slate-200 hover:text-white transition-colors py-1 px-2 rounded"
+              className="hidden lg:inline-flex items-center gap-1.5 text-xs font-medium text-slate-200 hover:text-white transition-colors min-h-[44px] px-2.5 rounded"
               aria-label="Audit Checklist"
             >
               <FileText className="w-3.5 h-3.5 text-[#C1F24F] flex-shrink-0" />

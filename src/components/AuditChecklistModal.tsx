@@ -134,7 +134,7 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
             </div>
           </div>
           <div className="text-right">
-            <span className="text-[10px] uppercase font-bold text-slate-500">Audit Progress</span>
+            <span className="text-xs uppercase font-bold text-slate-500">Audit Progress</span>
             <div className="text-base font-extrabold text-[#056D67]">
               {completedCount} of {totalItems} Checked ({completionPercentage}%)
             </div>

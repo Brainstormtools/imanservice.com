@@ -87,7 +87,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenQuote }) => {
           <div className="lg:col-span-6">
             <div className="bg-[#F4FAF8] rounded-3xl p-6 sm:p-8 border border-[#056D67]/20 shadow-xs">
               <div className="mb-6">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#056D67]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#056D67]">
                   The i Man Standard
                 </span>
                 <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-display">

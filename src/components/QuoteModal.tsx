@@ -283,7 +283,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 </button>
               </div>
 
-              <div className="text-center text-[11px] text-slate-400">
+              <div className="text-center text-xs text-slate-500">
                 Or call our Lahore desk directly at <strong>{COMPANY_INFO.phone}</strong> for urgent emergency assistance.
               </div>
 
@@ -309,7 +309,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
             </p>
 
             <div className="mt-6 p-4 rounded-xl bg-[#F4FAF8] border border-slate-200 text-left text-xs text-slate-700 max-w-md mx-auto space-y-1.5">
-              <div className="font-bold text-[#056D67] uppercase text-[11px] mb-1">
+              <div className="font-bold text-[#056D67] uppercase text-xs mb-1">
                 Immediate Reference:
               </div>
               <div>• Service Pillar: <strong>{serviceInterest.toUpperCase()}</strong></div>

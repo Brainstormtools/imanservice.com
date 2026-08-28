@@ -154,7 +154,7 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
                         <div className="font-bold text-sm leading-tight">
                           {area.area}
                         </div>
-                        <span className={`text-[10px] uppercase font-semibold ${isActive ? 'text-[#D8FA8A]' : 'text-slate-500'}`}>
+                        <span className={`text-xs uppercase font-semibold ${isActive ? 'text-[#D8FA8A]' : 'text-slate-500'}`}>
                           {area.criticality} Priority
                         </span>
                       </div>
@@ -279,7 +279,7 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
                 className="bg-white border border-slate-200 hover:border-[#056D67] rounded-2xl p-6 transition-all duration-200 shadow-xs hover:shadow-md flex flex-col justify-between relative group"
               >
                 {/* Step Pill */}
-                <div className="absolute -top-3 left-6 px-3 py-0.5 rounded-full bg-[#056D67] text-white text-[11px] font-extrabold tracking-wider uppercase border-2 border-white shadow-xs">
+                <div className="absolute -top-3 left-6 px-3 py-0.5 rounded-full bg-[#056D67] text-white text-xs font-extrabold tracking-wider uppercase border-2 border-white shadow-xs">
                   Stage 0{step.step}
                 </div>
 
@@ -296,7 +296,7 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
                 </div>
 
                 <div className="mt-5 pt-3 border-t border-slate-100">
-                  <div className="text-[10px] uppercase font-bold text-[#056D67] tracking-wider">
+                  <div className="text-xs uppercase font-bold text-[#056D67] tracking-wider">
                     Key Deliverable
                   </div>
                   <div className="text-xs font-semibold text-slate-800 mt-0.5">
@@ -346,7 +346,7 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
             {/* Quick Consultation Callout */}
             <div className="bg-[#034F4B] border border-[#C1F24F]/40 rounded-xl p-5 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#C1F24F]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#C1F24F]">
                   Lahore Corporate Special
                 </span>
                 <h5 className="font-bold text-sm text-white mt-1">
