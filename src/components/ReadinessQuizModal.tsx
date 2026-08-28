@@ -76,7 +76,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
         level: 'High / Critical Outage Risk',
         badgeColor: 'bg-rose-100 text-rose-800 border-rose-300',
         icon: <ShieldAlert className="w-8 h-8 text-rose-600" />,
-        summary: 'Your organization is highly vulnerable to prolonged downtime, ransomware impact, or hardware failures. An immediate Existing Networks Audit and structured IT-AMC are strongly advised.'
+        summary: 'Your organization is highly vulnerable to prolonged downtime, ransomware impact, or hardware failures. An immediate Existing Network Audit and structured IT-AMC are strongly advised.'
       };
     }
   };
@@ -194,7 +194,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#056D67] flex-shrink-0 mt-0.5" />
-                <span>Perform an <strong>Existing Networks Audit</strong> to inventory all hardware assets and firmware risks.</span>
+                <span>Perform an <strong>Existing Network Audit</strong> to inventory all hardware assets and firmware risks.</span>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#056D67] flex-shrink-0 mt-0.5" />

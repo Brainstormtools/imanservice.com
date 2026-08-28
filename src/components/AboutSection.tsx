@@ -33,7 +33,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenQuote }) => {
   };
 
   return (
-    <section id="about" className="py-20 bg-white border-b border-slate-200">
+    <section id="about" className="scroll-mt-[140px] py-20 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Grid: Overview & Commitments */}
@@ -71,10 +71,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenQuote }) => {
 
             {/* Quick Contact Chips */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <div className="flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+              <address className="not-italic flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
                 <MapPin className="w-4 h-4 text-[#056D67] flex-shrink-0" />
-                <span className="truncate">Gulberg ll, Lahore</span>
-              </div>
+                <span className="truncate">Gulberg II, Lahore</span>
+              </address>
               <div className="flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
                 <Phone className="w-4 h-4 text-[#056D67] flex-shrink-0" />
                 <span>{COMPANY_INFO.phone}</span>

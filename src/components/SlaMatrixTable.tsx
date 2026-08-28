@@ -20,7 +20,7 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
   const [activeTab, setActiveTab] = useState<'matrix' | 'flow' | 'preventive'>('matrix');
 
   return (
-    <section id="sla-matrix" className="py-16 bg-white border-b border-slate-200">
+    <section id="sla-matrix" className="scroll-mt-[140px] py-16 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -225,7 +225,7 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
               </div>
 
               <div className="bg-white p-4 rounded-xl border border-slate-200">
-                <div className="text-xs font-bold text-[#056D67]">Tier 3: Onsite Dispatch Team</div>
+                <div className="text-xs font-bold text-[#056D67]">Tier 3: On-Site Dispatch Team</div>
                 <div className="text-xs text-slate-500 mt-1">Within 1 - 2 Hours</div>
                 <p className="text-xs text-slate-700 mt-2">
                   Certified hardware technician deployed directly to your Lahore premises with replacement spares.

@@ -1,6 +1,6 @@
 {
-  "name": "i Man Service - Enterprise IT Infrastructure & AMC Solutions",
-  "description": "Official corporate portal for i Man Service Lahore, providing Existing Networks Audit, IT-AMC/SLA agreements, and Strategic IT Consultancy.",
+  "name": "i Man Service | IT Infrastructure, Network Audit & AMC Lahore",
+  "description": "i Man Service provides network audits, fixed-fee IT-AMC/SLA maintenance and strategic IT consultancy for businesses in Lahore, Pakistan.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -314,7 +314,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               </div>
               <div>• Service Pillar: <strong>{serviceInterest.toUpperCase()}</strong></div>
               <div>• Fleet Size: <strong>{workstations} Workstations & {servers} Servers</strong></div>
-              <div>• Official Lahore Office: <strong>{COMPANY_INFO.address}</strong></div>
+              <div>• Official Lahore Office: <address className="not-italic inline font-bold text-slate-900">{COMPANY_INFO.address}</address></div>
               <div>• Direct Phone: <strong>{COMPANY_INFO.phone}</strong></div>
             </div>
 

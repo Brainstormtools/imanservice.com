@@ -65,7 +65,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
   };
 
   return (
-    <section id="it-amc" className="py-20 bg-[#F4FAF8] border-b border-slate-200">
+    <section id="it-amc" className="scroll-mt-[140px] py-20 bg-[#F4FAF8] border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Pillar Header */}
@@ -79,7 +79,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
               IT-AMC / SLA (Annual Maintenance Contract)
             </h2>
             <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
-              An IT AMC is a fixed-fee agreement that keeps your computers, servers, and network maintained and supported throughout the year. At IMAN, we go beyond reactive "break-fix" support—we deliver structured, SLA-backed maintenance that prevents downtime before it happens.
+              An IT AMC is a fixed-fee agreement that keeps your computers, servers, and network maintained and supported throughout the year. At i Man Service, we go beyond reactive "break-fix" support—we deliver structured, SLA-backed maintenance that prevents downtime before it happens.
             </p>
           </div>
 
@@ -165,7 +165,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
         </div>
 
         {/* Section 2: Interactive SLA Tier & Scope Calculator */}
-        <div id="sla-calculator" className="mt-20 scroll-mt-24">
+        <div id="sla-calculator" className="mt-20 scroll-mt-[140px]">
           <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xl relative overflow-hidden">
             
             {/* Header */}
@@ -178,7 +178,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                 Customize Your IT-AMC Tier & Scope
               </h3>
               <p className="text-slate-600 text-sm mt-1">
-                Configure your digital fleet size, select your desired SLA response tier, and review your customized service level commitments instantly.
+                Configure your digital fleet size, select your desired SLA response tier, and review your customized service-level commitments instantly.
               </p>
             </div>
 
@@ -388,7 +388,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
           </div>
         </div>
 
-        {/* Section 3: Key Benefits of IMAN IT-AMC */}
+        {/* Section 3: Key Benefits of i Man Service IT-AMC */}
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           <div className="bg-white p-4 rounded-xl border border-slate-200 flex items-center gap-3">
             <span className="text-lg">✅</span>

@@ -129,9 +129,9 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
             <div className="text-sm font-bold text-[#056D67]">
               {COMPANY_INFO.name} – Network Audit Division
             </div>
-            <div className="text-xs text-slate-600">
+            <address className="not-italic text-xs text-slate-600">
               {COMPANY_INFO.address} • Tel: {COMPANY_INFO.phone} • {COMPANY_INFO.website}
-            </div>
+            </address>
           </div>
           <div className="text-right">
             <span className="text-xs uppercase font-bold text-slate-500">Audit Progress</span>
@@ -191,7 +191,7 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
             }}
             className="min-h-[44px] px-5 py-2.5 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs sm:text-sm transition-colors flex items-center justify-center"
           >
-            Schedule Professional Onsite Audit
+            Schedule Professional On-Site Audit
           </button>
         </div>
 

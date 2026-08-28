@@ -27,6 +27,9 @@ export const Footer: React.FC<FooterProps> = ({
 }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
   };
 
   return (
@@ -46,10 +49,10 @@ export const Footer: React.FC<FooterProps> = ({
 
             {/* Location & Phone */}
             <div className="space-y-0.5 text-xs sm:text-sm pt-2">
-              <div className="inline-flex items-center gap-2.5 text-slate-200 min-h-[36px] py-1.5">
+              <address className="not-italic inline-flex items-center gap-2.5 text-slate-200 min-h-[36px] py-1.5">
                 <MapPin className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
-                <span>{COMPANY_INFO.address}, {COMPANY_INFO.city}</span>
-              </div>
+                <span>{COMPANY_INFO.address}</span>
+              </address>
               <div>
                 <a 
                   href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`} 
@@ -93,7 +96,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <a href="#network-audit" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C1F24F]" />
-                  <span>1. Existing Networks Audit</span>
+                  <span>1. Existing Network Audit</span>
                 </a>
               </li>
               <li>
@@ -146,7 +149,7 @@ export const Footer: React.FC<FooterProps> = ({
               >
                 <span className="flex items-center gap-2">
                   <FileCheck className="w-3.5 h-3.5 text-[#C1F24F]" />
-                  <span>Download Audit Checklist</span>
+                  <span>Open Audit Checklist</span>
                 </span>
                 <span className="text-xs text-[#C1F24F]">&rarr;</span>
               </button>
@@ -169,7 +172,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Bottom Copyright Row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            © {new Date().getFullYear()} <strong>i Man Service</strong>. All Rights Reserved. {COMPANY_INFO.address}.
+            © 2026 i Man Service. All rights reserved.
           </div>
 
           <div className="flex items-center gap-4">

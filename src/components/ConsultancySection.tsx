@@ -35,7 +35,7 @@ export const ConsultancySection: React.FC<ConsultancySectionProps> = ({ onOpenQu
   const activeService = CONSULTANCY_SERVICES[selectedServiceIdx];
 
   return (
-    <section id="it-consultancy" className="py-20 bg-white border-b border-slate-200">
+    <section id="it-consultancy" className="scroll-mt-[140px] py-20 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Pillar Header */}

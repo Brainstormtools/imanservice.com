@@ -38,7 +38,7 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-[#F4FAF8]">
+    <section id="contact" className="scroll-mt-[140px] py-20 bg-[#F4FAF8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -84,7 +84,7 @@ export const ContactSection: React.FC = () => {
                     >
                       {COMPANY_INFO.phone}
                     </a>
-                    <div className="text-xs text-slate-200">Available 24/7 for Onsite & SLA Dispatch</div>
+                    <div className="text-xs text-slate-200">Available 24/7 for On-Site & SLA Dispatch</div>
                   </div>
                 </div>
 
@@ -95,8 +95,7 @@ export const ContactSection: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-xs uppercase font-bold text-slate-300">Physical Address</div>
-                    <div className="font-bold text-white leading-snug">{COMPANY_INFO.address}</div>
-                    <div className="text-xs text-slate-200">{COMPANY_INFO.city}</div>
+                    <address className="not-italic font-bold text-white leading-snug">{COMPANY_INFO.address}</address>
                   </div>
                 </div>
 
@@ -160,7 +159,7 @@ export const ContactSection: React.FC = () => {
               </div>
               <div className="text-xs">
                 <div className="font-bold text-slate-900">Lahore Rapid Response Fleet</div>
-                <div className="text-slate-500 mt-0.5">Onsite engineers available for fast physical dispatch across Lahore industrial & commercial districts.</div>
+                <div className="text-slate-500 mt-0.5">On-site engineers available for fast physical dispatch across Lahore industrial & commercial districts.</div>
               </div>
             </div>
 
@@ -234,7 +233,7 @@ export const ContactSection: React.FC = () => {
                       onChange={(e) => setSubject(e.target.value)}
                       className="w-full min-h-[44px] px-3 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] bg-white"
                     >
-                      <option value="Existing Networks Audit">1. Existing Networks Audit</option>
+                      <option value="Existing Network Audit">1. Existing Network Audit</option>
                       <option value="IT-AMC / SLA Contract">2. IT-AMC / SLA Maintenance</option>
                       <option value="IT Consultancy Service">3. Strategic IT Consultancy</option>
                       <option value="Emergency Network Repair">Urgent Incident / Emergency</option>

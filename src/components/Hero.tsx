@@ -19,7 +19,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
   return (
-    <section id="overview" className="relative overflow-hidden bg-gradient-to-b from-[#034F4B] via-[#056D67] to-[#056D67] text-white pt-10 pb-20 lg:pt-16 lg:pb-28">
+    <section id="overview" className="scroll-mt-[140px] relative overflow-hidden bg-gradient-to-b from-[#034F4B] via-[#056D67] to-[#056D67] text-white pt-10 pb-20 lg:pt-16 lg:pb-28">
       {/* Background Subtle Geometric Pattern */}
       <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#C1F24F_1px,transparent_1px)] [background-size:24px_24px]" />
       
@@ -47,7 +47,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
 
             {/* Sub-headline / Core Description */}
             <p className="text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl font-light">
-              <strong className="font-semibold text-white">i Man Service</strong> delivers reliable, secure, and future-ready IT infrastructure across the entire lifecycle. Your single point of accountability for <span className="text-white font-medium underline decoration-[#C1F24F] decoration-2 underline-offset-4">Existing Networks Audit</span>, <span className="text-white font-medium underline decoration-[#C1F24F] decoration-2 underline-offset-4">IT-AMC/SLA Maintenance</span>, and <span className="text-white font-medium underline decoration-[#C1F24F] decoration-2 underline-offset-4">IT Consultancy</span>.
+              <strong className="font-semibold text-white">i Man Service</strong> delivers reliable, secure, and future-ready IT infrastructure across the entire lifecycle. Your single point of accountability for <span className="text-white font-medium underline decoration-[#C1F24F] decoration-2 underline-offset-4">Existing Network Audit</span>, <span className="text-white font-medium underline decoration-[#C1F24F] decoration-2 underline-offset-4">IT-AMC/SLA Maintenance</span>, and <span className="text-white font-medium underline decoration-[#C1F24F] decoration-2 underline-offset-4">IT Consultancy</span>.
             </p>
 
             {/* Value Pillars Quick Chips */}
@@ -108,9 +108,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
                   <div className="text-xs uppercase tracking-wider font-bold text-[#056D67]">
                     Enterprise Service Framework
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 font-display">
+                  <h2 className="text-xl font-bold text-slate-900 font-display">
                     3 Core Technology Pillars
-                  </h3>
+                  </h2>
                 </div>
                 <div className="w-10 h-10 rounded-xl bg-[#F4FAF8] border border-[#056D67]/20 flex items-center justify-center text-[#056D67]">
                   <Network className="w-5 h-5" />
@@ -133,7 +133,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-sm text-slate-900 group-hover:text-[#056D67] transition-colors">
-                          1. Existing Networks Audit
+                          1. Existing Network Audit
                         </span>
                         <span className="text-xs font-semibold uppercase px-2 py-0.5 rounded bg-white text-[#056D67] border border-slate-200">
                           Assessment
@@ -205,7 +205,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
               <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
                 <span className="flex items-center gap-1">
                   <ShieldCheck className="w-4 h-4 text-[#056D67]" />
-                  <span>Lahore Onsite Support</span>
+                  <span>Lahore On-Site Support</span>
                 </span>
                 <span className="font-semibold text-slate-800">
                   Mon – Sat 9am – 7pm

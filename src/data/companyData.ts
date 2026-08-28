@@ -20,10 +20,10 @@ export const COMPANY_INFO = {
   email: "info@imanservice.com",
   supportEmail: "support@imanservice.com",
   website: "imanservice.com",
-  address: "P-120, Siddique Trade Center, Gulberg ll Lahore",
+  address: "P-120, Siddique Trade Center, Gulberg II, Lahore, Pakistan",
   city: "Lahore, Pakistan",
   hours: "Monday – Saturday: 9:00 AM – 7:00 PM (Emergency SLA Support 24/7/365)",
-  overview: "i Man Service is a trusted IT infrastructure and technology services provider committed to delivering excellence across the entire IT lifecycle. We empower businesses with reliable, secure, and future-ready technology solutions through three specialized service pillars: Existing Networks Audit, IT-AMC/SLA and IT Consultancy. With a comprehensive portfolio spanning hardware and software, we serve as a single point of accountability for all your technology needs. Our mission is to transform IT from a cost center into a strategic business enabler—ensuring your systems are always available, always secure, and always aligned with your business goals."
+  overview: "i Man Service is a trusted IT infrastructure and technology services provider committed to delivering excellence across the entire IT lifecycle. We empower businesses with reliable, secure, and future-ready technology solutions through three specialized service pillars: Existing Network Audit, IT-AMC/SLA and IT Consultancy. With a comprehensive portfolio spanning hardware and software, we serve as a single point of accountability for all your technology needs. Our mission is to transform IT from a cost center into a strategic business enabler—ensuring your systems are always available, always secure, and always aligned with your business goals."
 };
 
 export const BRAND_COLORS = {
@@ -57,7 +57,7 @@ export const KEY_MESSAGING_THEMES = [
     id: "sla-backed",
     title: "SLA-Backed Reliability",
     subtitle: "Measurable, contractual commitments",
-    description: "Every service comes with clear, measurable commitments. Guaranteed response times, strict escalation matrixes, and transparent monthly reporting.",
+    description: "Every service comes with clear, measurable commitments. Guaranteed response times, strict escalation matrices, and transparent monthly reporting.",
     icon: "Clock",
     stats: "99.9% Uptime Commitment"
   },
@@ -145,7 +145,7 @@ export const AUDIT_METHODOLOGY: AuditMethodologyStep[] = [
   {
     step: 2,
     title: "Performance & Health Analysis",
-    description: "Deep-dive analysis of system health under real-world load, measuring throughput bottlenecks, Wi-Fi coverage deadzones, and hardware stress points.",
+    description: "Deep-dive analysis of system health under real-world load, measuring throughput bottlenecks, Wi-Fi coverage dead zones, and hardware stress points.",
     deliverable: "Telemetry & Bottleneck Diagnostic Report",
     icon: "Activity"
   },
@@ -245,7 +245,7 @@ export const AMC_COVERAGE_ITEMS: AmcCoverageItem[] = [
     includedTasks: [
       "Multi-channel ticketing (Phone, Email, Portal, WhatsApp)",
       "Remote desktop instant assistance within SLA minutes",
-      "Onsite dispatch for hardware or physical line faults",
+      "On-site dispatch for hardware or physical line faults",
       "User onboarding & access permission provisioning"
     ]
   },
@@ -297,7 +297,7 @@ export const SLA_TIERS: SlaTier[] = [
     responseHigh: "< 2 Hours",
     responseMedium: "< 6 Hours",
     responseLow: "< 12 Hours",
-    preventiveVisits: "Monthly Comprehensive Onsite Visits",
+    preventiveVisits: "Monthly Comprehensive On-Site Visits",
     reporting: "Real-time Dashboard + Monthly Executive Briefing",
     bestFor: "Large enterprises, financial, healthcare & 24/7 operations.",
     popular: false
@@ -310,7 +310,7 @@ export const SLA_SEVERITY_MATRIX: SlaSeverityRow[] = [
     level: "P1",
     example: "Complete network outage, primary server down, core firewall failure, or active security breach affecting entire organization.",
     ackTime: "Within 15 Minutes",
-    onsiteOrRemoteResolution: "Immediate remote response / Onsite dispatch < 1-2 Hours",
+    onsiteOrRemoteResolution: "Immediate remote response / On-site dispatch < 1-2 Hours",
     escalationManager: "Lead Infrastructure Architect & Director of Operations"
   },
   {
@@ -318,7 +318,7 @@ export const SLA_SEVERITY_MATRIX: SlaSeverityRow[] = [
     level: "P2",
     example: "Major department unable to work, backup system failure, critical business software degraded, internet line degraded without failover.",
     ackTime: "Within 30 Minutes",
-    onsiteOrRemoteResolution: "Remote triage < 1 Hour / Onsite within 2-4 Hours",
+    onsiteOrRemoteResolution: "Remote triage < 1 Hour / On-site within 2-4 Hours",
     escalationManager: "Senior Systems Engineer"
   },
   {

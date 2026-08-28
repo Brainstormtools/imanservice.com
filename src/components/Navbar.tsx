@@ -79,10 +79,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="text-xs font-semibold">WhatsApp</span>
             </a>
             <span className="hidden md:inline text-slate-500">•</span>
-            <div className="hidden md:flex items-center gap-1.5 text-slate-300 text-xs">
+            <address className="not-italic hidden md:flex items-center gap-1.5 text-slate-300 text-xs">
               <MapPin className="w-3.5 h-3.5 text-[#C1F24F] flex-shrink-0" />
               <span className="truncate max-w-[280px] lg:max-w-none">{COMPANY_INFO.address}</span>
-            </div>
+            </address>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3 ml-auto">

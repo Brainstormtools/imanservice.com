@@ -68,7 +68,7 @@ export default function App() {
           onOpenQuote={handleOpenQuote}
         />
 
-        {/* 3. Core Pillar 1: Existing Networks Audit */}
+        {/* 3. Core Pillar 1: Existing Network Audit */}
         <NetworkAuditExplorer 
           onOpenQuote={handleOpenQuote}
           onOpenChecklist={handleOpenChecklist}
@@ -89,7 +89,7 @@ export default function App() {
           onOpenQuote={handleOpenQuote}
         />
 
-        {/* 7. About IMAN SERVICE COMPANY & 4 Commitments */}
+        {/* 7. About i Man Service & 4 Commitments */}
         <AboutSection 
           onOpenQuote={handleOpenQuote}
         />

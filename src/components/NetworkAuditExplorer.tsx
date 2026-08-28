@@ -78,7 +78,7 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
   const activeArea = ASSESSMENT_AREAS[selectedAreaIdx];
 
   return (
-    <section id="network-audit" className="py-20 bg-white border-b border-slate-200">
+    <section id="network-audit" className="scroll-mt-[140px] py-20 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Pillar Header */}
@@ -89,10 +89,10 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
               <span>Core Service Pillar 1</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-display">
-              Existing Networks Audit
+              Existing Network Audit
             </h2>
             <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
-              A comprehensive evaluation of your entire IT infrastructure—encompassing hardware, software, connected devices, security protocols, and performance metrics. IMAN delivers thorough, independent assessments that uncover risks, remove bottlenecks, and create a clear roadmap for scalable, future-ready operations.
+              A comprehensive evaluation of your entire IT infrastructure—encompassing hardware, software, connected devices, security protocols, and performance metrics. i Man Service delivers thorough, independent assessments that uncover risks, remove bottlenecks, and create a clear roadmap for scalable, future-ready operations.
             </p>
           </div>
 
@@ -334,9 +334,9 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
                 <div className="w-10 h-10 rounded-lg bg-[#C1F24F] text-[#034F4B] flex items-center justify-center font-bold mb-3">
                   {getWhyIcon(why.icon)}
                 </div>
-                <h5 className="font-bold text-sm text-white">
+                <h4 className="font-bold text-sm text-white">
                   {why.title}
-                </h5>
+                </h4>
                 <p className="text-xs text-slate-200 mt-1.5 leading-relaxed">
                   {why.description}
                 </p>
@@ -349,9 +349,9 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
                 <span className="text-xs font-bold uppercase tracking-wider text-[#C1F24F]">
                   Lahore Corporate Special
                 </span>
-                <h5 className="font-bold text-sm text-white mt-1">
-                  Ready for an Onsite Preliminary Walkthrough?
-                </h5>
+                <h4 className="font-bold text-sm text-white mt-1">
+                  Ready for an On-Site Preliminary Walkthrough?
+                </h4>
                 <p className="text-xs text-slate-300 mt-1.5">
                   Our certified network engineers can survey your Lahore facility within 24–48 hours.
                 </p>
@@ -360,7 +360,7 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
                 onClick={() => onOpenQuote('audit')}
                 className="mt-4 w-full min-h-[44px] py-2.5 px-3 rounded-lg bg-[#C1F24F] text-[#034F4B] font-bold text-xs sm:text-sm hover:bg-[#D8FA8A] transition-colors text-center flex items-center justify-center"
               >
-                Schedule Onsite Walkthrough
+                Schedule On-Site Walkthrough
               </button>
             </div>
           </div>
