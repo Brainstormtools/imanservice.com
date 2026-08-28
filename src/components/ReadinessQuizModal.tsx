@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { HEALTH_QUIZ_QUESTIONS } from '../data/companyData';
 import { 
   X, 
@@ -27,6 +27,57 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState<boolean>(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      previousFocusRef.current = document.activeElement as HTMLElement;
+      
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          onClose();
+          return;
+        }
+
+        if (e.key === 'Tab' && modalRef.current) {
+          const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+            'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          );
+          if (focusableElements.length === 0) return;
+
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
+
+          if (e.shiftKey && document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          } else if (!e.shiftKey && document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+
+      // Focus first interactive element in modal
+      const timer = setTimeout(() => {
+        if (modalRef.current) {
+          const firstFocusable = modalRef.current.querySelector<HTMLElement>('button, [tabindex="0"]');
+          firstFocusable?.focus();
+        }
+      }, 50);
+
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+        clearTimeout(timer);
+        if (previousFocusRef.current) {
+          previousFocusRef.current.focus();
+        }
+      };
+    }
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -98,7 +149,13 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-white rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative max-h-[90vh] overflow-y-auto">
+      <div 
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="quiz-modal-title"
+        className="bg-white rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative max-h-[90vh] overflow-y-auto"
+      >
         
         {/* Close Button */}
         <button
@@ -132,7 +189,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
 
             {/* Question Card */}
             <div className="mb-6">
-              <h3 className="text-lg sm:text-xl font-bold text-slate-900 font-display">
+              <h3 id="quiz-modal-title" className="text-lg sm:text-xl font-bold text-slate-900 font-display">
                 {currentQuestion.question}
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -179,7 +236,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
               {riskStatus.level}
             </div>
 
-            <h3 className="text-2xl font-extrabold text-slate-900 font-display">
+            <h3 id="quiz-modal-title" className="text-2xl font-extrabold text-slate-900 font-display">
               Readiness Score: {totalScore} / 100
             </h3>
 
@@ -208,7 +265,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
                 onClick={handleRequestRemediation}
                 className="w-full min-h-[44px] py-3 px-4 rounded-xl bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-sm transition-all shadow-md flex items-center justify-center gap-2"
               >
-                <span>Request Free Audit Review</span>
+                <span>Request IT Proposal</span>
                 <ArrowRight className="w-4 h-4 text-[#C1F24F]" />
               </button>
               <button

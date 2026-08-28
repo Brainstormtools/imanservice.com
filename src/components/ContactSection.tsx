@@ -181,11 +181,13 @@ export const ContactSection: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label htmlFor="contact-full-name" className="block text-xs font-semibold text-slate-700 mb-1">
                       Full Name *
                     </label>
                     <input
                       type="text"
+                      id="contact-full-name"
+                      name="fullName"
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
@@ -195,11 +197,13 @@ export const ContactSection: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label htmlFor="contact-phone" className="block text-xs font-semibold text-slate-700 mb-1">
                       Phone Number *
                     </label>
                     <input
                       type="tel"
+                      id="contact-phone"
+                      name="phone"
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
@@ -211,11 +215,13 @@ export const ContactSection: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label htmlFor="contact-email" className="block text-xs font-semibold text-slate-700 mb-1">
                       Corporate Email *
                     </label>
                     <input
                       type="email"
+                      id="contact-email"
+                      name="email"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -225,10 +231,12 @@ export const ContactSection: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label htmlFor="contact-category" className="block text-xs font-semibold text-slate-700 mb-1">
                       Inquiry Category
                     </label>
                     <select
+                      id="contact-category"
+                      name="category"
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
                       className="w-full min-h-[44px] px-3 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] bg-white"
@@ -242,10 +250,12 @@ export const ContactSection: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label htmlFor="contact-message" className="block text-xs font-semibold text-slate-700 mb-1">
                     Message / Project Details *
                   </label>
                   <textarea
+                    id="contact-message"
+                    name="message"
                     rows={4}
                     required
                     value={message}
@@ -265,10 +275,14 @@ export const ContactSection: React.FC = () => {
                   ) : (
                     <>
                       <Send className="w-4 h-4 text-[#C1F24F]" />
-                      <span>Send Direct Message to i Man Engineers</span>
+                      <span>Request IT Proposal</span>
                     </>
                   )}
                 </button>
+
+                <p className="text-xs text-slate-500 text-center pt-2">
+                  Your details will only be used to respond to your inquiry and will not be shared with third parties.
+                </p>
               </form>
             ) : (
               <div className="text-center py-10 space-y-4">
