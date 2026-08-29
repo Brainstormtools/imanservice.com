@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SLA_SEVERITY_MATRIX } from '../data/companyData';
+import { SLA_SEVERITY_MATRIX, COMPANY_INFO } from '../data/companyData';
 import { 
   ShieldAlert, 
   AlertCircle, 
@@ -8,9 +8,9 @@ import {
   UserCheck, 
   CheckCircle,
   HelpCircle,
-  PhoneCall
+  PhoneCall,
+  ArrowRight
 } from 'lucide-react';
-import { COMPANY_INFO } from '../data/companyData';
 
 interface SlaMatrixTableProps {
   onOpenQuote: (service?: 'audit' | 'amc' | 'consultancy' | 'all') => void;
@@ -20,7 +20,7 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
   const [activeTab, setActiveTab] = useState<'matrix' | 'flow' | 'preventive'>('matrix');
 
   return (
-    <section id="sla-matrix" className="scroll-mt-[140px] py-16 bg-white border-b border-slate-200">
+    <section id="sla-matrix" className="scroll-mt-[140px] py-16 sm:py-20 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -41,6 +41,7 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
         <div className="flex justify-center mb-8">
           <div className="inline-flex flex-wrap sm:flex-nowrap p-1.5 rounded-xl bg-[#F4FAF8] border border-slate-200 text-xs sm:text-sm font-semibold gap-1">
             <button
+              type="button"
               onClick={() => setActiveTab('matrix')}
               className={`min-h-[44px] px-4 py-2.5 rounded-lg transition-all flex items-center justify-center ${
                 activeTab === 'matrix' 
@@ -51,6 +52,7 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
               Severity & Response Matrix
             </button>
             <button
+              type="button"
               onClick={() => setActiveTab('preventive')}
               className={`min-h-[44px] px-4 py-2.5 rounded-lg transition-all flex items-center justify-center ${
                 activeTab === 'preventive' 
@@ -61,6 +63,7 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
               Preventive Maintenance Visits
             </button>
             <button
+              type="button"
               onClick={() => setActiveTab('flow')}
               className={`min-h-[44px] px-4 py-2.5 rounded-lg transition-all flex items-center justify-center ${
                 activeTab === 'flow' 
@@ -75,52 +78,100 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
 
         {/* Tab 1: Severity Matrix Table */}
         {activeTab === 'matrix' && (
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden animate-in fade-in duration-200">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs sm:text-sm">
-                <thead className="bg-[#056D67] text-white uppercase text-xs font-bold tracking-wider">
-                  <tr>
-                    <th className="py-4 px-4 sm:px-6">Severity Level</th>
-                    <th className="py-4 px-4 sm:px-6">Example Scenario</th>
-                    <th className="py-4 px-4 sm:px-6">Initial Acknowledgement</th>
-                    <th className="py-4 px-4 sm:px-6">Target Resolution Commitment</th>
-                    <th className="py-4 px-4 sm:px-6">Escalation Authority</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {SLA_SEVERITY_MATRIX.map((row, idx) => {
-                    const isP1 = row.level === 'P1';
-                    const isP2 = row.level === 'P2';
-                    return (
-                      <tr key={row.level} className={`hover:bg-[#F4FAF8]/60 transition-colors ${isP1 ? 'bg-red-50/40' : isP2 ? 'bg-amber-50/30' : ''}`}>
-                        <td className="py-4 px-4 sm:px-6 font-bold whitespace-nowrap">
-                          <div className="flex items-center gap-2">
-                            <span className={`w-2.5 h-2.5 rounded-full ${
-                              isP1 ? 'bg-red-600 animate-pulse' : isP2 ? 'bg-amber-500' : 'bg-[#056D67]'
-                            }`} />
-                            <span className="text-slate-900 font-display">{row.severity}</span>
-                          </div>
-                          <span className="text-xs text-slate-500 font-mono">Priority: {row.level}</span>
-                        </td>
-                        <td className="py-4 px-4 sm:px-6 text-slate-600 max-w-xs">
-                          {row.example}
-                        </td>
-                        <td className="py-4 px-4 sm:px-6 font-bold text-slate-900 whitespace-nowrap">
-                          <span className="px-2.5 py-1 rounded bg-slate-100 text-[#034F4B] border border-slate-200">
-                            {row.ackTime}
-                          </span>
-                        </td>
-                        <td className="py-4 px-4 sm:px-6 font-semibold text-[#056D67]">
-                          {row.onsiteOrRemoteResolution}
-                        </td>
-                        <td className="py-4 px-4 sm:px-6 text-slate-700 text-xs font-medium">
-                          {row.escalationManager}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+          <div className="space-y-4 animate-in fade-in duration-200">
+            {/* Mobile Card Layout (Visible on Small Viewports < 640px) */}
+            <div className="sm:hidden space-y-4">
+              {SLA_SEVERITY_MATRIX.map((row) => {
+                const isP1 = row.level === 'P1';
+                const isP2 = row.level === 'P2';
+                return (
+                  <div 
+                    key={row.level}
+                    className={`p-4 rounded-2xl border ${
+                      isP1 
+                        ? 'bg-rose-50/50 border-rose-200' 
+                        : isP2 
+                          ? 'bg-amber-50/40 border-amber-200' 
+                          : 'bg-white border-slate-200'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <span className={`w-2.5 h-2.5 rounded-full ${
+                          isP1 ? 'bg-red-600 animate-pulse' : isP2 ? 'bg-amber-500' : 'bg-[#056D67]'
+                        }`} />
+                        <span className="font-bold text-slate-900 font-display">{row.severity}</span>
+                      </div>
+                      <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-white border border-slate-200 text-slate-700">
+                        {row.level}
+                      </span>
+                    </div>
+
+                    <p className="text-xs text-slate-600 mb-3">{row.example}</p>
+
+                    <div className="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-slate-200/80">
+                      <div>
+                        <span className="text-slate-500 block text-[10px] uppercase">Ack Time</span>
+                        <strong className="text-slate-800">{row.ackTime}</strong>
+                      </div>
+                      <div>
+                        <span className="text-slate-500 block text-[10px] uppercase">Target Resolution</span>
+                        <strong className="text-[#056D67]">{row.onsiteOrRemoteResolution}</strong>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Desktop Table (Visible >= 640px) */}
+            <div className="hidden sm:block bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs sm:text-sm">
+                  <thead className="bg-[#056D67] text-white uppercase text-xs font-bold tracking-wider">
+                    <tr>
+                      <th className="py-4 px-4 sm:px-6">Severity Level</th>
+                      <th className="py-4 px-4 sm:px-6">Example Scenario</th>
+                      <th className="py-4 px-4 sm:px-6">Initial Acknowledgement</th>
+                      <th className="py-4 px-4 sm:px-6">Target Resolution Commitment</th>
+                      <th className="py-4 px-4 sm:px-6">Escalation Authority</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {SLA_SEVERITY_MATRIX.map((row) => {
+                      const isP1 = row.level === 'P1';
+                      const isP2 = row.level === 'P2';
+                      return (
+                        <tr key={row.level} className={`hover:bg-[#F4FAF8]/60 transition-colors ${isP1 ? 'bg-red-50/40' : isP2 ? 'bg-amber-50/30' : ''}`}>
+                          <td className="py-4 px-4 sm:px-6 font-bold whitespace-nowrap">
+                            <div className="flex items-center gap-2">
+                              <span className={`w-2.5 h-2.5 rounded-full ${
+                                isP1 ? 'bg-red-600 animate-pulse' : isP2 ? 'bg-amber-500' : 'bg-[#056D67]'
+                              }`} />
+                              <span className="text-slate-900 font-display">{row.severity}</span>
+                            </div>
+                            <span className="text-xs text-slate-500 font-mono">Priority: {row.level}</span>
+                          </td>
+                          <td className="py-4 px-4 sm:px-6 text-slate-600 max-w-xs">
+                            {row.example}
+                          </td>
+                          <td className="py-4 px-4 sm:px-6 font-bold text-slate-900 whitespace-nowrap">
+                            <span className="px-2.5 py-1 rounded bg-slate-100 text-[#034F4B] border border-slate-200">
+                              {row.ackTime}
+                            </span>
+                          </td>
+                          <td className="py-4 px-4 sm:px-6 font-semibold text-[#056D67]">
+                            {row.onsiteOrRemoteResolution}
+                          </td>
+                          <td className="py-4 px-4 sm:px-6 text-slate-700 text-xs font-medium">
+                            {row.escalationManager}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         )}
@@ -244,21 +295,23 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
         )}
 
         {/* Emergency Help Banner */}
-        <div className="mt-8 p-4 rounded-xl bg-slate-900 text-white flex flex-wrap items-center justify-between gap-4">
+        <div className="mt-8 p-5 rounded-2xl bg-slate-900 text-white flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-[#C1F24F] text-[#034F4B] flex items-center justify-center font-bold">
-              <PhoneCall className="w-4 h-4" />
+            <div className="w-10 h-10 rounded-xl bg-[#C1F24F] text-[#034F4B] flex items-center justify-center font-bold">
+              <PhoneCall className="w-5 h-5" />
             </div>
             <div>
               <div className="text-xs font-semibold text-slate-300">Experiencing an Active Network Emergency in Lahore?</div>
-              <div className="text-sm font-bold text-white">Call Emergency Line: {COMPANY_INFO.phone}</div>
+              <div className="text-base font-bold text-white">Call Emergency Line: {COMPANY_INFO.phone}</div>
             </div>
           </div>
           <button
+            type="button"
             onClick={() => onOpenQuote('amc')}
-            className="min-h-[44px] px-4 py-2.5 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white text-xs sm:text-sm font-bold transition-colors flex items-center justify-center"
+            className="min-h-[44px] px-5 py-2.5 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white text-xs sm:text-sm font-bold transition-colors flex items-center justify-center gap-2"
           >
-            Request Priority Dispatch
+            <span>Request IT Proposal</span>
+            <ArrowRight className="w-4 h-4 text-[#C1F24F]" />
           </button>
         </div>
 

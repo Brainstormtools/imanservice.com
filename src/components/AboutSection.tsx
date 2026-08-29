@@ -33,11 +33,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenQuote }) => {
   };
 
   return (
-    <section id="about" className="scroll-mt-[140px] py-20 bg-white border-b border-slate-200">
+    <section id="about" className="scroll-mt-[140px] py-16 sm:py-20 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Grid: Overview & Commitments */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
           {/* Left Column: Company Story & Mission (Col 1-6) */}
           <div className="lg:col-span-6 space-y-6">
@@ -71,11 +71,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenQuote }) => {
 
             {/* Quick Contact Chips */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <address className="not-italic flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+              <address className="not-italic flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100 min-h-[44px]">
                 <MapPin className="w-4 h-4 text-[#056D67] flex-shrink-0" />
                 <span className="truncate">Gulberg II, Lahore</span>
               </address>
-              <div className="flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+              <div className="flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100 min-h-[44px]">
                 <Phone className="w-4 h-4 text-[#056D67] flex-shrink-0" />
                 <span>{COMPANY_INFO.phone}</span>
               </div>
@@ -122,10 +122,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenQuote }) => {
                   Ready to partner with Lahore's premier IT team?
                 </span>
                 <button
+                  type="button"
                   onClick={() => onOpenQuote('all')}
                   className="min-h-[44px] px-4 py-2.5 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs sm:text-sm transition-colors flex items-center justify-center gap-1.5"
                 >
-                  <span>Start Conversation</span>
+                  <span>Request IT Proposal</span>
                   <ArrowRight className="w-3.5 h-3.5 text-[#C1F24F]" />
                 </button>
               </div>

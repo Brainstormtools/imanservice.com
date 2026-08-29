@@ -19,7 +19,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
   return (
-    <section id="overview" className="scroll-mt-[140px] relative overflow-hidden bg-gradient-to-b from-[#034F4B] via-[#056D67] to-[#056D67] text-white pt-10 pb-20 lg:pt-16 lg:pb-28">
+    <section id="overview" className="scroll-mt-[140px] relative overflow-hidden bg-gradient-to-b from-[#034F4B] via-[#056D67] to-[#056D67] text-white pt-10 pb-16 lg:pt-14 lg:pb-24">
       {/* Background Subtle Geometric Pattern */}
       <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#C1F24F_1px,transparent_1px)] [background-size:24px_24px]" />
       
@@ -28,7 +28,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
       <div className="absolute -bottom-10 left-10 w-80 h-80 rounded-full bg-[#096F67]/60 blur-2xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
           {/* Main Hero Copy (Col 1-7) */}
           <div className="lg:col-span-7 space-y-6">
@@ -39,7 +39,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
               <span>Lahore's Premier IT Infrastructure & AMC Partner</span>
             </div>
 
-            {/* Headline */}
+            {/* Main Single H1 */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight font-display text-white leading-tight">
               Transform IT into a <br className="hidden sm:inline" />
               <span className="text-[#C1F24F]">Strategic Business Enabler</span>
@@ -67,23 +67,25 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-wrap items-center gap-3.5 pt-4">
               <button
+                type="button"
                 onClick={() => onOpenQuote('all')}
                 id="hero-request-quote-btn"
-                className="min-h-[44px] inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] font-bold text-sm sm:text-base transition-all transform hover:-translate-y-0.5 shadow-lg shadow-[#034F4B]/30"
+                className="min-h-[44px] inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-lg bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] font-bold text-sm sm:text-base transition-all transform hover:-translate-y-0.5 shadow-lg shadow-[#034F4B]/30"
               >
-                <span>Request Custom IT Proposal</span>
+                <span>Request IT Proposal</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
               <button
+                type="button"
                 onClick={onOpenQuiz}
                 id="hero-health-check-btn"
-                className="min-h-[44px] inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg bg-white/15 hover:bg-white/25 border border-white/30 text-white font-semibold text-sm sm:text-base transition-all backdrop-blur-xs"
+                className="min-h-[44px] inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-white/15 hover:bg-white/25 border border-white/30 text-white font-bold text-sm sm:text-base transition-all backdrop-blur-xs"
               >
                 <Activity className="w-4 h-4 text-[#C1F24F]" />
-                <span>Instant Infrastructure Health Check</span>
+                <span>Run Free IT Health Check</span>
               </button>
 
               <a
@@ -92,7 +94,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
                 className="min-h-[44px] inline-flex items-center gap-2 text-sm text-slate-200 hover:text-[#C1F24F] transition-colors py-2 px-2"
               >
                 <PhoneCall className="w-4 h-4 text-[#C1F24F]" />
-                <span>Direct Line: <strong>{COMPANY_INFO.phone}</strong></span>
+                <span>Direct: <strong>{COMPANY_INFO.phone}</strong></span>
               </a>
             </div>
 
@@ -123,7 +125,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
                 {/* Pillar 1 */}
                 <a
                   href="#network-audit"
-                  className="group block p-3.5 rounded-xl border border-slate-200 hover:border-[#056D67] bg-[#F4FAF8]/50 hover:bg-[#F4FAF8] transition-all"
+                  className="group block p-3.5 rounded-xl border border-slate-200 hover:border-[#056D67] bg-[#F4FAF8]/50 hover:bg-[#F4FAF8] transition-all min-h-[44px]"
                   id="hero-card-pillar-audit"
                 >
                   <div className="flex items-start gap-3.5">
@@ -149,7 +151,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
                 {/* Pillar 2 */}
                 <a
                   href="#it-amc"
-                  className="group block p-3.5 rounded-xl border-2 border-[#056D67]/30 hover:border-[#056D67] bg-white hover:bg-[#F4FAF8] transition-all relative overflow-hidden"
+                  className="group block p-3.5 rounded-xl border-2 border-[#056D67]/30 hover:border-[#056D67] bg-white hover:bg-[#F4FAF8] transition-all relative overflow-hidden min-h-[44px]"
                   id="hero-card-pillar-amc"
                 >
                   <div className="absolute top-0 right-0 w-2 h-full bg-[#C1F24F]" />
@@ -176,7 +178,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
                 {/* Pillar 3 */}
                 <a
                   href="#it-consultancy"
-                  className="group block p-3.5 rounded-xl border border-slate-200 hover:border-[#056D67] bg-[#F4FAF8]/50 hover:bg-[#F4FAF8] transition-all"
+                  className="group block p-3.5 rounded-xl border border-slate-200 hover:border-[#056D67] bg-[#F4FAF8]/50 hover:bg-[#F4FAF8] transition-all min-h-[44px]"
                   id="hero-card-pillar-consultancy"
                 >
                   <div className="flex items-start gap-3.5">

@@ -6,7 +6,8 @@ import {
   Square, 
   FileCheck, 
   ShieldCheck,
-  Building2
+  Building2,
+  ArrowRight
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
 
@@ -28,6 +29,7 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
   useEffect(() => {
     if (isOpen) {
       previousFocusRef.current = document.activeElement as HTMLElement;
+      document.body.style.overflow = 'hidden';
 
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
@@ -64,6 +66,7 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
       }, 50);
 
       return () => {
+        document.body.style.overflow = '';
         document.removeEventListener('keydown', handleKeyDown);
         clearTimeout(timer);
         if (previousFocusRef.current) {
@@ -135,7 +138,13 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-white rounded-2xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative max-h-[90vh] overflow-y-auto">
+      <div 
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="checklist-modal-title"
+        className="bg-white rounded-2xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative max-h-[90vh] overflow-y-auto"
+      >
         
         {/* Modal Top Bar */}
         <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6 no-print">
@@ -144,7 +153,7 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
               <FileCheck className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-slate-900 font-display">
+              <h3 id="checklist-modal-title" className="text-xl font-bold text-slate-900 font-display">
                 Enterprise IT Infrastructure Audit Checklist
               </h3>
               <p className="text-xs text-slate-500">
@@ -155,25 +164,27 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
 
           <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={handlePrint}
               className="min-h-[44px] p-2.5 rounded-lg text-slate-600 hover:text-[#056D67] hover:bg-slate-100 transition-colors flex items-center justify-center gap-1.5 text-xs font-semibold"
               title="Print Checklist"
-              aria-label="Print Checklist"
+              aria-label="Print or Save PDF"
             >
               <Printer className="w-4 h-4" />
               <span className="hidden sm:inline">Print / Save PDF</span>
             </button>
             <button
+              type="button"
               onClick={onClose}
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
-              aria-label="Close checklist"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors focus:outline-hidden focus:ring-2 focus:ring-[#056D67]"
+              aria-label="Close checklist modal"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
         </div>
 
-        {/* Printable Official Header (visible during print or in modal) */}
+        {/* Printable Official Header */}
         <div className="mb-6 p-4 rounded-xl bg-[#F4FAF8] border border-[#056D67]/20 flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="text-sm font-bold text-[#056D67]">
@@ -205,6 +216,10 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
                     <div
                       key={item.id}
                       onClick={() => toggleItem(item.id)}
+                      role="checkbox"
+                      aria-checked={isChecked}
+                      tabIndex={0}
+                      onKeyDown={(e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleItem(item.id); } }}
                       className={`min-h-[44px] cursor-pointer p-3 rounded-lg border transition-all flex items-start gap-3 select-none ${
                         isChecked 
                           ? 'bg-emerald-50/70 border-emerald-300 text-emerald-900' 
@@ -235,13 +250,15 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
             Need our certified engineers to conduct this full inspection on-site?
           </span>
           <button
+            type="button"
             onClick={() => {
               onClose();
               onOpenQuote();
             }}
-            className="min-h-[44px] px-5 py-2.5 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs sm:text-sm transition-colors flex items-center justify-center"
+            className="min-h-[44px] px-5 py-2.5 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs sm:text-sm transition-colors flex items-center justify-center gap-2"
           >
-            Schedule Professional On-Site Audit
+            <span>Request IT Proposal</span>
+            <ArrowRight className="w-4 h-4 text-[#C1F24F]" />
           </button>
         </div>
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   X, 
   ShieldCheck, 
@@ -10,7 +10,8 @@ import {
   MessageSquare, 
   CheckCircle, 
   Sparkles,
-  PhoneCall
+  PhoneCall,
+  AlertCircle
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
 import confetti from 'canvas-confetti';
@@ -37,35 +38,128 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
   const [servers, setServers] = useState<number>(2);
   const [urgency, setUrgency] = useState<string>('planned');
   const [notes, setNotes] = useState<string>('');
+  const [honeypot, setHoneypot] = useState<string>('');
+  
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const modalRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+
+  // Sync state on open
   useEffect(() => {
-    if (initialService) {
-      setServiceInterest(initialService);
+    if (isOpen) {
+      triggerRef.current = document.activeElement as HTMLElement;
+      document.body.style.overflow = 'hidden';
+      
+      if (initialService) {
+        setServiceInterest(initialService);
+      }
+      if (prefillData) {
+        if (prefillData.workstationsCount) setWorkstations(prefillData.workstationsCount);
+        if (prefillData.serversCount) setServers(prefillData.serversCount);
+        if (prefillData.notes) setNotes(prefillData.notes);
+      }
+      setIsSubmitted(false);
+      setErrorMessage(null);
+    } else {
+      document.body.style.overflow = '';
+      if (triggerRef.current) {
+        triggerRef.current.focus();
+      }
     }
-    if (prefillData) {
-      if (prefillData.workstationsCount) setWorkstations(prefillData.workstationsCount);
-      if (prefillData.serversCount) setServers(prefillData.serversCount);
-      if (prefillData.notes) setNotes(prefillData.notes);
-    }
-  }, [initialService, prefillData, isOpen]);
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen, initialService, prefillData]);
+
+  // Trap focus and handle escape
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage(null);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      confetti({
-        particleCount: 70,
-        spread: 80,
-        origin: { y: 0.6 }
+    try {
+      const payload = {
+        serviceDomain: serviceInterest,
+        companyName: companyName.trim(),
+        contactPerson: contactPerson.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        workstations: Number(workstations),
+        servers: Number(servers),
+        timeline: urgency,
+        notes: notes.trim(),
+        honeypot
+      };
+
+      const res = await fetch('/api/proposal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       });
-    }, 600);
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to submit proposal request. Please check your inputs.');
+      }
+
+      setIsSubmitted(true);
+      try {
+        confetti({
+          particleCount: 70,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
+      } catch (err) {
+        // Confetti is decorative
+      }
+    } catch (err: any) {
+      setErrorMessage(err.message || 'A network error occurred. Please try again or call us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -74,14 +168,28 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative max-h-[92vh] overflow-y-auto">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-xs animate-in fade-in duration-200"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div 
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="proposal-modal-heading"
+        aria-describedby="proposal-modal-desc"
+        className="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative max-h-[92vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
         
         {/* Close Button */}
         <button
+          type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
-          aria-label="Close modal"
+          className="absolute top-4 right-4 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors focus:outline-hidden focus:ring-2 focus:ring-[#056D67]"
+          aria-label="Close proposal dialog"
         >
           <X className="w-5 h-5" />
         </button>
@@ -94,17 +202,39 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 <ShieldCheck className="w-4 h-4 text-[#056D67]" />
                 <span>Executive IT Proposal Request</span>
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 font-display">
-                Request Tailored IT Infrastructure Proposal
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-500 mt-1">
+              <h2 id="proposal-modal-heading" className="text-2xl font-bold text-slate-900 font-display">
+                Request IT Infrastructure Proposal
+              </h2>
+              <p id="proposal-modal-desc" className="text-xs sm:text-sm text-slate-500 mt-1">
                 Tell us about your organization's IT requirements. Our engineers will prepare a formal scope & SLA proposal within 24 hours.
               </p>
             </div>
 
+            {/* Error Banner */}
+            {errorMessage && (
+              <div className="mb-4 p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" />
+                <span>{errorMessage}</span>
+              </div>
+            )}
+
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">
               
+              {/* Honeypot anti-spam field */}
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="proposal_website">Leave this field blank</label>
+                <input
+                  type="text"
+                  id="proposal_website"
+                  name="honeypot"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                />
+              </div>
+
               {/* Service Selection */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
@@ -136,14 +266,16 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               {/* 2-Col Contact Info */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label htmlFor="modal_company" className="block text-xs font-semibold text-slate-700 mb-1">
                     Company Name *
                   </label>
                   <div className="relative">
                     <Building className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
                     <input
+                      id="modal_company"
                       type="text"
                       required
+                      autoComplete="organization"
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
                       placeholder="e.g. Acme Enterprises Ltd."
@@ -153,31 +285,35 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label htmlFor="modal_name" className="block text-xs font-semibold text-slate-700 mb-1">
                     Contact Person Name *
                   </label>
                   <div className="relative">
                     <User className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
                     <input
+                      id="modal_name"
                       type="text"
                       required
+                      autoComplete="name"
                       value={contactPerson}
                       onChange={(e) => setContactPerson(e.target.value)}
-                      placeholder="e.g. Zeeshan Usmani / IT Manager"
+                      placeholder="e.g. Zeeshan Usmani"
                       className="w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label htmlFor="modal_email" className="block text-xs font-semibold text-slate-700 mb-1">
                     Business Email Address *
                   </label>
                   <div className="relative">
                     <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
                     <input
+                      id="modal_email"
                       type="email"
                       required
+                      autoComplete="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="it@yourcompany.com"
@@ -187,17 +323,19 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label htmlFor="modal_phone" className="block text-xs font-semibold text-slate-700 mb-1">
                     Phone / Mobile Number *
                   </label>
                   <div className="relative">
                     <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
                     <input
+                      id="modal_phone"
                       type="tel"
                       required
+                      autoComplete="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="e.g. +92 314 9020008 or 0314-9020008"
+                      placeholder="e.g. +92 314 9020008"
                       className="w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
                     />
                   </div>
@@ -207,10 +345,11 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               {/* Asset Numbers & Timeline */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-[#F4FAF8] p-3.5 rounded-xl border border-slate-200/80">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label htmlFor="modal_workstations" className="block text-xs font-semibold text-slate-700 mb-1">
                     Approx. Workstations
                   </label>
                   <input
+                    id="modal_workstations"
                     type="number"
                     min="1"
                     value={workstations}
@@ -220,10 +359,11 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label htmlFor="modal_servers" className="block text-xs font-semibold text-slate-700 mb-1">
                     Approx. Servers
                   </label>
                   <input
+                    id="modal_servers"
                     type="number"
                     min="0"
                     value={servers}
@@ -233,10 +373,11 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label htmlFor="modal_timeline" className="block text-xs font-semibold text-slate-700 mb-1">
                     Implementation Timeline
                   </label>
                   <select
+                    id="modal_timeline"
                     value={urgency}
                     onChange={(e) => setUrgency(e.target.value)}
                     className="w-full min-h-[44px] px-2 py-2 rounded-md border border-slate-200 bg-white text-slate-800 text-xs font-semibold"
@@ -250,12 +391,13 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
               {/* Message / Scope Notes */}
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label htmlFor="modal_notes" className="block text-xs font-semibold text-slate-700 mb-1">
                   Specific Technical Requirements or Notes
                 </label>
                 <div className="relative">
                   <MessageSquare className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
                   <textarea
+                    id="modal_notes"
                     rows={3}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
@@ -265,19 +407,27 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 </div>
               </div>
 
+              {/* Privacy Reassurance */}
+              <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-[11px] text-slate-600 flex items-start gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#056D67] flex-shrink-0 mt-0.5" />
+                <span>
+                  Your details will only be used to formulate your proposal and will not be shared with third parties.
+                </span>
+              </div>
+
               {/* Submit Button */}
               <div className="pt-2">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 px-4 rounded-xl bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-sm transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="w-full min-h-[48px] py-3 px-4 rounded-xl bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-sm transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   {isSubmitting ? (
-                    <span>Preparing Your Scope Request...</span>
+                    <span>Submitting Request...</span>
                   ) : (
                     <>
                       <Send className="w-4 h-4 text-[#C1F24F]" />
-                      <span>Submit Proposal Request to Engineering Team</span>
+                      <span>Request IT Proposal</span>
                     </>
                   )}
                 </button>
@@ -327,6 +477,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 <span>Call Dispatch Desk Now</span>
               </a>
               <button
+                type="button"
                 onClick={handleReset}
                 className="min-h-[44px] py-2.5 px-4 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-xs sm:text-sm transition-colors flex items-center justify-center"
               >

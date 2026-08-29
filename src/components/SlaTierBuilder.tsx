@@ -32,7 +32,6 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
   const [workstations, setWorkstations] = useState<number>(25);
   const [servers, setServers] = useState<number>(3);
   const [networkDevices, setNetworkDevices] = useState<number>(6);
-  const [need24x7, setNeed24x7] = useState<boolean>(false);
 
   const getCoverageIcon = (icon: string) => {
     switch (icon) {
@@ -48,11 +47,9 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
 
   // Estimated ROI / Uptime math
   const totalAssets = workstations + servers + networkDevices;
-  const estimatedMonthlyTickets = Math.max(2, Math.round(workstations * 0.4 + servers * 1.2));
   const estimatedDowntimeHoursSavedYearly = Math.round(workstations * 2.8 + servers * 14.5);
 
   const selectedTier = SLA_TIERS.find(t => t.id === selectedTierId) || SLA_TIERS[1];
-  const activeCoverage = AMC_COVERAGE_ITEMS[selectedCoverageIdx];
 
   const handleRequestQuoteForEstimate = () => {
     onOpenQuote('amc', {
@@ -60,12 +57,12 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
       serversCount: servers,
       networkDevicesCount: networkDevices,
       slaTier: selectedTier.name,
-      notes: `Custom calculated scope for ${workstations} workstations, ${servers} servers, and ${networkDevices} network nodes under ${selectedTier.name} SLA.`
+      notes: `Configured scope for ${workstations} workstations, ${servers} servers, and ${networkDevices} network nodes under ${selectedTier.name} SLA.`
     });
   };
 
   return (
-    <section id="it-amc" className="scroll-mt-[140px] py-20 bg-[#F4FAF8] border-b border-slate-200">
+    <section id="it-amc" className="scroll-mt-[140px] py-16 sm:py-20 bg-[#F4FAF8] border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Pillar Header */}
@@ -92,11 +89,12 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
               <span>View Escalation Matrix</span>
             </a>
             <button
+              type="button"
               onClick={() => onOpenQuote('amc')}
               id="amc-get-quote-btn"
-              className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-semibold text-sm transition-all shadow-xs"
+              className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-sm transition-all shadow-xs"
             >
-              <span>Get Custom AMC Quote</span>
+              <span>Request IT Proposal</span>
               <ArrowRight className="w-4 h-4 text-[#C1F24F]" />
             </button>
           </div>
@@ -165,7 +163,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
         </div>
 
         {/* Section 2: Interactive SLA Tier & Scope Calculator */}
-        <div id="sla-calculator" className="mt-20 scroll-mt-[140px]">
+        <div id="sla-calculator" className="mt-16 sm:mt-20 scroll-mt-[140px]">
           <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xl relative overflow-hidden">
             
             {/* Header */}
@@ -190,7 +188,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                 {/* 1. Workstations Slider */}
                 <div className="bg-[#F4FAF8] rounded-2xl p-5 border border-slate-200/80">
                   <div className="flex items-center justify-between mb-2">
-                    <label className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                    <label htmlFor="range-workstations" className="text-sm font-bold text-slate-900 flex items-center gap-2">
                       <Monitor className="w-4 h-4 text-[#056D67]" />
                       <span>Desktops & Laptops (Workstations)</span>
                     </label>
@@ -198,17 +196,23 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                       {workstations} Units
                     </span>
                   </div>
-                  <input
-                    type="range"
-                    min="5"
-                    max="200"
-                    step="5"
-                    value={workstations}
-                    onChange={(e) => setWorkstations(Number(e.target.value))}
-                    aria-label="Desktops and Laptops count"
-                    className="w-full h-3 py-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#056D67]"
-                  />
-                  <div className="flex justify-between text-xs text-slate-500 mt-1.5">
+                  <div className="min-h-[44px] flex items-center">
+                    <input
+                      id="range-workstations"
+                      type="range"
+                      min="5"
+                      max="200"
+                      step="5"
+                      value={workstations}
+                      onChange={(e) => setWorkstations(Number(e.target.value))}
+                      aria-label="Desktops and Laptops count"
+                      aria-valuenow={workstations}
+                      aria-valuemin={5}
+                      aria-valuemax={200}
+                      className="w-full h-3 py-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#056D67]"
+                    />
+                  </div>
+                  <div className="flex justify-between text-xs text-slate-500 mt-1">
                     <span>5 Units</span>
                     <span>50 Units</span>
                     <span>100 Units</span>
@@ -219,7 +223,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                 {/* 2. Servers Slider */}
                 <div className="bg-[#F4FAF8] rounded-2xl p-5 border border-slate-200/80">
                   <div className="flex items-center justify-between mb-2">
-                    <label className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                    <label htmlFor="range-servers" className="text-sm font-bold text-slate-900 flex items-center gap-2">
                       <Server className="w-4 h-4 text-[#056D67]" />
                       <span>Physical & Virtual Servers / Storage</span>
                     </label>
@@ -227,17 +231,23 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                       {servers} Servers
                     </span>
                   </div>
-                  <input
-                    type="range"
-                    min="1"
-                    max="25"
-                    step="1"
-                    value={servers}
-                    onChange={(e) => setServers(Number(e.target.value))}
-                    aria-label="Physical and Virtual Servers count"
-                    className="w-full h-3 py-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#056D67]"
-                  />
-                  <div className="flex justify-between text-xs text-slate-500 mt-1.5">
+                  <div className="min-h-[44px] flex items-center">
+                    <input
+                      id="range-servers"
+                      type="range"
+                      min="1"
+                      max="25"
+                      step="1"
+                      value={servers}
+                      onChange={(e) => setServers(Number(e.target.value))}
+                      aria-label="Physical and Virtual Servers count"
+                      aria-valuenow={servers}
+                      aria-valuemin={1}
+                      aria-valuemax={25}
+                      className="w-full h-3 py-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#056D67]"
+                    />
+                  </div>
+                  <div className="flex justify-between text-xs text-slate-500 mt-1">
                     <span>1 Server</span>
                     <span>5 Servers</span>
                     <span>15 Servers</span>
@@ -248,7 +258,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                 {/* 3. Network Devices Slider */}
                 <div className="bg-[#F4FAF8] rounded-2xl p-5 border border-slate-200/80">
                   <div className="flex items-center justify-between mb-2">
-                    <label className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                    <label htmlFor="range-network" className="text-sm font-bold text-slate-900 flex items-center gap-2">
                       <Share2 className="w-4 h-4 text-[#056D67]" />
                       <span>Routers, Managed Switches & Access Points</span>
                     </label>
@@ -256,17 +266,23 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                       {networkDevices} Devices
                     </span>
                   </div>
-                  <input
-                    type="range"
-                    min="2"
-                    max="50"
-                    step="2"
-                    value={networkDevices}
-                    onChange={(e) => setNetworkDevices(Number(e.target.value))}
-                    aria-label="Network Devices count"
-                    className="w-full h-3 py-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#056D67]"
-                  />
-                  <div className="flex justify-between text-xs text-slate-500 mt-1.5">
+                  <div className="min-h-[44px] flex items-center">
+                    <input
+                      id="range-network"
+                      type="range"
+                      min="2"
+                      max="50"
+                      step="2"
+                      value={networkDevices}
+                      onChange={(e) => setNetworkDevices(Number(e.target.value))}
+                      aria-label="Network Devices count"
+                      aria-valuenow={networkDevices}
+                      aria-valuemin={2}
+                      aria-valuemax={50}
+                      className="w-full h-3 py-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#056D67]"
+                    />
+                  </div>
+                  <div className="flex justify-between text-xs text-slate-500 mt-1">
                     <span>2 Devices</span>
                     <span>15 Devices</span>
                     <span>30 Devices</span>
@@ -276,9 +292,9 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
 
                 {/* 4. SLA Tier Selection */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2.5">
+                  <span className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2.5">
                     Select SLA Response Level
-                  </label>
+                  </span>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {SLA_TIERS.map((tier) => {
                       const isSelected = selectedTierId === tier.id;
@@ -369,12 +385,13 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
 
                 {/* Action CTA */}
                 <button
+                  type="button"
                   onClick={handleRequestQuoteForEstimate}
                   id="sla-calc-request-quote-btn"
-                  className="mt-6 w-full py-3.5 px-4 rounded-xl bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] font-bold text-sm transition-all transform hover:-translate-y-0.5 shadow-md flex items-center justify-center gap-2"
+                  className="mt-6 w-full min-h-[48px] py-3 px-4 rounded-xl bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] font-bold text-sm transition-all transform hover:-translate-y-0.5 shadow-md flex items-center justify-center gap-2"
                 >
                   <CheckCircle2 className="w-4 h-4 text-[#034F4B]" />
-                  <span>Request Official Proposal for this Configuration</span>
+                  <span>Request IT Proposal</span>
                 </button>
 
                 <div className="mt-3 text-center text-xs text-slate-300">
@@ -385,30 +402,6 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
 
             </div>
 
-          </div>
-        </div>
-
-        {/* Section 3: Key Benefits of i Man Service IT-AMC */}
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div className="bg-white p-4 rounded-xl border border-slate-200 flex items-center gap-3">
-            <span className="text-lg">✅</span>
-            <div className="text-xs font-bold text-slate-800">Reduced System Downtime</div>
-          </div>
-          <div className="bg-white p-4 rounded-xl border border-slate-200 flex items-center gap-3">
-            <span className="text-lg">⚡</span>
-            <div className="text-xs font-bold text-slate-800">Faster Issue Resolution</div>
-          </div>
-          <div className="bg-white p-4 rounded-xl border border-slate-200 flex items-center gap-3">
-            <span className="text-lg">📊</span>
-            <div className="text-xs font-bold text-slate-800">Predictable IT Operating Costs</div>
-          </div>
-          <div className="bg-white p-4 rounded-xl border border-slate-200 flex items-center gap-3">
-            <span className="text-lg">🛡️</span>
-            <div className="text-xs font-bold text-slate-800">Improved Infrastructure Lifespan</div>
-          </div>
-          <div className="bg-white p-4 rounded-xl border border-slate-200 flex items-center gap-3">
-            <span className="text-lg">🔒</span>
-            <div className="text-xs font-bold text-slate-800">Enhanced Cybersecurity Protection</div>
           </div>
         </div>
 

@@ -94,13 +94,14 @@ export const KeyThemes: React.FC<KeyThemesProps> = ({ onOpenQuote }) => {
                     <span>Guaranteed Standard</span>
                   </span>
                   <button
+                    type="button"
                     onClick={() => onOpenQuote('all')}
                     className={`min-h-[44px] inline-flex items-center gap-1 font-bold text-xs sm:text-sm hover:underline px-2 py-1 -mr-2 rounded transition-colors ${
                       isFeatured ? 'text-[#C1F24F]' : 'text-[#056D67]'
                     }`}
-                    aria-label={`Inquire about ${theme.title}`}
+                    aria-label={`Request proposal for ${theme.title}`}
                   >
-                    <span>Inquire</span>
+                    <span>Request Proposal</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -123,10 +124,11 @@ export const KeyThemes: React.FC<KeyThemesProps> = ({ onOpenQuote }) => {
             </div>
             <div className="mt-4 pt-3">
               <button
+                type="button"
                 onClick={() => onOpenQuote('all')}
-                className="w-full min-h-[44px] py-2.5 px-4 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-semibold text-xs sm:text-sm transition-colors text-center flex items-center justify-center"
+                className="w-full min-h-[44px] py-2.5 px-4 rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs sm:text-sm transition-colors text-center flex items-center justify-center"
               >
-                Schedule Executive Consultation
+                Request IT Proposal
               </button>
             </div>
           </div>

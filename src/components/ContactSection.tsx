@@ -10,39 +10,74 @@ import {
   CheckCircle, 
   Building2, 
   ShieldCheck,
-  MessageSquare
+  MessageSquare,
+  AlertCircle
 } from 'lucide-react';
+import { Link } from '../router/Router';
 import confetti from 'canvas-confetti';
 
 export const ContactSection: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [subject, setSubject] = useState('General IT Infrastructure Inquiry');
+  const [subject, setSubject] = useState('Existing Network Audit');
   const [message, setMessage] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-      confetti({
-        particleCount: 50,
-        spread: 60,
-        origin: { y: 0.7 }
+    setErrorMessage(null);
+
+    try {
+      const payload = {
+        fullName: name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        category: subject,
+        message: message.trim(),
+        honeypot
+      };
+
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       });
-    }, 500);
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to send your inquiry. Please try again.');
+      }
+
+      setSubmitted(true);
+      try {
+        confetti({
+          particleCount: 50,
+          spread: 60,
+          origin: { y: 0.7 }
+        });
+      } catch (err) {
+        // decorative
+      }
+    } catch (err: any) {
+      setErrorMessage(err.message || 'A network error occurred. Please try again or call our hotline.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <section id="contact" className="scroll-mt-[140px] py-20 bg-[#F4FAF8]">
+    <section id="contact" className="scroll-mt-[140px] py-16 sm:py-20 bg-[#F4FAF8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#056D67]/20 text-[#056D67] text-xs font-bold uppercase tracking-wider mb-2">
             <Building2 className="w-3.5 h-3.5 text-[#056D67]" />
             <span>Lahore Technology Operations Hub</span>
@@ -80,7 +115,7 @@ export const ContactSection: React.FC = () => {
                     <div className="text-xs uppercase font-bold text-slate-300">Mobile & WhatsApp Helpline</div>
                     <a 
                       href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`} 
-                      className="text-base font-extrabold text-[#C1F24F] hover:underline block"
+                      className="text-base font-extrabold text-[#C1F24F] hover:underline min-h-[44px] inline-flex items-center"
                     >
                       {COMPANY_INFO.phone}
                     </a>
@@ -106,14 +141,12 @@ export const ContactSection: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-xs uppercase font-bold text-slate-300">Official Web Portal</div>
-                    <a 
-                      href={`https://${COMPANY_INFO.website}`} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="font-bold text-white hover:text-[#C1F24F] underline"
+                    <Link 
+                      to="/"
+                      className="font-bold text-white hover:text-[#C1F24F] underline min-h-[44px] inline-flex items-center"
                     >
                       {COMPANY_INFO.website}
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
@@ -179,6 +212,28 @@ export const ContactSection: React.FC = () => {
                   </p>
                 </div>
 
+                {/* Error Banner */}
+                {errorMessage && (
+                  <div className="p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2">
+                    <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" />
+                    <span>{errorMessage}</span>
+                  </div>
+                )}
+
+                {/* Honeypot field */}
+                <div className="hidden" aria-hidden="true">
+                  <label htmlFor="contact_website">Leave this field blank</label>
+                  <input
+                    type="text"
+                    id="contact_website"
+                    name="honeypot"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                  />
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="contact-full-name" className="block text-xs font-semibold text-slate-700 mb-1">
@@ -189,6 +244,7 @@ export const ContactSection: React.FC = () => {
                       id="contact-full-name"
                       name="fullName"
                       required
+                      autoComplete="name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Bilal Liaqat"
@@ -205,9 +261,10 @@ export const ContactSection: React.FC = () => {
                       id="contact-phone"
                       name="phone"
                       required
+                      autoComplete="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="e.g. +92 314 9020008 or 0314-9020008"
+                      placeholder="e.g. +92 314 9020008"
                       className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67]"
                     />
                   </div>
@@ -223,6 +280,7 @@ export const ContactSection: React.FC = () => {
                       id="contact-email"
                       name="email"
                       required
+                      autoComplete="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="name@company.com"
@@ -268,10 +326,10 @@ export const ContactSection: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full min-h-[44px] py-3 px-4 rounded-xl bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-xs disabled:opacity-50"
+                  className="w-full min-h-[48px] py-3 px-4 rounded-xl bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-xs disabled:opacity-50"
                 >
                   {loading ? (
-                    <span>Sending Message...</span>
+                    <span>Submitting Message...</span>
                   ) : (
                     <>
                       <Send className="w-4 h-4 text-[#C1F24F]" />
@@ -280,9 +338,14 @@ export const ContactSection: React.FC = () => {
                   )}
                 </button>
 
-                <p className="text-xs text-slate-500 text-center pt-2">
-                  Your details will only be used to respond to your inquiry and will not be shared with third parties.
-                </p>
+                <div className="pt-2 text-center text-xs text-slate-500 space-y-1">
+                  <p>
+                    Your details will only be used to respond to your inquiry and will not be shared with third parties.
+                  </p>
+                  <p className="text-[11px] text-slate-400">
+                    By submitting, you agree to our <Link to="/privacy-policy" className="underline hover:text-[#056D67]">Privacy Policy</Link> and <Link to="/terms-and-conditions" className="underline hover:text-[#056D67]">Terms & Conditions</Link>.
+                  </p>
+                </div>
               </form>
             ) : (
               <div className="text-center py-10 space-y-4">
@@ -297,11 +360,12 @@ export const ContactSection: React.FC = () => {
                 </p>
                 <div className="pt-4">
                   <button
+                    type="button"
                     onClick={() => {
                       setSubmitted(false);
                       setMessage('');
                     }}
-                    className="text-xs font-bold text-[#056D67] hover:underline"
+                    className="text-xs font-bold text-[#056D67] hover:underline min-h-[44px] px-4 py-2 inline-flex items-center"
                   >
                     Send Another Message
                   </button>

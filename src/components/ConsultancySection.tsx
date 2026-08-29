@@ -35,7 +35,7 @@ export const ConsultancySection: React.FC<ConsultancySectionProps> = ({ onOpenQu
   const activeService = CONSULTANCY_SERVICES[selectedServiceIdx];
 
   return (
-    <section id="it-consultancy" className="scroll-mt-[140px] py-20 bg-white border-b border-slate-200">
+    <section id="it-consultancy" className="scroll-mt-[140px] py-16 sm:py-20 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Pillar Header */}
@@ -55,11 +55,12 @@ export const ConsultancySection: React.FC<ConsultancySectionProps> = ({ onOpenQu
 
           <div>
             <button
+              type="button"
               onClick={() => onOpenQuote('consultancy')}
               id="consulting-book-session-btn"
-              className="inline-flex items-center gap-2 px-5 py-3 min-h-[44px] rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-semibold text-sm transition-all shadow-xs"
+              className="inline-flex items-center gap-2 px-5 py-3 min-h-[44px] rounded-lg bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-sm transition-all shadow-xs"
             >
-              <span>Book Strategy Session</span>
+              <span>Request IT Proposal</span>
               <ArrowRight className="w-4 h-4 text-[#C1F24F]" />
             </button>
           </div>
@@ -120,15 +121,16 @@ export const ConsultancySection: React.FC<ConsultancySectionProps> = ({ onOpenQu
                   Unsure Where to Start with Your Digital Strategy?
                 </h4>
                 <p className="text-xs text-slate-200 mt-2 leading-relaxed">
-                  Schedule a complimentary 30-minute discovery session with our Lead Infrastructure Consultant to review your immediate technical bottlenecks.
+                  Schedule a complimentary discovery session with our Lead Infrastructure Consultant to review your immediate technical bottlenecks.
                 </p>
               </div>
 
               <button
+                type="button"
                 onClick={() => onOpenQuote('consultancy')}
                 className="mt-6 w-full min-h-[44px] py-2.5 px-4 rounded-lg bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] font-bold text-xs sm:text-sm transition-colors text-center flex items-center justify-center"
               >
-                Schedule 30-Min Strategy Call
+                Request IT Proposal
               </button>
             </div>
           </div>

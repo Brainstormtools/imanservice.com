@@ -33,6 +33,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
   useEffect(() => {
     if (isOpen) {
       previousFocusRef.current = document.activeElement as HTMLElement;
+      document.body.style.overflow = 'hidden';
       
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
@@ -70,6 +71,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
       }, 50);
 
       return () => {
+        document.body.style.overflow = '';
         document.removeEventListener('keydown', handleKeyDown);
         clearTimeout(timer);
         if (previousFocusRef.current) {
@@ -159,9 +161,10 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
         
         {/* Close Button */}
         <button
+          type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
-          aria-label="Close modal"
+          className="absolute top-4 right-4 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors focus:outline-hidden focus:ring-2 focus:ring-[#056D67]"
+          aria-label="Close quiz modal"
         >
           <X className="w-5 h-5" />
         </button>
@@ -202,8 +205,9 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
               {currentQuestion.options.map((option, idx) => (
                 <button
                   key={idx}
+                  type="button"
                   onClick={() => handleSelectOption(option.points, idx)}
-                  className="w-full min-h-[48px] text-left p-4 rounded-xl border border-slate-200 hover:border-[#056D67] bg-[#F4FAF8]/60 hover:bg-[#F4FAF8] text-slate-800 text-sm font-medium transition-all flex items-center justify-between group"
+                  className="w-full min-h-[48px] text-left p-4 rounded-xl border border-slate-200 hover:border-[#056D67] bg-[#F4FAF8]/60 hover:bg-[#F4FAF8] text-slate-800 text-sm font-medium transition-all flex items-center justify-between group focus:outline-hidden focus:ring-2 focus:ring-[#056D67]"
                 >
                   <span className="pr-4">{option.label}</span>
                   <div className="w-6 h-6 rounded-full border border-slate-300 group-hover:border-[#056D67] group-hover:bg-[#056D67] group-hover:text-white flex items-center justify-center flex-shrink-0 transition-colors text-xs font-bold">
@@ -217,6 +221,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
             {currentStep > 0 && (
               <div className="mt-6 pt-4 border-t border-slate-100 flex justify-start">
                 <button
+                  type="button"
                   onClick={() => setCurrentStep(currentStep - 1)}
                   className="min-h-[44px] inline-flex items-center text-xs text-slate-500 hover:text-slate-800 font-medium"
                 >
@@ -262,6 +267,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
             {/* Action Buttons */}
             <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
               <button
+                type="button"
                 onClick={handleRequestRemediation}
                 className="w-full min-h-[44px] py-3 px-4 rounded-xl bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-sm transition-all shadow-md flex items-center justify-center gap-2"
               >
@@ -269,6 +275,7 @@ export const ReadinessQuizModal: React.FC<ReadinessQuizModalProps> = ({
                 <ArrowRight className="w-4 h-4 text-[#C1F24F]" />
               </button>
               <button
+                type="button"
                 onClick={handleReset}
                 className="w-full sm:w-auto min-h-[44px] py-3 px-4 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-xs transition-colors flex items-center justify-center gap-1.5"
               >

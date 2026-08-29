@@ -4,21 +4,28 @@
  */
 
 import React, { useState } from 'react';
+import { RouterProvider, useRouter } from './router/Router';
 import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { KeyThemes } from './components/KeyThemes';
-import { NetworkAuditExplorer } from './components/NetworkAuditExplorer';
-import { SlaTierBuilder } from './components/SlaTierBuilder';
-import { SlaMatrixTable } from './components/SlaMatrixTable';
-import { ConsultancySection } from './components/ConsultancySection';
-import { AboutSection } from './components/AboutSection';
-import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
+import { MobileQuickBar } from './components/MobileQuickBar';
 import { QuoteModal } from './components/QuoteModal';
 import { ReadinessQuizModal } from './components/ReadinessQuizModal';
 import { AuditChecklistModal } from './components/AuditChecklistModal';
 
-export default function App() {
+// Pages
+import { HomePage } from './pages/HomePage';
+import { NetworkAuditPage } from './pages/NetworkAuditPage';
+import { ItAmcSlaPage } from './pages/ItAmcSlaPage';
+import { ItConsultancyPage } from './pages/ItConsultancyPage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { TermsPage } from './pages/TermsPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+
+function AppContent() {
+  const { path } = useRouter();
+
   // Modal states
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [selectedServiceForQuote, setSelectedServiceForQuote] = useState<'audit' | 'amc' | 'consultancy' | 'all'>('all');
@@ -44,9 +51,68 @@ export default function App() {
     setChecklistModalOpen(true);
   };
 
+  // Route matching
+  const renderCurrentPage = () => {
+    const cleanPath = path.split('#')[0].replace(/\/$/, '') || '/';
+
+    switch (cleanPath) {
+      case '/':
+        return (
+          <HomePage 
+            onOpenQuote={handleOpenQuote}
+            onOpenQuiz={handleOpenQuiz}
+            onOpenChecklist={handleOpenChecklist}
+          />
+        );
+      case '/network-audit':
+        return (
+          <NetworkAuditPage 
+            onOpenQuote={handleOpenQuote}
+            onOpenQuiz={handleOpenQuiz}
+            onOpenChecklist={handleOpenChecklist}
+          />
+        );
+      case '/it-amc':
+      case '/it-amc-sla':
+        return (
+          <ItAmcSlaPage 
+            onOpenQuote={handleOpenQuote}
+          />
+        );
+      case '/it-consultancy':
+        return (
+          <ItConsultancyPage 
+            onOpenQuote={handleOpenQuote}
+          />
+        );
+      case '/about':
+        return (
+          <AboutPage 
+            onOpenQuote={handleOpenQuote}
+          />
+        );
+      case '/contact':
+        return (
+          <ContactPage />
+        );
+      case '/privacy-policy':
+        return (
+          <PrivacyPolicyPage />
+        );
+      case '/terms-and-conditions':
+      case '/terms':
+        return (
+          <TermsPage />
+        );
+      default:
+        return (
+          <NotFoundPage />
+        );
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#F4FAF8] text-slate-800 selection:bg-[#C1F24F] selection:text-[#034F4B]">
-      
+    <div className="min-h-screen flex flex-col bg-[#F4FAF8] text-slate-800 selection:bg-[#C1F24F] selection:text-[#034F4B] pb-16 md:pb-0">
       {/* Navigation */}
       <Navbar 
         onOpenQuote={handleOpenQuote}
@@ -54,49 +120,9 @@ export default function App() {
         onOpenChecklist={handleOpenChecklist}
       />
 
-      {/* Main Content Sections */}
+      {/* Main Content Router */}
       <main className="flex-grow">
-        
-        {/* 1. Hero Section */}
-        <Hero 
-          onOpenQuote={handleOpenQuote}
-          onOpenQuiz={handleOpenQuiz}
-        />
-
-        {/* 2. Key Messaging Themes (5 Pillars) */}
-        <KeyThemes 
-          onOpenQuote={handleOpenQuote}
-        />
-
-        {/* 3. Core Pillar 1: Existing Network Audit */}
-        <NetworkAuditExplorer 
-          onOpenQuote={handleOpenQuote}
-          onOpenChecklist={handleOpenChecklist}
-        />
-
-        {/* 4. Core Pillar 2: IT-AMC / SLA (Annual Maintenance Contract & Scope Calculator) */}
-        <SlaTierBuilder 
-          onOpenQuote={handleOpenQuote}
-        />
-
-        {/* 5. SLA Severity & Escalation Matrix Table */}
-        <SlaMatrixTable 
-          onOpenQuote={handleOpenQuote}
-        />
-
-        {/* 6. Core Pillar 3: IT Consultancy Service */}
-        <ConsultancySection 
-          onOpenQuote={handleOpenQuote}
-        />
-
-        {/* 7. About i Man Service & 4 Commitments */}
-        <AboutSection 
-          onOpenQuote={handleOpenQuote}
-        />
-
-        {/* 8. Contact Hub & Inquiry Desk (Lahore Office) */}
-        <ContactSection />
-
+        {renderCurrentPage()}
       </main>
 
       {/* Footer */}
@@ -104,6 +130,11 @@ export default function App() {
         onOpenQuote={handleOpenQuote}
         onOpenQuiz={handleOpenQuiz}
         onOpenChecklist={handleOpenChecklist}
+      />
+
+      {/* Mobile Sticky Quick Action Bar */}
+      <MobileQuickBar 
+        onOpenQuote={() => handleOpenQuote('all')}
       />
 
       {/* Interactive Modals */}
@@ -125,7 +156,14 @@ export default function App() {
         onClose={() => setChecklistModalOpen(false)}
         onOpenQuote={() => handleOpenQuote('audit')}
       />
-
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <RouterProvider>
+      <AppContent />
+    </RouterProvider>
   );
 }

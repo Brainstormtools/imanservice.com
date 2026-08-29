@@ -13,6 +13,7 @@ import {
   Activity,
   MessageSquare
 } from 'lucide-react';
+import { Link } from '../router/Router';
 
 interface FooterProps {
   onOpenQuote: (service?: 'audit' | 'amc' | 'consultancy' | 'all') => void;
@@ -41,22 +42,24 @@ export const Footer: React.FC<FooterProps> = ({
           
           {/* Col 1: Brand & Tagline (Col 1-5) */}
           <div className="lg:col-span-5 space-y-4">
-            <Logo variant="dark" size="lg" showTagline={true} />
+            <Link to="/" className="inline-block" aria-label="i Man Service Homepage">
+              <Logo variant="dark" size="lg" showTagline={true} />
+            </Link>
             
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm pt-2">
               <strong>i Man Service</strong> is your single point of accountability for enterprise IT infrastructure, fixed-fee SLA-backed maintenance, independent audits, and strategic technology consulting.
             </p>
 
             {/* Location & Phone */}
-            <div className="space-y-0.5 text-xs sm:text-sm pt-2">
-              <address className="not-italic inline-flex items-center gap-2.5 text-slate-200 min-h-[36px] py-1.5">
+            <div className="space-y-1 text-xs sm:text-sm pt-2">
+              <address className="not-italic inline-flex items-center gap-2.5 text-slate-200 min-h-[44px] py-1">
                 <MapPin className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
                 <span>{COMPANY_INFO.address}</span>
               </address>
               <div>
                 <a 
                   href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`} 
-                  className="inline-flex items-center gap-2.5 min-h-[44px] py-2.5 font-bold text-white hover:text-[#C1F24F] transition-colors"
+                  className="inline-flex items-center gap-2.5 min-h-[44px] py-1 font-bold text-white hover:text-[#C1F24F] transition-colors"
                 >
                   <Phone className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
                   <span>{COMPANY_INFO.phone} (Direct & 24/7 SLA)</span>
@@ -67,22 +70,20 @@ export const Footer: React.FC<FooterProps> = ({
                   href={COMPANY_INFO.whatsappLink || 'https://wa.me/923149020008'} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="inline-flex items-center gap-2.5 min-h-[44px] py-2.5 font-bold text-[#C1F24F] hover:underline transition-colors"
+                  className="inline-flex items-center gap-2.5 min-h-[44px] py-1 font-bold text-[#C1F24F] hover:underline transition-colors"
                 >
                   <MessageSquare className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
                   <span>WhatsApp: {COMPANY_INFO.whatsapp || '+92 314 9020008'}</span>
                 </a>
               </div>
               <div>
-                <a 
-                  href={`https://${COMPANY_INFO.website}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="inline-flex items-center gap-2.5 min-h-[44px] py-2.5 text-slate-200 hover:text-[#C1F24F] transition-colors"
+                <Link 
+                  to="/"
+                  className="inline-flex items-center gap-2.5 min-h-[44px] py-1 text-slate-200 hover:text-[#C1F24F] transition-colors"
                 >
                   <Globe className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
                   <span>{COMPANY_INFO.website}</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -94,34 +95,34 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <ul className="space-y-1 text-xs sm:text-sm">
               <li>
-                <a href="#network-audit" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
+                <Link to="/network-audit" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C1F24F]" />
                   <span>1. Existing Network Audit</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#it-amc" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
+                <Link to="/it-amc-sla" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C1F24F]" />
                   <span>2. IT-AMC / SLA Contracts</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#it-consultancy" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
+                <Link to="/it-consultancy" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C1F24F]" />
                   <span>3. Strategic IT Consultancy</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#sla-matrix" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
+                <Link to="/about" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C1F24F]" />
-                  <span>SLA Severity & Escalation Matrix</span>
-                </a>
+                  <span>About i Man Service</span>
+                </Link>
               </li>
               <li>
-                <a href="#sla-calculator" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
+                <Link to="/contact" className="min-h-[44px] hover:text-[#C1F24F] transition-colors flex items-center gap-2 py-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C1F24F]" />
-                  <span>Interactive Fleet & SLA Estimator</span>
-                </a>
+                  <span>Contact Lahore Office</span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -133,17 +134,19 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <div className="space-y-2 pt-1">
               <button
+                type="button"
                 onClick={onOpenQuiz}
                 className="w-full min-h-[44px] text-left p-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white transition-all flex items-center justify-between"
               >
                 <span className="flex items-center gap-2">
                   <Activity className="w-3.5 h-3.5 text-[#C1F24F]" />
-                  <span>IT Health Readiness Quiz</span>
+                  <span>Run Free IT Health Check</span>
                 </span>
                 <span className="text-xs text-[#C1F24F]">&rarr;</span>
               </button>
 
               <button
+                type="button"
                 onClick={onOpenChecklist}
                 className="w-full min-h-[44px] text-left p-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white transition-all flex items-center justify-between"
               >
@@ -155,12 +158,13 @@ export const Footer: React.FC<FooterProps> = ({
               </button>
 
               <button
+                type="button"
                 onClick={() => onOpenQuote('all')}
                 className="w-full min-h-[44px] text-left p-2.5 rounded-lg bg-[#056D67] hover:bg-[#096F67] border border-[#C1F24F]/30 text-xs font-bold text-[#C1F24F] transition-all flex items-center justify-between"
               >
                 <span className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>Request Instant Proposal</span>
+                  <span>Request IT Proposal</span>
                 </span>
                 <span className="text-xs text-white">&rarr;</span>
               </button>
@@ -169,10 +173,18 @@ export const Footer: React.FC<FooterProps> = ({
 
         </div>
 
-        {/* Bottom Copyright Row */}
+        {/* Bottom Copyright & Legal Row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <div>
-            © 2026 i Man Service. All rights reserved.
+          <div className="flex items-center gap-3 flex-wrap">
+            <span>© 2026 i Man Service. All rights reserved.</span>
+            <span>•</span>
+            <Link to="/privacy-policy" className="hover:text-[#C1F24F] transition-colors min-h-[44px] inline-flex items-center">
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link to="/terms-and-conditions" className="hover:text-[#C1F24F] transition-colors min-h-[44px] inline-flex items-center">
+              Terms & Conditions
+            </Link>
           </div>
 
           <div className="flex items-center gap-4">
@@ -180,8 +192,9 @@ export const Footer: React.FC<FooterProps> = ({
               Single Point of Accountability for Enterprise IT
             </span>
             <button
+              type="button"
               onClick={scrollToTop}
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-lg bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white transition-colors"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-lg bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white transition-colors focus:outline-hidden focus:ring-1 focus:ring-[#C1F24F]"
               title="Scroll to top"
               aria-label="Scroll to top"
             >
