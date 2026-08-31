@@ -155,7 +155,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Desktop Nav Links */}
             <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-700">
               {navLinks.map((link) => {
-                const isActive = path === link.href;
+                const isActive = path === link.href || path.split('#')[0] === link.href;
                 return (
                   <Link
                     key={link.label}
@@ -235,14 +235,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                   to="/"
                   onClick={() => setMobileMenuOpen(false)}
                   className={`min-h-[44px] px-3.5 py-2.5 rounded-lg text-base font-medium flex items-center transition-colors ${
-                    path === '/' ? 'bg-[#F4FAF8] text-[#056D67] font-bold' : 'text-slate-800 hover:bg-[#F4FAF8]'
+                    path === '/' || path.split('#')[0] === '/' ? 'bg-[#F4FAF8] text-[#056D67] font-bold' : 'text-slate-800 hover:bg-[#F4FAF8]'
                   }`}
                 >
                   Home
                 </Link>
 
                 {navLinks.map((link) => {
-                  const isActive = path === link.href;
+                  const isActive = path === link.href || path.split('#')[0] === link.href;
                   return (
                     <Link
                       key={link.label}
@@ -256,6 +256,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                     </Link>
                   );
                 })}
+
+                <Link
+                  to="/it-amc-sla#interactive-estimator"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`min-h-[44px] px-3.5 py-2.5 rounded-lg text-base font-medium flex items-center gap-2 transition-colors ${
+                    path === '/it-amc-sla#interactive-estimator' ? 'bg-[#F4FAF8] text-[#056D67] font-bold' : 'text-slate-800 hover:bg-[#F4FAF8]'
+                  }`}
+                >
+                  <Calculator className="w-4 h-4 text-[#056D67]" />
+                  <span>SLA Estimator</span>
+                </Link>
                 
                 <div className="pt-4 mt-2 border-t border-slate-100 flex flex-col gap-3">
                   <button
