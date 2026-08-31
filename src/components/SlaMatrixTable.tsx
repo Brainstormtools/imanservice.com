@@ -111,11 +111,11 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
 
                     <div className="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-slate-200/80">
                       <div>
-                        <span className="text-slate-500 block text-[10px] uppercase">Ack Time</span>
+                        <span className="text-slate-500 block text-xs font-semibold uppercase">Ack Time</span>
                         <strong className="text-slate-800">{row.ackTime}</strong>
                       </div>
                       <div>
-                        <span className="text-slate-500 block text-[10px] uppercase">Target Resolution</span>
+                        <span className="text-slate-500 block text-xs font-semibold uppercase">Target Resolution</span>
                         <strong className="text-[#056D67]">{row.onsiteOrRemoteResolution}</strong>
                       </div>
                     </div>

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { COMPANY_INFO } from '../data/companyData';
 import { 
   Phone, 
-  Mail, 
   MapPin, 
   Globe, 
   Clock, 
@@ -11,7 +10,8 @@ import {
   Building2, 
   ShieldCheck,
   MessageSquare,
-  AlertCircle
+  AlertCircle,
+  Check
 } from 'lucide-react';
 import { Link } from '../router/Router';
 import confetti from 'canvas-confetti';
@@ -25,13 +25,16 @@ export const ContactSection: React.FC = () => {
   const [honeypot, setHoneypot] = useState('');
   
   const [submitted, setSubmitted] = useState(false);
+  const [deliveryConfirmedAt, setDeliveryConfirmedAt] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setErrorMessage(null);
+    setValidationErrors({});
 
     try {
       const payload = {
@@ -51,10 +54,15 @@ export const ContactSection: React.FC = () => {
 
       const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.message || 'Failed to send your inquiry. Please try again.');
+      if (!res.ok || !data.success) {
+        if (data.errors) {
+          setValidationErrors(data.errors);
+        }
+        throw new Error(data.message || 'Delivery to consultation dispatch failed. Please call our Lahore desk.');
       }
 
+      // Delivery confirmed by webhook response
+      setDeliveryConfirmedAt(data.receivedAt || new Date().toISOString());
       setSubmitted(true);
       try {
         confetti({
@@ -66,7 +74,7 @@ export const ContactSection: React.FC = () => {
         // decorative
       }
     } catch (err: any) {
-      setErrorMessage(err.message || 'A network error occurred. Please try again or call our hotline.');
+      setErrorMessage(err.message || 'Delivery failure: Unable to dispatch inquiry to our backend. Please call our hotline directly.');
     } finally {
       setLoading(false);
     }
@@ -212,11 +220,14 @@ export const ContactSection: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Error Banner */}
+                {/* Delivery Failure or Validation Error Banner */}
                 {errorMessage && (
-                  <div className="p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2">
-                    <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" />
-                    <span>{errorMessage}</span>
+                  <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs sm:text-sm flex items-start gap-2.5">
+                    <AlertCircle className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="block font-bold text-rose-900">Delivery Notification</strong>
+                      <span>{errorMessage}</span>
+                    </div>
                   </div>
                 )}
 
@@ -248,8 +259,15 @@ export const ContactSection: React.FC = () => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Bilal Liaqat"
-                      className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67]"
+                      className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-lg border text-xs sm:text-sm focus:outline-hidden focus:ring-1 ${
+                        validationErrors.fullName
+                          ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500 bg-rose-50/20'
+                          : 'border-slate-200 focus:border-[#056D67] focus:ring-[#056D67]'
+                      }`}
                     />
+                    {validationErrors.fullName && (
+                      <span className="text-xs text-rose-600 font-medium mt-1 block">{validationErrors.fullName}</span>
+                    )}
                   </div>
 
                   <div>
@@ -265,8 +283,15 @@ export const ContactSection: React.FC = () => {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="e.g. +92 314 9020008"
-                      className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67]"
+                      className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-lg border text-xs sm:text-sm focus:outline-hidden focus:ring-1 ${
+                        validationErrors.phone
+                          ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500 bg-rose-50/20'
+                          : 'border-slate-200 focus:border-[#056D67] focus:ring-[#056D67]'
+                      }`}
                     />
+                    {validationErrors.phone && (
+                      <span className="text-xs text-rose-600 font-medium mt-1 block">{validationErrors.phone}</span>
+                    )}
                   </div>
                 </div>
 
@@ -284,8 +309,15 @@ export const ContactSection: React.FC = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="name@company.com"
-                      className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67]"
+                      className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-lg border text-xs sm:text-sm focus:outline-hidden focus:ring-1 ${
+                        validationErrors.email
+                          ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500 bg-rose-50/20'
+                          : 'border-slate-200 focus:border-[#056D67] focus:ring-[#056D67]'
+                      }`}
                     />
+                    {validationErrors.email && (
+                      <span className="text-xs text-rose-600 font-medium mt-1 block">{validationErrors.email}</span>
+                    )}
                   </div>
 
                   <div>
@@ -319,8 +351,15 @@ export const ContactSection: React.FC = () => {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Tell us about your IT setup, pain points, or timeline..."
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-xs sm:text-sm focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67]"
+                    className={`w-full px-3.5 py-2.5 rounded-lg border text-xs sm:text-sm focus:outline-hidden focus:ring-1 ${
+                      validationErrors.message
+                        ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500 bg-rose-50/20'
+                        : 'border-slate-200 focus:border-[#056D67] focus:ring-[#056D67]'
+                    }`}
                   />
+                  {validationErrors.message && (
+                    <span className="text-xs text-rose-600 font-medium mt-1 block">{validationErrors.message}</span>
+                  )}
                 </div>
 
                 <button
@@ -329,7 +368,7 @@ export const ContactSection: React.FC = () => {
                   className="w-full min-h-[48px] py-3 px-4 rounded-xl bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-xs disabled:opacity-50"
                 >
                   {loading ? (
-                    <span>Submitting Message...</span>
+                    <span>Delivering to Consultation Dispatch...</span>
                   ) : (
                     <>
                       <Send className="w-4 h-4 text-[#C1F24F]" />
@@ -342,22 +381,36 @@ export const ContactSection: React.FC = () => {
                   <p>
                     Your details will only be used to respond to your inquiry and will not be shared with third parties.
                   </p>
-                  <p className="text-[11px] text-slate-400">
+                  <p className="text-xs text-slate-400">
                     By submitting, you agree to our <Link to="/privacy-policy" className="underline hover:text-[#056D67]">Privacy Policy</Link> and <Link to="/terms-and-conditions" className="underline hover:text-[#056D67]">Terms & Conditions</Link>.
                   </p>
                 </div>
               </form>
             ) : (
-              <div className="text-center py-10 space-y-4">
-                <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center mx-auto">
-                  <CheckCircle className="w-8 h-8" />
+              <div className="text-center py-8 space-y-4">
+                <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center mx-auto shadow-xs">
+                  <CheckCircle className="w-9 h-9" />
                 </div>
+                
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100/80 text-emerald-800 text-xs font-bold uppercase tracking-wider">
+                  <Check className="w-3.5 h-3.5" />
+                  <span>Webhook Delivery Confirmed</span>
+                </div>
+
                 <h4 className="text-2xl font-bold text-slate-900 font-display">
-                  Message Sent Successfully!
+                  Inquiry Dispatched Successfully
                 </h4>
-                <p className="text-sm text-slate-600 max-w-md mx-auto">
-                  Thank you, <strong>{name}</strong>. An IT consultant from our Lahore office has received your inquiry and will connect with you at <strong>{email || phone}</strong> shortly.
+                
+                <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                  Thank you, <strong>{name}</strong>. Your consultation inquiry has been confirmed and routed to our Lahore engineering dispatch team. We will reach out via <strong>{email || phone}</strong> shortly.
                 </p>
+
+                {deliveryConfirmedAt && (
+                  <div className="p-3 rounded-lg bg-[#F4FAF8] border border-slate-200 text-xs text-slate-500 max-w-sm mx-auto">
+                    Confirmed Dispatch Time: {new Date(deliveryConfirmedAt).toLocaleString()}
+                  </div>
+                )}
+
                 <div className="pt-4">
                   <button
                     type="button"

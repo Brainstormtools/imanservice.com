@@ -28,7 +28,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         "@id": "https://www.imanservice.com/#organization",
         "name": "i Man Service",
         "url": "https://www.imanservice.com/",
-        "logo": "https://www.imanservice.com/logo.png",
+        "logo": "https://www.imanservice.com/logo.svg",
         "image": "https://www.imanservice.com/og-image.jpg",
         "description": "i Man Service provides network audits, fixed-fee IT-AMC/SLA maintenance and strategic IT consultancy for businesses in Lahore, Pakistan.",
         "telephone": "+923149020008",

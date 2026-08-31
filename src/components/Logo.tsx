@@ -270,7 +270,7 @@ export const Logo: React.FC<LogoProps> = ({
           <span className={`ml-1 font-light ${size === 'sm' ? 'text-sm sm:text-base' : size === 'lg' ? 'text-xl sm:text-2xl' : size === 'xl' ? 'text-2xl sm:text-3xl' : 'text-base sm:text-xl'} ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
             Service
           </span>
-          <span className="ml-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#C1F24F] text-[#034F4B] tracking-wider uppercase flex-shrink-0">
+          <span className="ml-1.5 text-xs font-bold px-1.5 py-0.5 rounded bg-[#C1F24F] text-[#034F4B] tracking-wider uppercase flex-shrink-0">
             IT
           </span>
         </div>

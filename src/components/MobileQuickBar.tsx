@@ -14,7 +14,7 @@ export const MobileQuickBar: React.FC<MobileQuickBarProps> = ({ onOpenQuote }) =
         {/* Direct Phone Call */}
         <a
           href={`tel:${COMPANY_INFO.phoneRaw || '+923149020008'}`}
-          className="min-h-[44px] flex flex-col items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 text-white text-[11px] font-bold transition-all border border-white/15 active:scale-95"
+          className="min-h-[44px] flex flex-col items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all border border-white/15 active:scale-95 py-1"
           aria-label="Call i Man Service Helpline"
         >
           <Phone className="w-4 h-4 text-[#C1F24F] mb-0.5" />
@@ -26,7 +26,7 @@ export const MobileQuickBar: React.FC<MobileQuickBarProps> = ({ onOpenQuote }) =
           href={COMPANY_INFO.whatsappLink || 'https://wa.me/923149020008'}
           target="_blank"
           rel="noopener noreferrer"
-          className="min-h-[44px] flex flex-col items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 text-white text-[11px] font-bold transition-all border border-white/15 active:scale-95"
+          className="min-h-[44px] flex flex-col items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all border border-white/15 active:scale-95 py-1"
           aria-label="Chat with i Man Service on WhatsApp"
         >
           <MessageSquare className="w-4 h-4 text-[#C1F24F] mb-0.5" />
@@ -37,7 +37,7 @@ export const MobileQuickBar: React.FC<MobileQuickBarProps> = ({ onOpenQuote }) =
         <button
           type="button"
           onClick={onOpenQuote}
-          className="min-h-[44px] flex flex-col items-center justify-center rounded-xl bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] text-[11px] font-extrabold transition-all shadow-md active:scale-95"
+          className="min-h-[44px] flex flex-col items-center justify-center rounded-xl bg-[#C1F24F] hover:bg-[#D8FA8A] text-[#034F4B] text-xs font-extrabold transition-all shadow-md active:scale-95 py-1"
           aria-label="Request IT Proposal"
         >
           <ShieldCheck className="w-4 h-4 text-[#034F4B] mb-0.5" />

@@ -59,7 +59,7 @@ export const ContactPage: React.FC = () => {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex items-center space-x-2 text-xs text-slate-300">
+            <ol className="flex flex-wrap items-center gap-2 text-xs text-slate-300">
               <li>
                 <Link to="/" className="hover:text-[#C1F24F] transition-colors">Home</Link>
               </li>

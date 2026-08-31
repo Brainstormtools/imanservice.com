@@ -114,8 +114,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 aria-label="Run Free IT Health Check"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#034F4B] flex-shrink-0" />
-                <span className="hidden xs:inline">Run Free IT Health Check</span>
-                <span className="xs:hidden">Health Check</span>
+                <span className="hidden sm:inline">Run Free IT Health Check</span>
+                <span className="sm:hidden">Health Check</span>
               </button>
               <button
                 type="button"

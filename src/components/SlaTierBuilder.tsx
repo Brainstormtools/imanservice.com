@@ -310,7 +310,7 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                           }`}
                         >
                           {tier.popular && (
-                            <span className="absolute -top-2.5 right-2 text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-[#C1F24F] text-[#034F4B]">
+                            <span className="absolute -top-2.5 right-2 text-xs font-extrabold uppercase px-2 py-0.5 rounded-full bg-[#C1F24F] text-[#034F4B]">
                               Popular
                             </span>
                           )}

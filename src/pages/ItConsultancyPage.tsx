@@ -57,7 +57,7 @@ export const ItConsultancyPage: React.FC<ItConsultancyPageProps> = ({ onOpenQuot
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex items-center space-x-2 text-xs text-slate-300">
+            <ol className="flex flex-wrap items-center gap-2 text-xs text-slate-300">
               <li>
                 <Link to="/" className="hover:text-[#C1F24F] transition-colors">Home</Link>
               </li>
@@ -125,7 +125,7 @@ export const ItConsultancyPage: React.FC<ItConsultancyPageProps> = ({ onOpenQuot
                   <p className="text-xs text-slate-600 leading-relaxed mb-4">{srv.description}</p>
                   
                   <div className="pt-3 border-t border-slate-200 space-y-1.5">
-                    <span className="text-[11px] font-bold text-slate-700 block">Key Consulting Deliverables:</span>
+                    <span className="text-xs font-bold text-slate-700 block">Key Consulting Deliverables:</span>
                     {srv.outcomes.map((out, oIdx) => (
                       <div key={oIdx} className="flex items-start gap-2 text-xs text-slate-600">
                         <CheckCircle2 className="w-3.5 h-3.5 text-[#056D67] flex-shrink-0 mt-0.5" />

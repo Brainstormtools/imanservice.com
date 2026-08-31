@@ -30,7 +30,7 @@ export const TermsPage: React.FC = () => {
       <section className="bg-[#034F4B] text-white py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav aria-label="Breadcrumb" className="mb-4">
-            <ol className="flex items-center space-x-2 text-xs text-slate-300">
+            <ol className="flex flex-wrap items-center gap-2 text-xs text-slate-300">
               <li>
                 <Link to="/" className="hover:text-[#C1F24F] transition-colors">Home</Link>
               </li>

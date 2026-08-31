@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    { "source": "/it-amc", "destination": "/it-amc-sla", "permanent": true },
+    { "source": "/terms", "destination": "/terms-and-conditions", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/((?!api/|assets/|favicon\\.ico|favicon\\.png|apple-touch-icon\\.png|logo\\.svg|og-image\\.jpg|sitemap\\.xml|robots\\.txt).*)", "destination": "/index.html" }
+  ]
+}

@@ -112,7 +112,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F4FAF8] text-slate-800 selection:bg-[#C1F24F] selection:text-[#034F4B] pb-16 md:pb-0">
+    <div className="min-h-screen flex flex-col bg-[#F4FAF8] text-slate-800 selection:bg-[#C1F24F] selection:text-[#034F4B] pb-20 md:pb-0">
       {/* Navigation */}
       <Navbar 
         onOpenQuote={handleOpenQuote}
@@ -121,7 +121,7 @@ function AppContent() {
       />
 
       {/* Main Content Router */}
-      <main className="flex-grow">
+      <main id="main-content" tabIndex={-1} className="flex-grow focus:outline-hidden">
         {renderCurrentPage()}
       </main>
 

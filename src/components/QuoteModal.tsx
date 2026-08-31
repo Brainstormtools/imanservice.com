@@ -9,9 +9,9 @@ import {
   Mail, 
   MessageSquare, 
   CheckCircle, 
-  Sparkles,
   PhoneCall,
-  AlertCircle
+  AlertCircle,
+  Check
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
 import confetti from 'canvas-confetti';
@@ -41,8 +41,10 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
   const [honeypot, setHoneypot] = useState<string>('');
   
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [deliveryConfirmedAt, setDeliveryConfirmedAt] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
   const modalRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
@@ -63,6 +65,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
       }
       setIsSubmitted(false);
       setErrorMessage(null);
+      setValidationErrors({});
     } else {
       document.body.style.overflow = '';
       if (triggerRef.current) {
@@ -118,6 +121,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
     e.preventDefault();
     setIsSubmitting(true);
     setErrorMessage(null);
+    setValidationErrors({});
 
     try {
       const payload = {
@@ -141,10 +145,14 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
       const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.message || 'Failed to submit proposal request. Please check your inputs.');
+      if (!res.ok || !data.success) {
+        if (data.errors) {
+          setValidationErrors(data.errors);
+        }
+        throw new Error(data.message || 'Delivery failure: Proposal request could not be dispatched.');
       }
 
+      setDeliveryConfirmedAt(data.receivedAt || new Date().toISOString());
       setIsSubmitted(true);
       try {
         confetti({
@@ -156,7 +164,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
         // Confetti is decorative
       }
     } catch (err: any) {
-      setErrorMessage(err.message || 'A network error occurred. Please try again or call us directly.');
+      setErrorMessage(err.message || 'Delivery failure: A network error occurred while routing your proposal request. Please call us directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -206,15 +214,18 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 Request IT Infrastructure Proposal
               </h2>
               <p id="proposal-modal-desc" className="text-xs sm:text-sm text-slate-500 mt-1">
-                Tell us about your organization's IT requirements. Our engineers will prepare a formal scope & SLA proposal within 24 hours.
+                Tell us about your organization's IT requirements. Our engineers will prepare a formal scope &amp; SLA proposal within 24 hours.
               </p>
             </div>
 
             {/* Error Banner */}
             {errorMessage && (
-              <div className="mb-4 p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2">
-                <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" />
-                <span>{errorMessage}</span>
+              <div className="mb-4 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs sm:text-sm flex items-start gap-2.5">
+                <AlertCircle className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <strong className="block font-bold text-rose-900">Delivery Notification</strong>
+                  <span>{errorMessage}</span>
+                </div>
               </div>
             )}
 
@@ -279,9 +290,16 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
                       placeholder="e.g. Acme Enterprises Ltd."
-                      className="w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
+                      className={`w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border focus:outline-hidden focus:ring-1 text-slate-800 ${
+                        validationErrors.companyName
+                          ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500 bg-rose-50/20'
+                          : 'border-slate-200 focus:border-[#056D67] focus:ring-[#056D67]'
+                      }`}
                     />
                   </div>
+                  {validationErrors.companyName && (
+                    <span className="text-xs text-rose-600 font-medium mt-1 block">{validationErrors.companyName}</span>
+                  )}
                 </div>
 
                 <div>
@@ -298,9 +316,16 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                       value={contactPerson}
                       onChange={(e) => setContactPerson(e.target.value)}
                       placeholder="e.g. Zeeshan Usmani"
-                      className="w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
+                      className={`w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border focus:outline-hidden focus:ring-1 text-slate-800 ${
+                        validationErrors.contactPerson
+                          ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500 bg-rose-50/20'
+                          : 'border-slate-200 focus:border-[#056D67] focus:ring-[#056D67]'
+                      }`}
                     />
                   </div>
+                  {validationErrors.contactPerson && (
+                    <span className="text-xs text-rose-600 font-medium mt-1 block">{validationErrors.contactPerson}</span>
+                  )}
                 </div>
 
                 <div>
@@ -317,9 +342,16 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="it@yourcompany.com"
-                      className="w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
+                      className={`w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border focus:outline-hidden focus:ring-1 text-slate-800 ${
+                        validationErrors.email
+                          ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500 bg-rose-50/20'
+                          : 'border-slate-200 focus:border-[#056D67] focus:ring-[#056D67]'
+                      }`}
                     />
                   </div>
+                  {validationErrors.email && (
+                    <span className="text-xs text-rose-600 font-medium mt-1 block">{validationErrors.email}</span>
+                  )}
                 </div>
 
                 <div>
@@ -336,9 +368,16 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="e.g. +92 314 9020008"
-                      className="w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-hidden focus:border-[#056D67] focus:ring-1 focus:ring-[#056D67] text-slate-800"
+                      className={`w-full min-h-[44px] pl-9 pr-3 py-2.5 rounded-lg border focus:outline-hidden focus:ring-1 text-slate-800 ${
+                        validationErrors.phone
+                          ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500 bg-rose-50/20'
+                          : 'border-slate-200 focus:border-[#056D67] focus:ring-[#056D67]'
+                      }`}
                     />
                   </div>
+                  {validationErrors.phone && (
+                    <span className="text-xs text-rose-600 font-medium mt-1 block">{validationErrors.phone}</span>
+                  )}
                 </div>
               </div>
 
@@ -408,7 +447,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               </div>
 
               {/* Privacy Reassurance */}
-              <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-[11px] text-slate-600 flex items-start gap-2">
+              <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600 flex items-start gap-2">
                 <ShieldCheck className="w-4 h-4 text-[#056D67] flex-shrink-0 mt-0.5" />
                 <span>
                   Your details will only be used to formulate your proposal and will not be shared with third parties.
@@ -423,7 +462,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   className="w-full min-h-[48px] py-3 px-4 rounded-xl bg-[#056D67] hover:bg-[#034F4B] text-white font-bold text-sm transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   {isSubmitting ? (
-                    <span>Submitting Request...</span>
+                    <span>Dispatching Proposal Request...</span>
                   ) : (
                     <>
                       <Send className="w-4 h-4 text-[#C1F24F]" />
@@ -446,24 +485,31 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               <CheckCircle className="w-10 h-10" />
             </div>
 
-            <span className="text-xs font-bold uppercase tracking-wider text-[#056D67] bg-[#F4FAF8] px-3 py-1 rounded-full border border-[#056D67]/20">
-              Proposal Request Received
-            </span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-2">
+              <Check className="w-3.5 h-3.5" />
+              <span>Proposal Dispatch Confirmed</span>
+            </div>
 
-            <h3 className="text-2xl font-bold text-slate-900 font-display mt-3">
+            <h3 className="text-2xl font-bold text-slate-900 font-display mt-2">
               Thank You, {contactPerson || 'Valued Client'}!
             </h3>
 
             <p className="text-sm text-slate-600 mt-2 max-w-md mx-auto leading-relaxed">
-              Your inquiry for <strong>{companyName || 'your organization'}</strong> has been assigned to our Lahore Infrastructure Engineering Lead. We will contact you via email (<strong>{email || 'provided address'}</strong>) or phone (<strong>{phone || 'provided phone'}</strong>) with your customized scope.
+              Your proposal request for <strong>{companyName || 'your organization'}</strong> has been confirmed and routed to our Lahore Infrastructure Engineering Lead. We will contact you at <strong>{email || phone}</strong> with your customized scope.
             </p>
+
+            {deliveryConfirmedAt && (
+              <div className="mt-2 text-xs text-slate-400">
+                Delivered to consultation desk: {new Date(deliveryConfirmedAt).toLocaleTimeString()}
+              </div>
+            )}
 
             <div className="mt-6 p-4 rounded-xl bg-[#F4FAF8] border border-slate-200 text-left text-xs text-slate-700 max-w-md mx-auto space-y-1.5">
               <div className="font-bold text-[#056D67] uppercase text-xs mb-1">
                 Immediate Reference:
               </div>
               <div>• Service Pillar: <strong>{serviceInterest.toUpperCase()}</strong></div>
-              <div>• Fleet Size: <strong>{workstations} Workstations & {servers} Servers</strong></div>
+              <div>• Fleet Size: <strong>{workstations} Workstations &amp; {servers} Servers</strong></div>
               <div>• Official Lahore Office: <address className="not-italic inline font-bold text-slate-900">{COMPANY_INFO.address}</address></div>
               <div>• Direct Phone: <strong>{COMPANY_INFO.phone}</strong></div>
             </div>

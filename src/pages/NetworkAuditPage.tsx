@@ -90,7 +90,7 @@ export const NetworkAuditPage: React.FC<NetworkAuditPageProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumbs */}
           <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex items-center space-x-2 text-xs text-slate-300">
+            <ol className="flex flex-wrap items-center gap-2 text-xs text-slate-300">
               <li>
                 <Link to="/" className="hover:text-[#C1F24F] transition-colors">Home</Link>
               </li>
@@ -213,7 +213,7 @@ export const NetworkAuditPage: React.FC<NetworkAuditPageProps> = ({
                   <p className="text-xs text-slate-600 leading-relaxed mb-4">{step.description}</p>
                 </div>
                 <div className="pt-3 border-t border-slate-100 bg-[#F4FAF8] p-2.5 rounded-lg">
-                  <span className="text-[10px] font-bold text-[#056D67] uppercase block">Deliverable</span>
+                  <span className="text-xs font-bold text-[#056D67] uppercase block">Deliverable</span>
                   <span className="text-xs font-medium text-slate-800">{step.deliverable}</span>
                 </div>
               </div>

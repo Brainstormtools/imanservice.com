@@ -36,7 +36,7 @@ export const NotFoundPage: React.FC = () => {
             >
               <FileSearch className="w-4 h-4 text-[#056D67] mb-1.5" />
               <span className="font-bold text-xs text-slate-900 block">Network Audit</span>
-              <span className="text-[11px] text-slate-500">Diagnostics & Heatmaps</span>
+              <span className="text-xs text-slate-500">Diagnostics & Heatmaps</span>
             </Link>
 
             <Link
@@ -45,7 +45,7 @@ export const NotFoundPage: React.FC = () => {
             >
               <Clock className="w-4 h-4 text-[#056D67] mb-1.5" />
               <span className="font-bold text-xs text-slate-900 block">IT-AMC / SLA</span>
-              <span className="text-[11px] text-slate-500">Fixed-Fee Maintenance</span>
+              <span className="text-xs text-slate-500">Fixed-Fee Maintenance</span>
             </Link>
 
             <Link
@@ -54,7 +54,7 @@ export const NotFoundPage: React.FC = () => {
             >
               <Compass className="w-4 h-4 text-[#056D67] mb-1.5" />
               <span className="font-bold text-xs text-slate-900 block">IT Consultancy</span>
-              <span className="text-[11px] text-slate-500">Strategic Advisory</span>
+              <span className="text-xs text-slate-500">Strategic Advisory</span>
             </Link>
           </div>
 
