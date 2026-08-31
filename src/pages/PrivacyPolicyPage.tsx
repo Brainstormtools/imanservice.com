@@ -9,7 +9,7 @@ export const PrivacyPolicyPage: React.FC = () => {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Privacy Policy | i Man Service",
-    "description": "Privacy Policy for i Man Service Lahore. Explaining data collection, storage, and zero third-party disclosure for IT proposals and inquiries.",
+    "description": "Privacy Policy for i Man Service Lahore. Explaining data collection, storage, and confidential data handling for IT proposals and enquiries.",
     "publisher": {
       "@type": "Organization",
       "name": "i Man Service",
@@ -21,7 +21,7 @@ export const PrivacyPolicyPage: React.FC = () => {
     <>
       <SeoHead
         title="Privacy Policy | i Man Service"
-        description="Privacy Policy for i Man Service. We safeguard your corporate details, infrastructure specs, and contact information with zero third-party sharing."
+        description="Privacy Policy for i Man Service. We safeguard your corporate details, infrastructure specs, and contact information with secure, confidential processing."
         canonical="https://www.imanservice.com/privacy-policy"
         ogType="website"
         schema={pageSchema}
@@ -53,20 +53,20 @@ export const PrivacyPolicyPage: React.FC = () => {
             <ShieldCheck className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
             <div>
               <strong className="block font-bold">Privacy Reassurance</strong>
-              Your details will only be used to respond to your inquiry and prepare customized IT proposals. We never sell, rent, or share your data with third parties.
+              Your details will only be used to respond to your enquiry and prepare customised IT proposals. We never sell or rent your data to external marketing parties.
             </div>
           </div>
 
           <div>
             <h2 className="text-xl font-bold text-slate-900 font-display">1. Information We Collect</h2>
             <p>
-              When you interact with <strong>i Man Service</strong> (via our contact forms, SLA scope calculator, proposal request forms, or direct email/telephone inquiries), we may collect the following personal and corporate information:
+              When you interact with <strong>i Man Service</strong> (via our contact forms, SLA scope calculator, proposal request forms, or direct email/telephone enquiries), we may collect the following personal and corporate information:
             </p>
             <ul className="list-disc pl-5 space-y-1">
               <li><strong>Contact Identification:</strong> Full name, official email address, corporate telephone or mobile number.</li>
-              <li><strong>Company Details:</strong> Organization name, office address, industry sector.</li>
+              <li><strong>Company Details:</strong> Organisation name, office address, industry sector.</li>
               <li><strong>Infrastructure Specifications:</strong> Estimated workstation count, server fleet size, network topology notes, and SLA requirements submitted during proposal configuration.</li>
-              <li><strong>Technical Metadata:</strong> Anonymized server logs including IP address, browser type, and submission timestamps to safeguard our API endpoints against abuse.</li>
+              <li><strong>Technical Metadata:</strong> Anonymised server logs including IP address, browser type, and submission timestamps to safeguard our API endpoints against abuse.</li>
             </ul>
           </div>
 
@@ -76,27 +76,27 @@ export const PrivacyPolicyPage: React.FC = () => {
               We collect information strictly for legitimate commercial and engineering purposes, including:
             </p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Responding promptly to your infrastructure audit or SLA inquiries.</li>
-              <li>Formulating accurate, customized IT-AMC proposals and technical feasibility estimates.</li>
+              <li>Responding promptly to your infrastructure audit or SLA enquiries.</li>
+              <li>Formulating accurate, customised IT-AMC proposals and technical feasibility estimates.</li>
               <li>Executing contracted on-site audits, scheduled maintenance visits, and emergency SLA dispatches across Lahore.</li>
               <li>Fulfilling legal obligations and maintaining contractual SLA documentation.</li>
             </ul>
           </div>
 
           <div>
-            <h2 className="text-xl font-bold text-slate-900 font-display">3. Zero Third-Party Sharing</h2>
+            <h2 className="text-xl font-bold text-slate-900 font-display">3. Third-Party Data Sharing & Confidentiality</h2>
             <p>
-              <strong>i Man Service does not sell, lease, trade, or distribute your corporate or personal data to any external marketing agencies, advertising platforms, or unauthorized third parties.</strong>
+              <strong>i Man Service does not sell, lease, or trade your corporate or personal data to any external marketing agencies or advertising platforms.</strong>
             </p>
             <p>
-              Data is accessible solely to authorized senior infrastructure engineers and account managers bound by strict confidentiality agreements.
+              We only share information with trusted third-party service providers (such as secure webhook integrations and cloud hosting services) strictly necessary to process your enquiries, or when required by applicable law. Data is accessible solely to authorised senior infrastructure engineers and account managers bound by strict confidentiality agreements.
             </p>
           </div>
 
           <div>
             <h2 className="text-xl font-bold text-slate-900 font-display">4. Data Security and Retention</h2>
             <p>
-              We implement enterprise-grade technical and organizational safeguards, including SSL/TLS encryption for all data in transit, strict access control, and server-side validation. Your data is retained only for the duration required to service your account or maintain audit compliance.
+              We implement enterprise-grade technical and organisational safeguards, including SSL/TLS encryption for all data in transit, strict access control, and server-side validation. Your data is retained only for the duration required to service your account or maintain audit compliance.
             </p>
           </div>
 
@@ -108,7 +108,7 @@ export const PrivacyPolicyPage: React.FC = () => {
             <ul className="list-disc pl-5 space-y-1">
               <li>Request a copy of the personal or corporate information we hold about you.</li>
               <li>Request correction or rectification of any inaccurate information.</li>
-              <li>Request complete deletion or erasure of your inquiry data from our systems.</li>
+              <li>Request complete deletion or erasure of your enquiry data from our systems.</li>
             </ul>
           </div>
 

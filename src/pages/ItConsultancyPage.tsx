@@ -77,7 +77,7 @@ export const ItConsultancyPage: React.FC<ItConsultancyPageProps> = ({ onOpenQuot
             </h1>
             
             <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-light">
-              Transform your technology infrastructure from a reactive overhead into a scalable business accelerator. Our vendor-neutral IT architects advise leadership on multi-year roadmaps, hybrid-cloud migrations, Zero-Trust cybersecurity, and procurement cost optimization.
+              Transform your technology infrastructure from a reactive overhead into a scalable business accelerator. Our vendor-neutral IT architects advise leadership on multi-year roadmaps, hybrid-cloud migrations, Zero-Trust cybersecurity, and procurement cost optimisation.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-4">
@@ -107,7 +107,7 @@ export const ItConsultancyPage: React.FC<ItConsultancyPageProps> = ({ onOpenQuot
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="text-xs uppercase font-bold text-[#056D67] tracking-wider">Advisory Practices</span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display mt-1">
-              5 Specialized Technology Consulting Domains
+              5 Specialised Technology Consulting Domains
             </h2>
             <p className="text-sm text-slate-600 mt-2">
               Deep architectural acumen tailored for corporate enterprises, manufacturing hubs, and growing commercial businesses.
@@ -166,7 +166,7 @@ export const ItConsultancyPage: React.FC<ItConsultancyPageProps> = ({ onOpenQuot
               <span className="text-xs font-bold uppercase text-[#056D67] tracking-wide">Model A</span>
               <h3 className="text-lg font-bold text-slate-900 font-display">Project-Based Architecture</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Fixed-scope design for specific initiatives: data center relocation, multi-branch SD-WAN rollout, or Microsoft 365 cloud migration.
+                Fixed-scope design for specific initiatives: data centre relocation, multi-branch SD-WAN rollout, or Microsoft 365 cloud migration.
               </p>
             </div>
 

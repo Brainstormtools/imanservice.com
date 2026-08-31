@@ -36,7 +36,7 @@ export const KeyThemes: React.FC<KeyThemesProps> = ({ onOpenQuote }) => {
             Why Leading Enterprises Choose <span className="text-[#056D67]">i Man Service</span>
           </h2>
           <p className="text-slate-600 text-sm sm:text-base mt-2">
-            Five core differentiators that transform your IT infrastructure from a chaotic cost center into a predictable, high-performance competitive engine.
+            Five core differentiators that transform your IT infrastructure from a chaotic cost centre into a predictable, high-performance competitive engine.
           </p>
         </div>
 
@@ -91,7 +91,7 @@ export const KeyThemes: React.FC<KeyThemesProps> = ({ onOpenQuote }) => {
                 }`}>
                   <span className="flex items-center gap-1.5 font-medium">
                     <CheckCircle2 className={`w-3.5 h-3.5 ${isFeatured ? 'text-[#C1F24F]' : 'text-[#056D67]'}`} />
-                    <span>Guaranteed Standard</span>
+                    <span>Service Standard</span>
                   </span>
                   <button
                     type="button"

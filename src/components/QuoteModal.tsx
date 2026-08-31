@@ -214,7 +214,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 Request IT Infrastructure Proposal
               </h2>
               <p id="proposal-modal-desc" className="text-xs sm:text-sm text-slate-500 mt-1">
-                Tell us about your organization's IT requirements. Our engineers will prepare a formal scope &amp; SLA proposal within 24 hours.
+                Tell us about your organisation's IT requirements. Our engineers will prepare a formal scope &amp; SLA proposal within 24 hours.
               </p>
             </div>
 
@@ -450,7 +450,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600 flex items-start gap-2">
                 <ShieldCheck className="w-4 h-4 text-[#056D67] flex-shrink-0 mt-0.5" />
                 <span>
-                  Your details will only be used to formulate your proposal and will not be shared with third parties.
+                  Your details will only be used to formulate your proposal and will not be sold or shared with unauthorised third parties.
                 </span>
               </div>
 
@@ -495,7 +495,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
             </h3>
 
             <p className="text-sm text-slate-600 mt-2 max-w-md mx-auto leading-relaxed">
-              Your proposal request for <strong>{companyName || 'your organization'}</strong> has been confirmed and routed to our Lahore Infrastructure Engineering Lead. We will contact you at <strong>{email || phone}</strong> with your customized scope.
+              Your proposal request for <strong>{companyName || 'your organisation'}</strong> has been confirmed and routed to our Lahore Infrastructure Engineering Lead. We will contact you at <strong>{email || phone}</strong> with your customised scope.
             </p>
 
             {deliveryConfirmedAt && (

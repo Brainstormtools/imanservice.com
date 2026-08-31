@@ -49,7 +49,7 @@ export const ConsultancySection: React.FC<ConsultancySectionProps> = ({ onOpenQu
               Strategic IT Consultancy
             </h2>
             <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
-              IT consulting is strategic advice that helps organizations improve the performance, scalability, and strategic value of their technology functions. i Man Service provides expert guidance that harmonizes technology with your most important business goals.
+              IT consulting is strategic advice that helps organisations improve the performance, scalability, and strategic value of their technology functions. i Man Service provides expert guidance that harmonises technology with your most important business goals.
             </p>
           </div>
 
@@ -70,7 +70,7 @@ export const ConsultancySection: React.FC<ConsultancySectionProps> = ({ onOpenQu
         <div className="mt-12">
           <div className="mb-6">
             <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-display">
-              Our 5 Specialized IT Consulting Domains
+              Our 5 Specialised IT Consulting Domains
             </h3>
             <p className="text-slate-600 text-xs sm:text-sm">
               Tailored strategic advisory from enterprise architecture to vendor negotiations and cloud adoption.

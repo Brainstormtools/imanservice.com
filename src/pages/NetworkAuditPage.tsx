@@ -65,7 +65,7 @@ export const NetworkAuditPage: React.FC<NetworkAuditPageProps> = ({
     },
     {
       q: "What concrete deliverables will our management receive upon audit completion?",
-      a: "You receive an Executive Summary Scorecard (business-friendly risk summary), As-Built Network Topology Diagrams (Visio/PDF), Complete Asset & Warranty Inventory, Vulnerability & Security Matrix, and a Prioritized 30/60/90-Day Remediation Action Plan with estimated budgetary costs."
+      a: "You receive an Executive Summary Scorecard (business-friendly risk summary), As-Built Network Topology Diagrams (Visio/PDF), Complete Asset & Warranty Inventory, Vulnerability & Security Matrix, and a Prioritised 30/60/90-Day Remediation Action Plan with estimated budgetary costs."
     },
     {
       q: "Do you sign Non-Disclosure Agreements (NDAs) before conducting the audit?",

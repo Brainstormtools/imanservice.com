@@ -62,8 +62,8 @@ export const TermsPage: React.FC = () => {
               i Man Service provides services across three primary disciplines:
             </p>
             <ul className="list-disc pl-5 space-y-1">
-              <li><strong>Existing Network Audit:</strong> Diagnostic evaluation of switches, routers, firewalls, wireless RF coverage, and asset inventories. Final findings are summarized in an Executive Remediation Roadmap.</li>
-              <li><strong>IT-AMC / SLA Contracts:</strong> Fixed-fee annual maintenance covering desktop, server, and network equipment subject to the specific SLA Tier (Bronze, Silver, Gold, or Platinum) selected in the executed contract.</li>
+              <li><strong>Existing Network Audit:</strong> Diagnostic evaluation of switches, routers, firewalls, wireless RF coverage, and asset inventories. Final findings are summarised in an Executive Remediation Roadmap.</li>
+              <li><strong>IT-AMC / SLA Contracts:</strong> Fixed-fee annual maintenance covering desktop, server, and network equipment subject to the specific SLA Tier (Bronze, Silver, or Gold) selected in the executed contract.</li>
               <li><strong>Strategic IT Consultancy:</strong> Advisory, solution architecture, cloud migration planning, and independent procurement guidance.</li>
             </ul>
           </div>
@@ -71,7 +71,7 @@ export const TermsPage: React.FC = () => {
           <div>
             <h2 className="text-xl font-bold text-slate-900 font-display">3. Service Level Agreements (SLAs) & Response Metrics</h2>
             <p>
-              Response and resolution windows are categorized by severity level (P1 Critical, P2 High, P3 Medium, P4 Low) as specified in the agreed contract. Target response times commence once an incident ticket is acknowledged via phone, email, or ticketing portal.
+              Response and resolution windows are categorised by severity level (P1 Critical, P2 High, P3 Medium, P4 Low) as specified in the agreed contract. Target response times commence once an incident ticket is acknowledged via phone, email, or ticketing portal.
             </p>
           </div>
 

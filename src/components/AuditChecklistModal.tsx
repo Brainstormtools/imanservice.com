@@ -92,7 +92,7 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
         { id: "net-1", label: "Core & distribution switches firmware updated to latest stable vendor releases" },
         { id: "net-2", label: "VLAN segmentation configured separating guest, voice, CCTV, and corporate traffic" },
         { id: "net-3", label: "Wi-Fi access points mapped with RF coverage heatmaps (no dead zones)" },
-        { id: "net-4", label: "Structured cabling certified (Cat6/Fiber) with labeled patch panels" },
+        { id: "net-4", label: "Structured cabling certified (Cat6/Fibre) with labelled patch panels" },
         { id: "net-5", label: "Dual-WAN internet failover / SD-WAN configured with automatic failover" }
       ]
     },
@@ -110,7 +110,7 @@ export const AuditChecklistModal: React.FC<AuditChecklistModalProps> = ({
       category: "3. Cybersecurity, Firewall & Access Control",
       items: [
         { id: "sec-1", label: "Next-Gen Firewall rules audited, unused open ports closed, and UTM licenses active" },
-        { id: "sec-2", label: "Centralized Endpoint Detection & Response (EDR) / Antivirus updated on all nodes" },
+        { id: "sec-2", label: "Centralised Endpoint Detection & Response (EDR) / Antivirus updated on all nodes" },
         { id: "sec-3", label: "Active Directory / Identity Access privilege audit (disabled former employee accounts)" },
         { id: "sec-4", label: "Multi-Factor Authentication (MFA) enforced on VPNs, email, and admin logins" },
         { id: "sec-5", label: "Automated vulnerability scan executed across public and internal IP ranges" }

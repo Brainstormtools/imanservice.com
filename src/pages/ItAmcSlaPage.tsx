@@ -79,7 +79,7 @@ export const ItAmcSlaPage: React.FC<ItAmcSlaPageProps> = ({ onOpenQuote }) => {
             </h1>
             
             <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-light">
-              Eliminate unexpected IT downtime and unpredictable break-fix invoices. Our SLA-backed Annual Maintenance Contracts give your organization dedicated helpdesk support, scheduled preventive physical maintenance, and guaranteed emergency on-site dispatch across Lahore.
+              Eliminate unexpected IT downtime and unpredictable break-fix invoices. Our SLA-backed Annual Maintenance Contracts give your organisation dedicated help desk support, scheduled preventive physical maintenance, and guaranteed emergency on-site dispatch across Lahore.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-4">
@@ -112,7 +112,7 @@ export const ItAmcSlaPage: React.FC<ItAmcSlaPageProps> = ({ onOpenQuote }) => {
               Contractual SLA Tiers Designed for Every Business Size
             </h2>
             <p className="text-sm text-slate-600 mt-2">
-              From growing SMBs needing standard business hour support to 24/7 mission-critical operations.
+              From growing SMBs needing standard business-hours support to 24/7 mission-critical operations.
             </p>
           </div>
 

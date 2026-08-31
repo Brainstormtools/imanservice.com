@@ -208,7 +208,7 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
               </div>
 
               <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs">
-                <div className="text-xs font-bold uppercase text-[#056D67] mb-2">Phase 2: System Optimization</div>
+                <div className="text-xs font-bold uppercase text-[#056D67] mb-2">Phase 2: System Optimisation</div>
                 <ul className="space-y-2 text-xs text-slate-700">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle className="w-3.5 h-3.5 text-[#056D67] flex-shrink-0 mt-0.5" />
@@ -260,8 +260,8 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="bg-white p-4 rounded-xl border border-slate-200">
-                <div className="text-xs font-bold text-[#056D67]">Tier 1: Helpdesk Frontline</div>
-                <div className="text-xs text-slate-500 mt-1">0 - 15 Mins</div>
+                <div className="text-xs font-bold text-[#056D67]">Tier 1: Help Desk Frontline</div>
+                <div className="text-xs text-slate-500 mt-1">0–15 Mins</div>
                 <p className="text-xs text-slate-700 mt-2">
                   Immediate triage, remote diagnostic session, user verification, and standard fix library execution.
                 </p>
@@ -269,15 +269,15 @@ export const SlaMatrixTable: React.FC<SlaMatrixTableProps> = ({ onOpenQuote }) =
 
               <div className="bg-white p-4 rounded-xl border border-slate-200">
                 <div className="text-xs font-bold text-[#056D67]">Tier 2: Senior Systems Engineer</div>
-                <div className="text-xs text-slate-500 mt-1">15 - 45 Mins</div>
+                <div className="text-xs text-slate-500 mt-1">15–45 Mins</div>
                 <p className="text-xs text-slate-700 mt-2">
-                  Advanced troubleshooting, server virtualization debugging, firewall and routing analysis.
+                  Advanced troubleshooting, server virtualisation debugging, firewall and routing analysis.
                 </p>
               </div>
 
               <div className="bg-white p-4 rounded-xl border border-slate-200">
                 <div className="text-xs font-bold text-[#056D67]">Tier 3: On-Site Dispatch Team</div>
-                <div className="text-xs text-slate-500 mt-1">Within 1 - 2 Hours</div>
+                <div className="text-xs text-slate-500 mt-1">Within 1–2 Hours</div>
                 <p className="text-xs text-slate-700 mt-2">
                   Certified hardware technician deployed directly to your Lahore premises with replacement spares.
                 </p>

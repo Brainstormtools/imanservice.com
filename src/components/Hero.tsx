@@ -62,7 +62,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
               </div>
               <div className="flex items-center gap-2.5 bg-white/10 backdrop-blur-xs border border-white/10 rounded-lg p-2.5">
                 <CheckCircle className="w-4 h-4 text-[#C1F24F] flex-shrink-0" />
-                <span className="text-xs font-medium text-slate-100">99.9% Uptime Commitment</span>
+                <span className="text-xs font-medium text-slate-100">SLA Uptime Targets</span>
               </div>
             </div>
 
@@ -142,7 +142,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
                         </span>
                       </div>
                       <p className="text-xs text-slate-600 mt-1 line-clamp-2">
-                        Hardware asset cataloging, Wi-Fi heatmaps, firewall security review & EOL analysis.
+                        Hardware asset cataloguing, Wi-Fi heatmaps, firewall security review & EOL analysis.
                       </p>
                     </div>
                   </div>
@@ -210,7 +210,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote, onOpenQuiz }) => {
                   <span>Lahore On-Site Support</span>
                 </span>
                 <span className="font-semibold text-slate-800">
-                  Mon – Sat 9am – 7pm
+                  Mon–Sat 9:00 AM–7:00 PM
                 </span>
               </div>
 

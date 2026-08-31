@@ -66,7 +66,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenQuote }) => {
 
             {/* Quote / Mission Callout */}
             <div className="p-4 rounded-xl bg-[#F4FAF8] border-l-4 border-[#056D67] text-slate-800 text-xs sm:text-sm font-medium">
-              "Our mission is to transform IT from a cost center into a strategic business enabler—ensuring your systems are always available, always secure, and always aligned with your business goals."
+              "Our mission is to transform IT from a cost centre into a strategic business enabler—ensuring your systems are always available, always secure, and always aligned with your business goals."
             </div>
 
             {/* Quick Contact Chips */}

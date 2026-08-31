@@ -89,7 +89,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote }) => {
             </h1>
             
             <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-light">
-              We are a specialized IT infrastructure and engineering services firm headquartered at Siddique Trade Center in Gulberg II, Lahore. We eliminate the friction between hardware vendors, internet service providers, and software systems by serving as your single point of accountability.
+              We are a specialised IT infrastructure and engineering services firm headquartered at Siddique Trade Center in Gulberg II, Lahore. We eliminate the friction between hardware vendors, internet service providers, and software systems by serving as your single point of accountability.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-4">

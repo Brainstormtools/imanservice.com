@@ -71,7 +71,7 @@ export const ContactPage: React.FC = () => {
           <div className="max-w-3xl space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-[#C1F24F]/30 text-xs font-semibold text-[#D8FA8A]">
               <MapPin className="w-3.5 h-3.5 text-[#C1F24F]" />
-              <span>Lahore Help Desk & Inquiry Hub</span>
+              <span>Lahore Help Desk & Enquiry Hub</span>
             </div>
             
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white font-display tracking-tight">
@@ -79,7 +79,7 @@ export const ContactPage: React.FC = () => {
             </h1>
             
             <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-light">
-              Speak directly with our senior infrastructure engineers in Gulberg II, Lahore. Submit an inquiry below or reach out directly via Phone or WhatsApp for rapid response.
+              Speak directly with our senior infrastructure engineers in Gulberg II, Lahore. Submit an enquiry below or reach out directly via Phone or WhatsApp for rapid response.
             </p>
           </div>
         </div>

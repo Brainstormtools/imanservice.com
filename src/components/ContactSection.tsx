@@ -74,7 +74,7 @@ export const ContactSection: React.FC = () => {
         // decorative
       }
     } catch (err: any) {
-      setErrorMessage(err.message || 'Delivery failure: Unable to dispatch inquiry to our backend. Please call our hotline directly.');
+      setErrorMessage(err.message || 'Delivery failure: Unable to dispatch enquiry to our backend. Please call our hotline directly.');
     } finally {
       setLoading(false);
     }
@@ -213,7 +213,7 @@ export const ContactSection: React.FC = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <h3 className="text-xl font-bold text-slate-900 font-display">
-                    Send Us an Inquiry
+                    Send Us an Enquiry
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-500 mt-1">
                     Fill out the form below and an infrastructure consultant will respond within 2–4 business hours.
@@ -322,7 +322,7 @@ export const ContactSection: React.FC = () => {
 
                   <div>
                     <label htmlFor="contact-category" className="block text-xs font-semibold text-slate-700 mb-1">
-                      Inquiry Category
+                      Enquiry Category
                     </label>
                     <select
                       id="contact-category"
@@ -379,7 +379,7 @@ export const ContactSection: React.FC = () => {
 
                 <div className="pt-2 text-center text-xs text-slate-500 space-y-1">
                   <p>
-                    Your details will only be used to respond to your inquiry and will not be shared with third parties.
+                    Your details will only be used to respond to your enquiry and will not be sold or shared with unauthorised third parties.
                   </p>
                   <p className="text-xs text-slate-400">
                     By submitting, you agree to our <Link to="/privacy-policy" className="underline hover:text-[#056D67]">Privacy Policy</Link> and <Link to="/terms-and-conditions" className="underline hover:text-[#056D67]">Terms & Conditions</Link>.
@@ -398,11 +398,11 @@ export const ContactSection: React.FC = () => {
                 </div>
 
                 <h4 className="text-2xl font-bold text-slate-900 font-display">
-                  Inquiry Dispatched Successfully
+                  Enquiry Dispatched Successfully
                 </h4>
                 
                 <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                  Thank you, <strong>{name}</strong>. Your consultation inquiry has been confirmed and routed to our Lahore engineering dispatch team. We will reach out via <strong>{email || phone}</strong> shortly.
+                  Thank you, <strong>{name}</strong>. Your consultation enquiry has been confirmed and routed to our Lahore engineering dispatch team. We will reach out via <strong>{email || phone}</strong> shortly.
                 </p>
 
                 {deliveryConfirmedAt && (

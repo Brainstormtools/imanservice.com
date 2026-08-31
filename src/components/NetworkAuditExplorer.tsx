@@ -126,7 +126,7 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
                 What We Assess: Infrastructure Inspection Matrix
               </h3>
               <p className="text-slate-600 text-xs sm:text-sm">
-                Explore the 4 specialized assessment dimensions and their deep-dive inspection parameters.
+                Explore the 4 specialised assessment dimensions and their deep-dive inspection parameters.
               </p>
             </div>
           </div>
@@ -266,7 +266,7 @@ export const NetworkAuditExplorer: React.FC<NetworkAuditExplorerProps> = ({
         <div className="mt-20">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="text-xs font-bold text-[#056D67] uppercase tracking-wider bg-[#F4FAF8] px-3 py-1 rounded-full border border-[#056D67]/20">
-              Standardized Assessment Workflow
+              Standardised Assessment Workflow
             </span>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display mt-2">
               Our 4-Stage Audit Methodology

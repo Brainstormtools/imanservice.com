@@ -173,10 +173,10 @@ export const SlaTierBuilder: React.FC<SlaTierBuilderProps> = ({ onOpenQuote }) =
                 <span>Interactive AMC Configurator</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
-                Customize Your IT-AMC Tier & Scope
+                Customise Your IT-AMC Tier & Scope
               </h3>
               <p className="text-slate-600 text-sm mt-1">
-                Configure your digital fleet size, select your desired SLA response tier, and review your customized service-level commitments instantly.
+                Configure your digital fleet size, select your desired SLA response tier, and review your customised service-level commitments instantly.
               </p>
             </div>
 

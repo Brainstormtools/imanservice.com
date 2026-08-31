@@ -22,8 +22,8 @@ export const COMPANY_INFO = {
   website: "imanservice.com",
   address: "P-120, Siddique Trade Center, Gulberg II, Lahore, Pakistan",
   city: "Lahore, Pakistan",
-  hours: "Monday – Saturday: 9:00 AM – 7:00 PM (Emergency SLA Support 24/7/365)",
-  overview: "i Man Service is a trusted IT infrastructure and technology services provider committed to delivering excellence across the entire IT lifecycle. We empower businesses with reliable, secure, and future-ready technology solutions through three specialized service pillars: Existing Network Audit, IT-AMC/SLA and IT Consultancy. With a comprehensive portfolio spanning hardware and software, we serve as a single point of accountability for all your technology needs. Our mission is to transform IT from a cost center into a strategic business enabler—ensuring your systems are always available, always secure, and always aligned with your business goals."
+  hours: "Monday–Saturday: 9:00 AM–7:00 PM (Emergency SLA Support 24/7/365)",
+  overview: "i Man Service is a trusted IT infrastructure and technology services provider committed to delivering excellence across the entire IT lifecycle. We empower businesses with reliable, secure, and future-ready technology solutions through three specialised service pillars: Existing Network Audit, IT-AMC/SLA and IT Consultancy. With a comprehensive portfolio spanning hardware and software, we serve as a single point of accountability for all your technology needs. Our mission is to transform IT from a cost centre into a strategic business enabler—ensuring your systems are always available, always secure, and always aligned with your business goals."
 };
 
 export const BRAND_COLORS = {
@@ -57,9 +57,9 @@ export const KEY_MESSAGING_THEMES = [
     id: "sla-backed",
     title: "SLA-Backed Reliability",
     subtitle: "Measurable, contractual commitments",
-    description: "Every service comes with clear, measurable commitments. Guaranteed response times, strict escalation matrices, and transparent monthly reporting.",
+    description: "Every service comes with clear, measurable commitments. Committed response times, strict escalation matrices, and transparent monthly reporting.",
     icon: "Clock",
-    stats: "99.9% Uptime Commitment"
+    stats: "SLA Uptime Targets"
   },
   {
     id: "end-to-end",
@@ -87,7 +87,7 @@ export const ASSESSMENT_AREAS: AssessmentArea[] = [
     criticality: "Critical",
     checklist: [
       "Core & Edge switch port configuration & VLAN segmentation",
-      "Firewall security policy & rule-base optimization",
+      "Firewall security policy & rule-base optimisation",
       "Wireless signal heatmapping & RF interference check",
       "Structured cabling integrity & bandwidth certification",
       "WAN redundancy, failover & gateway latency profiling"
@@ -95,7 +95,7 @@ export const ASSESSMENT_AREAS: AssessmentArea[] = [
   },
   {
     area: "Hardware & Assets",
-    examine: "Servers, workstations, storage systems, networking gear—cataloging assets and identifying those approaching End-of-Life (EOL).",
+    examine: "Servers, workstations, storage systems, networking gear—cataloguing assets and identifying those approaching End-of-Life (EOL).",
     icon: "HardDrive",
     criticality: "High",
     checklist: [
@@ -108,7 +108,7 @@ export const ASSESSMENT_AREAS: AssessmentArea[] = [
   },
   {
     area: "Performance & Health",
-    examine: "Latency, packet loss, throughput bottlenecks, capacity planning, and system utilization across peak and non-peak hours.",
+    examine: "Latency, packet loss, throughput bottlenecks, capacity planning, and system utilisation across peak and non-peak hours.",
     icon: "Gauge",
     criticality: "High",
     checklist: [
@@ -159,7 +159,7 @@ export const AUDIT_METHODOLOGY: AuditMethodologyStep[] = [
   {
     step: 4,
     title: "Strategic Roadmap",
-    description: "Actionable, multi-year plan with phased execution priorities, budget projections, and clear ROI justification for upgrades and optimization.",
+    description: "Actionable, multi-year plan with phased execution priorities, budget projections, and clear ROI justification for upgrades and optimisation.",
     deliverable: "Executive Roadmap & Remediation Blueprint",
     icon: "FileCheck"
   }
@@ -173,7 +173,7 @@ export const AUDIT_WHY_POINTS = [
   },
   {
     title: "Gain Complete Insight into Performance",
-    description: "Know exactly how every megabit of bandwidth and gigabyte of memory is utilized across your corporate ecosystem.",
+    description: "Know exactly how every megabit of bandwidth and gigabyte of memory is utilised across your corporate ecosystem.",
     icon: "Eye"
   },
   {
@@ -182,12 +182,12 @@ export const AUDIT_WHY_POINTS = [
     icon: "Shield"
   },
   {
-    title: "Prepare for Cloud Migration & Modernization",
+    title: "Prepare for Cloud Migration & Modernisation",
     description: "Ensure your local network topology, throughput, and security are primed for hybrid or full-cloud architectures.",
     icon: "Cloud"
   },
   {
-    title: "Optimize Costs by Eliminating Waste",
+    title: "Optimise Costs by Eliminating Waste",
     description: "Right-size your hardware, terminate zombie licenses, and eliminate unnecessary replacement expenses.",
     icon: "DollarSign"
   }
@@ -207,11 +207,11 @@ export const AMC_COVERAGE_ITEMS: AmcCoverageItem[] = [
   },
   {
     title: "Network Support & Management",
-    description: "Monitoring, optimization, and maintenance of your entire network infrastructure for reliable connectivity and secure communication.",
+    description: "Monitoring, optimisation, and maintenance of your entire network infrastructure for reliable connectivity and secure communication.",
     icon: "Share2",
     includedTasks: [
       "Switch port configuration, VLAN tagging & traffic balancing",
-      "Wi-Fi controller tuning & roaming optimization",
+      "Wi-Fi controller tuning & roaming optimisation",
       "Router & gateway load balancing / multi-WAN failover",
       "Network cabling health & patch panel re-termination"
     ]
@@ -229,18 +229,18 @@ export const AMC_COVERAGE_ITEMS: AmcCoverageItem[] = [
   },
   {
     title: "Server Monitoring & Support",
-    description: "Proactive server monitoring, performance optimization, troubleshooting, and maintenance to maximize reliability and uptime.",
+    description: "Proactive server monitoring, performance optimisation, troubleshooting, and maintenance to maximise reliability and uptime.",
     icon: "Server",
     includedTasks: [
       "24/7/365 CPU, RAM, Disk I/O & event log surveillance",
-      "Virtualization management (VMware, Hyper-V, Proxmox)",
+      "Virtualisation management (VMware, Hyper-V, Proxmox)",
       "Domain Controller (Active Directory, DNS, DHCP) health checks",
       "Automated daily backup verification & test restores"
     ]
   },
   {
     title: "IT Help Desk Support",
-    description: "Dedicated help desk for quick technical issue resolution, minimizing disruption to daily business activities.",
+    description: "Dedicated help desk for quick technical issue resolution, minimising disruption to daily business activities.",
     icon: "Headphones",
     includedTasks: [
       "Multi-channel ticketing (Phone, Email, Portal, WhatsApp)",
@@ -254,7 +254,7 @@ export const AMC_COVERAGE_ITEMS: AmcCoverageItem[] = [
     description: "Regular security updates, vulnerability assessments, antivirus management, firewall tuning, and proactive threat monitoring.",
     icon: "ShieldCheck",
     includedTasks: [
-      "Centralized Endpoint Protection / Antivirus management",
+      "Centralised Endpoint Protection / Antivirus management",
       "Firewall intrusion prevention & web filtering policies",
       "Ransomware protection & air-gapped backup schedules",
       "Staff security hygiene & phishing awareness updates"
@@ -267,23 +267,23 @@ export const SLA_TIERS: SlaTier[] = [
     id: "bronze",
     name: "Standard Business (Bronze)",
     tag: "Essential IT Coverage",
-    responseCritical: "< 4 Hours",
-    responseHigh: "< 8 Hours",
-    responseMedium: "< 24 Hours",
-    responseLow: "< 48 Hours",
+    responseCritical: "Under 4 Hours",
+    responseHigh: "Under 8 Hours",
+    responseMedium: "Under 24 Hours",
+    responseLow: "Under 48 Hours",
     preventiveVisits: "Quarterly Scheduled Visit",
     reporting: "Quarterly Executive Health Report",
-    bestFor: "Small offices and non-critical standard business hours operations.",
+    bestFor: "Small offices and non-critical standard business-hours operations.",
     popular: false
   },
   {
     id: "silver",
     name: "Business Pro (Silver)",
     tag: "Most Popular for Growing SMBs",
-    responseCritical: "< 2 Hours",
-    responseHigh: "< 4 Hours",
-    responseMedium: "< 12 Hours",
-    responseLow: "< 24 Hours",
+    responseCritical: "Under 2 Hours",
+    responseHigh: "Under 4 Hours",
+    responseMedium: "Under 12 Hours",
+    responseLow: "Under 24 Hours",
     preventiveVisits: "Bi-Monthly Scheduled Visits",
     reporting: "Monthly Detailed Incident & Health Report",
     bestFor: "Mid-sized companies requiring fast turnaround and high uptime.",
@@ -293,13 +293,13 @@ export const SLA_TIERS: SlaTier[] = [
     id: "gold",
     name: "Enterprise Prime (Gold)",
     tag: "Mission-Critical 24/7 SLA",
-    responseCritical: "< 1 Hour (Immediate Remote)",
-    responseHigh: "< 2 Hours",
-    responseMedium: "< 6 Hours",
-    responseLow: "< 12 Hours",
+    responseCritical: "Under 1 Hour (Immediate Remote Response)",
+    responseHigh: "Under 2 Hours",
+    responseMedium: "Under 6 Hours",
+    responseLow: "Under 12 Hours",
     preventiveVisits: "Monthly Comprehensive On-Site Visits",
     reporting: "Real-time Dashboard + Monthly Executive Briefing",
-    bestFor: "Large enterprises, financial, healthcare & 24/7 operations.",
+    bestFor: "Large enterprises, financial institutions, healthcare organisations and other 24/7 operations.",
     popular: false
   }
 ];
@@ -308,9 +308,9 @@ export const SLA_SEVERITY_MATRIX: SlaSeverityRow[] = [
   {
     severity: "Level 1: Critical",
     level: "P1",
-    example: "Complete network outage, primary server down, core firewall failure, or active security breach affecting entire organization.",
+    example: "Complete network outage, primary server down, core firewall failure, or active security breach affecting the entire organisation.",
     ackTime: "Within 15 Minutes",
-    onsiteOrRemoteResolution: "Immediate remote response / On-site dispatch < 1-2 Hours",
+    onsiteOrRemoteResolution: "Immediate remote response / On-site dispatch within 1–2 hours",
     escalationManager: "Lead Infrastructure Architect & Director of Operations"
   },
   {
@@ -318,23 +318,23 @@ export const SLA_SEVERITY_MATRIX: SlaSeverityRow[] = [
     level: "P2",
     example: "Major department unable to work, backup system failure, critical business software degraded, internet line degraded without failover.",
     ackTime: "Within 30 Minutes",
-    onsiteOrRemoteResolution: "Remote triage < 1 Hour / On-site within 2-4 Hours",
+    onsiteOrRemoteResolution: "Remote triage within 1 hour / On-site within 2–4 hours",
     escalationManager: "Senior Systems Engineer"
   },
   {
     severity: "Level 3: Medium",
     level: "P3",
-    example: "Individual workstation issues, shared network printer offline, slow application performance for non-critical team.",
+    example: "Individual workstation issues, shared network printer offline, slow application performance affecting a non-critical team.",
     ackTime: "Within 2 Hours",
-    onsiteOrRemoteResolution: "Remote assistance within 4-8 Hours",
-    escalationManager: "Helpdesk Team Lead"
+    onsiteOrRemoteResolution: "Remote assistance within 4–8 hours",
+    escalationManager: "Help Desk Team Lead"
   },
   {
     severity: "Level 4: Low / Request",
     level: "P4",
     example: "New user account creation, software upgrade request, minor aesthetic hardware adjustments, scheduled routine tasks.",
     ackTime: "Within 4 Hours",
-    onsiteOrRemoteResolution: "Resolved within 24–48 Hours",
+    onsiteOrRemoteResolution: "Resolved within 24–48 hours",
     escalationManager: "Tier-1 Technical Support Specialist"
   }
 ];
@@ -346,7 +346,7 @@ export const CONSULTANCY_SERVICES: ConsultancyServiceItem[] = [
     icon: "Compass",
     outcomes: [
       "3–5 Year IT Capability Roadmap",
-      "Technology budget forecast & CAPEX/OPEX optimization",
+      "Technology budget forecast & CAPEX/OPEX optimisation",
       "Business continuity & scalable architecture milestones"
     ]
   },
@@ -377,16 +377,16 @@ export const CONSULTANCY_SERVICES: ConsultancyServiceItem[] = [
     outcomes: [
       "RFP drafting & vendor proposal evaluation",
       "Neutral price negotiation and technical validation",
-      "Volume license optimization and hardware sizing"
+      "Volume license optimisation and hardware sizing"
     ]
   },
   {
     title: "Digital Transformation",
-    description: "Practical, phased guidance to help your business modernize legacy workflows, adopt cloud tools, and succeed in today's digital landscape.",
+    description: "Practical, phased guidance to help your business modernise legacy workflows, adopt cloud tools, and succeed in today's digital landscape.",
     icon: "Zap",
     outcomes: [
       "Cloud migration strategy (Microsoft 365, AWS, Azure, Google Cloud)",
-      "Legacy system modernization without operational interruption",
+      "Legacy system modernisation without operational interruption",
       "Change management & team technology adoption programs"
     ]
   }
@@ -433,7 +433,7 @@ export const HEALTH_QUIZ_QUESTIONS: QuizQuestion[] = [
     description: "Proactive AMC contracts reduce emergency downtime by up to 85% compared to ad-hoc repairs.",
     options: [
       { label: "Reactive 'Break-Fix' (we only call someone when things break)", points: 0, riskNote: "Severe risk of extended downtime, lost revenue, and high emergency repair bills." },
-      { label: "Internal staff with no formal SLA commitments", points: 10, riskNote: "Staff may get overwhelmed during major outages without specialized escalation tiers." },
+      { label: "Internal staff with no formal SLA commitments", points: 10, riskNote: "Staff may get overwhelmed during major outages without specialised escalation tiers." },
       { label: "Third-party vendor with loose verbal agreement", points: 15, riskNote: "Lacks contractual response time enforcement." },
       { label: "Structured IT-AMC with SLA-backed response & regular preventive visits", points: 25 }
     ]
@@ -454,7 +454,7 @@ export const HEALTH_QUIZ_QUESTIONS: QuizQuestion[] = [
     question: "How are your network security and firewall policies managed?",
     description: "Modern threats require unified endpoint protection, firewall rules, and patch management.",
     options: [
-      { label: "Basic ISP router with default password & consumer antivirus", points: 0, riskNote: "Critical vulnerability to unauthorized intrusion and lateral cyber attacks." },
+      { label: "Basic ISP router with default password & consumer antivirus", points: 0, riskNote: "Critical vulnerability to unauthorised intrusion and lateral cyber attacks." },
       { label: "Decent firewall in place, but firmware and rules haven't been updated recently", points: 10, riskNote: "Outdated firmware is the #1 vector for network penetration." },
       { label: "Enterprise firewall and managed antivirus on most machines", points: 20 },
       { label: "Centrally managed UTM/Next-Gen Firewall, VLAN segmentation, and updated EDR", points: 25 }
