@@ -1,3 +1,7 @@
+# Client portal addition
+
+See [PORTAL_SETUP.md](PORTAL_SETUP.md) for the new project workspace, client portal, secure database setup and Vercel deployment instructions.
+
 # i Man Service — Enterprise IT Infrastructure & AMC Portal
 
 Official web portal and IT service platform for **i Man Service**, specializing in Network Audits, fixed-fee IT-AMC/SLA maintenance, and strategic IT consultancy for corporate and industrial enterprises across Lahore, Pakistan.
