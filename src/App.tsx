@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
+const Portal = lazy(() => import('./portal/Portal'));
 import { RouterProvider, useRouter } from './router/Router';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -110,6 +111,10 @@ function AppContent() {
         );
     }
   };
+
+  if (path.split('#')[0].replace(/\/$/, '') === '/portal') {
+    return <Suspense fallback={<main style={{padding:40}}>Loading portal…</main>}><Portal /></Suspense>;
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F4FAF8] text-slate-800 selection:bg-[#C1F24F] selection:text-[#034F4B] pb-20 md:pb-0">

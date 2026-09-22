@@ -60,6 +60,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'IT Consultancy', href: '/it-consultancy' },
     { label: 'About Us', href: '/about' },
     { label: 'Contact', href: '/contact' },
+    { label: 'Client portal', href: '/portal' },
   ];
 
   return (

@@ -1,9 +1,47 @@
 {
   "redirects": [
-    { "source": "/it-amc", "destination": "/it-amc-sla", "permanent": true },
-    { "source": "/terms", "destination": "/terms-and-conditions", "permanent": true }
+    {
+      "source": "/it-amc",
+      "destination": "/it-amc-sla",
+      "permanent": true
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms-and-conditions",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/((?!api/|assets/|favicon\\.ico|favicon\\.png|apple-touch-icon\\.png|logo\\.svg|og-image\\.jpg|sitemap\\.xml|robots\\.txt).*)", "destination": "/index.html" }
+    {
+      "source": "/((?!api/|assets/|favicon\\.ico|favicon\\.png|apple-touch-icon\\.png|logo\\.svg|og-image\\.jpg|sitemap\\.xml|robots\\.txt).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/portal",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
   ]
 }
