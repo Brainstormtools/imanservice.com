@@ -13,6 +13,7 @@ alter table storage.objects enable row level security;
 grant select,insert,update,delete on storage.objects to authenticated;
 `);
 await pg.exec(await fs.readFile(new URL('../supabase/001_portal.sql', import.meta.url),'utf8'));
+if(process.env.PORTAL_TEST_OPERATIONS==='1') await pg.exec(await fs.readFile(new URL('../supabase/002_operations.sql',import.meta.url),'utf8'));
 const ids={admin:'00000000-0000-0000-0000-000000000001',clientA:'00000000-0000-0000-0000-000000000002',clientB:'00000000-0000-0000-0000-000000000003',team:'00000000-0000-0000-0000-000000000004',outsider:'00000000-0000-0000-0000-000000000005',a:'10000000-0000-0000-0000-000000000001',b:'10000000-0000-0000-0000-000000000002',pa:'20000000-0000-0000-0000-000000000001',pb:'20000000-0000-0000-0000-000000000002',ticket:'30000000-0000-0000-0000-000000000001',file:'40000000-0000-0000-0000-000000000001',fileb:'40000000-0000-0000-0000-000000000002'};
 await pg.exec(`insert into auth.users values ('${ids.admin}'),('${ids.clientA}'),('${ids.clientB}'),('${ids.team}'),('${ids.outsider}');
 insert into companies values ('${ids.a}','A'),('${ids.b}','B');
