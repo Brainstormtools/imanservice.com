@@ -1,4 +1,6 @@
-# i Man Service — project workspace and client portal
+# i Man Service — original portal setup
+
+**Existing installations:** use `UPGRADE_GUIDE.md` and run only `supabase/002_operations.sql` for this update. This document describes the original installation and its original verification status. For a new installation, apply `001_portal.sql` once and then `002_operations.sql` once. The current upgrade adds contracts, SLA clocks, equipment and task boards; see the upgrade guide for current behavior.
 
 This ZIP adds an original project-management application to the supplied React/Vite website at `/portal`. It is not RISE software and contains no RISE code. The public website, contact/proposal handlers, branding and existing routes remain in the project. A Client portal link is included in desktop and mobile navigation.
 
