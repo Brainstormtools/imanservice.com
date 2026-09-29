@@ -2,6 +2,20 @@
 
 This release adds notification channels, CSV/XLSX task import, a drag-and-drop task board, SLA reports, bank-transfer billing, and recurring maintenance. The existing 24/7 contract-specific SLA rules remain in place.
 
+## Deployment status — 29 September 2026
+
+Migration 003 is applied to the live portal database. Direct authenticated invoice UPDATE privileges were verified false. The database job `iman-maintenance-and-alerts` is active every minute; a successful automatic execution was verified at 05:55 UTC. PR #3 has been merged into main.
+
+Maintenance and alert queuing run directly in Postgres, independently of the Vercel notification worker. Reproduce the installed job as the database owner with:
+
+```sql
+create extension if not exists pg_cron;
+select cron.schedule('iman-maintenance-and-alerts', '* * * * *',
+  $job$select public.generate_maintenance(); select public.queue_due_alerts();$job$);
+```
+
+Email/SMS/WhatsApp **delivery is not activated**. Complete the sender credentials, server variables, and HTTP worker schedule below to enable it. Calling the worker in addition to the database schedule is safe: maintenance occurrences and notification event keys are deduplicated. Do not rerun migration 003 on this database.
+
 ## Deployment order
 
 1. Back up the database using your normal Supabase backup procedure. Test against a staging project first.
