@@ -43,5 +43,10 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/portal-worker.ts": {
+      "maxDuration": 60
+    }
+  }
 }
