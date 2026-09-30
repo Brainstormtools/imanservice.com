@@ -32,6 +32,6 @@ Apply `supabase/011_it_operations.sql` once after 010, then deploy the interface
 | All | Download reports/evidence; refresh; try stale saved versions | Authenticated files, history available, stale edits rejected |
 
 ## Verification
-39 PostgreSQL assertions, 6 new UI assertions and 17 existing operations UI assertions passed (62 total). TypeScript and production build passed. Database identities and UI transport are simulated locally; these do not replace the acceptance workflow with hosted accounts. Database migration and hosted acceptance are pending Supabase sign-in; do not merge before applying 011.
+39 PostgreSQL assertions, 6 new UI assertions and 17 existing operations UI assertions passed (62 total). TypeScript and production build passed. Database identities and UI transport are simulated locally; these do not replace the acceptance workflow with hosted accounts. Migration 011 was applied successfully to production on 1 October 2026 (Pakistan time). Live catalog checks verified RLS on all five new tables, no anonymous SELECT, no direct authenticated INSERT/UPDATE, and authenticated-only execution of the five checked workflow functions. Hosted client-team acceptance is still required.
 
 External notification delivery remains inactive pending provider setup. Historical CRM data migration is excluded.
