@@ -56,6 +56,7 @@ await deny('update client_sites set name=$1 where id=$2',['Tampered',sa],'Direct
 await user(ids.admin);
 const saveJob=async(id=null,ver=null,site=sa,project=ids.pa,start='2030-01-01T10:00Z',end='2030-01-01T11:00Z',kind='Audit',work='Audit completed',list=[{title:'Security',done:true}],findings=[{title:'Backup gap',severity:'High',recommendation:'Enable backups'}],evidence=[ids.file])=>(await one('select save_it_job($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) id',[id,ver,kind,site,project,ids.team,'Network assessment',start,end,work,JSON.stringify(list),JSON.stringify(findings),evidence])).id;
 const jid=await saveJob();
+await assert.rejects(()=>saveJob(jid,1,sb,ids.pb,'2030-01-01T10:00Z','2030-01-01T11:00Z','Audit','Summary',[],[],[]));passed++;console.log('PASS existing job cannot move to another company');
 await deny('select save_it_job(null,null,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)', ['Audit',sa,ids.pb,ids.team,'Cross company','2030-02-01T10:00Z','2030-02-01T11:00Z','Test','[]','[]',[]],'Cross-company project denied');
 await assert.rejects(()=>saveJob(null,null,sa,ids.pa,'2030-01-01T10:30Z','2030-01-01T11:30Z'));passed++;console.log('PASS overlapping technician work denied');
 await assert.rejects(()=>saveJob(null,null,sa,ids.pa,'2030-01-02T10:00Z','2030-01-02T11:00Z','Audit','Summary',[],[],[ids.fileb]));passed++;console.log('PASS cross-company evidence denied');
