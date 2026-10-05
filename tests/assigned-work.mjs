@@ -1,3 +1,4 @@
+import {supplyCases} from './helpers/supply-cases.mjs';
 import {handoverCases} from './helpers/crm-handover-cases.mjs';
 import {executionCases} from './helpers/crm-execution-cases.mjs';
 import {conversionCases} from './helpers/crm-conversion-cases.mjs';
@@ -281,6 +282,7 @@ const conversionFixture=await quoteCases({pg,fs,q,one,user,eq,deny,ids,deal:sale
 const executionFixture=await conversionCases({pg,fs,q,one,user,eq,deny,ids,boardA,boardB,...conversionFixture});
 await executionCases({pg,fs,q,one,user,eq,deny,ids,...executionFixture});
 await handoverCases({pg,fs,q,one,user,eq,deny,ids,...executionFixture});
+await supplyCases({pg,fs,q,one,user,eq,deny,ids});
 await user(ids.admin);await q('select set_sales_board_member($1,$2,false)',[boardA,ids.team]);await q('select set_sales_board_member($1,$2,false)',[boardB,ids.team]);
 await user(ids.team);eq((await q('select * from crm_deals where id=$1',[salesDeal])).length,0,'Removing all boards revokes sales deal');eq((await q('select * from crm_leads where id=$1',[salesLead])).length,0,'Removing boards revokes assigned contact');eq((await q('select * from portal_reminders where deal_id=$1',[salesDeal])).length,0,'Sales reminders disappear after board revocation');
 await user(ids.clientA);eq((await q('select * from crm_leads')).length,0,'Clients cannot see raw sales contacts');eq((await q('select * from crm_deals')).length,0,'Clients cannot see internal sales pipeline');await deny("select capture_crm_lead('Client lead','client@example.test','','','','','')",[],'Clients cannot use internal intake');
