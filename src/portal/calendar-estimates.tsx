@@ -10,7 +10,7 @@ export const localInput=(s:string)=>{const d=new Date(s);return `${localDate(d)}
 const options=(rows:Row[])=>rows.map(r=><option value={r.id} key={r.id}>{r.title||r.name}</option>);
 export function CalendarWorkspace({profile,projects,onOpen}:any){
  const [events,setEvents]=useState<Row[]>([]),[tasks,setTasks]=useState<Row[]>([]),[milestones,setMilestones]=useState<Row[]>([]),[error,setError]=useState(''),[note,setNote]=useState(''),[busy,setBusy]=useState(false),[loading,setLoading]=useState(true),[edit,setEdit]=useState<Row|null>(null),[month,setMonth]=useState(localDate(new Date()).slice(0,7)),[scope,setScope]=useState('all'),[mode,setMode]=useState('month'),[now,setNow]=useState(Date.now());
- const staff=profile.role!=='client';
+ const staff=profile.role==='admin';
  async function load(){const [e,t,m]=await Promise.all(['calendar_events','tasks','milestones'].map(x=>workspaceRows(x)));setEvents(e);setTasks(t);setMilestones(m);}
  useEffect(()=>{let active=true;Promise.all(['calendar_events','tasks','milestones'].map(x=>workspaceRows(x))).then(([e,t,m])=>{if(active){setEvents(e);setTasks(t);setMilestones(m);}}).catch(e=>{if(active)setError(e.message);}).finally(()=>{if(active)setLoading(false);});const timer=setInterval(()=>setNow(Date.now()),30000);return()=>{active=false;clearInterval(timer);};},[profile.id]);
  async function run(fn:()=>PromiseLike<any>){if(busy)return false;setBusy(true);setError('');try{check(await fn());await load();setEdit(null);setNote('Saved');return true;}catch(e:any){setError(e.message);return false;}finally{setBusy(false);}}

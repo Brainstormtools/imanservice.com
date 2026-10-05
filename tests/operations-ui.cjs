@@ -21,7 +21,7 @@ const helperOut=path.join(dir,'operations.cjs');
 await build({entryPoints:[project+'/src/portal/operations.tsx'],bundle:true,platform:'node',format:'cjs',outfile:helperOut,plugins:[{name:'react-external',setup(b){b.onResolve({filter:/^react$/},()=>({path:require.resolve('react'),external:true}));}}]});
 const {slaState}=require(helperOut);
 const flush=async(fn=()=>{})=>React.act(async()=>{await fn();await new Promise(r=>setTimeout(r,25));});
-const click=async(text)=>{const el=[...document.querySelectorAll('button')].find(b=>b.textContent===text);assert.ok(el,`Button ${text}`);await flush(()=>el.click());};
+const click=async(text)=>{const labels={Equipment:['Equipment','IT assets','My IT assets','Related IT assets'],Projects:['Projects','My projects','Assigned projects'],'Clients & team':['Clients & team','Clients & team access'],'AMC & SLA':['AMC & SLA','My AMC & SLA']}[text]||[text];const el=[...document.querySelectorAll('button')].find(b=>labels.includes(b.textContent));assert.ok(el,`Button ${text}`);await flush(()=>el.click());};
 const set=async(el,value)=>{assert.ok(el);await flush(()=>{el.value=value;el.dispatchEvent(new dom.window.Event('change',{bubbles:true}));});};
 const submit=async form=>{await flush(()=>form.dispatchEvent(new dom.window.Event('submit',{bubbles:true,cancelable:true})));};
 let passed=0;const pass=t=>{passed++;console.log('PASS',t)};
@@ -40,7 +40,7 @@ await click('Projects');await flush(()=>[...document.querySelectorAll('button')]
 assert.equal(document.querySelectorAll('.p-lane').length,3);assert.ok(document.body.textContent.includes('Inspect router'));pass('Task board renders all three workflow columns');
 await set(document.querySelector('[aria-label="Status for Inspect router"]'),'In progress');assert.equal(data.tasks[0].status,'In progress');pass('Board status change persists through refresh');
 await flush(()=>document.querySelector('.p-check-item input').click());assert.equal(data.task_items[0].done,true);pass('Checklist completion persists');
-await click('Add task');form=document.querySelector('form');for(const [name,value] of Object.entries({title:'Replace router',assignee:'team',priority:'Urgent',deadline:'2026-12-01',equipment_id:'ea',ticket_id:'ticket'}))form.elements.namedItem(name).value=value;await submit(form);
+await click('Add task');form=[...document.querySelectorAll('form')].find(f=>f.elements.namedItem('title')&&f.elements.namedItem('assignee'));for(const [name,value] of Object.entries({title:'Replace router',assignee:'team',priority:'Urgent',deadline:'2026-12-01',equipment_id:'ea',ticket_id:'ticket'}))form.elements.namedItem(name).value=value;await submit(form);
 const tw=writes.find(x=>x.table==='tasks'&&x.verb==='insert');assert.equal(tw.values.ticket_id,'ticket');assert.equal(tw.values.equipment_id,'ea');assert.equal(tw.values.assignee,'team');pass('Task creation links team assignee equipment and support ticket');
 await click('Equipment');assert.ok(document.body.textContent.includes('Office router'));form=document.querySelector('form');form.elements.namedItem('serviced_on').value='2026-09-22';form.elements.namedItem('summary').value='Replaced patch cable';await submit(form);assert.ok(document.body.textContent.includes('Replaced patch cable'));pass('Equipment service entry is saved and displayed');
 await click('Clients & team');await click('Sign out');await flush(()=>{session={user:{id:'client'}};callback('SIGNED_IN',session)});

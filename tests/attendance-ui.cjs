@@ -5,6 +5,7 @@ const dir=fs.mkdtempSync(path.join(__dirname,'workspace-ui-')),file=path.join(di
 data.attendance_entries=[{id:'a',user_id:'team',checked_in:'2026-09-30T03:00:00Z',checked_out:'2026-09-30T11:00:00Z',version:2,voided:false},{id:'b',user_id:'team',checked_in:'2026-08-31T20:00:00Z',checked_out:'2026-08-31T21:00:00Z',version:1,voided:false},{id:'c',user_id:'team',checked_in:'2026-09-29T03:00:00Z',checked_out:'2026-09-29T11:00:00Z',version:1,voided:true}];data.attendance_history=[];
 const members=[{id:'team',role:'team',name:'Engineer'},{id:'admin',role:'admin',name:'Admin'}];
 await flush(()=>root.render(React.createElement(Attendance,{profile:{id:'team',role:'team'},members})));
+const monthInput=document.querySelector('input[type=month]');await flush(()=>{Object.getOwnPropertyDescriptor(dom.window.HTMLInputElement.prototype,'value').set.call(monthInput,'2026-09');monthInput.dispatchEvent(new dom.window.Event('input',{bubbles:true}));});
 assert.match(document.body.textContent,/9.00 recorded hours/);pass('Pakistan month includes boundary session and excludes void hours');
 assert.doesNotMatch(document.body.textContent,/Add missed attendance|Correct entry/);pass('Staff hides administrator correction controls');
 await click('Check in');assert.equal(writes.at(-1).name,'attendance_clock');assert.equal(writes.at(-1).args.p_action,'in');pass('Staff check in uses checked RPC');
