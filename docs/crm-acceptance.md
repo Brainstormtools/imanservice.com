@@ -36,9 +36,9 @@ Acceptance for each item: specification fields; workflow transitions and history
 | 28 | Project Configurator | Template planning implemented; acceptance partial |
 | 29 | Execution and handover | Nodes, punch, phases and electronic handover implemented; live walkthrough pending |
 | 30 | Supply Chain | Core request-to-delivery implemented; acceptance partial |
-| 31 | Payables and expenses | Matched vendor payables implemented; expenses and acceptance pending |
-| 32 | Loans and advances | Missing |
-| 33 | Project Financials | Missing |
+| 31 | Payables and expenses | Matched payables and approved expenses implemented; acceptance partial |
+| 32 | Loans and advances | Separate principal ledgers implemented; acceptance partial |
+| 33 | Project Financials | Recorded costs, invoices and cash implemented; provisional labour and acceptance pending |
 | 34 | Daily activity log | Missing |
 | 35 | HR performance | Missing |
 | 36 | Administration configuration | Foundation implemented; acceptance partial |
@@ -133,3 +133,20 @@ Finance navigation and the lazy-loaded screen provide an Accounts overview, held
 975 automated checks across 30 suites, TypeScript and the production build passed. A five-page 52-row statement layout was rendered and visually checked, including repeated headers and normal body rows after page breaks. Migration 022 applied to production. A live transaction verified held/corrected matching, duplicate GRN denial, separate approval, partial/full payment, reversal, billed-return protection and client/Purchase isolation; all temporary records and memberships rolled back. Security advisor categories remain the existing checked-function, intentionally private-table and password-protection notices.
 
 Payables/finance acceptance remains partial: tax/charge invoice components, evidence file uploads (current evidence is a document reference), supplier advances, credit/debit notes, expense approval/ledger, loans/advances, bank reconciliation, project financials, combined receivable/payable cash flow and one-time opening-balance imports are pending. Browser role/download walkthrough and full 41-item acceptance remain pending.
+
+
+## Expenses, loans/advances and recorded project financials increment
+
+Migration 023 adds configured expense categories, project/task-scoped or authorized office expenses, immutable submitted/approved details, administrator approval/rejection separate from the requester, bounded partial/full expense payments and documented separate-actor reversals. Task-only staff bind expenses to their assigned task; revocation removes access to both records and history. Accounts can route office/project expenses. Vendor-linked invoice references are checked in both expense and purchase entry points under a vendor lock to prevent the same invoice being recorded twice. Evidence currently uses a document reference; file upload remains pending.
+
+Loans Given, Loans Taken and Staff advances have a separate approved principal ledger with a staff recipient or lender/borrower, project link, agreement, due date, terms and evidence reference. Draws cannot exceed the approved principal and repayments cannot exceed the disbursed outstanding. Server code derives cash direction, requires chronological entries and prevents reversals from leaving a repayment without prior funding, even if the final balance would be positive. Approvers cannot record cash for their own approved record. Original cash and audit history remain intact after reversal. Loan/advance balances and cash are excluded from customer receivables, trade payables and project expense costs.
+
+Accounts has company finance totals, customer receivables separated by currency, vendor/expense payables, net PKR trade position, separate principal outstanding and monthly recorded cash movements. Assigned project managers have checked project reports only; clients and technicians cannot see internal profitability or company ledgers. Explicit customer-and-currency-checked invoice links supplement automatic Sale/order and recurring invoice links. Links cannot move an invoice to a different project and repeat links are idempotent.
+
+Project Financials appears in the project tab and Finance workspace, with CSV/PDF exports. It combines accepted Sale/BOQ values, linked issued invoices, verified collections and credits, purchase commitments, vendor bill liabilities, net non-returnable stock issues/site returns, approved additional expenses, and separate supplier/expense/loan cash. Material vendor bills are shown as purchase liabilities and not added again to issued material cost. Returnable tool custody is excluded from consumed material. Missing accepted contract/budget values remain unknown. Remaining cost, utilisation and profitability explicitly refer to recorded costs; hourly labour, other unrecorded costs, tax treatment, released/revised budgets, product allocations and final profitability remain pending. This is a provisional recorded-cost view, not final project P&L acceptance.
+
+The prior Vendor Payables menu routing gap is fixed. Integration tests now click actual portal navigation into Vendor Payables, Accounts Finance and the project Financials tab. Administration configuration filters category arrays instead of treating the supply control object as category options. The finance workspace and reports load on demand.
+
+1061 automated checks across 31 functional suites, TypeScript and production build passed. A three-page project financials export was rendered and visually checked, including continued tables and the report-basis note. Migration 023 applied to production. Live rollback checks passed for assigned expense submission, separate approval/payment/reversal, separate given/taken principal, project invoice/collection totals, unknown legacy revenue, client/technician isolation and assignment revocation; all temporary records and memberships rolled back. Advisor categories remain the existing checked-function, intentionally private-table and password-protection notices.
+
+Finance acceptance remains partial: hourly labour from approved activity logs, released/revised budgets, product allocations, evidence uploads, staff advance settlement against expenses/payroll, interest, tax/charge handling, supplier credit/debit notes, bank reconciliation and opening-balance imports remain pending. Full browser role/download walkthrough and 41-item acceptance remain pending. Next is the daily activity log and approved hourly project costing, followed by HR performance/payout summaries.

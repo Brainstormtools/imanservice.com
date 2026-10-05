@@ -1,3 +1,4 @@
+import {financeCases} from './finance-cases.mjs';
 export async function payablesCases({pg,fs,q,one,user,eq,deny,ids,actors,po,grn,location,department}){
  await pg.exec('reset role');await pg.exec(await fs.readFile(new URL('../../supabase/022_vendor_payables.sql',import.meta.url),'utf8'));
  const accounts=crypto.randomUUID();await q('insert into auth.users values($1)',[accounts]);await q("insert into profiles(id,name,role) values($1,'Accounts','team')",[accounts]);await user(ids.admin);await q('select set_crm_membership($1,$2,$3,true)',[accounts,'accounts',department]);
@@ -37,5 +38,5 @@ export async function payablesCases({pg,fs,q,one,user,eq,deny,ids,actors,po,grn,
  }
  await pg.exec('reset role');await q('update sc_bills set invoice_date=$2,due_date=$2 where id=$1',[bill,today]);await pg.exec("select set_config('request.jwt.claim.sub','',false);set role anon");await deny('select * from sc_bills',[],'Anonymous cannot read vendor bills');await deny('select vendor_payables_report()',[],'Anonymous cannot call financial report');await deny("select vendor_bill_action($1,9,'Match','')",[bill],'Anonymous cannot invoke bill workflow');
  await user(ids.clientA);eq((await q('select * from sc_bills')).length,0,'Own company client cannot see internal vendor bills');eq((await q('select * from sc_vendor_payments')).length,0,'Client cannot see vendor bank evidence');await deny('select vendor_payables_report()',[],'Client cannot call payables report');
- await user(ids.admin);eq((await q('select * from sc_bill_history where bill_id=$1',[bill])).length>=7,true,'Invoice revisions matching approval and payment preserve audit');await q('update profiles set active=false where id=$1',[accounts]);await user(accounts);await deny('select vendor_payables_report()',[],'Disabled Accounts account loses finance access');await user(ids.admin);
+ await user(ids.admin);eq((await q('select * from sc_bill_history where bill_id=$1',[bill])).length>=7,true,'Invoice revisions matching approval and payment preserve audit');await financeCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts,today,po});await q('update profiles set active=false where id=$1',[accounts]);await user(accounts);await deny('select vendor_payables_report()',[],'Disabled Accounts account loses finance access');await user(ids.admin);
 }
