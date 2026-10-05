@@ -36,7 +36,7 @@ Acceptance for each item: specification fields; workflow transitions and history
 | 28 | Project Configurator | Template planning implemented; acceptance partial |
 | 29 | Execution and handover | Nodes, punch, phases and electronic handover implemented; live walkthrough pending |
 | 30 | Supply Chain | Core request-to-delivery implemented; acceptance partial |
-| 31 | Payables and expenses | Missing |
+| 31 | Payables and expenses | Matched vendor payables implemented; expenses and acceptance pending |
 | 32 | Loans and advances | Missing |
 | 33 | Project Financials | Missing |
 | 34 | Daily activity log | Missing |
@@ -120,3 +120,16 @@ The menu provides Requests, Stock, Sourcing, Purchase Orders, Inbound, Outbound,
 Supply-chain acceptance remains partial: automatic go-live BOQ requests and mapping of legacy unmapped accepted lines, reorder-generated PRs, rate contracts, multi-line PO headers/amendments, standalone logistics/inspection approvals, direct-to-site combined receipt/issue, vendor RMA/debit-note execution and store sales are pending. Three-way vendor bill matching and payables follow in the finance increment. Full project financials and browser role/download walkthrough remain pending.
 
 903 checks across 29 suites, TypeScript and the production build passed. Migration 021 applied to production. A live rollback transaction verified stock-first shortfall sourcing, separate approval and receipt actors, partial/rejected GRNs, weighted-average valuation, issue/delivery, return credit and client isolation; all temporary records and role assignments were rolled back. Browser walkthrough remains pending.
+
+
+## Vendor bills and payables increment
+
+Migration 022 links PKR material-only vendor invoices to an approved PO and selected accepted GRN quantities. Exact PO rate, approved ordered quantity and net accepted receipt allocations are checked under a PO lock. Rejected and returned quantities cannot be paid, and matched receipts cannot be invoiced twice. Mismatches remain Held for Purchase to review and Accounts to revise. Vendor invoice numbers and payment references are normalized for duplicate prevention. Matched bills require a separate administrator from both the creator and matcher; the approver cannot record the payment. Direct bill, allocation, payment and history writes are denied.
+
+Accounts records full or partial payments already made, with business date, method, reference and evidence document reference. No bank transfer or external message is initiated. Outstanding balances use unreversed payments, payment retries use the current bill version, and payments cannot exceed the balance or be future dated. A separate administrator can record a reasoned reversal while retaining the original payment and evidence. Cancellation requires an unpaid bill. Vendor returns cannot invalidate quantities committed to matched or approved bills; paid-return credit notes are pending.
+
+Finance navigation and the lazy-loaded screen provide an Accounts overview, held/matched/approved bill queues, invoice revision and GRN allocation, payment/reversal history, payable schedule and vendor statements with CSV/PDF exports. Purchase can inspect bill mismatches but cannot certify the match, approve bills, read payment evidence or make payments. Clients, technicians, disabled accounts and anonymous callers cannot access payables. Report aging uses the Asia/Karachi business date and buckets Current, 1–30, 31–60, 61–90 and 90+. Held/draft/cancelled amounts are excluded from approved outstanding and overdue totals. Project/vendor identities are separate fields.
+
+975 automated checks across 30 suites, TypeScript and the production build passed. A five-page 52-row statement layout was rendered and visually checked, including repeated headers and normal body rows after page breaks. Migration 022 applied to production. A live transaction verified held/corrected matching, duplicate GRN denial, separate approval, partial/full payment, reversal, billed-return protection and client/Purchase isolation; all temporary records and memberships rolled back. Security advisor categories remain the existing checked-function, intentionally private-table and password-protection notices.
+
+Payables/finance acceptance remains partial: tax/charge invoice components, evidence file uploads (current evidence is a document reference), supplier advances, credit/debit notes, expense approval/ledger, loans/advances, bank reconciliation, project financials, combined receivable/payable cash flow and one-time opening-balance imports are pending. Browser role/download walkthrough and full 41-item acceptance remain pending.
