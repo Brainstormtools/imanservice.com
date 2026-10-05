@@ -29,9 +29,9 @@ Acceptance for each item: specification fields; workflow transitions and history
 | 21 | Notifications | Partial |
 | 22 | Attendance | Partial |
 | 23 | Clients and team access | Partial |
-| 24 | Raw Lead Board | Missing |
-| 25 | Product sales boards | Missing |
-| 26 | Deal detail | Missing |
+| 24 | Raw Lead Board | Core implemented; acceptance partial |
+| 25 | Product sales boards | Core implemented; acceptance partial |
+| 26 | Deal detail | Core implemented; acceptance partial |
 | 27 | Won conversion | Missing |
 | 28 | Project Configurator | Missing |
 | 29 | Execution and handover | Missing |
@@ -66,3 +66,9 @@ The first audit listed 37 page/module rows. Items 38–41 make the shared custom
 ## Foundation increment
 
 Migration 014 adds audited teams, department memberships, twelve role definitions and versioned shared categories. Staff capability resolution is limited to the current active account. Customer history uses security-invoker queries so assignment, publication and commercial policies remain enforced. New department permissions do not grant legacy administrator powers. CRM configuration is administrator-only; Customer history is visible to authorized staff and administrators. Leads, deals, stock, HR and finance expansion remain pending.
+
+## Sales intake increment
+
+Migration 015 adds manual and mapped CSV/XLSX intake, contact deduplication, six configurable boards, shared multi-product deals, board membership policies, checked stage transitions, section ownership, activity history, saved filters and CSV exports. Follow-ups use portal reminders; lost deals create dated re-engagement tasks. 676 automated checks across 24 suites, TypeScript and production build passed before release. Board revocation also removes assigned contact and reminder access.
+
+Sales acceptance remains partial. Website/Meta/API intake, routing automation, full quotation/BOQ, proposal negotiation gates and atomic Won conversion remain pending. Proposal, negotiation and Won transitions are blocked until those prerequisites are implemented. Live browser verification remains blocked by the protected browser runtime.
