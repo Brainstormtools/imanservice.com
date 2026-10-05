@@ -48,4 +48,5 @@ const targets=Object.fromEntries(['Low','Normal','High','Urgent'].map(p=>[p,{res
 const slaSale=(await one('select convert_crm_won($1,$2,$3,null,current_date,$4,$5,$6) id',[slaDeal,slaVersion,slaPub,'[]',JSON.stringify({kind:'Monthly',first_percent:100/12,months:12}),JSON.stringify({end_date:'2099-01-01',services:'Managed support',targets})])).id;
 const convertedSla=await one('select * from crm_sales where id=$1',[slaSale]);eq(convertedSla.project_id,null,'SLA-only conversion does not create a project');eq(Boolean(convertedSla.contract_id),true,'SLA-only conversion creates support contract');eq((await one('select status,total from invoices where id=$1',[convertedSla.invoice_id])),{status:'Draft',total:'200.00'},'SLA monthly first invoice uses period fraction');
 
+return {project:sale.project_id,saleId,workstream:(await one('select id from crm_project_workstreams where sale_id=$1 limit 1',[saleId])).id};
 }
