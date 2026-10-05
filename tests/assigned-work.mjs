@@ -1,8 +1,9 @@
+import {quoteCases} from './helpers/crm-quote-cases.mjs';
 import {PGlite} from '@electric-sql/pglite';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const pg=new PGlite();
-await pg.exec(`create role anon;create role authenticated;create role service_role bypassrls;
+await pg.exec(`set timezone='UTC';create role anon;create role authenticated;create role service_role bypassrls;
 create schema auth;create schema storage;create function auth.role() returns text language sql stable as $$select nullif(current_setting('request.jwt.claim.role',true),'')$$;
 create table auth.users(id uuid primary key);
 create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
@@ -273,6 +274,7 @@ eq((await q("select * from crm_leads where email='rollback@example.test'")).leng
 await user(ids.team);await q('select save_portal_reminder_preferences(true)');
 await user(ids.admin);await q('select queue_portal_reminders()');
 await user(ids.team);eq((await q('select * from portal_reminders where deal_id=$1',[salesDeal])).length>0,true,'Sales owner receives portal follow-up reminder');
+await quoteCases({pg,fs,q,one,user,eq,deny,ids,deal:salesDeal,boardA,boardB,expert:productExpert});
 await user(ids.admin);await q('select set_sales_board_member($1,$2,false)',[boardA,ids.team]);await q('select set_sales_board_member($1,$2,false)',[boardB,ids.team]);
 await user(ids.team);eq((await q('select * from crm_deals where id=$1',[salesDeal])).length,0,'Removing all boards revokes sales deal');eq((await q('select * from crm_leads where id=$1',[salesLead])).length,0,'Removing boards revokes assigned contact');eq((await q('select * from portal_reminders where deal_id=$1',[salesDeal])).length,0,'Sales reminders disappear after board revocation');
 await user(ids.clientA);eq((await q('select * from crm_leads')).length,0,'Clients cannot see raw sales contacts');eq((await q('select * from crm_deals')).length,0,'Clients cannot see internal sales pipeline');await deny("select capture_crm_lead('Client lead','client@example.test','','','','','')",[],'Clients cannot use internal intake');
