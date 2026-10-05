@@ -48,5 +48,8 @@
     "api/portal-worker.ts": {
       "maxDuration": 60
     }
-  }
+  },
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
 }
