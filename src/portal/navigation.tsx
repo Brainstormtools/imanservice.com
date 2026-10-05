@@ -14,7 +14,7 @@ export function navigationGroups(role?:string,permissions:string[]=[]):Group[] {
  ...(!client?[{label:'Supply chain',items:[item('supply_chain','Supply chain')]}]:[]),
  ...(!team?[{label:'Sales & billing',items:[...(client?[item('quotations','My quotations')]:[]),item('estimates',client?'My estimates & proposals':'Estimates & proposals'),item('agreements',client?'My contract documents':'Contract documents'),item('orders',client?'My orders & catalogue':'Orders & catalogue'),item('billing',client?'My invoices & payments':'Invoices & payments')]}]:[]),
  {label:'IT operations',items:[item('sites',client?'My sites':team?'Assigned sites':'Client sites'),item('equipment',client?'My IT assets':team?'Related IT assets':'IT assets'),item('contracts',client?'My AMC & SLA':'AMC & SLA'),...(!team?[item('renewals','AMC renewals')]:[]),item('visits','Maintenance visits'),item('maintenance','Preventive maintenance'),item('audits','Network audits'),item('support','Support & SLA'),item('reports','Reports')]},
- {label:'My workspace',items:[item('notifications','Notifications'),...(!client?[item('attendance','Attendance'),item('activity_log','Daily activity log')]:[])]},
+ {label:'My workspace',items:[item('notifications','Notifications'),...(!client?[item('attendance','Attendance'),item('activity_log','Daily activity log'),item('hr_workspace','Overtime & performance')]:[])]},
  ...(role==='admin'?[{label:'Administration',items:[item('clients','Clients & team access'),item('configuration','CRM configuration'),item('sales_configuration','Sales board configuration')]}]:[])
  ];
 }

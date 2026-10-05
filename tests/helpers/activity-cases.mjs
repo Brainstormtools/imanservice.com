@@ -1,3 +1,4 @@
+import {hrCases} from './hr-cases.mjs';
 export async function activityCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts}){
  await pg.exec('reset role');await pg.exec(await fs.readFile(new URL('../../supabase/024_activity_labour.sql',import.meta.url),'utf8'));await user(ids.admin);
  await q("select save_crm_configuration('setting','delay_reasons',$2,'Delay reasons',$1)",[JSON.stringify(['Material not available','Other']),(await one("select version from crm_settings where id='delay_reasons'")).version]);
@@ -42,4 +43,5 @@ export async function activityCases({pg,fs,q,one,user,eq,deny,ids,actors,account
  await user(ids.admin);eq((await q("select * from work_activity_history where activity_id=$1 and action='Approve'",[id]))[0].snapshot.status,'Approved','Audit retains immutable approved actuals snapshot');await q('update profiles set active=false where id=$1',[ids.team]);await user(ids.team);eq((await q('select * from work_activities')).length,0,'Disabled employee loses activity access');await deny('select work_activity_report()',[],'Disabled employee cannot query report');await user(ids.admin);await q('update profiles set active=true where id=$1',[ids.team]);
  await user(ids.clientA);eq((await q('select * from work_activities')).length,0,'Client cannot see internal activity logs');eq((await q('select * from work_labour_costs')).length,0,'Client cannot see labour rates');await deny('select work_activity_report()',[],'Client cannot call activity report');
  await pg.exec("reset role;select set_config('request.jwt.claim.sub','',false);set role anon");await deny('select * from work_activities',[],'Anonymous activity access denied');await deny('select work_activity_report()',[],'Anonymous activity RPC denied');await user(ids.admin);
+ await hrCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts});
 }
