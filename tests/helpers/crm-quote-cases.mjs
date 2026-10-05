@@ -50,4 +50,5 @@ await deny('update crm_quote_publications set total=1 where id=$1',[pub2],'Direc
 await user(ids.team);await q('select set_config(\'request.jwt.claim.sub\',$1,false)',[ids.team]);
 await user(ids.admin);await q('select set_sales_board_member($1,$2,false)',[boardA,expert]);await user(expert);eq((await q('select * from crm_quote_lines where quote_id=$1',[quote])).length,0,'Board revocation also revokes internal BOQ');
 await user(ids.admin);
+return {publication:pub2,deal,products};
 }
