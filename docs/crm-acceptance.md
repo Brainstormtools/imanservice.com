@@ -33,8 +33,8 @@ Acceptance for each item: specification fields; workflow transitions and history
 | 25 | Product sales boards | Core implemented; acceptance partial |
 | 26 | Deal detail | Core implemented; acceptance partial |
 | 27 | Won conversion | Core implemented; acceptance partial |
-| 28 | Project Configurator | Missing |
-| 29 | Execution and handover | Missing |
+| 28 | Project Configurator | Template planning implemented; acceptance partial |
+| 29 | Execution and handover | Nodes, punch and phase review implemented; handover pending |
 | 30 | Supply Chain | Missing |
 | 31 | Payables and expenses | Missing |
 | 32 | Loans and advances | Missing |
@@ -86,3 +86,9 @@ Migration 017 adds versioned product templates, bounded quantity formulas, site 
 Validation: 761 checks across 26 suites, TypeScript and production build. Coverage includes failed preflight, late invoice failure with rollback, duplicate retry, stale templates, immutable live plans, wrong-client access, budget revocation and SLA-only monthly invoices. Production transactional verification and browser acceptance are separate release checks.
 
 Configurator acceptance remains partial: a standalone task library, node-list import, project-specific plan edits, resource allocation, actual-time learning and phase execution gates are pending. Later scheduled payment drafts, Accounts routing and customer creation during conversion remain pending; this flow uses the customer already linked to the accepted quotation. Generated task dates are an initial sequential schedule for manager review. No templates are activated automatically; administrators must enter and approve their standards.
+
+## Node execution and phase review increment
+
+Migration 018 adds project-scoped node registers, mapped CSV/XLSX import with atomic validation and batch idempotency, six quality checks with server-attributed identity/time and evidence, administrator publication/return, punch findings and reviewed closure, ordered phase review gates and scoped progress. Task-only technicians cannot read or alter nodes belonging to other tasks, including published nodes. Clients see only published results for their company. Submitted punch corrections are hidden until review. Node registers lock when phase review starts. Phase review requires prior phase publication, reviewed Pass checks, approved planned-task completion and evidence; phase 5 also requires all punch items closed. Internal task approval completes generated internal work without exposing its records or files. Execution exports use authorized records and published quality results. The screen loads on demand.
+
+799 checks across 27 suites, TypeScript and production build passed. Coverage includes wrong task/project access, private draft results, import rollback/retry, actor history, private internal-task evidence, phase ordering, incomplete phase gates and reviewed punch closure. Live browser checks remain pending. Contractor/consultant/client handover signatures, stored signed PDFs and final project closure will be implemented separately; phase publication does not close the project.
