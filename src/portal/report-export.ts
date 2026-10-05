@@ -13,7 +13,7 @@ export async function createReportPDF(title:string,context:string,sections:Repor
  // Long work records continue as labelled paragraphs across pages.
  values.forEach((v,i)=>line(`${section.headers[i]}: ${String(v??'—')}`,8));y+=3;return;
  }
- if(y+rowHeight>height-18){doc.addPage();y=20;if(!heading)drawRow(section.headers,true);}
+ if(y+rowHeight>height-18){doc.addPage();y=20;if(!heading){drawRow(section.headers,true);doc.setFont('helvetica','normal');doc.setFontSize(8);}}
  if(heading){doc.setFillColor(235,240,247);doc.rect(margin,y-3,width-2*margin,rowHeight,'F');}
  cells.forEach((cell,i)=>doc.text(cell,margin+i*columnWidth+2,y+1));y+=rowHeight;doc.setDrawColor(220);doc.line(margin,y-3,width-margin,y-3);};
  drawRow(section.headers,true);section.rows.forEach(r=>drawRow(r));y+=6;
