@@ -1,3 +1,4 @@
+import {pushCases} from './helpers/push-cases.mjs';
 import {supplyCases} from './helpers/supply-cases.mjs';
 import {handoverCases} from './helpers/crm-handover-cases.mjs';
 import {executionCases} from './helpers/crm-execution-cases.mjs';
@@ -293,5 +294,6 @@ await user(ids.outsider);eq((await q('select * from projects')).length,0,'Unprof
 await pg.exec("reset role;select set_config('request.jwt.claim.sub','',false);set role anon;");
 await deny('select * from project_assignments',[],'Anonymous cannot read assignments');
 await deny('select queue_portal_reminders()',[],'Anonymous cannot invoke reminder scanner');
+await pushCases({pg,fs,q,one,user,eq,deny,ids});
 console.log(`${passed} assigned-work and portal reminder assertions passed`);
 await pg.close();

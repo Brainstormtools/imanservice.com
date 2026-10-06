@@ -1,0 +1,51 @@
+export async function pushCases({pg,fs,q,one,user,eq,ids}){
+ await pg.exec('reset role');await pg.exec(await fs.readFile(new URL('../../supabase/027_portal_push.sql',import.meta.url),'utf8'));
+ await pg.exec('begin');
+ const deny=async(sql,args,title)=>{await pg.exec('savepoint push_denial');let rejected=false;try{await q(sql,args);}catch{rejected=true;}finally{await pg.exec('rollback to savepoint push_denial;release savepoint push_denial');}eq(rejected,true,title);};await q('update profiles set active=true where id=$1',[ids.team]);
+ const key='B'.repeat(87),auth='C'.repeat(22),endpoint='https://fcm.googleapis.com/fcm/send/QA-PUSH';
+ await user(ids.team);await q('select save_portal_reminder_preferences(true)');
+ const sub=(await one('select save_portal_push($1,$2,$3) id',[endpoint,key,auth])).id;
+ eq((await one('select save_portal_push($1,$2,$3) id',[endpoint,key,auth])).id,sub,'Push subscription retry retains identity');
+ await deny('select save_portal_push($1,$2,$3)',['https://localhost/private',key,auth],'Local endpoint rejected before provider request');
+ await deny('select save_portal_push($1,$2,$3)',['https://fcm.googleapis.com.evil.test/private',key,auth],'Lookalike provider endpoint rejected');
+ await deny('select save_portal_push($1,$2,$3)',['https://fcm.googleapis.com:444/fcm/send/key',key,auth],'Nonstandard provider port rejected');
+ await deny('select save_portal_push($1,$2,$3)',[endpoint,'bad',auth],'Invalid push encryption key rejected');
+ await deny("insert into portal_push_subscriptions(user_id,endpoint,p256dh,auth) values($1,$2,$3,$4)",[ids.clientA,endpoint+'fake',key,auth],'Direct subscription mutation denied');
+ await user(ids.clientA);eq((await q('select * from portal_push_subscriptions')).length,0,'Other account cannot read provider endpoint or encryption keys');
+ await deny('select save_portal_push($1,$2,$3)',[endpoint,key,auth],'Other account cannot take over an existing device');
+ await q('select remove_portal_push($1)',[endpoint]);await user(ids.team);eq((await q('select * from portal_push_subscriptions')).length,1,'Other account cannot delete device subscription');
+ await deny('select claim_portal_push()',[],'Technician cannot claim global push queue');
+ await deny('select portal_private.push_visible($1,$2)',[ids.clientA,crypto.randomUUID()],'Technician cannot impersonate push recipient');
+ for(const uid of [ids.team,ids.admin,ids.clientA,ids.clientB]){
+  await user(uid);await q('select save_portal_reminder_preferences(true)');const visible=(await q('select id from portal_reminders where read_at is null order by id')).map(r=>r.id);
+  await pg.exec('reset role');const pushVisible=(await q('select id from portal_reminders where portal_private.push_visible($1,id) order by id',[uid])).map(r=>r.id);eq(pushVisible,visible,'Push scope matches reminder RLS for '+uid);
+ }
+ await user(ids.team);
+ for(let i=1;i<5;i++)await q('select save_portal_push($1,$2,$3)',[endpoint+'-'+i,key,auth]);
+ await deny('select save_portal_push($1,$2,$3)',[endpoint+'-six',key,auth],'Device quota rejects a sixth subscription');
+ for(let i=1;i<5;i++)await q('select remove_portal_push($1)',[endpoint+'-'+i]);
+ await pg.exec('reset role');
+ const task=(await one("insert into tasks(project_id,title,assignee,deadline) values($1,'QA push task',$2,current_date) returning id",[ids.pa,ids.team])).id;
+ const reminder=(await one("insert into portal_reminders(user_id,event_key,title,view,project_id,task_id) values($1,'qa-push-assigned','Confidential project title','projects',$2,$3) returning id",[ids.team,ids.pa,task])).id;
+ const hiddenProject=(await one("insert into projects(company_id,title) values($1,'QA unassigned push project') returning id",[ids.b])).id;
+ const hidden=(await one("insert into portal_reminders(user_id,event_key,title,view,project_id) values($1,'qa-push-hidden','Hidden project title','projects',$2) returning id",[ids.team,hiddenProject])).id;
+ const scheduler=async()=>pg.exec("reset role;select set_config('request.jwt.claim.sub','',false);select set_config('request.jwt.claim.role','service_role',false);set role service_role");
+ await scheduler();let claimed=(await one('select claim_portal_push() r')).r;
+ const delivery=claimed.find(r=>r.reminder_id===reminder);eq(!!delivery,true,'Scheduler claims currently assigned unread work');eq(claimed.some(r=>r.reminder_id===hidden),false,'Unassigned work cannot trigger device push');
+ eq(claimed.some(r=>'title' in r||'project_id' in r),false,'Push claims exclude project titles and record details');
+ eq((await one("select current_setting('request.jwt.claim.sub',true) uid")).uid,'','Push scope check restores scheduler identity');
+ eq((await one('select claim_portal_push() r')).r.length,0,'Leased push delivery cannot be claimed twice');
+ await q('select finish_portal_push($1,$2,$3,$4)',[sub,reminder,crypto.randomUUID(),'sent']);
+ await pg.exec('reset role');eq((await one('select sent_at from portal_private.push_deliveries where subscription_id=$1 and reminder_id=$2',[sub,reminder])).sent_at,null,'Wrong lease cannot acknowledge another delivery');
+ await q("update portal_private.push_deliveries set lease_until=now()-interval '1 minute' where subscription_id=$1 and reminder_id=$2",[sub,reminder]);
+ await q('update tasks set assignee=null,collaborators=array[]::uuid[] where id=$1',[task]);await q('delete from project_assignments where project_id=$1 and technician_id=$2',[ids.pa,ids.team]);
+ await scheduler();eq((await one('select claim_portal_push() r')).r.some(r=>r.reminder_id===reminder),false,'Assignment revocation blocks retry of queued push');
+ await pg.exec('reset role');await q('update tasks set assignee=$1 where id=$2',[ids.team,task]);
+ await user(ids.team);await q('select save_portal_reminder_preferences(false)');await scheduler();eq((await one('select claim_portal_push() r')).r.length,0,'Reminder opt-out blocks pending push delivery');
+ await user(ids.team);await q('select save_portal_reminder_preferences(true)');await pg.exec('reset role');await q('update profiles set active=false where id=$1',[ids.team]);await scheduler();eq((await one('select claim_portal_push() r')).r.length,0,'Inactive account cannot receive push');
+ await pg.exec('reset role');await q('update profiles set active=true where id=$1',[ids.team]);await scheduler();claimed=(await one('select claim_portal_push() r')).r;const retry=claimed.find(r=>r.reminder_id===reminder);eq(!!retry,true,'Authorized delivery can resume after restoration');
+ await q('select finish_portal_push($1,$2,$3,$4)',[sub,reminder,retry.lease,'sent']);eq((await one('select claim_portal_push() r')).r.length,0,'Acknowledged notification is not sent again');
+ await user(ids.team);await q('select remove_portal_push($1)',[endpoint]);eq((await q('select * from portal_push_subscriptions')).length,0,'Device opt-out removes subscription');
+ await pg.exec("reset role;select set_config('request.jwt.claim.sub','',false);set role anon");await deny('select save_portal_push($1,$2,$3)',[endpoint,key,auth],'Anonymous cannot register push');
+ await pg.exec('reset role;rollback');await user(ids.admin);
+}

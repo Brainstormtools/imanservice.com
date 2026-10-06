@@ -1,0 +1,16 @@
+{
+  "id": "/portal",
+  "name": "i Man Service Portal",
+  "short_name": "i Man Portal",
+  "description": "Assigned work, project updates and client approvals.",
+  "start_url": "/portal",
+  "scope": "/portal",
+  "display": "standalone",
+  "background_color": "#f7f8f5",
+  "theme_color": "#16362a",
+  "icons": [
+    {"src": "/portal/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/portal/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/portal/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

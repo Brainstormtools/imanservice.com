@@ -124,3 +124,16 @@ Files are restricted by size and accepted MIME types, but the app does not scan 
 - Hosted Auth, SMTP, real storage transport and production Vercel integration require the account-level acceptance checks above; local simulation is not a substitute for them.
 
 Run the security test in an isolated temporary directory with `@electric-sql/pglite` installed, or temporarily install it with `npm install --no-save --package-lock=false @electric-sql/pglite` and run `node tests/security.mjs`. The test creates a fresh in-memory PostgreSQL database and does not connect to your hosted database.
+
+
+## Portal PWA and browser push
+
+The current acceptance checklist is `docs/crm-acceptance.md`; the initial verification and limitation notes above describe the first portal release.
+
+Apply migrations 027 and 028 in sequence. Deploy `supabase/functions/portal-push-worker` using its `deno.json` import map. The function implements custom bearer authentication before queue access, so its gateway `verify_jwt` is false. The function’s built-in Supabase service credential stays server-side. Never put it in Vite variables.
+
+Provision four named Vault secrets outside migrations/source control: `portal_push_public_key`, `portal_push_private_key` (a web-push VAPID key pair), `portal_push_worker_secret` (32 random bytes encoded as unpadded base64url), and `portal_push_worker_url` (this project’s HTTPS Edge Function URL ending `/functions/v1/portal-push-worker`). Set production Vercel `WEB_PUSH_PUBLIC_KEY` to the matching public key and redeploy. Preview environments do not receive push configuration by default.
+
+The `iman-portal-web-push` cron runs at minutes 1, 16, 31 and 46. Check its latest HTTP result and delivery counts. Do not log provider endpoints, encryption keys, bearer credentials or reminder contents. After rotating the VAPID pair, users should disable and enable notifications again on each device. Subscriptions expire in 30 days and support five devices per account. Supported provider hosts are Google FCM, Mozilla and Apple; arbitrary URLs and custom ports are rejected.
+
+Phone installation and camera usage require device acceptance. Sign in as a technician, upload a JPG/PNG camera photo to an assigned project, select it in work completion, submit, publish as an administrator and review as the client. Verify unassigned projects and private photos remain inaccessible. Opt in on the phone, create an eligible unread reminder after opting in and verify delivery. Test preference opt-out, device opt-out, reassignment, disabled accounts and sign-out.
