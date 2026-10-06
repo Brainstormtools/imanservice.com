@@ -42,11 +42,11 @@ Acceptance for each item: specification fields; workflow transitions and history
 | 34 | Daily activity log | Assigned actuals, review and hourly costing implemented; scheduling and acceptance partial |
 | 35 | HR performance | Recorded KPI scorecards, overtime and reviewed payout summaries implemented; acceptance partial |
 | 36 | Administration configuration | Foundation implemented; acceptance partial |
-| 37 | PWA | Missing |
+| 37 | PWA | Installation, camera capture and opt-in web push implemented; physical-device acceptance pending |
 | 38 | Shared customer timeline | Foundation implemented; acceptance partial |
 | 39 | Department roles and teams | Foundation implemented; acceptance partial |
 | 40 | Design system alignment | Partial |
-| 41 | End-to-end live acceptance | Blocked by browser runtime |
+| 41 | End-to-end live acceptance | Signed-in administrator, technician and client walkthroughs pending |
 
 The first audit listed 37 page/module rows. Items 38–41 make the shared customer, permissions, design and live verification requirements explicit to keep the agreed total of 41 auditable.
 
@@ -195,3 +195,22 @@ Migration 026 adds an Accounts-only current receivables/payables report from iss
 Finance navigation includes Receivables & payables, currency/direction/due-status filters, eligible document detail and scoped CSV/PDF exports. Document filters do not change clearly labelled all-record currency totals. Payment evidence is omitted. Accounts revocation, disabled accounts, clients, technicians, project managers and anonymous access are checked.
 
 1222 checks across 33 suites, TypeScript and production build passed. A six-page 44-document PDF was visually reviewed, including repeated headers, the final row and the report basis. Migration 026 applied to production. Live rollback verification passed for receipt/credit balance calculation, reversals, due today, exact seven-day dates, currency separation, private evidence and Accounts revocation. All QA records and memberships rolled back. Browser acceptance, PWA and the other documented module gaps remain pending.
+
+
+## PWA and device notifications increment
+
+Portal-scoped installation includes 192/512 PNG icons, an explicit browser installation button and iOS instructions. A service worker stores only public icons and a generic reconnect page. Project HTML, API/authentication responses, storage objects and uploads remain network-only; unsent work is not retained offline. This is the web PWA bridge, not the deferred native offline mobile app.
+
+Project Files & approvals now has a phone-camera capture control. It shares the existing 10 MB JPG/PNG upload pipeline, storage authorization, orphan cleanup and technician-private publication workflow. Captured evidence must be uploaded before leaving the project, then selected in the existing work completion form. No camera permission is requested automatically.
+
+Notifications includes per-device opt-in, opt-out and unsupported-browser guidance. Browser permission is requested only on explicit opt-in. Notifications contain generic text and open the portal inbox; project, customer, contact and salary details are excluded. Subscriptions are private to the active owner, capped at five devices and expire after 30 days. Opt-out removes the subscription and closes device notifications. Account changes reconcile ownership; sign-out attempts subscription cleanup and always clears the login session.
+
+Migration 027 adds the private subscription/lease queue. The scheduler checks active profiles, reminder preferences, unread state and current project/task/ticket/job/contract/deal visibility before claiming deliveries. Its private predicate mirrors reminder RLS from 013 and 015; permission-policy changes must update and test both. Old reminders and pre-opt-in history are excluded. A maximum of twenty deliveries is claimed per run, four provider requests run concurrently, and retries stop after three attempts. Expired provider endpoints are removed. Claims/acknowledgements require service-role authorization and matching leases. Delivery is at least once: a crash between provider acceptance and database acknowledgement can cause a duplicate generic reminder; one notification tag replaces earlier portal reminders.
+
+Migration 028 schedules a custom-authenticated Supabase Edge Function every 15 minutes, one minute after the existing database reminder scan. The private VAPID key and scheduler credential are in Vault; only the public VAPID key is a production Vercel variable. Email, SMS and WhatsApp delivery remain excluded. A live scheduler invocation returned HTTP 200 with configured=true and zero deliveries, as no device has opted in yet. This confirms worker wiring, not receipt on a physical phone.
+
+Physical Android/iOS installation, notification permission/delivery, actual camera capture and signed-in administrator/technician/client evidence publication walkthroughs remain pending. All other documented module gaps remain on the 41-item checklist. The current cloud browser opens the portal login page; earlier browser-runtime failures are historical and do not establish a current runtime block.
+
+Validation: 1,277 automated checks across 35 suites, TypeScript and the production build passed. Live scheduler privilege checks confirmed authenticated and anonymous accounts cannot execute queue, acknowledgement, identity-scope, key-configuration or scheduler functions. The security advisor still reports the existing three categories: intentionally inaccessible private RLS tables, explicitly granted checked definer functions, and the previously documented leaked-password setting. No claim of full acceptance is made.
+
+Live rollback verification also passed for assigned/unassigned reminders, assignment revocation, reminder opt-out, inactive accounts and identity restoration. All QA users, projects, subscriptions and reminders were rolled back.

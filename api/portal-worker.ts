@@ -1,7 +1,7 @@
 import {createClient} from '@supabase/supabase-js';
 import {timingSafeEqual} from 'node:crypto';
 const safeEqual=(a:string,b:string)=>a.length===b.length&&timingSafeEqual(Buffer.from(a),Buffer.from(b));
-// This release intentionally has no outbound notification channels.
+// External email, SMS and WhatsApp remain excluded; browser push is separate.
 export function configuredChannels(_env:NodeJS.ProcessEnv){return [] as string[];}
 export async function submitAlert(_channel:string,_destination:string,_id:string,_env:NodeJS.ProcessEnv,_fetcher:typeof fetch=fetch){
  throw new Error('External email, SMS and WhatsApp delivery is excluded');
