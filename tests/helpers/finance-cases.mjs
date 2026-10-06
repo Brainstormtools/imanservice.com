@@ -1,3 +1,4 @@
+import {tradeAgingCases} from './trade-aging-cases.mjs';
 import {activityCases} from './activity-cases.mjs';
 export async function financeCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts,today,po}){
  await pg.exec('reset role');await pg.exec(await fs.readFile(new URL('../../supabase/023_finance_ledgers.sql',import.meta.url),'utf8'));
@@ -40,4 +41,5 @@ export async function financeCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts
  await user(ids.clientA);eq((await q('select * from fin_loans')).length,0,'Client cannot see staff advances or borrowings');eq((await q('select * from fin_expenses')).length,0,'Client cannot see internal project expense records');await deny('select project_financials($1)',[project],'Client cannot read internal project profitability');await deny('select finance_dashboard()',[],'Client cannot query company finances');
  await pg.exec("reset role;select set_config('request.jwt.claim.sub','',false);set role anon");await deny('select * from fin_cash_entries',[],'Anonymous cannot read finance cash records');await deny('select finance_dashboard()',[],'Anonymous cannot call finance dashboard');await user(ids.admin);
  await activityCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts});
+ await tradeAgingCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts,po});
 }
