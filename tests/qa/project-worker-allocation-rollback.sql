@@ -1,0 +1,34 @@
+begin;
+do $$
+declare qa_admin uuid;qa_manager uuid:=gen_random_uuid();qa_worker uuid:=gen_random_uuid();qa_outsider uuid:=gen_random_uuid();qa_client uuid:=gen_random_uuid();qa_company uuid:=gen_random_uuid();qa_project uuid:=gen_random_uuid();qa_task uuid:=gen_random_uuid();qa_team uuid:=gen_random_uuid();qa_schedule uuid;qa_data jsonb;qa_count int:=0;
+begin
+select id into qa_admin from public.profiles where active and role='admin' order by id limit 1;if qa_admin is null then raise exception 'Administrator required';end if;
+perform set_config('request.jwt.claim.sub',qa_admin::text,true);perform set_config('request.jwt.claim.role','authenticated',true);
+insert into public.companies(id,name) values(qa_company,'QA worker allocation company');
+insert into auth.users(id) values(qa_manager),(qa_worker),(qa_outsider),(qa_client);
+insert into public.profiles(id,name,role,company_id) values(qa_manager,'QA allocation manager','team',null),(qa_worker,'QA allocation worker','team',null),(qa_outsider,'QA allocation outsider','team',null),(qa_client,'QA allocation client','client',qa_company);
+insert into public.projects(id,company_id,title) values(qa_project,qa_company,'QA worker allocation project');
+insert into public.crm_teams(id,name) values(qa_team,'QA allocation team '||qa_team::text);
+insert into public.crm_memberships(user_id,role_id,team_id) values(qa_manager,'project_manager',qa_team);
+insert into public.project_assignments(project_id,technician_id) values(qa_project,qa_manager);
+insert into public.tasks(id,project_id,title,assignee,internal) values(qa_task,qa_project,'QA worker allocation task',qa_worker,true);
+perform set_config('request.jwt.claim.sub',qa_manager::text,true);execute 'set local role authenticated';
+if not exists(select 1 from public.project_allocation_people(qa_project) p where p.id=qa_worker and p.name='QA allocation worker') then raise exception 'Assigned worker unavailable';end if;qa_count:=qa_count+1;
+if exists(select 1 from public.project_allocation_people(qa_project) p where p.id in (qa_outsider,qa_client)) then raise exception 'Unassigned/client identity exposed';end if;qa_count:=qa_count+1;
+qa_data:=jsonb_build_object('user_id',qa_worker,'link_kind','Project','project_id',qa_project,'task_id',qa_task,'location','QA assigned site','activity_type','Survey','description','QA named allocation','planned_start',now()+interval '3 days','planned_end',now()+interval '3 days 1 hour','status','Scheduled');
+qa_schedule:=public.save_work_schedule(null,null,qa_data,'QA reviewed named allocation');
+if not exists(select 1 from public.work_schedules where id=qa_schedule and user_id=qa_worker and task_id=qa_task) then raise exception 'Allocation not saved';end if;qa_count:=qa_count+1;
+begin perform public.save_work_schedule(null,null,qa_data,'QA overlapping booking');raise exception 'Overlapping booking allowed';exception when others then if sqlerrm is distinct from 'Worker schedule overlaps existing planned work' then raise;end if;end;qa_count:=qa_count+1;
+begin perform public.save_work_schedule(null,null,qa_data||jsonb_build_object('user_id',qa_outsider),'QA unassigned booking');raise exception 'Unassigned booking allowed';exception when others then if sqlerrm is distinct from 'Authorized scheduler and currently assigned worker required' then raise;end if;end;qa_count:=qa_count+1;
+perform set_config('request.jwt.claim.sub',qa_worker::text,true);
+if not exists(select 1 from public.work_schedules where id=qa_schedule) then raise exception 'Worker allocation invisible';end if;qa_count:=qa_count+1;
+begin perform public.project_allocation_people(qa_project);raise exception 'Technician directory allowed';exception when others then if sqlerrm is distinct from 'Assigned project manager access required' then raise;end if;end;qa_count:=qa_count+1;
+perform set_config('request.jwt.claim.sub',qa_client::text,true);
+begin perform public.project_allocation_people(qa_project);raise exception 'Client directory allowed';exception when others then if sqlerrm is distinct from 'Assigned project manager access required' then raise;end if;end;qa_count:=qa_count+1;
+execute 'reset role';delete from public.project_assignments where project_id=qa_project and technician_id=qa_manager;perform set_config('request.jwt.claim.sub',qa_manager::text,true);execute 'set local role authenticated';
+begin perform public.project_allocation_people(qa_project);raise exception 'Revoked manager directory allowed';exception when others then if sqlerrm is distinct from 'Assigned project manager access required' then raise;end if;end;qa_count:=qa_count+1;
+execute 'reset role';if has_function_privilege('anon','public.project_allocation_people(uuid)','EXECUTE') then raise exception 'Anonymous enumeration allowed';end if;qa_count:=qa_count+1;
+perform set_config('qa.allocation_result',jsonb_build_object('passed',true,'assertions',qa_count,'fixtures_rollback',true)::text,true);
+end$$;
+select current_setting('qa.allocation_result')::jsonb as qa_result;
+rollback;

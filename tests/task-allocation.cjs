@@ -1,0 +1,15 @@
+const assert=require('node:assert/strict'),{buildSync}=require('esbuild');const result=buildSync({entryPoints:['src/portal/task-allocation.ts'],bundle:true,platform:'node',write:false,format:'cjs'}),mod={exports:{}};new Function('module','exports',result.outputFiles[0].text)(mod,mod.exports);const {taskAllocation:f}=mod.exports;let n=0;const test=(name,fn)=>{fn();n++;console.log('PASS',name)};const s=(id,user,start,end,status='Scheduled',task='t')=>({id,user_id:user,planned_start:'2026-10-09T'+start+':00Z',planned_end:'2026-10-09T'+end+':00Z',status,task_id:task});
+test('No bookings have known zero hours without implying coverage',()=>assert.deepEqual([f('t',2,60,[]).workerHours,f('t',2,60,[]).peak],[0,0]));
+test('Current plan crew and duration define planned worker hours',()=>assert.equal(f('t',3,90,[]).plannedHours,4.5));
+test('Parallel named workers sum person hours',()=>{const a=f('t',2,60,[s('a','one','10:00','11:00'),s('b','two','10:00','11:00')]);assert.equal(a.workerHours,2);assert.equal(a.peak,2);assert.equal(a.workers.length,2)});
+test('Sequential workers are not simultaneous crew',()=>assert.equal(f('t',2,60,[s('a','one','10:00','11:00'),s('b','two','11:00','12:00')]).peak,1));
+test('Partial overlap is counted',()=>assert.equal(f('t',2,60,[s('a','one','10:00','11:00'),s('b','two','10:30','11:30')]).peak,2));
+test('Repeated worker bookings retain one identity',()=>assert.equal(f('t',2,60,[s('a','one','10:00','11:00'),s('b','one','11:00','12:00')]).workers.length,1));
+test('Cancelled and other-task bookings excluded',()=>assert.equal(f('t',1,60,[s('a','one','10:00','11:00','Cancelled'),s('b','two','10:00','11:00','Scheduled','other')]).workerHours,0));
+test('Duplicate schedule IDs not counted twice',()=>{const a=s('a','one','10:00','11:00');assert.equal(f('t',1,60,[a,a]).workerHours,1)});
+test('Invalid dates remain unknown',()=>assert.equal(f('t',1,60,[{...s('a','one','10:00','11:00'),planned_start:'bad'}]).known,false));
+test('Reversed interval remains unknown',()=>assert.equal(f('t',1,60,[s('a','one','11:00','10:00')]).workerHours,null));
+test('Missing worker remains unknown',()=>assert.equal(f('t',1,60,[s('a','','10:00','11:00')]).known,false));
+test('Invalid planned basis remains unknown',()=>assert.equal(f('t',0,60,[]).plannedHours,null));
+test('Fractional planned duration retained without per-row rounding',()=>assert.equal(f('t',2,7.5,[]).plannedHours,0.25));
+console.log(n+' allocation assertions passed');
