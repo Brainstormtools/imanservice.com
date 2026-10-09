@@ -18,6 +18,14 @@ await act(()=>root.render(React.createElement(ProjectPortfolio,{...props,project
 await act(()=>settle({data:null,error:{message:'Task access revoked'}}));assert.match(document.body.textContent,/Task progress unavailable: Task access revoked/);pass('Read failure is explicitly reported');
 await act(()=>{status.value='';status.dispatchEvent(new dom.window.Event('change',{bubbles:true}));});assert.match(document.body.textContent,/Unavailable/);assert.doesNotMatch(document.body.textContent,/0 \/ 0 done/);assert.match(await exportCSV(),/"Unavailable"/);pass('Failed progress is unavailable in table and export, never zero');
 await act(()=>root.render(React.createElement(ProjectPortfolio,{...props,projects:[{...props.projects[0],title:'Retry'}]})));assert.doesNotMatch(document.body.textContent,/Task access revoked/);await act(()=>settle({data:[],error:null}));assert.match(document.body.textContent,/0 \/ 0 done/);pass('Successful refresh clears previous error and confirms empty results');
+const asOf=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Karachi',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+const scheduled={...props,projects:[{...props.projects[0],title:'Due project',deadline:asOf},{...props.projects[0],id:'closed',title:'Closed project',status:'Completed',deadline:asOf},props.projects[1]]};
+await act(()=>root.render(React.createElement(ProjectPortfolio,scheduled)));await act(()=>settle({data:[],error:null}));
+assert.match(document.body.textContent,/Due today/);assert.match(document.body.textContent,/No deadline/);assert.match(document.body.textContent,/Asia\/Karachi/);assert.match(await exportCSV(),/Deadline status/);pass('Deadline statuses and date basis appear in table and CSV');
+const schedule=[...document.querySelectorAll('select')].find(s=>s.parentElement.textContent.startsWith('Schedule'));const choose=async value=>act(()=>{schedule.value=value;schedule.dispatchEvent(new dom.window.Event('change',{bubbles:true}));});
+await choose('week');let scheduleCSV=await exportCSV();assert.match(scheduleCSV,/Due project/);assert.doesNotMatch(scheduleCSV,/Closed project|Empty/);pass('Weekly due filter exports only unfinished projects in this week');
+await choose('undated');scheduleCSV=await exportCSV();assert.match(scheduleCSV,/Empty/);assert.doesNotMatch(scheduleCSV,/Due project|Closed project/);pass('Undated filter exports only unfinished projects without a deadline');
+await choose('overdue');assert.match(document.body.textContent,/0 matching projects/);pass('Today and completed projects are not overdue');
 await act(()=>root.unmount());console.log(`${n} portfolio progress assertions passed`);
 }finally{dom.window.close();fs.rmSync(dir,{recursive:true,force:true});}
 })().catch(e=>{console.error(e);process.exit(1)});
