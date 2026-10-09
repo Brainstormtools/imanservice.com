@@ -1,3 +1,4 @@
+import {projectToolBookingCases} from './helpers/project-tool-booking-cases.mjs';
 import {projectToolRequestCases} from './helpers/project-tool-request-cases.mjs';
 import {taskLibraryImportCases} from './helpers/task-library-import-cases.mjs';
 import {taskTimeLearningCases} from './helpers/task-time-learning-cases.mjs';
@@ -325,5 +326,6 @@ await projectAllocationPeopleCases({pg,fs,q,one,user,eq,deny,ids});
 await taskTimeLearningCases({pg,fs,q,one,user,eq,deny,ids});
 await taskLibraryImportCases({pg,fs,q,one,user,eq,deny,ids});
 await projectToolRequestCases({pg,fs,q,one,user,eq,deny,ids});
+await projectToolBookingCases({pg,fs,q,one,user,eq,deny,ids});
 console.log(`${passed} assigned-work and portal reminder assertions passed`);
 await pg.close();
