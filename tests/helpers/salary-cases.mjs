@@ -1,5 +1,7 @@
 export async function salaryCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts}){
- await pg.exec('reset role');await pg.exec(await fs.readFile(new URL('../../supabase/030_hr_salary_basis.sql',import.meta.url),'utf8'));
+ await pg.exec('reset role');await pg.exec(await fs.readFile(new URL('../../supabase/030_hr_salary_basis.sql',import.meta.url),'utf8'));await pg.exec(await fs.readFile(new URL('../../supabase/031_hr_employment_legacy_lock.sql',import.meta.url),'utf8'));
+ await user(ids.admin);await q('select save_hr_employment($1,$2,null,null,$3)',[ids.team,'2000-01-01','Confirm full legacy employment period']);eq((await one('select version from hr_employment where user_id=$1',[ids.team])).version,1,'Existing legacy locked month allows explicit dates preserving full employment');await deny('select save_hr_employment($1,$2,null,1,$3)',[ids.team,'2200-01-01','Exclude legacy locked employment'],'Legacy locked month still rejects excluded employment days');
+ await pg.exec('reset role');
  const employee=crypto.randomUUID(),manager=crypto.randomUUID(),role='salary_test_'+employee.slice(0,8);await q('insert into auth.users values($1),($2)',[employee,manager]);await q("insert into profiles(id,name,role) values($1,'Salary employee','team')",[employee]);await q("insert into profiles(id,name,role) values($1,'Salary manager','admin')",[manager]);await q('insert into crm_roles(id,name) values($1,$2)',[role,'Salary policy test role']);
  const month=(await one("select (date_trunc('month',now() at time zone 'Asia/Karachi')-interval '1 month')::date::text d")).d;
  const start=(await one('select ($1::date+14)::text d',[month])).d,end=(await one("select ($1::date+interval '1 month'-interval '1 day')::date::text d",[month])).d;
