@@ -40,7 +40,7 @@ Acceptance for each item: specification fields; workflow transitions and history
 | 32 | Loans and advances | Separate principal ledgers implemented; acceptance partial |
 | 33 | Project Financials | Approved hourly labour, recorded costs, invoices and cash implemented; final costing and acceptance pending |
 | 34 | Daily activity log | Assigned actuals, review and hourly costing implemented; scheduling and acceptance partial |
-| 35 | HR performance | KPI scorecards, overtime, reviewed payout summaries and manager-reviewed leave/balances implemented; acceptance partial |
+| 35 | HR performance | KPI scorecards, overtime, leave/balances, salary proration and configured deductions implemented; acceptance partial |
 | 36 | Administration configuration | Foundation implemented; acceptance partial |
 | 37 | PWA | Installation, camera capture and opt-in web push implemented; physical-device acceptance pending |
 | 38 | Shared customer timeline | Foundation implemented; acceptance partial |
@@ -225,3 +225,16 @@ Approved leave excuses the appropriate attendance/reporting units; remaining hal
 This increment completes the leave workflow implementation, not all 41 acceptance items. Employment-day/salary proration, automatic absence/late deductions, the other documented module gaps and signed-in browser/device acceptance remain pending. Full payroll processing remains outside the specification; reviewed payout summaries and exports are in scope. Administrators must enter actual entitlements and designate separate reviewers.
 
 Validation: 1,319 checks across 36 suites, TypeScript and production build passed. Migration 029 applied to production. Live rollback verification covers balance reservation, separate manager review, private attendance classification, cancellation and half-day work. Temporary QA records are rolled back. Existing security-advisor categories remain unchanged.
+
+
+## Salary proration and configured deductions — migration 030
+
+HR confirms an employee’s actual employment start/end dates with versioned history. Administrators define immutable role/default payout policies effective from a month’s first day. No business values are activated automatically. Calendar-day proration includes employed calendar days; working-day proration uses the applicable shift’s full-month working-day count excluding confirmed holidays/off-days. Effective salary changes contribute at each day’s rate, and a mid-month hire does not require fictitious earlier salary terms. Days outside employment are excluded from attendance expectations and salary.
+
+Automatic absence deductions use the explicit fraction, exclude approved leave, and credit recorded half-days. Unpaid leave is deducted once at the applicable daily salary rate. Configured late penalties use completed check-in evidence after the monthly allowance per payout policy; they can be a fixed PKR amount or a salary-day fraction. Missing required check-in evidence blocks Accounts locking. HR’s additional documented deductions are added to the automatic total and remain separately identifiable in the snapshot, UI and CSV export. Total deductions cannot exceed gross salary. Existing unconfigured employees retain their legacy manual basis; using the new basis requires both employment dates and an effective payout policy.
+
+Employment changes cannot exclude recorded work or active leave and cannot alter employment-day eligibility in a locked month. New attendance, activity and leave outside configured employment are rejected. Existing separate Lead → Manager → Accounts review, stale-source detection and immutable locked snapshots remain in force. Full payroll processing and payment execution are outside scope; this is a reviewed payout summary.
+
+Validation: 1,356 automated checks across 37 suites, TypeScript and production build passed. Migration 030 applied to production. Live rollback verification, running as authenticated staff, confirmed an explicit mid-month salary of PKR 16,000, absence/late deductions, a separate manual deduction, three distinct reviewers, net PKR 5,850, locked employment protection and employee RLS boundaries. All temporary records were rolled back. Existing advisor categories remain unchanged.
+
+Administrator browser page-loading review has started: 31 sidebar views plus the Projects and HR workspaces were inspected with no observed alert messages. This is not full workflow acceptance. Technician/client role flows, live export/download checks and physical-device PWA tests remain pending, as do other documented module gaps and advanced bonus/SLA/CSAT rules. Real employment dates, salaries, deduction policies and authorized reviewers must be supplied by the administrator.

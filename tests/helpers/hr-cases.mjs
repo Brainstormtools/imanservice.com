@@ -1,3 +1,4 @@
+import {salaryCases} from './salary-cases.mjs';
 import {leaveCases} from './leave-cases.mjs';
 export async function hrCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts}){
  await pg.exec('reset role');await pg.exec(await fs.readFile(new URL('../../supabase/025_hr_performance.sql',import.meta.url),'utf8'));await user(ids.admin);
@@ -36,4 +37,5 @@ export async function hrCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts}){
  await user(ids.clientA);eq((await q('select * from hr_monthly')).length,0,'Clients cannot see payroll summaries');await deny('select hr_daily_preview($1,$2)',[ids.team,day],'Client cannot query staff overtime');await deny('select hr_people()',[],'Client cannot list HR staff');
  await pg.exec("reset role;select set_config('request.jwt.claim.sub','',false);set role anon");await deny('select * from hr_terms',[],'Anonymous salary access denied');await deny('select hr_month_preview($1,$2)',[ids.team,month],'Anonymous HR report denied');await user(ids.admin);
  await leaveCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts});
+ await salaryCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts});
 }
