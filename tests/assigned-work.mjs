@@ -1,3 +1,4 @@
+import {bonusCases} from './helpers/bonus-cases.mjs';
 import {scheduleReminderCases} from './helpers/schedule-reminder-cases.mjs';
 import {pushCases} from './helpers/push-cases.mjs';
 import {supplyCases} from './helpers/supply-cases.mjs';
@@ -297,5 +298,6 @@ await deny('select * from project_assignments',[],'Anonymous cannot read assignm
 await deny('select queue_portal_reminders()',[],'Anonymous cannot invoke reminder scanner');
 await pushCases({pg,fs,q,one,user,eq,deny,ids});
 await scheduleReminderCases({pg,fs,q,one,user,eq,deny,ids});
+await bonusCases({pg,fs,q,one,user,eq,deny,ids});
 console.log(`${passed} assigned-work and portal reminder assertions passed`);
 await pg.close();

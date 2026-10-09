@@ -28,3 +28,6 @@ Read-only inspection covered all 63 sheets, their nonempty cells, stored formula
 ## Completion gate
 
 For each of the 41 items: fields, transitions/history, validation, database permissions, role visibility, responsive interactions and required exports must have evidence. Automated source tests and a successful deployment do not replace the full browser acceptance review. Actual policy/salary/reviewer configuration is a business-data setup requirement, separate from feature implementation.
+
+
+Percentage bonus increment: migration 035 adds explicit fixed PKR/salary-percentage score bands, using prorated basic salary before deductions, with saved calculation evidence and unchanged three-stage review/locked snapshots. Administrators must supply actual thresholds and amounts. Historical KPI/SLA/CSAT calculations and optional project-completion bonus rules remain pending.
