@@ -1,0 +1,50 @@
+begin;
+do $$
+declare qa_admin uuid;qa_company uuid:=gen_random_uuid();qa_project uuid:=gen_random_uuid();qa_lead uuid:=gen_random_uuid();qa_deal uuid:=gen_random_uuid();qa_board uuid:=gen_random_uuid();qa_product uuid:=gen_random_uuid();qa_quote uuid:=gen_random_uuid();qa_publication uuid:=gen_random_uuid();qa_invoice uuid:=gen_random_uuid();qa_sale uuid:=gen_random_uuid();qa_template uuid:=gen_random_uuid();qa_template_version uuid:=gen_random_uuid();qa_stream uuid:=gen_random_uuid();qa_task uuid:=gen_random_uuid();qa_client uuid:=gen_random_uuid();qa_count int:=0;
+begin
+select id into qa_admin from public.profiles where active and role='admin' order by id limit 1;if qa_admin is null then raise exception 'Administrator required';end if;
+perform set_config('request.jwt.claim.sub',qa_admin::text,true);perform set_config('request.jwt.claim.role','authenticated',true);
+insert into public.companies(id,name) values(qa_company,'QA task learning company');
+insert into auth.users(id) values(qa_client);insert into public.profiles(id,name,role,company_id) values(qa_client,'QA task learning client','client',qa_company);
+insert into public.projects(id,company_id,title) values(qa_project,qa_company,'QA task learning project');
+insert into public.crm_leads(id,name,email,source) values(qa_lead,'QA task learning',qa_lead::text||'@example.test','QA');
+insert into public.crm_deals(id,lead_id,company_id,title,owner_id) values(qa_deal,qa_lead,qa_company,'QA adjustment deal',qa_admin);
+insert into public.crm_boards(id,code,name,color,outcome) values(qa_board,'qa_'||replace(qa_board::text,'-',''),'QA adjustment board','#112233','Project');
+insert into public.crm_product_lines(id,deal_id,board_id) values(qa_product,qa_deal,qa_board);
+insert into public.crm_quotes(id,deal_id,number,title,valid_until) values(qa_quote,qa_deal,'QA-'||qa_quote::text,'QA adjustment quote',current_date);
+insert into public.crm_quote_publications(id,quote_id,deal_id,company_id,number,revision,title,option_name,currency,valid_until,terms,company_name,items,subtotal,tax_total,total,wht_total,receivable) values(qa_publication,qa_quote,qa_deal,qa_company,'QA-'||qa_quote::text,1,'QA adjustment quote','QA option','PKR',current_date,'QA','QA company','[]',1,0,1,0,1);
+insert into public.invoices(id,company_id,company_name,number,currency,total,author_id,due_on) values(qa_invoice,qa_company,'QA company','QA-'||qa_invoice::text,'PKR',1,qa_admin,current_date);
+insert into public.crm_sales(id,deal_id,publication_id,company_id,project_id,invoice_id,owner_id,total,currency,payment_terms,planned_budget,created_by) values(qa_sale,qa_deal,qa_publication,qa_company,qa_project,qa_invoice,qa_admin,1,'PKR','{}','{}',qa_admin);
+insert into public.crm_project_templates(id,board_id,name) values(qa_template,qa_board,'QA adjustment template');
+insert into public.crm_template_versions(id,template_id,revision,parameters,tasks,author_id) values(qa_template_version,qa_template,1,'[]','[]',qa_admin);
+insert into public.crm_project_workstreams(id,sale_id,project_id,product_line_id,template_version_id,parameters,plan) values(qa_stream,qa_sale,qa_project,qa_product,qa_template_version,'{}','{"qa_fixed_baseline":true}');
+insert into public.tasks(id,project_id,title,assignee,internal,deadline) values(qa_task,qa_project,'QA adjustment task',qa_admin,true,current_date);
+insert into public.crm_task_plans(task_id,workstream_id,task_key,phase,process,step,unit,quantity,duration_minutes,crew,crew_role,tools,preconditions) values(qa_task,qa_stream,'qa_adjustment',0,'Survey','Inspect','node',2,60,2,'Technician','Tester','Access');
+-- Synthetic reviewed activity/completion fixtures isolate learning; approval flows are tested separately.
+insert into public.work_activities(user_id,link_kind,project_id,task_id,location,activity_type,description,actual_start,actual_end,outcome,quantity,crew,status,reviewed_by,lost_minutes)
+select qa_admin,'Project',qa_project,qa_task,'QA site','Survey','QA learning interval','2026-10-01T10:00:00Z'::timestamptz,'2026-10-01T11:00:00Z'::timestamptz,'Done',2,3,'Approved',qa_admin,10 from generate_series(1,2);
+insert into public.task_completions(task_id,project_id,technician_id,summary,status) values(qa_task,qa_project,qa_admin,'QA reviewed completion','Published');
+update public.tasks set status='Done' where id=qa_task;
+execute 'set local role authenticated';
+if not (public.crm_project_task_learning(qa_project)->0->>'ready')::boolean then raise exception 'Learning not ready';end if;qa_count:=qa_count+1;
+perform public.review_crm_task_learning(qa_task,0,public.crm_project_task_learning(qa_project)->0->>'source_hash',2,'QA verified output');
+if not exists(select 1 from public.crm_task_learning_reviews where task_id=qa_task and revision=1 and reviewer_id=qa_admin and (snapshot->>'worker_minutes')::numeric=120 and (snapshot->>'baseline_worker_minutes_per_unit')::numeric=60 and (snapshot->>'actual_worker_minutes_per_unit')::numeric=60 and (snapshot->>'variance_percent')::numeric=0) then raise exception 'Calculation mismatch';end if;qa_count:=qa_count+1;
+if not (public.crm_project_task_learning(qa_project)->0->>'review_current')::boolean then raise exception 'Current review missing';end if;qa_count:=qa_count+1;
+if (select count(*) from public.crm_activity_plan_basis where task_id=qa_task)<>2 then raise exception 'Basis capture mismatch';end if;qa_count:=qa_count+1;
+begin perform public.review_crm_task_learning(qa_task,0,public.crm_project_task_learning(qa_project)->0->>'source_hash',2,'QA stale review');raise exception 'Stale version allowed';exception when others then if sqlerrm is distinct from 'Current learning review version required' then raise;end if;end;qa_count:=qa_count+1;
+begin perform public.review_crm_task_learning(qa_task,1,'stale',2,'QA stale source');raise exception 'Stale source allowed';exception when others then if sqlerrm is distinct from 'Current complete approved activity and captured planning evidence required' then raise;end if;end;qa_count:=qa_count+1;
+begin update public.crm_task_learning_reviews set quantity=99 where task_id=qa_task;raise exception 'Direct write allowed';exception when insufficient_privilege then null;end;qa_count:=qa_count+1;
+perform set_config('request.jwt.claim.sub',qa_client::text,true);
+if exists(select 1 from public.crm_task_learning_reviews where task_id=qa_task) then raise exception 'Client history visible';end if;qa_count:=qa_count+1;
+begin perform public.crm_project_task_learning(qa_project);raise exception 'Client read allowed';exception when others then if sqlerrm is distinct from 'Assigned project manager access required' then raise;end if;end;qa_count:=qa_count+1;
+execute 'reset role';
+update public.work_activities set status='Voided',version=version+1 where id=(select id from public.work_activities where task_id=qa_task order by id limit 1);
+perform set_config('request.jwt.claim.sub',qa_admin::text,true);execute 'set local role authenticated';
+if (public.crm_project_task_learning(qa_project)->0->>'review_current')::boolean or public.crm_project_task_learning(qa_project)->0->>'actual_worker_minutes_per_unit' is not null then raise exception 'Stale comparison exposed';end if;qa_count:=qa_count+1;
+if not exists(select 1 from public.crm_task_learning_reviews where task_id=qa_task and (snapshot->>'actual_worker_minutes_per_unit')::numeric=60) then raise exception 'Saved evidence changed';end if;qa_count:=qa_count+1;
+execute 'reset role';
+if has_function_privilege('anon','public.crm_project_task_learning(uuid)','EXECUTE') or has_function_privilege('authenticated','portal_private.task_learning_source(uuid)','EXECUTE') then raise exception 'Unexpected helper exposure';end if;qa_count:=qa_count+1;
+perform set_config('qa.learning_result',jsonb_build_object('passed',true,'assertions',qa_count,'fixtures_rollback',true)::text,true);
+end$$;
+select current_setting('qa.learning_result')::jsonb as qa_result;
+rollback;
