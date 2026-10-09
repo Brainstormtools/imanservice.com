@@ -1,3 +1,4 @@
+import {leaveCases} from './leave-cases.mjs';
 export async function hrCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts}){
  await pg.exec('reset role');await pg.exec(await fs.readFile(new URL('../../supabase/025_hr_performance.sql',import.meta.url),'utf8'));await user(ids.admin);
  const lead=crypto.randomUUID();await pg.exec('reset role');await q('insert into auth.users values($1)',[lead]);await q("insert into profiles(id,name,role) values($1,'Designated lead','team')",[lead]);await user(ids.admin);const dept=(await one("select save_crm_configuration('team',null,null,'HR test team') id")).id;await q("select set_crm_membership($1,'team_lead',$2,true)",[lead,dept]);
@@ -34,4 +35,5 @@ export async function hrCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts}){
  await user(ids.admin);await q('select save_hr_terms($1)',[JSON.stringify({...terms,effective_on:(await one("select (now() at time zone 'Asia/Karachi')::date::text d")).d,manager_id:ids.admin,salary:50000,reason:'Supervisor transfer and new salary'})]);await user(actors.manager);await deny('select hr_month_preview($1,$2)',[ids.team,month],'Current supervisor reassignment immediately revokes old manager salary access');await user(ids.team);eq(Number((await one('select hr_month_preview($1,$2) r',[ids.team,month])).r.net_salary_summary),30350,'Locked month reads immutable snapshot after later salary changes');
  await user(ids.clientA);eq((await q('select * from hr_monthly')).length,0,'Clients cannot see payroll summaries');await deny('select hr_daily_preview($1,$2)',[ids.team,day],'Client cannot query staff overtime');await deny('select hr_people()',[],'Client cannot list HR staff');
  await pg.exec("reset role;select set_config('request.jwt.claim.sub','',false);set role anon");await deny('select * from hr_terms',[],'Anonymous salary access denied');await deny('select hr_month_preview($1,$2)',[ids.team,month],'Anonymous HR report denied');await user(ids.admin);
+ await leaveCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts});
 }
