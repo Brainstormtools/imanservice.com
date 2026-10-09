@@ -1,3 +1,4 @@
+import {servicePerformanceCases} from './helpers/service-performance-cases.mjs';
 import {historicalTaskCases} from './helpers/historical-task-cases.mjs';
 import {bonusCases} from './helpers/bonus-cases.mjs';
 import {scheduleReminderCases} from './helpers/schedule-reminder-cases.mjs';
@@ -301,5 +302,6 @@ await pushCases({pg,fs,q,one,user,eq,deny,ids});
 await scheduleReminderCases({pg,fs,q,one,user,eq,deny,ids});
 await bonusCases({pg,fs,q,one,user,eq,deny,ids});
 await historicalTaskCases({pg,fs,q,one,user,eq,deny,ids});
+await servicePerformanceCases({pg,fs,q,one,user,eq,deny,ids});
 console.log(`${passed} assigned-work and portal reminder assertions passed`);
 await pg.close();
