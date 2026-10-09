@@ -1,3 +1,4 @@
+import {ticketResponseRepeatCases} from './helpers/ticket-response-repeat-cases.mjs';
 import {handoverRatingCases} from './helpers/handover-rating-cases.mjs';
 import {slaPauseCases} from './helpers/sla-pause-cases.mjs';
 import {servicePerformanceCases} from './helpers/service-performance-cases.mjs';
@@ -307,5 +308,6 @@ await historicalTaskCases({pg,fs,q,one,user,eq,deny,ids});
 await servicePerformanceCases({pg,fs,q,one,user,eq,deny,ids});
 await slaPauseCases({pg,fs,q,one,user,eq,deny,ids});
 await handoverRatingCases({pg,fs,q,one,user,eq,deny,ids});
+await ticketResponseRepeatCases({pg,fs,q,one,user,eq,deny,ids});
 console.log(`${passed} assigned-work and portal reminder assertions passed`);
 await pg.close();
