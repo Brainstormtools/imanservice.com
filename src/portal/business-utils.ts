@@ -1,3 +1,4 @@
+import {slaClock} from './sla-clock';
 export function csvText(rows:unknown[][]){return '\ufeff'+rows.map(row=>row.map(value=>{let s=String(value??'');if(/^[\s]*[=+\-@]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';}).join(',')).join('\r\n');}
 export function downloadText(name:string,text:string,type='text/csv;charset=utf-8'){const url=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 export function parseCSV(text:string):string[][]{
@@ -58,8 +59,9 @@ export async function readXLSX(buffer:ArrayBuffer):Promise<string[][]>{
 export function reportRows(tickets:any[],from:string,to:string,company:string,projects:any[],now:number){
  const ids=new Set(projects.filter(p=>!company||p.company_id===company).map(p=>p.id));
  return tickets.filter(t=>ids.has(t.project_id)&&(!from||t.created_at.slice(0,10)>=from)&&(!to||t.created_at.slice(0,10)<=to)).map(t=>{
-  const response=!t.response_due_at?'Not measured':t.first_response_at?(Date.parse(t.first_response_at)<=Date.parse(t.response_due_at)?'Met':'Missed'):t.status==='Resolved'?'Closed without reply':Date.parse(t.response_due_at)<now?'Overdue':'Pending';
-  const resolution=!t.resolution_due_at?'Not measured':t.resolved_at?(Date.parse(t.resolved_at)<=Date.parse(t.resolution_due_at)?'Met':'Missed'):Date.parse(t.resolution_due_at)<now?'Overdue':'Pending';
+  const clock=slaClock(t,now), pending=t.sla_paused_at?'Paused':'Pending';
+  const response=!t.response_due_at?'Not measured':t.first_response_at?(Date.parse(t.first_response_at)<=Date.parse(t.response_due_at)?'Met':'Missed'):t.status==='Resolved'?'Closed without reply':Date.parse(t.response_due_at)<clock?'Overdue':pending;
+  const resolution=!t.resolution_due_at?'Not measured':t.resolved_at?(Date.parse(t.resolved_at)<=Date.parse(t.resolution_due_at)?'Met':'Missed'):Date.parse(t.resolution_due_at)<clock?'Overdue':pending;
   return {...t,response_result:response,resolution_result:resolution};
  });
 }
