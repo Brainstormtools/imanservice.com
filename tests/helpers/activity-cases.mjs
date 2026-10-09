@@ -1,3 +1,4 @@
+import {activityEvidenceCases} from './activity-evidence-cases.mjs';
 import {hrCases} from './hr-cases.mjs';
 export async function activityCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts}){
  await pg.exec('reset role');await pg.exec(await fs.readFile(new URL('../../supabase/024_activity_labour.sql',import.meta.url),'utf8'));await user(ids.admin);
@@ -44,4 +45,5 @@ export async function activityCases({pg,fs,q,one,user,eq,deny,ids,actors,account
  await user(ids.clientA);eq((await q('select * from work_activities')).length,0,'Client cannot see internal activity logs');eq((await q('select * from work_labour_costs')).length,0,'Client cannot see labour rates');await deny('select work_activity_report()',[],'Client cannot call activity report');
  await pg.exec("reset role;select set_config('request.jwt.claim.sub','',false);set role anon");await deny('select * from work_activities',[],'Anonymous activity access denied');await deny('select work_activity_report()',[],'Anonymous activity RPC denied');await user(ids.admin);
  await hrCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts});
+ await activityEvidenceCases({pg,fs,q,one,user,eq,deny,ids,accounts});
 }
