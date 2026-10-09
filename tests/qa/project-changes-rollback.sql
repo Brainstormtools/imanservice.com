@@ -1,0 +1,27 @@
+begin;
+do $$declare a uuid;c uuid:=gen_random_uuid();p uuid:=gen_random_uuid();m uuid:=gen_random_uuid();g uuid:=gen_random_uuid();l uuid:=gen_random_uuid();d jsonb:='{"title":"QA request","proposed_scope":"QA proposed scope","justification":"QA need","cost_impact":"QA cost assessment","schedule_impact":"QA schedule assessment","evidence":"QA reference","status":"Draft","decision_note":""}';begin
+select id into a from profiles where active and role='admin' order by id limit 1;
+perform set_config('request.jwt.claim.sub',a::text,true);
+insert into companies(id,name) values(c,'QA change register company');
+insert into projects(id,company_id,title) values(p,c,'QA change register project');
+insert into auth.users(id) values(m);insert into profiles(id,name,role) values(m,'QA manager','team');
+insert into crm_teams(id,name) values(g,'QA change register team');
+insert into crm_memberships(user_id,role_id,team_id) values(m,'project_manager',g);
+insert into project_assignments(project_id,technician_id) values(p,m);
+perform set_config('request.jwt.claim.sub',m::text,true);execute 'set local role authenticated';
+perform save_project_change(l,null,p,d,'QA request reason');
+perform save_project_change(l,null,p,d,'QA request reason');
+if (select count(*) from crm_project_changes_history where change_id=l)<>1 then raise exception 'retry';end if;
+d:=d||'{"status":"Submitted"}';perform save_project_change(l,1,p,d,'QA submission reason');
+if not exists(select 1 from crm_project_changes where id=l and submitted_by=m and version=2) then raise exception 'submit';end if;
+begin perform save_project_change(l,2,p,d,'QA self decision');raise exception 'allowed';exception when others then if sqlerrm<>'Separate administrator decision required' then raise;end if;end;
+perform set_config('request.jwt.claim.sub',a::text,true);
+d:=d||'{"status":"Approved","decision_note":"QA separate decision"}';
+begin perform save_project_change(l,2,p,d||'{"proposed_scope":"QA altered scope"}','QA frozen evidence');raise exception 'allowed';exception when others then if sqlerrm<>'Submitted request evidence is frozen' then raise;end if;end;
+begin perform save_project_change(l,1,p,d,'QA stale decision');raise exception 'allowed';exception when others then if sqlerrm<>'Current change version and fixed project required' then raise;end if;end;
+perform save_project_change(l,2,p,d,'QA approval reason');
+if not exists(select 1 from crm_project_changes_history where change_id=l and revision=3 and actor_id=a and before_change->'details'->>'status'='Submitted') then raise exception 'history';end if;
+begin perform save_project_change(l,3,p,d,'QA immutable decision');raise exception 'mutable';exception when others then if sqlerrm<>'Decided change is immutable' then raise;end if;end;
+end$$;
+select true as passed,7 as assertions,true as fixtures_rollback;
+rollback;
