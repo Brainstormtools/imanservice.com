@@ -19,7 +19,7 @@ await build({entryPoints:[project+'/src/portal/Portal.tsx'],bundle:true,platform
 const Portal=require(outfile).default,root=createRoot(document.getElementById('root'));
 const helperOut=path.join(dir,'operations.cjs');
 await build({entryPoints:[project+'/src/portal/operations.tsx'],bundle:true,platform:'node',format:'cjs',outfile:helperOut,plugins:[{name:'react-external',setup(b){b.onResolve({filter:/^react$/},()=>({path:require.resolve('react'),external:true}));}}]});
-const {slaState}=require(helperOut);
+const {slaState,SlaSummary}=require(helperOut);
 const flush=async(fn=()=>{})=>React.act(async()=>{await fn();await new Promise(r=>setTimeout(r,25));});
 const click=async(text)=>{const labels={Equipment:['Equipment','IT assets','My IT assets','Related IT assets'],Projects:['Projects','My projects','Assigned projects'],'Clients & team':['Clients & team','Clients & team access'],'AMC & SLA':['AMC & SLA','My AMC & SLA']}[text]||[text];const el=[...document.querySelectorAll('button')].find(b=>labels.includes(b.textContent));assert.ok(el,`Button ${text}`);await flush(()=>el.click());};
 const set=async(el,value)=>{assert.ok(el);await flush(()=>{el.value=value;el.dispatchEvent(new dom.window.Event('change',{bubbles:true}));});};
@@ -31,6 +31,8 @@ assert.equal(slaState(deadline,undefined,clock-60000).text,'Due in 1m');pass('Co
 assert.equal(slaState(deadline,undefined,clock+60000).text,'Overdue by 1m');pass('Expired deadline is marked overdue');
 assert.equal(slaState(deadline,deadline,clock).text,'Met');pass('Completion exactly on deadline meets target');
 assert.equal(slaState(deadline,'2026-09-26T03:00:01.000Z',clock).text,'Missed');pass('Late completion remains missed');
+await flush(()=>root.render(React.createElement(SlaSummary,{ticket:{contract_title:'Pause contract',status:'Waiting on client',sla_pause_enabled:true,sla_paused_at:'2026-09-26T02:00:00Z',response_due_at:deadline,resolution_due_at:deadline},now:clock+86400000})));
+assert.match(document.body.textContent,/Paused · Due in 1h 0m/);assert.doesNotMatch(document.body.textContent,/Overdue/);assert.match(document.body.textContent,/Deadline at pause entry/);pass('Paused SLA summary freezes countdown and identifies deadline basis');
 await flush(()=>root.render(React.createElement(Portal)));
 assert.ok(document.body.textContent.includes('1 overdue tickets'));pass('Dashboard shows overdue service attention');
 await click('Overtime & performance');assert.ok(document.querySelector('h1').textContent==='Overtime & performance');assert.ok(writes.some(w=>w.rpc==='hr_people'));pass('HR navigation mounts the scoped overtime and performance workspace');
