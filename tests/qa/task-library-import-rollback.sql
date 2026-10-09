@@ -1,0 +1,31 @@
+begin;
+do $$
+declare qa_admin uuid;qa_company uuid:=gen_random_uuid();qa_client uuid:=gen_random_uuid();qa_batch uuid:=gen_random_uuid();qa_failed uuid:=gen_random_uuid();qa_task jsonb;qa_rows jsonb;qa_ids uuid[];qa_count integer:=0;qa_before bigint;
+begin
+select id into qa_admin from public.profiles where active and role='admin' order by id limit 1;if qa_admin is null then raise exception 'Administrator required';end if;
+insert into public.companies(id,name) values(qa_company,'QA library import company');
+insert into auth.users(id) values(qa_client);insert into public.profiles(id,name,role,company_id) values(qa_client,'QA import client','client',qa_company);
+perform set_config('request.jwt.claim.sub',qa_admin::text,true);perform set_config('request.jwt.claim.role','authenticated',true);
+qa_task:='{"key":"qa_import","phase":0,"title":"QA imported task","process":"Survey","step":"Inspect","unit":"node","minutes":30,"fixed_minutes":0,"fixed_quantity":2,"crew":2,"crew_role":"Technician","tools":"Tester","preconditions":"Access","checklist":["Checked"],"quantity_parameters":[],"factor_parameter":"","condition_parameter":"","depends_on":[]}'::jsonb;
+qa_rows:=jsonb_build_array(jsonb_build_object('name','QA imported standard','task',qa_task));
+execute 'set local role authenticated';
+select count(*) into qa_before from public.crm_task_library;
+qa_ids:=public.import_crm_task_standards(qa_batch,'qa-library.csv','QA reviewed inactive source',qa_rows);
+if cardinality(qa_ids)<>1 or not exists(select 1 from public.crm_task_library where id=qa_ids[1] and active=false and version=1) then raise exception 'Inactive import mismatch';end if;qa_count:=qa_count+1;
+if not exists(select 1 from public.crm_task_library_versions where standard_id=qa_ids[1] and task=qa_task and parameters='[]'::jsonb and author_id=qa_admin) then raise exception 'Reviewed revision mismatch';end if;qa_count:=qa_count+1;
+if not exists(select 1 from public.crm_task_library_imports where batch_id=qa_batch and author_id=qa_admin and source_name='qa-library.csv' and standard_ids=qa_ids) then raise exception 'Receipt mismatch';end if;qa_count:=qa_count+1;
+if public.import_crm_task_standards(qa_batch,'qa-library.csv','QA reviewed inactive source',qa_rows)<>qa_ids or (select count(*) from public.crm_task_library)<>qa_before+1 then raise exception 'Retry duplicated standards';end if;qa_count:=qa_count+1;
+begin perform public.import_crm_task_standards(qa_batch,'qa-library.csv','Changed review',qa_rows);raise exception 'Changed retry allowed';exception when others then if sqlerrm is distinct from 'Import batch already used for different reviewed data' then raise;end if;end;qa_count:=qa_count+1;
+begin perform public.import_crm_task_standards(qa_failed,'qa-library.csv','QA invalid later row',qa_rows||jsonb_build_array(jsonb_build_object('name','QA invalid second','task',qa_task||'{"key":"qa_invalid","crew":0}'::jsonb)));raise exception 'Invalid later row allowed';exception when others then if sqlerrm is distinct from 'Integer phase and crew required' then raise;end if;end;
+if (select count(*) from public.crm_task_library)<>qa_before+1 or exists(select 1 from public.crm_task_library_imports where batch_id=qa_failed) then raise exception 'Atomic rollback failed';end if;qa_count:=qa_count+1;
+begin perform public.import_crm_task_standards(gen_random_uuid(),'qa-library.csv','QA forced activation',jsonb_build_array(qa_rows->0||'{"active":true}'::jsonb));raise exception 'Forced activation allowed';exception when others then if sqlerrm is distinct from 'Import new fixed standards only; formulas require manual review' then raise;end if;end;qa_count:=qa_count+1;
+begin update public.crm_task_library_imports set source_name='Forged' where batch_id=qa_batch;raise exception 'Direct receipt write allowed';exception when insufficient_privilege then null;end;qa_count:=qa_count+1;
+perform set_config('request.jwt.claim.sub',qa_client::text,true);
+if exists(select 1 from public.crm_task_library_imports) then raise exception 'Client receipt visible';end if;qa_count:=qa_count+1;
+begin perform public.import_crm_task_standards(gen_random_uuid(),'qa-library.csv','QA client attempt',qa_rows);raise exception 'Client import allowed';exception when others then if sqlerrm is distinct from 'Administrator reviews task-library imports' then raise;end if;end;qa_count:=qa_count+1;
+execute 'reset role';
+if has_function_privilege('anon','public.import_crm_task_standards(uuid,text,text,jsonb)','EXECUTE') then raise exception 'Anonymous RPC exposed';end if;qa_count:=qa_count+1;
+perform set_config('qa.library_import_result',jsonb_build_object('passed',true,'assertions',qa_count,'fixtures_rollback',true)::text,true);
+end$$;
+select current_setting('qa.library_import_result')::jsonb as qa_result;
+rollback;
