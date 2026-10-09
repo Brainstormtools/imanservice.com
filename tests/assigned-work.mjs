@@ -1,3 +1,4 @@
+import {historicalTaskCases} from './helpers/historical-task-cases.mjs';
 import {bonusCases} from './helpers/bonus-cases.mjs';
 import {scheduleReminderCases} from './helpers/schedule-reminder-cases.mjs';
 import {pushCases} from './helpers/push-cases.mjs';
@@ -299,5 +300,6 @@ await deny('select queue_portal_reminders()',[],'Anonymous cannot invoke reminde
 await pushCases({pg,fs,q,one,user,eq,deny,ids});
 await scheduleReminderCases({pg,fs,q,one,user,eq,deny,ids});
 await bonusCases({pg,fs,q,one,user,eq,deny,ids});
+await historicalTaskCases({pg,fs,q,one,user,eq,deny,ids});
 console.log(`${passed} assigned-work and portal reminder assertions passed`);
 await pg.close();
