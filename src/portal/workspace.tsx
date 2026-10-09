@@ -7,7 +7,7 @@ const today=()=>new Date().toISOString().slice(0,10);
 const labels=(s:string)=>[...new Set(s.split(',').map(x=>x.trim()).filter(Boolean))];
 const opts=(rows:Row[])=>rows.map(r=><option key={r.id} value={r.id}>{r.title||r.name}</option>);
 const states=['Planning','In progress','On hold','Completed'];
-export async function workspaceRows(table:string,projectId?:string){const out:Row[]=[];for(let start=0;start<100000;start+=1000){let q=db!.from(table).select('*').order('id').range(start,start+999);if(projectId)q=q.eq('project_id',projectId);const rows=check(await q) as Row[];out.push(...rows);if(rows.length<1000)return out;}throw new Error('Too many records to load. Please request a scoped database export.');}
+export async function workspaceRows(table:string,projectId?:string){const out:Row[]=[];for(let start=0;start<100000;start+=1000){let q=db!.from(table).select('*').order(table==='hr_employment'?'user_id':'id').range(start,start+999);if(projectId)q=q.eq('project_id',projectId);const rows=check(await q) as Row[];out.push(...rows);if(rows.length<1000)return out;}throw new Error('Too many records to load. Please request a scoped database export.');}
 const headers:Record<string,string[]>={clients:['name','email','phone','address','website','labels'],projects:['company_id','title','description','status','start_date','deadline','labels']};
 export function validateWorkspaceImport(kind:string,rows:string[][],companies:Row[]){
  const hs=rows[0]?.map(x=>x.trim().toLowerCase())||[];const required=kind==='clients'?['name']:['company_id','title'];
