@@ -1,3 +1,4 @@
+import {projectTaskAdjustmentCases} from './helpers/project-task-adjustment-cases.mjs';
 import {tradeIdentityCases} from './helpers/trade-identity-cases.mjs';
 
 import {taskLibraryCases} from './helpers/task-library-cases.mjs';
@@ -315,5 +316,6 @@ await ticketResponseRepeatCases({pg,fs,q,one,user,eq,deny,ids});
 await tradeIdentityCases({pg,fs,q,one,user,eq,deny,ids});
 
 await taskLibraryCases({pg,fs,q,one,user,eq,deny,ids});
+await projectTaskAdjustmentCases({pg,fs,q,one,user,eq,deny,ids});
 console.log(`${passed} assigned-work and portal reminder assertions passed`);
 await pg.close();
