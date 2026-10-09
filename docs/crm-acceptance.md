@@ -40,7 +40,7 @@ Acceptance for each item: specification fields; workflow transitions and history
 | 32 | Loans and advances | Separate principal ledgers implemented; acceptance partial |
 | 33 | Project Financials | Approved hourly labour, recorded costs, invoices and cash implemented; final costing and acceptance pending |
 | 34 | Daily activity log | Assigned actuals, review and hourly costing implemented; scheduling and acceptance partial |
-| 35 | HR performance | Recorded KPI scorecards, overtime and reviewed payout summaries implemented; acceptance partial |
+| 35 | HR performance | KPI scorecards, overtime, reviewed payout summaries and manager-reviewed leave/balances implemented; acceptance partial |
 | 36 | Administration configuration | Foundation implemented; acceptance partial |
 | 37 | PWA | Installation, camera capture and opt-in web push implemented; physical-device acceptance pending |
 | 38 | Shared customer timeline | Foundation implemented; acceptance partial |
@@ -214,3 +214,14 @@ Physical Android/iOS installation, notification permission/delivery, actual came
 Validation: 1,277 automated checks across 35 suites, TypeScript and the production build passed. Live scheduler privilege checks confirmed authenticated and anonymous accounts cannot execute queue, acknowledgement, identity-scope, key-configuration or scheduler functions. The security advisor still reports the existing three categories: intentionally inaccessible private RLS tables, explicitly granted checked definer functions, and the previously documented leaked-password setting. No claim of full acceptance is made.
 
 Live rollback verification also passed for assigned/unassigned reminders, assignment revocation, reminder opt-out, inactive accounts and identity restoration. All QA users, projects, subscriptions and reminders were rolled back.
+
+
+## Leave requests and balances — migration 029
+
+Employees request annual, sick, casual or unpaid leave against explicit HR allocations. Requests reserve balances; only the employee’s current designated manager can approve or reject them. Cancellation retains approved usage until reviewed. Half-day requests specify morning or afternoon, exclude holidays/off-days, and cannot overlap recorded work. Direct table writes, self-approval, stale updates and unassigned access are blocked by database permissions. Accounts sees attendance and salary basis without private leave reasons.
+
+Approved leave excuses the appropriate attendance/reporting units; remaining half-day work is allowed only outside the approved leave interval. Pending leave decisions block monthly locking, and locked months reject backdated requests and cancellations. Balances have CSV export and changes have immutable history.
+
+This increment completes the leave workflow implementation, not all 41 acceptance items. Employment-day/salary proration, automatic absence/late deductions, the other documented module gaps and signed-in browser/device acceptance remain pending. Full payroll processing remains outside the specification; reviewed payout summaries and exports are in scope. Administrators must enter actual entitlements and designate separate reviewers.
+
+Validation: 1,319 checks across 36 suites, TypeScript and production build passed. Migration 029 applied to production. Live rollback verification covers balance reservation, separate manager review, private attendance classification, cancellation and half-day work. Temporary QA records are rolled back. Existing security-advisor categories remain unchanged.
