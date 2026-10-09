@@ -1,3 +1,4 @@
+import {projectCharterCases} from './helpers/project-charter-cases.mjs';
 import {projectLessonCases} from './helpers/project-lesson-cases.mjs';
 import {projectRiskCases} from './helpers/project-risk-cases.mjs';
 import {projectToolBookingCases} from './helpers/project-tool-booking-cases.mjs';
@@ -331,5 +332,6 @@ await projectToolRequestCases({pg,fs,q,one,user,eq,deny,ids});
 await projectToolBookingCases({pg,fs,q,one,user,eq,deny,ids});
 await projectRiskCases({pg,fs,q,one,user,eq,deny,ids});
 await projectLessonCases({pg,fs,q,one,user,eq,deny,ids});
+await projectCharterCases({pg,fs,q,one,user,eq,deny,ids});
 console.log(`${passed} assigned-work and portal reminder assertions passed`);
 await pg.close();
