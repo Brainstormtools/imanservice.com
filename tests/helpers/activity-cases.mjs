@@ -1,3 +1,4 @@
+import {scheduleCases} from './schedule-cases.mjs';
 import {activityEvidenceCases} from './activity-evidence-cases.mjs';
 import {hrCases} from './hr-cases.mjs';
 export async function activityCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts}){
@@ -46,4 +47,5 @@ export async function activityCases({pg,fs,q,one,user,eq,deny,ids,actors,account
  await pg.exec("reset role;select set_config('request.jwt.claim.sub','',false);set role anon");await deny('select * from work_activities',[],'Anonymous activity access denied');await deny('select work_activity_report()',[],'Anonymous activity RPC denied');await user(ids.admin);
  await hrCases({pg,fs,q,one,user,eq,deny,ids,actors,accounts});
  await activityEvidenceCases({pg,fs,q,one,user,eq,deny,ids,accounts});
+ await scheduleCases({pg,fs,q,one,user,eq,deny,ids,accounts});
 }
