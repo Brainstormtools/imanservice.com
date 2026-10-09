@@ -1,0 +1,40 @@
+begin;
+do $$
+declare qa_admin uuid;qa_company uuid:=gen_random_uuid();qa_project uuid:=gen_random_uuid();qa_lead uuid:=gen_random_uuid();qa_deal uuid:=gen_random_uuid();qa_board uuid:=gen_random_uuid();qa_product uuid:=gen_random_uuid();qa_quote uuid:=gen_random_uuid();qa_publication uuid:=gen_random_uuid();qa_invoice uuid:=gen_random_uuid();qa_sale uuid:=gen_random_uuid();qa_template uuid:=gen_random_uuid();qa_template_version uuid:=gen_random_uuid();qa_stream uuid:=gen_random_uuid();qa_task uuid:=gen_random_uuid();qa_client uuid:=gen_random_uuid();qa_change uuid:=gen_random_uuid();qa_count int:=0;
+begin
+select id into qa_admin from public.profiles where active and role='admin' order by id limit 1;if qa_admin is null then raise exception 'Administrator required';end if;
+perform set_config('request.jwt.claim.sub',qa_admin::text,true);perform set_config('request.jwt.claim.role','authenticated',true);
+insert into public.companies(id,name) values(qa_company,'QA task change linkage company');
+insert into auth.users(id) values(qa_client);insert into public.profiles(id,name,role,company_id) values(qa_client,'QA task change linkage client','client',qa_company);
+insert into public.projects(id,company_id,title) values(qa_project,qa_company,'QA task change linkage project');
+insert into public.crm_leads(id,name,email,source) values(qa_lead,'QA task change linkage',qa_lead::text||'@example.test','QA');
+insert into public.crm_deals(id,lead_id,company_id,title,owner_id) values(qa_deal,qa_lead,qa_company,'QA linkage deal',qa_admin);
+insert into public.crm_boards(id,code,name,color,outcome) values(qa_board,'qa_'||replace(qa_board::text,'-',''),'QA linkage board','#112233','Project');
+insert into public.crm_product_lines(id,deal_id,board_id) values(qa_product,qa_deal,qa_board);
+insert into public.crm_quotes(id,deal_id,number,title,valid_until) values(qa_quote,qa_deal,'QA-'||qa_quote::text,'QA linkage quote',current_date);
+insert into public.crm_quote_publications(id,quote_id,deal_id,company_id,number,revision,title,option_name,currency,valid_until,terms,company_name,items,subtotal,tax_total,total,wht_total,receivable) values(qa_publication,qa_quote,qa_deal,qa_company,'QA-'||qa_quote::text,1,'QA linkage quote','QA option','PKR',current_date,'QA','QA company','[]',1,0,1,0,1);
+insert into public.invoices(id,company_id,company_name,number,currency,total,author_id,due_on) values(qa_invoice,qa_company,'QA company','QA-'||qa_invoice::text,'PKR',1,qa_admin,current_date);
+insert into public.crm_sales(id,deal_id,publication_id,company_id,project_id,invoice_id,owner_id,total,currency,payment_terms,planned_budget,created_by) values(qa_sale,qa_deal,qa_publication,qa_company,qa_project,qa_invoice,qa_admin,1,'PKR','{}','{}',qa_admin);
+insert into public.crm_project_templates(id,board_id,name) values(qa_template,qa_board,'QA linkage template');
+insert into public.crm_template_versions(id,template_id,revision,parameters,tasks,author_id) values(qa_template_version,qa_template,1,'[]','[]',qa_admin);
+insert into public.crm_project_workstreams(id,sale_id,project_id,product_line_id,template_version_id,parameters,plan) values(qa_stream,qa_sale,qa_project,qa_product,qa_template_version,'{}','{"qa_fixed_baseline":true}');
+insert into public.tasks(id,project_id,title,assignee,internal,deadline) values(qa_task,qa_project,'QA linkage task',qa_admin,true,current_date);
+insert into public.crm_task_plans(task_id,workstream_id,task_key,phase,process,step,unit,quantity,duration_minutes,crew,crew_role,tools,preconditions) values(qa_task,qa_stream,'qa_adjustment',0,'Survey','Inspect','node',2,60,1,'Technician','Tester','Access');
+
+insert into public.crm_project_changes(id,project_id,details,reason,created_by,submitted_by,version) values(qa_change,qa_project,'{"title":"QA linked decision","proposed_scope":"QA task plan fixture","justification":"QA need","cost_impact":"QA assessment","schedule_impact":"QA assessment","evidence":"QA reference","status":"Approved","decision_note":"QA fixture decision"}','QA rollback fixture',qa_admin,qa_admin,3);
+execute 'set local role authenticated';
+perform public.apply_crm_task_change(qa_change,3,qa_task,0,4,120,2,'QA tester','QA access','QA linked plan revision');
+if not exists(select 1 from public.crm_task_plan_history where task_id=qa_task and revision=1 and change_id=qa_change and change_version=3 and actor_id=qa_admin and before_plan->>'quantity'='2' and after_plan->>'quantity'='4') then raise exception 'Atomic linkage missing';end if;qa_count:=qa_count+1;
+if (select plan from public.crm_project_workstreams where id=qa_stream) is distinct from '{"qa_fixed_baseline":true}'::jsonb then raise exception 'Baseline changed';end if;qa_count:=qa_count+1;
+begin perform public.apply_crm_task_change(qa_change,2,qa_task,1,4,120,2,'','','QA stale decision');raise exception 'Allowed';exception when others then if sqlerrm is distinct from 'Current approved change for this task project required' then raise;end if;end;qa_count:=qa_count+1;
+begin perform public.apply_crm_task_change(qa_change,3,qa_task,0,4,120,2,'','','QA stale plan');raise exception 'Allowed';exception when others then if sqlerrm is distinct from 'Current generated task plan required' then raise;end if;end;qa_count:=qa_count+1;
+begin update public.crm_task_plan_history set change_id=null where task_id=qa_task;raise exception 'Allowed';exception when insufficient_privilege then null;end;qa_count:=qa_count+1;
+perform set_config('request.jwt.claim.sub',qa_client::text,true);
+begin perform public.apply_crm_task_change(qa_change,3,qa_task,1,4,120,2,'','','QA client attempt');raise exception 'Allowed';exception when others then if sqlerrm is distinct from 'Administrator applies approved task changes' then raise;end if;end;qa_count:=qa_count+1;
+perform set_config('request.jwt.claim.sub',qa_admin::text,true);perform public.save_work_activity(null,null,jsonb_build_object('link_kind','Project','project_id',qa_project,'task_id',qa_task,'location','QA site','activity_type','Survey','description','QA frozen task','actual_start',now()-interval '2 hours','actual_end',now()-interval '1 hour','outcome','Done'));
+begin perform public.apply_crm_task_change(qa_change,3,qa_task,1,4,120,2,'','','QA started work');raise exception 'Allowed';exception when others then if sqlerrm is distinct from 'Started, reviewed or handover-locked work cannot be replanned' then raise;end if;end;qa_count:=qa_count+1;
+execute 'reset role';if has_function_privilege('anon','public.apply_crm_task_change(uuid,integer,uuid,integer,numeric,numeric,integer,text,text,text)','EXECUTE') then raise exception 'Anonymous allowed';end if;qa_count:=qa_count+1;
+perform set_config('qa.linkage_result',jsonb_build_object('passed',true,'assertions',qa_count,'fixtures_rollback',true)::text,true);
+end$$;
+select current_setting('qa.linkage_result')::jsonb as qa_result;
+rollback;
