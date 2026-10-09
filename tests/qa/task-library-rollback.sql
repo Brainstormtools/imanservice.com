@@ -1,0 +1,35 @@
+begin;
+do $$
+declare qa_admin uuid; qa_client uuid:=gen_random_uuid(); qa_planner uuid:=gen_random_uuid(); qa_tech uuid:=gen_random_uuid(); qa_company uuid:=gen_random_uuid(); qa_team uuid:=gen_random_uuid(); qa_standard uuid; qa_task jsonb:='{"key":"qa_survey","phase":0,"title":"QA rollback survey","unit":"node","minutes":30,"fixed_minutes":0,"fixed_quantity":1,"crew":1,"crew_role":"Technician","quantity_parameters":[],"factor_parameter":"","condition_parameter":"","depends_on":[],"checklist":["Access checked"]}';qa_count int:=0;
+begin
+ select id into qa_admin from public.profiles where active and role='admin' order by id limit 1;
+ if qa_admin is null then raise exception 'Active administrator required';end if;
+ insert into public.companies(id,name) values(qa_company,'QA library rollback company');
+ insert into auth.users(id) values(qa_client),(qa_planner),(qa_tech);
+ insert into public.profiles(id,name,role,company_id) values(qa_client,'QA library client','client',qa_company),(qa_planner,'QA library planner','team',null),(qa_tech,'QA library technician','team',null);
+ insert into public.crm_teams(id,name) values(qa_team,'QA library team '||qa_team::text);
+ insert into public.crm_memberships(user_id,role_id,team_id) values(qa_planner,'project_manager',qa_team);
+ perform set_config('request.jwt.claim.sub',qa_admin::text,true);perform set_config('request.jwt.claim.role','authenticated',true);execute 'set local role authenticated';
+ qa_standard:=public.save_crm_task_standard(null,null,'QA rollback standard',true,'[]',qa_task,'QA reviewed standard');
+ if not exists(select 1 from public.crm_task_library_versions where standard_id=qa_standard and revision=1 and author_id=qa_admin and task->>'minutes'='30') then raise exception 'Initial attribution mismatch';end if;qa_count:=qa_count+1;
+ perform public.save_crm_task_standard(qa_standard,1,'QA rollback standard',true,'[]',jsonb_set(qa_task,'{minutes}','45'),'QA revised time');
+ if not exists(select 1 from public.crm_task_library_versions where standard_id=qa_standard and revision=1 and task->>'minutes'='30') then raise exception 'Prior timing changed';end if;qa_count:=qa_count+1;
+ begin perform public.save_crm_task_standard(qa_standard,1,'Stale edit',true,'[]',qa_task,'QA stale attempt');raise exception 'Stale edit allowed';exception when others then if sqlerrm is distinct from 'Current task-library version required' then raise;end if;end;qa_count:=qa_count+1;
+ perform public.save_crm_task_standard(qa_standard,2,'QA rollback standard',false,'[]',qa_task,'QA retirement');
+ if not exists(select 1 from public.crm_task_library where id=qa_standard and not active and version=3) or (select count(*) from public.crm_task_library_versions where standard_id=qa_standard)<>3 then raise exception 'Deactivation lost identity/history';end if;qa_count:=qa_count+1;
+ begin update public.crm_task_library_versions set reason='Forged' where standard_id=qa_standard;raise exception 'Direct history update allowed';exception when insufficient_privilege then null;end;qa_count:=qa_count+1;
+ perform set_config('request.jwt.claim.sub',qa_client::text,true);
+ if exists(select 1 from public.crm_task_library where id=qa_standard) or exists(select 1 from public.crm_task_library_versions where standard_id=qa_standard) then raise exception 'Client read allowed';end if;qa_count:=qa_count+1;
+ begin perform public.save_crm_task_standard(null,null,'Client forge',true,'[]',qa_task,'QA client attempt');raise exception 'Client save allowed';exception when others then if sqlerrm is distinct from 'Administrator configures task library standards' then raise;end if;end;qa_count:=qa_count+1;
+ perform set_config('request.jwt.claim.sub',qa_tech::text,true);
+ if exists(select 1 from public.crm_task_library where id=qa_standard) then raise exception 'Ordinary technician read allowed';end if;qa_count:=qa_count+1;
+ perform set_config('request.jwt.claim.sub',qa_planner::text,true);
+ if not exists(select 1 from public.crm_task_library where id=qa_standard) then raise exception 'Authorized planner read denied';end if;qa_count:=qa_count+1;
+ execute 'reset role';update public.crm_teams set active=false where id=qa_team;execute 'set local role authenticated';
+ if exists(select 1 from public.crm_task_library where id=qa_standard) or exists(select 1 from public.crm_task_library_versions where standard_id=qa_standard) then raise exception 'Revoked planner read allowed';end if;qa_count:=qa_count+1;
+ execute 'reset role';
+ if has_function_privilege('anon','public.save_crm_task_standard(uuid,integer,text,boolean,jsonb,jsonb,text)','EXECUTE') or has_function_privilege('authenticated','portal_private.validate_library_task(jsonb,jsonb)','EXECUTE') then raise exception 'Unexpected RPC exposure';end if;qa_count:=qa_count+1;
+ perform set_config('qa.library_result',jsonb_build_object('passed',true,'assertions',qa_count,'fixtures_rollback',true)::text,true);
+end$$;
+select current_setting('qa.library_result')::jsonb as qa_result;
+rollback;
