@@ -38,7 +38,7 @@ Start with DEV-028 (BOQ revisions and client approval), implementing its first b
 | DEV-026 | Training | Training evidence uploads and approved-activity linkage | Pending development |
 | DEV-027 | Training | Documented competence/certification workflow | Pending development |
 | DEV-028 | Commercial change approvals | Reviewed BOQ revisions and client approval | In progress: offers, client decisions, invoice drafts and reviewed new/existing-workstream tasks; replacement/removal/adoption remain |
-| DEV-029 | Commercial change approvals | Reviewed budget releases/revisions | In progress: private additional-scope cost drafts; review/release and operative consumer integration pending |
+| DEV-029 | Commercial change approvals | Reviewed budget releases/revisions | In progress: private additional-scope cost drafts and reviewed release archives; operative consumer integration pending |
 | DEV-030 | Commercial change approvals | Reviewed contract revisions and client sign-off | Pending development |
 | DEV-031 | Supply chain | Barcode workflow | Pending development |
 | DEV-032 | Supply chain | Supplier defaults | Pending development |
@@ -87,3 +87,5 @@ DEV-028 sixth increment: detailed frozen new-product/extension application histo
 DEV-029 first increment: administrator-only accepted-additional-scope budget cost drafts, manual existing-block cost inputs, calculated draft totals and private immutable revision history under migration 065. No release or operative finance/procurement change. Checkpoints are in both requirement documents and project-budget-drafts-guide.md. Backlog remains 58 open packages: two in progress (DEV-028/029), 56 not started.
 
 DEV-029 first increment release (13 October 2026, 00:50 PKT): PR #83 / 6a1366b126d1b0f4137936740cf590eaea4c6c6f merged; exact production dpl_34FhQqQo9eNj6eMaHWBCk5X1XhQR READY/domain mapping verified, /portal HTTP 200, recent error/fatal scan empty. Final 3,063 checks/69 suites, TypeScript/build and migration 065 metadata verification passed. Private cost drafts are deployed but unreleased; next is explicit version-specific review/return/release, with effective finance/procurement integration separately bounded. Both requirement documents preserve release evidence/resume point. Backlog: 58 open packages, two in progress (DEV-028/029), 56 not started. Client acceptance remains separate and pending.
+
+DEV-029 second increment (13 October 2026, 01:00 PKT): exact-version private administrator review/return/release archives with frozen costs, actual actors/reasons, stable action retries and scoped CSV. Released cost records do not yet affect original finance/procurement consumers. Requirement documents preserve validation/deployment checkpoint; effective contribution model and consumer integration remain next. Backlog remains 58 open packages: two in progress (DEV-028/029), 56 not started. Client acceptance remains separate and pending.
