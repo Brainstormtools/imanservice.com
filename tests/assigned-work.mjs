@@ -1,3 +1,4 @@
+import {boqExtensionCases} from './helpers/boq-extension-cases.mjs';
 import {boqWorkstreamCases} from './helpers/boq-workstream-cases.mjs';
 import {boqNewProductCases} from './helpers/boq-new-product-cases.mjs';
 import {boqOfferInvoiceCases} from './helpers/boq-offer-invoice-cases.mjs';
@@ -351,6 +352,7 @@ await boqChangeOfferCases({pg,fs,q,one,user,eq,deny,ids});
 await boqOfferInvoiceCases({pg,fs,q,one,user,eq,deny,ids});
 await boqNewProductCases({pg,fs,q,one,user,eq,deny,ids});
 await boqWorkstreamCases({pg,fs,q,one,user,eq,deny,ids});
+await boqExtensionCases({pg,fs,q,one,user,eq,deny,ids});
 await portalAccountsCases({pg,fs,q,one,user,eq,deny,ids});
 await salesLeadScopeCases({pg,fs,q,one,user,eq,deny,ids});
 console.log(`${passed} assigned-work and portal reminder assertions passed`);
