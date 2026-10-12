@@ -10,7 +10,7 @@ export function ProjectBudgetReview({draft,records,busy,blocked,setBusy,onError,
  const start=(a:string)=>{setAction(a);setReason('');attempt.current={hash:'',id:''};};
  return <div>
   <p>Current cost draft v{draft.version}: {current?.action||'Not reviewed'}. Latest archived release: {released?`v${released.draft_version} · ${released.snapshot.currency} ${released.snapshot.total_cost}`:'None'}.</p>
-  <p>A release archives the reviewed costs. Finance, funding and procurement still use the original budget until consumer integration is implemented.</p>
+  <p>A release archives the reviewed costs and its latest version contributes to financial planned costs. Funding and procurement limits still require separate integration.</p>
   {current?.action!=='Released'&&<>
    <button disabled={busy||blocked||current?.action==='Reviewed'} onClick={()=>start('Reviewed')}>Review this budget version</button>
    <button disabled={busy||blocked||current?.action==='Returned'} onClick={()=>start('Returned')}>Return this budget version</button>
