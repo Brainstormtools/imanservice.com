@@ -1,6 +1,6 @@
 # Additional BOQ change offers
 
-This increment offers additional items on an existing converted project. The original accepted quotation stays intact. Replacing/removing original items, adding a new product workstream, updating budgets/contracts or creating/linking the change invoice are later development increments.
+Additional-item offers on an existing converted project support existing workstreams and active new project products, frozen client approval and separately created fixed invoice drafts. The original accepted quotation stays intact. Replacing/removing original items, creating executable new-product workstreams and updating budgets/contracts remain pending development.
 
 ## Manager: prepare a draft
 
@@ -12,7 +12,7 @@ Open **Project configurator → Project BOQ change offers → New additional BOQ
 | Currency | System | Fixed to the original converted sale; not a new currency choice. |
 | Offer title | Manager/admin | A clear client-visible title for the additional scope. |
 | Valid until | Manager/admin | Last business date on which the open offer can be approved. |
-| Product workstream | Manager/admin | One existing product workstream in this project. |
+| Existing product workstream or new project product | Manager/admin | Choose an existing workstream in this project, or an active new Project product without a workstream here. |
 | Description and unit | Manager/admin | Exactly what extra item/work is offered and how it is measured. |
 | Additional quantity and selling unit price | Manager/admin | Positive explicit values for the additional items, not replacements for original lines. |
 | PRA services tax %, taxable services amount and WHT % | Manager/admin | Actual applicable values. Enter 0 explicitly when none applies; the portal does not select the rate for you. |
@@ -20,7 +20,7 @@ Open **Project configurator → Project BOQ change offers → New additional BOQ
 | Draft revision reason | Manager/admin | Internal explanation retained in history; not shared with the client. |
 | Offer number and history identity/time | System | Generated reference and authenticated audit evidence. |
 
-Add more items as needed (up to 100). Use distinct item descriptions/units within a workstream; combine the quantity instead of duplicating the same item. Save the draft. Failed saves keep your entered fields for correction/retry. Refresh discards the current editor and reloads current access/data.
+Add more items as needed (up to 100). Use distinct item descriptions/units within the selected product scope; combine the quantity instead of duplicating the same item. Save the draft. Failed saves keep your entered fields for correction/retry. Refresh discards the current editor and reloads current access/data.
 
 The server calculates each additional line amount, subtotal, tax, total, WHT and net payment. Taxable services amount cannot exceed the additional subtotal. Selling prices are entered explicitly; this increment does not expose private original costs or calculate a new project budget/profit.
 
