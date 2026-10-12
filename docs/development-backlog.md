@@ -71,3 +71,5 @@ Start with DEV-028 (BOQ revisions and client approval), implementing its first b
 
 
 DEV-028 checkpoint: migration 060 and additional-item offer workflow implemented and automatically tested; release verification is recorded in the requirement documents. This does not complete the whole package. Backlog remains 58 open packages: one in progress and 57 not started in this numbered development pass. Existing implemented functionality is preserved; client acceptance is separate.
+
+DEV-028 first increment deployed through PR #77 / b6350f581aee53dc99ca59845ba6cd1eb8b7dfdf. Additional-item offers/client decisions are live; the package remains in progress. Continue controlled invoice application within DEV-028. Full client acceptance is separate.
