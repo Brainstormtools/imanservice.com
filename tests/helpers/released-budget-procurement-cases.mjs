@@ -1,3 +1,4 @@
+import {budgetMaterialMappingCases} from './budget-material-mapping-cases.mjs';
 export async function releasedBudgetProcurementCases({pg,fs,q,one,user,eq,deny,x,y}){
  await pg.exec('reset role');const signatures=['public.approve_supply_request(uuid,integer,text)','public.supply_order_action(uuid,integer,text,text)'],before=[];
  for(const s of signatures)before.push((await one('select pg_get_functiondef($1::regprocedure) d',[s])).d);
@@ -15,4 +16,5 @@ export async function releasedBudgetProcurementCases({pg,fs,q,one,user,eq,deny,x
  await deny("select supply_order_action($1,1,'Approve','QA creator attempt')",[po],'Released material budget preserves PO creator separation');await user(y.m);await q("select supply_order_action($1,1,'Approve','QA actual-rate overrun')",[po]);eq((await one('select status from sc_orders where id=$1',[po])).status,'Pending approval','Actual-rate PO overrun still requires second approver');await deny("select supply_order_action($1,2,'Approve','QA manager second attempt')",[po],'Actual-rate overrun requires distinct administrator');await user(x.a);await q("select supply_order_action($1,2,'Approve','QA distinct actual-rate review')",[po]);eq((await one('select status from sc_orders where id=$1',[po])).status,'Approved','Distinct administrator completes PO overrun approval');
  const report=(await one('select project_financials($1) r',[y.project])).r;eq(report.procurement_budget_integration_pending,false,'Financial report marks material approval-limit integration complete');eq(report.additional_material_request_integration_pending,true,'Catalogue-backed additional material requests remain explicitly pending');
  await pg.exec('reset role');eq((await one("select has_function_privilege('authenticated','portal_private.material_approval_budget(uuid)','execute') b")).b,false,'Material budget helper remains private');await user(y.client);await deny("select approve_supply_request($1,3,'QA client attempt')",[next],'Client cannot approve procurement');await user(x.a);
+ await budgetMaterialMappingCases({pg,fs,q,one,user,eq,deny,x,y,item});
 }
