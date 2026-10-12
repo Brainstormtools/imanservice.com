@@ -74,12 +74,14 @@ If invited by email, follow the invitation link to set a password. Alternatively
 ## 4. Add clients and team members
 
 1. As admin, open Clients & team and create a client company.
-2. Create/invite the person's account in Supabase Authentication. Copy its user UUID.
-3. In Clients & team → Grant account access, enter that UUID, their display name and role. For clients, select their company. For team/admin, leave company blank.
-4. Ask the person to follow their invitation or use the password-reset form. Until a profile is assigned, they see “awaiting access” and have no project access.
-5. Create a project for the company, then add tasks, milestones and shared deliverables.
+2. In Clients & team, use Create login account: enter the person's email/name and choose Client, Staff or Administrator. Clients require an existing company; Staff may receive an explicitly chosen department role and team.
+3. Click Create account & setup link. The server creates the unconfirmed Supabase Authentication identity and the CRM profile; the person confirms access when using the password setup/recovery link. No user UUID or administrator-chosen password is needed.
+4. Share the one-time link privately with that person. No email/SMS/WhatsApp is sent by account creation. Do not save links in documents, tickets or screenshots. Use Hide link after sharing.
+5. Use Edit account access for company/account role/enable-disable changes. Changing account role removes existing department memberships. Manage memberships and teams in CRM configuration; project/board assignments remain separate.
+6. If setup is interrupted, the creating administrator can Resume account setup with the saved request. Exact retries reuse the reserved identity and do not reassign existing email accounts. Existing people can receive a new setup/recovery link from their account row.
 
-This version manages invitations in the Supabase dashboard; there is no in-app email invitation service or provider-secret key. The browser administration form only assigns already-created accounts. Duplicate account assignments are rejected. Use “Disable access” in Clients & team to immediately block a person's project access while preserving historical records. All project access functions check active membership, including for existing sessions. Also revoke sessions/disable the account in Supabase Authentication when offboarding. Already-downloaded files cannot be recalled.
+Migration 058 and the authenticated portal-accounts Edge Function provide this flow. The function uses Supabase's server-injected credentials; no service key belongs in the browser or Vercel public environment. Profile/membership completion and audit commit together. Auth creation and database completion are separate services; pending requests retain a safe resume path rather than deleting an ambiguous account. Ordinary disable blocks CRM data through active-profile checks for existing sessions; it does not erase authentication identities, revoke already downloaded files or promise revocation of previously issued signed download URLs. First-administrator bootstrap and infrastructure configuration remain one-time setup tasks, not daily account management. Existing user-requested email recovery depends on configured email delivery and was not exercised in this increment. Full signed-in onboarding/password acceptance remains a separate release check.
+
 
 For changes to an existing role or company, use the owner SQL editor:
 

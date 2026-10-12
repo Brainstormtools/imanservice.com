@@ -1,0 +1,34 @@
+begin;
+do $$
+declare actor uuid;client uuid:=gen_random_uuid();company uuid:=gen_random_uuid();request uuid:=gen_random_uuid();r public.portal_account_requests;d jsonb;expected jsonb;n int:=0;
+begin
+ select id into actor from public.profiles where active and role='admin' order by id limit 1;if actor is null then raise exception 'Administrator required';end if;
+ insert into public.companies(id,name) values(company,'QA portal accounts rollback company');
+ insert into auth.users(id) values(client);insert into public.profiles(id,name,role,company_id) values(client,'QA portal accounts rollback client','client',company);
+ d:=jsonb_build_object('email',request::text||'@example.test','name','QA portal provisioned user','role','client','company_id',company,'department_role',null,'team_id',null);
+ execute 'set local role service_role';select * into r from public.reserve_portal_account(actor,request,d);
+ if r.status<>'Pending' then raise exception 'Bad reserved state';end if;n:=n+1;
+ if (public.reserve_portal_account(actor,request,d)).target_id<>r.target_id then raise exception 'Duplicate reserved target';end if;n:=n+1;
+ begin perform public.reserve_portal_account(client,gen_random_uuid(),d);raise exception 'Allowed';exception when others then if sqlerrm is distinct from 'Active administrator required' then raise;end if;end;n:=n+1;
+ begin perform public.reserve_portal_account(actor,request,d||'{"name":"Changed payload"}');raise exception 'Allowed';exception when others then if sqlerrm is distinct from 'Account request ID already used with different data' then raise;end if;end;n:=n+1;
+ begin perform public.complete_portal_account(actor,request);raise exception 'Allowed';exception when others then if sqlerrm is distinct from 'Matching server-created authentication account required' then raise;end if;end;n:=n+1;
+ execute 'reset role';insert into auth.users(id,email,raw_app_meta_data) values(r.target_id,d->>'email',jsonb_build_object('portal_request',request));
+ execute 'set local role service_role';perform public.complete_portal_account(actor,request);perform public.complete_portal_account(actor,request);perform public.record_portal_password_link(actor,r.target_id);execute 'reset role';
+ if not exists(select 1 from public.profiles where id=r.target_id and role='client' and company_id=company and active) then raise exception 'Profile scope missing';end if;n:=n+1;
+ if (select count(*) from public.portal_account_history where target_id=r.target_id and action='Account created')<>1 then raise exception 'Duplicate creation audit';end if;n:=n+1;
+ if (select count(*) from public.portal_account_history where target_id=r.target_id and action='Password setup/recovery link issued')<>1 then raise exception 'Link audit missing';end if;n:=n+1;
+ perform set_config('request.jwt.claim.sub',actor::text,true);perform set_config('request.jwt.claim.role','authenticated',true);execute 'set local role authenticated';
+ select jsonb_build_object('name',name,'role',role,'company_id',company_id,'active',active) into expected from public.profiles where id=r.target_id;
+ perform public.manage_portal_account(r.target_id,expected,'QA portal provisioned user','client',company,false);
+ if (select active from public.profiles where id=r.target_id) then raise exception 'Disable failed';end if;n:=n+1;
+ begin perform public.manage_portal_account(r.target_id,expected,'QA stale','client',company,true);raise exception 'Allowed';exception when others then if sqlerrm is distinct from 'Current account details required' then raise;end if;end;n:=n+1;
+ begin perform public.manage_portal_account(actor,'{}','QA self','admin',null,true);raise exception 'Allowed';exception when others then if sqlerrm is distinct from 'Use another administrator to change your own access' then raise;end if;end;n:=n+1;
+ begin perform public.reserve_portal_account(actor,gen_random_uuid(),d);raise exception 'Allowed';exception when insufficient_privilege then null;end;n:=n+1;
+ perform set_config('request.jwt.claim.sub',client::text,true);
+ if exists(select 1 from public.portal_account_requests where id=request) or exists(select 1 from public.portal_account_history where target_id=r.target_id) then raise exception 'Client audit leak';end if;n:=n+1;
+ begin perform public.manage_portal_account(r.target_id,expected,'QA escalation','admin',null,true);raise exception 'Allowed';exception when others then if sqlerrm is distinct from 'Active administrator required' then raise;end if;end;n:=n+1;
+ execute 'reset role';if has_function_privilege('anon','public.manage_portal_account(uuid,jsonb,text,text,uuid,boolean)','EXECUTE') or has_function_privilege('authenticated','public.complete_portal_account(uuid,uuid)','EXECUTE') then raise exception 'Provisioning privileges exposed';end if;n:=n+1;
+ perform set_config('qa.portal_accounts_result',jsonb_build_object('passed',true,'assertions',n,'fixtures_rollback',true)::text,true);
+end$$;
+select current_setting('qa.portal_accounts_result')::jsonb as qa_result;
+rollback;
