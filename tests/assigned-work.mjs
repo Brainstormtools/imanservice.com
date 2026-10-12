@@ -1,3 +1,4 @@
+import {boqChangeOfferCases} from './helpers/boq-change-offer-cases.mjs';
 import {changeFulfilmentCases} from './helpers/change-fulfilment-cases.mjs';
 import {portalAccountsCases} from './helpers/portal-accounts-cases.mjs';
 import {salesLeadScopeCases} from './helpers/sales-lead-scope-cases.mjs';
@@ -343,6 +344,7 @@ await projectCharterCases({pg,fs,q,one,user,eq,deny,ids});
 await projectSurveyCases({pg,fs,q,one,user,eq,deny,ids});
 await projectChangesCases({pg,fs,q,one,user,eq,deny,ids});await taskChangeLinkageCases({pg,fs,q,one,user,eq,deny,ids});await projectTrainingCases({pg,fs,q,one,user,eq,deny,ids});
 await changeFulfilmentCases({pg,fs,q,one,user,eq,deny,ids});
+await boqChangeOfferCases({pg,fs,q,one,user,eq,deny,ids});
 await portalAccountsCases({pg,fs,q,one,user,eq,deny,ids});
 await salesLeadScopeCases({pg,fs,q,one,user,eq,deny,ids});
 console.log(`${passed} assigned-work and portal reminder assertions passed`);

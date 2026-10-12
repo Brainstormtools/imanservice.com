@@ -1,0 +1,43 @@
+# Additional BOQ change offers
+
+This increment offers additional items on an existing converted project. The original accepted quotation stays intact. Replacing/removing original items, adding a new product workstream, updating budgets/contracts or creating/linking the change invoice are later development increments.
+
+## Manager: prepare a draft
+
+Open **Project configurator → Project BOQ change offers → New additional BOQ offer**. Select an existing Approved internal change request for a converted project.
+
+| Field | Who enters it | Meaning |
+|---|---|---|
+| Approved internal change request | Manager/admin | The existing approved scope request authorizing preparation of this offer. |
+| Currency | System | Fixed to the original converted sale; not a new currency choice. |
+| Offer title | Manager/admin | A clear client-visible title for the additional scope. |
+| Valid until | Manager/admin | Last business date on which the open offer can be approved. |
+| Product workstream | Manager/admin | One existing product workstream in this project. |
+| Description and unit | Manager/admin | Exactly what extra item/work is offered and how it is measured. |
+| Additional quantity and selling unit price | Manager/admin | Positive explicit values for the additional items, not replacements for original lines. |
+| PRA services tax %, taxable services amount and WHT % | Manager/admin | Actual applicable values. Enter 0 explicitly when none applies; the portal does not select the rate for you. |
+| Terms | Manager/admin | The client-visible terms for this offer. |
+| Draft revision reason | Manager/admin | Internal explanation retained in history; not shared with the client. |
+| Offer number and history identity/time | System | Generated reference and authenticated audit evidence. |
+
+Add more items as needed (up to 100). Use distinct item descriptions/units within a workstream; combine the quantity instead of duplicating the same item. Save the draft. Failed saves keep your entered fields for correction/retry. Refresh discards the current editor and reloads current access/data.
+
+The server calculates each additional line amount, subtotal, tax, total, WHT and net payment. Taxable services amount cannot exceed the additional subtotal. Selling prices are entered explicitly; this increment does not expose private original costs or calculate a new project budget/profit.
+
+## Administrator: publish or withdraw
+
+Review the exact draft items, prices, tax inputs and client-visible terms. Tick the review acknowledgement, enter an internal publication reason and select **Publish BOQ offer to client portal**. Only the latest draft for a request can be published.
+
+Publishing freezes that offer. To correct an open offer, create a new draft linked to the same Approved request and publish it; the earlier open publication becomes Superseded. Every draft/publication/history record remains. An administrator can withdraw an open publication with a client-visible reason. An Accepted offer cannot be withdrawn, edited or superseded; further scope needs a new internal request.
+
+## Client: approve or decline
+
+Open **My quotations → My BOQ change offers**. Review the additional items, totals, validity and terms. Choose Approve or Decline explicitly. Approval requires the consent checkbox. Decline requires a reason. Submit the decision; the portal records the actual account, time and exact offer version.
+
+Only active clients of the same company can decide. Expired, superseded, withdrawn or already decided offers cannot receive a new decision. A manager/administrator cannot approve on behalf of the client through this workflow.
+
+The displayed offer can be downloaded as PDF; a summary CSV is available. These exports contain public offer content, not internal draft reasons, request evidence or original private costs. Actual browser/download/device acceptance is performed by the client's team.
+
+## What the recorded approval means
+
+It records approval of this exact additional BOQ offer. It does not silently update the original quotation, project budget, contract, tasks, stock requests or invoice. Those changes must use their separately developed, controlled application workflows. Completed projects and released handovers block new drafts, publication and client decisions; administrator withdrawal remains available for an obsolete open offer. No external email/SMS/WhatsApp is sent.

@@ -37,7 +37,7 @@ Start with DEV-028 (BOQ revisions and client approval), implementing its first b
 | DEV-025 | Training | Account-linked participants and verified attendance | Pending development |
 | DEV-026 | Training | Training evidence uploads and approved-activity linkage | Pending development |
 | DEV-027 | Training | Documented competence/certification workflow | Pending development |
-| DEV-028 | Commercial change approvals | Reviewed BOQ revisions and client approval | Pending development |
+| DEV-028 | Commercial change approvals | Reviewed BOQ revisions and client approval | In progress: additional-item offer/client-decision increment; remaining scope tracked in requirement docs |
 | DEV-029 | Commercial change approvals | Reviewed budget releases/revisions | Pending development |
 | DEV-030 | Commercial change approvals | Reviewed contract revisions and client sign-off | Pending development |
 | DEV-031 | Supply chain | Barcode workflow | Pending development |
@@ -68,3 +68,6 @@ Start with DEV-028 (BOQ revisions and client approval), implementing its first b
 | DEV-056 | HR/performance | Project allocation of overtime premiums | Pending development |
 | DEV-057 | HR/performance | Holiday calendar feeds | Pending development |
 | DEV-058 | Design | Remaining specified design-system alignment | Pending development |
+
+
+DEV-028 checkpoint: migration 060 and additional-item offer workflow implemented and automatically tested; release verification is recorded in the requirement documents. This does not complete the whole package. Backlog remains 58 open packages: one in progress and 57 not started in this numbered development pass. Existing implemented functionality is preserved; client acceptance is separate.
