@@ -1,6 +1,6 @@
 # Additional BOQ change offers
 
-Additional-item offers on an existing converted project support existing workstreams and active new project products, frozen client approval and separately created fixed invoice drafts. The original accepted quotation stays intact. Replacing/removing original items, creating executable new-product workstreams and updating budgets/contracts remain pending development.
+Additional-item offers on an existing converted project support existing workstreams and active new project products, frozen client approval and separately created fixed invoice drafts. The original accepted quotation stays intact. Reviewed new-product workstream application is available as a separate action below. Replacing/removing original items, extending/adopting existing products and updating budgets/contracts remain pending development.
 
 ## Manager: prepare a draft
 
@@ -58,4 +58,12 @@ Each additional item now lets the manager choose either an existing project work
 
 The administrator reviews and publishes the exact draft. Publication rechecks product eligibility and freezes the current product name with the itemized scope; later catalog changes do not rewrite a published or accepted offer. The client explicitly approves/declines that frozen offer. A separately created invoice draft follows the existing accepted-offer billing workflow. No new Deal is created.
 
-This increment covers commercial offers for new products. It does not yet add a Deal product line, select a task template, create an executable workstream, assign people or release a budget. Reviewed new-workstream/template application and existing-line replacement/removal remain pending DEV-028 work. If eligibility changes before publication, refresh and revise the draft to the current correct scope.
+Commercial publication/approval alone does not add a Deal product line, choose a template, create an executable workstream, assign people or release a budget. Use the separately reviewed workstream application below. Existing-line replacement/removal and existing-workstream extensions remain pending DEV-028 work. If eligibility changes before publication, refresh and revise the draft to the current correct scope.
+
+## Applying a reviewed new-product workstream
+
+An accepted new-product offer now has **Accepted new-product workstreams** controls for assigned managers/administrators. Choose its frozen product name and a current active configured template, enter every parameter and the planning start date manually, and calculate the preview. Template defaults are not silently used. Review task quantities, dates, minutes, crew requirements, dependencies, checklists, tools and conditions against the accepted scope. Parameters are not inferred from commercial item quantities; reviewed mapping remains a human decision.
+
+Only an active administrator can tick the exact-review checkbox, enter an application reason and apply. The server recomputes and compares the exact preview, checks the accepted source/current template/project/handover state, then atomically adds the new product line, workstream, internal tasks, checklists and dedicated phase milestones. The product line uses its accepted item subtotal without allocating shared tax by guesswork. Tasks are **unassigned**; manually assign people later in Tasks. Dates use the existing serial eight-hour planning convention and do not prove worker capacity or resource reservations.
+
+Original sale, accepted budget, original workstream plans, project deadline and existing milestone dates are preserved. The new workstream has its own milestone dates. Invoice creation/issuance, budget releases and project deadline revisions remain separate actions. Frozen application receipts keep accepted source/version/consent, template/parameters/plan, actual task and milestone IDs, reason and actual actor/time. Later task revisions do not rewrite this receipt. Exact retries return the original workstream; competing/changed applications cannot duplicate it. An existing/dropped Deal product or existing project workstream requires a separate reviewed adoption/extension path; it is not silently revived.
