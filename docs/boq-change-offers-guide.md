@@ -41,3 +41,13 @@ The displayed offer can be downloaded as PDF; a summary CSV is available. These 
 ## What the recorded approval means
 
 It records approval of this exact additional BOQ offer. It does not silently update the original quotation, project budget, contract, tasks, stock requests or invoice. Those changes must use their separately developed, controlled application workflows. Completed projects and released handovers block new drafts, publication and client decisions; administrator withdrawal remains available for an obsolete open offer. No external email/SMS/WhatsApp is sent.
+
+## Invoice drafts from accepted additional offers
+
+In Project BOQ change offers, an administrator opens an **Accepted** offer and enters the invoice date, due date, actual bank transfer instructions and internal reason. Create accepted BOQ invoice draft creates one Draft invoice linked to that exact client-approved publication and project finance view. The original sale, budget and invoice stay unchanged. Managers see only the linked invoice number/status/dates/amount; clients see the link only after issuance.
+
+The accepted gross subtotal, explicit service-tax basis/rate and gross total are fixed. Invoice lines summarize the scope outside that tax basis and taxable services; they do not guess a tax allocation for individual BOQ items. The accepted offer remains the itemized scope and complete commercial terms. Large amounts split into exact summary buckets within existing invoice-line limits. WHT is referenced in invoice notes but creates no receipt, credit or automatic net settlement; recording/reconciling withholding remains a separate finance gap.
+
+While Draft, the administrator may use **Save draft payment details** here to change only due date and bank instructions with a reason. The previous/current values, actor and time are retained privately. Concurrent stale revisions require Refresh BOQ offers. Failed actions retain the entered fields. Generic invoice editing cannot alter the source, amount or items. Go to **Invoices** to issue or void using the existing controls. Creating a draft does not issue it or send a message. A repeated identical creation returns the existing invoice; a voided source cannot automatically generate a replacement. Replacement/rebilling is a separate pending workflow.
+
+Client live acceptance: approve an actual agreed offer; ask the administrator to create and issue its invoice; confirm the issued invoice and source reference under the correct client company, amounts, bank instructions and exports. The client owns these signed-in/browser/device checks; automated development checks do not mark them passed.
