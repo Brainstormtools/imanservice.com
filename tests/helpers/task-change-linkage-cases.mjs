@@ -1,3 +1,4 @@
+import {taskPlanProposalCases} from './task-plan-proposal-cases.mjs';
 export async function taskChangeLinkageCases({pg,fs,q,one,user,eq,deny,ids}){
  await pg.exec('reset role');await pg.exec(await fs.readFile(new URL('../../supabase/055_task_change_linkage.sql',import.meta.url),'utf8'));
  const project=(await one("insert into projects(company_id,title) values($1,'QA linked change project') returning id",[ids.a])).id;
@@ -19,4 +20,5 @@ export async function taskChangeLinkageCases({pg,fs,q,one,user,eq,deny,ids}){
  await user(ids.team);await deny(sql,[...args.slice(0,3),1,...args.slice(4)],'Team cannot apply linked change');await user(ids.clientA);await deny(sql,[...args.slice(0,3),1,...args.slice(4)],'Client cannot apply linked change');eq((await q('select * from crm_task_plan_history where task_id=$1',[task])).length,0,'Client cannot read linked history');await user(ids.admin);await deny('update crm_task_plan_history set change_id=null where task_id=$1',[task],'Direct linkage rewrite denied');eq((await one("select has_function_privilege('anon','public.apply_crm_task_change(uuid,integer,uuid,integer,numeric,numeric,integer,text,text,text)','EXECUTE') allowed")).allowed,false,'Anonymous application denied');
  await q("update tasks set status='In progress' where id=$1",[task]);await deny(sql,[...args.slice(0,3),1,...args.slice(4)],'Started work rejects linked change');await q("update tasks set status='To do' where id=$1",[task]);await pg.exec('reset role');await q("insert into crm_phases(project_id,phase,status) values($1,0,'Submitted')",[project]);await user(ids.admin);await deny(sql,[...args.slice(0,3),1,...args.slice(4)],'Reviewed phase rejects linked change');await pg.exec('reset role');await q('delete from crm_phases where project_id=$1',[project]);await user(ids.admin);
  await deny(sql,[...args.slice(0,4),0,...args.slice(5)],'Invalid values roll back linkage');eq((await q('select * from crm_task_plan_history where task_id=$1',[task])).length,1,'Failed application leaves linked evidence unchanged');
+ await taskPlanProposalCases({pg,fs,q,one,user,eq,deny,ids,project,task,change});
 }
