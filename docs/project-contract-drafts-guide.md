@@ -1,0 +1,11 @@
+# Private project contract revision drafts
+
+Administrator → Project configurator → Private project contract revision drafts.
+
+Choose an exact client-Accepted additional BOQ offer with recorded consent. Enter the proposal title, revision summary, proposed contract terms, proposed payment wording and revision reason manually. New fields are blank. Do not substitute assumed legal terms, amounts or payment policies for actual business input. Source currency is fixed; the draft does not calculate a new contract value.
+
+Save the private unreviewed proposal. One versioned draft is allowed per accepted offer. The original accepted source and complete original Sale record are frozen as administrator-only evidence, including its private planning basis. An expected-version amendment retains those original snapshots, records actual actor/time/reason and archives both old and new wording. Failed saves retain fields and retry identity. Exact delayed retries return the same draft without restoring earlier wording; changed or stale requests must refresh before editing. Completed projects and released handovers block further saves.
+
+Inspect current proposed wording and frozen source under the draft. Export the private current-draft CSV or its reasoned revision-history CSV. These contain private sale/source evidence and are available only to active administrators; clients, managers, workers and anonymous/disabled users have no access. A refresh rechecks authorization and closes unsaved editors. After a read/download failure, refresh to recheck access and retry.
+
+A saved draft is internal and unreviewed. Exact-version review/return, client publication/sign-off and operative contract/revenue integration remain subsequent development. Saving does not amend the original sale, accepted BOQ, invoices, budget, funding, material requests, actual assignments or existing AMC/SLA contract documents/settings. No external email/SMS/WhatsApp is sent. The client owns signed-in workflow/export/device acceptance.
