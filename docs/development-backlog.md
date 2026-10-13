@@ -39,7 +39,7 @@ Start with DEV-028 (BOQ revisions and client approval), implementing its first b
 | DEV-027 | Training | Documented competence/certification workflow | Pending development |
 | DEV-028 | Commercial change approvals | Reviewed BOQ revisions and client approval | In progress: offers, client decisions, invoice drafts and reviewed new/existing-workstream tasks; replacement/removal/adoption remain |
 | DEV-029 | Commercial change approvals | Reviewed budget releases/revisions | In progress: private costs/reviewed release archives and effective financial planning/material approval limits; manual catalogue mapping drafts; mapping reviews and initial material requests; subsequent quantity/product/contract gaps pending |
-| DEV-030 | Commercial change approvals | Reviewed contract revisions and client sign-off | Pending development |
+| DEV-030 | Commercial change approvals | Reviewed contract revisions and client sign-off | In progress: private accepted-scope contract wording drafts/history; review, client sign-off and operative contract integration pending |
 | DEV-031 | Supply chain | Barcode workflow | Pending development |
 | DEV-032 | Supply chain | Supplier defaults | Pending development |
 | DEV-033 | Supply chain | Reorder-generated purchase requests | Pending development |
@@ -115,3 +115,5 @@ DEV-029 seventh increment release (13 October 2026, 16:38 PKT): PR #89 / c93b69a
 DEV-029 receipt history correction (13 October 2026, 23:16 PKT): generated-request evidence now remains available for the exact project/accepted offer across later unmapped cost releases and mapping revisions, with complete frozen approval/manual-generation CSV. Validation/release checkpoint is in both requirement documents. No migration or business rule changes; backlog remains 58 open packages, two in progress and 56 not started. Client acceptance remains pending.
 
 DEV-029 receipt history correction release (13 October 2026, 23:22 PKT): PR #90 / 4de13a9b5ad87ab26a6e258934e66b2cbd7bb283 merged; exact production dpl_6GFEqmWN259vf8GBSwKzR5dmps2t READY/domain mapping verified, /portal HTTP 200 and recent error/fatal scan empty. Full 3,379 checks/75 suites, TypeScript/build passed. No migration. Both requirement documents preserve evidence and precise independent contract/product resume point. Backlog remains 58 open packages: two in progress, 56 not started. Client acceptance remains pending.
+
+DEV-030 first increment (14 October 2026, 02:39 PKT): private manual contract revision drafts for exact accepted additional BOQ offers, immutable reasoned history/frozen original sale/source and scoped CSV under migration 072. Validation/release checkpoint is in both requirement documents. No operative contract/revenue/client sign-off changes. Backlog remains 58 open packages: three in progress (DEV-028/029/030), 55 not started; client acceptance remains pending.
