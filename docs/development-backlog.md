@@ -51,7 +51,7 @@ Start with DEV-028 (BOQ revisions and client approval), implementing its first b
 | DEV-039 | Supply chain | Vendor RMA/returns and credit/debit-note execution | Pending development |
 | DEV-040 | Supply chain | Store sales | Pending development |
 | DEV-041 | Supply chain | Reviewed legacy opening-stock import | Pending development |
-| DEV-042 | Finance | Category/product cost allocations | Pending development |
+| DEV-042 | Finance | Category/product cost allocations | In progress: private Approved-expense manual product allocation drafts/history; review, application, product summaries and other cost sources pending |
 | DEV-043 | Finance | Project portfolio financial measures and actual date variance | Pending development |
 | DEV-044 | Finance | Full applicable invoice tax/charge accounting | Pending development |
 | DEV-045 | Finance | Immutable final financial settlement | Pending development |
@@ -135,3 +135,5 @@ DEV-030 fourth increment release (14 October 2026, 03:31 PKT): PR #94 / d71d74fa
 DEV-030 financial reference increment (15 October 2026, 01:54 PKT): Project Financials/CSV/PDF separately show latest client-Accepted additional quoted subtotal/tax/gross/WHT/receivable, counted once per offer under migration 076. Existing operative contract/profit/invoice/cash figures are unchanged. Validation/release checkpoint is in both requirement documents; operative model remains pending concrete documented rules. Backlog remains 58 open packages, three in progress and 55 not started. Client acceptance remains pending.
 
 DEV-030 financial reference release (15 October 2026, 02:00 PKT): PR #95 / 09b14c6d6946704864f22e0c9e4d4e664d359462 merged; exact production dpl_4u2a2VSJheQBinUGULQmgYPGDdaE READY/domain mapping verified, /portal HTTP 200 and recent error/fatal scan empty. Full 3,687 checks/80 suites, TypeScript/build and applied migration 076 readonly verification passed. Accepted quoted reference metrics/count/basis/CSV/PDF deployed; operative contribution needs concrete documented business rules. Independent DEV-042 cost allocation can be inspected next; both requirements preserve exact resume points. Backlog remains 58 open packages, three in progress and 55 not started. Client acceptance remains pending.
+
+DEV-042 first increment (15 October 2026, 02:15 PKT): Accounts-only manual allocation proposals for exact Approved PKR project expenses, fixed category/amount, actual workstream splits, calculated unallocated remainder and immutable history/CSV under migration 077. Validation/release checkpoint is in both requirement documents. No actual expense/payment/cost/report application; review/application/labour/stock/office allocation remain pending. Backlog remains 58 open packages, four in progress and 54 not started. Client acceptance remains pending.
