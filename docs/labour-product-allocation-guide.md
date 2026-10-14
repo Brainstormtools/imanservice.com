@@ -1,0 +1,9 @@
+# Private saved-labour product allocation drafts
+
+Accounts/administrator → Finance → Expenses → Private labour cost product allocation drafts.
+
+Choose an actual positive saved labour-cost record from an Approved PKR project activity. The source shows its saved hours, saved rate and recorded cost; these stay fixed. Later rate configuration changes do not recalculate the approved saved cost. Zero-cost or Voided sources are excluded. New source/workstream/amount/reason fields start blank; select existing same-project workstreams and manually enter actual positive split amounts up to two decimals. One row per workstream; totals cannot exceed saved cost. Partial drafts retain an explicit unallocated remainder. No distribution weight, salary, rate or assignment is supplied automatically.
+
+Save with an actual reason. A proposal is unique to the saved cost and retains expected activity/draft versions. Revision fixes the source and requires a fresh reason; changed original saved hours/rate/cost/approval requires separate reconciliation. Immutable history freezes full saved cost, Approved activity context, product identities and before/after records with actual actor/time/reason. Unchanged failed/delayed retries preserve identity without undoing newer splits. Accounts permission revocation/disablement removes private access. Refresh rechecks access and closes editors; after read/download failures, refresh and retry.
+
+Inspect saved hours/rate/cost and frozen splits; export current draft/history CSV for complete source/revision provenance. These remain unapplied drafts: review/return/application and labour product reporting are later increments. They change no recorded labour/project cost, rate/hours, payroll/cash, expense, stock, revenue or assignment. Net-stock and office allocations remain separate gaps. Client owns live workflow/export/device acceptance, which remains pending.
