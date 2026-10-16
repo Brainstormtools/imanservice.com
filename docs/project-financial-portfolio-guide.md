@@ -22,4 +22,14 @@ Use Financial measure view after applying any project/customer/status filters.
 
 Units distinguish PKR, percent, counts and hours. Export filtered portfolio financials CSV follows the selected view's visible columns and filtered project rows, retaining the selected view and complete current project JSON/basis. Switching views does not recalculate financials or make another read; refresh resets to Overview and clears project/status filters.
 
-Category-cost portfolio presentation and historical actual-date variance remain separate pending work.
+Historical actual-date variance remains separate pending work.
+
+## Category costs
+
+Select Category costs to view actual recorded category rows for the currently filtered projects. This sixth view preserves the five scalar views/43 measures. Approved expenses, net stock, saved hourly labour and recorded category cost are retained exactly as the source reports them; repeated source rows stay separate. No commitments/vendor liabilities or unapplied office distributions are added.
+
+Coverage lists each filtered project with its recorded category row count, confirmed empty categories or unavailable category source. Incomplete/malformed category arrays are unavailable; they do not create zero costs or partial rows. Missing individual amounts stay Not recorded.
+
+Export filtered portfolio category costs CSV contains only visible actual category rows, original row positions, full category/project source JSON, the exact filtered-project coverage JSON and observation/budget/limitation basis. Project recorded cost is a repeated reference only. If no category rows exist, export is disabled; the coverage list explains confirmed empty versus unavailable sources.
+
+Filters scope both category rows and coverage. Switching views makes no extra read. A download error blocks portfolio controls until refresh; refresh clears filters and returns to Overview. Access changes clear category data/export alongside the full private portfolio.
