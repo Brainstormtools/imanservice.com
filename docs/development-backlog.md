@@ -1,6 +1,6 @@
 # Remaining portal development backlog
 
-Current development count (17 October 2026): **56 open packages — five in progress and 51 not started; DEV-019/020 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
+Current development count (17 October 2026): **56 open packages — six in progress and 50 not started; DEV-019/020 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
 
 Counted on 12 October 2026 (Asia/Karachi) against docs/crm-acceptance.md and docs/workbook-requirements.md, after PR #76 / migration 059.
 
@@ -32,7 +32,7 @@ Start with DEV-028 (BOQ revisions and client approval), implementing its first b
 | DEV-018 | Resources | Worker skill/capacity/availability rules | Pending development |
 | DEV-019 | Lessons | Cross-project reviewed lesson adoption | Development complete: explicit admin Reviewed-source-to-target-Draft adoption, existing separate target review, immutable provenance/retries/access and scoped CSV deployed in PR #110; client acceptance pending |
 | DEV-020 | Charter and communication | Structured communication recipients/schedules and portal execution tracking | Development complete: manual structured charter-linked drafts, exact-version administrator review/return, actual occurrence evidence, immutable reasoned corrections/provenance and scoped CSV deployed through PR #115; client acceptance pending |
-| DEV-021 | Charter and communication | Client charter publication/sign-off | Pending development |
+| DEV-021 | Charter and communication | Client charter publication/sign-off | In progress: private manual client charter copy preparation; publication/withdrawal and sign-off pending |
 | DEV-022 | Surveys | Reviewed structured survey batch imports | Pending development |
 | DEV-023 | Surveys | Survey unit/calculation and template/BOQ linkage | Pending development |
 | DEV-024 | Surveys | Survey instrument/calibration records and evidence uploads | Pending development |
@@ -235,3 +235,9 @@ DEV-020 manual execution increment (17 October 2026): actual manually entered oc
 Communication execution validation checkpoint: full 4,784 checks across 99 suites, TypeScript/build/whitespace passed. Migration 092 applied with readonly permission/empty occurrence-table evidence. Exact preview/merge/production verification pending; do not reapply 065–092.
 
 DEV-020 development closure (17 October 2026, 21:35 PKT): PR #115 / e3de96b0a0eaf4a6ae3b53c070c160cf6fb490c7 merged; exact production dpl_4M4GfwyJDDz4mYhzMB42dHidbmmi READY/domain verified, /portal HTTP 200 and recent error/fatal scan empty. Full 4,784 checks/99 suites, TypeScript/build and migration 092 readonly checks passed. Manual structured communication planning/review/actual execution evidence, immutable corrections/provenance and scoped CSV deployed through 090–092. DEV-020 development closed for documented manual workflow; external delivery excluded and DEV-021 client publication/sign-off separate. Original catalogue 58 tracked: OPEN count now 56 (five in progress DEV-028/029/030/042/043, 51 not started), two development-complete DEV-019/020. Next inspect DEV-021 against current requirements/access/decision models; ask for missing concrete business definitions or select independent survey/training gap. Both requirements preserve precise resume points. Date/office rules unanswered; full client acceptance pending. Do not reapply 065–092. Documentation-only release checkpoint.
+
+DEV-021 first increment (17 October 2026): private manually written client charter copies linked to exact Reviewed source, immutable revisions/provenance and scoped private CSV prepared under migration 093. Seven new UI checks passed; initial SQL CASE syntax/sibling key issues corrected before migration. Final database/full validation/migration/release pending; both requirement documents preserve precise resume points. 56 open packages, six in progress, 50 not started; DEV-019/020 complete. No client visibility/sign-off or external delivery activated; client acceptance pending.
+
+Client copy database checkpoint: 3,543 assertions passed (35 new copy checks), existing charter UI and TypeScript/build/whitespace passed. Migration 093 applied once; readonly scoped SELECT RLS/blocked writes/anonymous access/empty search path/zero copy-history rows verified. Next exact-version administrator copy review/return before publication/withdrawal/client sign-off. Full regression/exact release pending; do not reapply 065–093.
+
+Client copy validation checkpoint: full 4,826 checks across 100 suites, TypeScript/build/whitespace passed. Migration 093 applied with readonly permission/empty copy-history table evidence. Exact preview/merge/production verification pending; do not reapply 065–093.
