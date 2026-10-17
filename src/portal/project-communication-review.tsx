@@ -1,0 +1,17 @@
+import React,{useRef,useState} from 'react';
+import {db,check,type Row} from './client';
+import {csvText,downloadText} from './business-utils';
+
+export function ProjectCommunicationReview({draft,records,admin,busy,blocked,setBusy,onError,onSaved}:{draft:Row;records:Row[];admin:boolean;busy:boolean;blocked:boolean;setBusy:(v:boolean)=>void;onError:(v:string)=>void;onSaved:()=>void}){
+ const [action,setAction]=useState(''),[reason,setReason]=useState('');const attempt=useRef({hash:'',id:''});
+ const events=records.filter(r=>r.plan_id===draft.id&&r.project_id===draft.project_id).sort((a,b)=>b.sequence-a.sequence),current=events.find(r=>r.plan_version===draft.version);
+ const start=(a:string)=>{setAction(a);setReason('');attempt.current={hash:'',id:''};};
+ return <section><h3>Communication plan review</h3><p>Current communication draft v{draft.version}: {current?.action||'Not reviewed'}. Review requires the exact current Reviewed charter and freshly captured source snapshot. Return can record corrections after source changes or archival. Decisions preserve full plan/source evidence. Later draft revisions require their own review; portal execution and client publication remain separate.</p>
+  <button hidden={!admin} disabled={!admin||busy||blocked||current?.action==='Reviewed'} onClick={()=>start('Reviewed')}>Review this communication plan version</button><button hidden={!admin} disabled={!admin||busy||blocked||current?.action==='Returned'} onClick={()=>start('Returned')}>Return this communication plan version</button>
+  {admin&&action&&<form className="p-form" onSubmit={async e=>{e.preventDefault();if(busy)return;const args={p_plan:draft.id,p_version:draft.version,p_action:action,p_reason:reason},hash=JSON.stringify(args);if(attempt.current.hash!==hash)attempt.current={hash,id:crypto.randomUUID()};setBusy(true);onError('');try{check(await db!.rpc('review_project_communication_draft',{...args,p_id:attempt.current.id}));setAction('');onSaved();}catch(e:any){onError(e.message);}finally{setBusy(false);}}}>
+   <p>{action} · exact communication draft v{draft.version}</p><label className="p-field">Communication plan review reason<textarea required minLength={3} maxLength={2000} value={reason} disabled={busy} onChange={e=>setReason(e.target.value)}/></label><button disabled={busy||reason.trim().length<3}>Confirm communication plan {action.toLowerCase()}</button><button type="button" disabled={busy} onClick={()=>setAction('')}>Close communication plan review</button>
+  </form>}
+  <button disabled={busy||blocked||!events.length} onClick={()=>{try{downloadText('project-communication-review-history.csv',csvText([['Action ID','Plan ID','Draft version','Action sequence','Action','Actual actor','Recorded time','Reason','Frozen plan JSON','Current charter at action JSON','Canonical request JSON'],...events.map(r=>[r.id,r.plan_id,r.plan_version,r.sequence,r.action,r.actor_id,r.created_at,r.reason,JSON.stringify(r.snapshot),JSON.stringify(r.charter_snapshot),JSON.stringify(r.request)])]));}catch(e:any){onError(e.message);}}}>Export communication plan review CSV</button>
+  {events.map(r=><details key={r.id}><summary>Communication draft v{r.plan_version} · {r.action} · {r.actor_id} · {r.created_at} · {r.reason}</summary><pre className="p-pre">{JSON.stringify(r.snapshot,null,2)}</pre><pre className="p-pre">{JSON.stringify(r.charter_snapshot,null,2)}</pre></details>)}
+ </section>;
+}
