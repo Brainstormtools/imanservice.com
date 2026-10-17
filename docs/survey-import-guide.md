@@ -1,0 +1,9 @@
+# Survey CSV batch drafts
+
+Open the Project survey measurements register in the Configurator and choose New survey import draft. Select the actual project and paste actual CSV with these eight headers, in any order: title, location, notes, method, evidence, unit, value, measured_on. No additional, duplicate or missing header is accepted. Enter an explicit decimal value (including signed/zero values, up to six decimal places), actual unit and ISO measurement date. Notes/method/evidence may be blank for Draft staging.
+
+Preview survey CSV shows every supplied data row. Changing CSV clears the preview; preview again before saving. Technical limits: 1–100 rows and 1 MB. The server validates all rows before staging anything. An invalid later row leaves no partial saved batch. Identical rows remain separate ordered input rows; no deduplication or unit conversion is inferred.
+
+Save survey batch draft requires an actual manual reason and records private Draft source evidence only. Revise survey import draft keeps the same project, requires a fresh reason/preview and creates immutable before/after/request/actual actor/time history. Negative values and formula-like notes stay unchanged in the editor; private audit CSV exports use production spreadsheet escaping. Refresh after stale version/access errors.
+
+Assigned managers/administrators can inspect their scoped drafts/history. Clients and ordinary workers cannot. Direct edits/deletes bypassing the workflow are denied. No actual survey registry measurement or review is created by staging. Exact-version administrator batch review/return and atomic application remain pending; file/XLSX mapping, calculation/unit conversion, BOQ/template linkage and instrument/evidence-upload gaps are separate later work. No real data or standards are supplied by this release.
