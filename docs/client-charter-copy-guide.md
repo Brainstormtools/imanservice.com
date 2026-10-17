@@ -6,4 +6,9 @@ The private draft freezes the exact source charter. Revise client charter copy k
 
 The copy and history exports are private and include full internal source provenance, actual actors/times/reasons and immutable revisions. They are intended for authorized internal users. Clients cannot read these tables or exports.
 
-This increment prepares drafts only. Explicit client publication/withdrawal and client sign-off remain pending. It does not approve contractual scope, alter budgets, assign signers, deliver messages or give clients access. Actual business wording is supplied by authorized users.
+This increment prepares drafts only. Administrator review/return is separate from client publication/withdrawal and client sign-off, which remain pending. It does not approve contractual scope, alter budgets, assign signers, deliver messages or give clients access. Actual business wording is supplied by authorized users.
+
+
+## Internal copy review
+
+An active administrator opens Review this client charter copy version or Return this client charter copy version and supplies the actual reason. Review requires exact current Reviewed source evidence captured in the copy; refresh and explicitly revise a stale copy first. Return can record corrections after source changes/archive. Later copy versions need new review; previous review/source evidence remains immutable. Assigned managers can inspect the scoped review archive and private CSV without administrator decision controls. Review does not publish or obtain client sign-off.

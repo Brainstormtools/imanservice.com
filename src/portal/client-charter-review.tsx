@@ -1,0 +1,17 @@
+import React,{useRef,useState} from 'react';
+import {db,check,type Row} from './client';
+import {csvText,downloadText} from './business-utils';
+
+export function ClientCharterReview({draft,records,admin,busy,blocked,setBusy,onError,onSaved}:{draft:Row;records:Row[];admin:boolean;busy:boolean;blocked:boolean;setBusy:(v:boolean)=>void;onError:(v:string)=>void;onSaved:()=>void}){
+ const [action,setAction]=useState(''),[reason,setReason]=useState('');const attempt=useRef({hash:'',id:''});
+ const events=records.filter(r=>r.copy_id===draft.id&&r.project_id===draft.project_id).sort((a,b)=>b.sequence-a.sequence),current=events.find(r=>r.copy_version===draft.version);
+ const start=(a:string)=>{setAction(a);setReason('');attempt.current={hash:'',id:''};};
+ return <section><h3>Client charter copy review</h3><p>Current client charter copy v{draft.version}: {current?.action||'Not reviewed'}. Review requires the exact current Reviewed charter and freshly captured source snapshot. Return can record corrections after source changes or archival. Decisions preserve full plan/source evidence. Later copy revisions require their own review. Publication, withdrawal and client sign-off remain pending; this is internal review only.</p>
+  <button hidden={!admin} disabled={!admin||busy||blocked||current?.action==='Reviewed'} onClick={()=>start('Reviewed')}>Review this client charter copy version</button><button hidden={!admin} disabled={!admin||busy||blocked||current?.action==='Returned'} onClick={()=>start('Returned')}>Return this client charter copy version</button>
+  {admin&&action&&<form className="p-form" onSubmit={async e=>{e.preventDefault();if(busy)return;const args={p_copy:draft.id,p_version:draft.version,p_action:action,p_reason:reason},hash=JSON.stringify(args);if(attempt.current.hash!==hash)attempt.current={hash,id:crypto.randomUUID()};setBusy(true);onError('');try{check(await db!.rpc('review_client_charter_draft',{...args,p_id:attempt.current.id}));setAction('');onSaved();}catch(e:any){onError(e.message);}finally{setBusy(false);}}}>
+   <p>{action} · exact client charter copy v{draft.version}</p><label className="p-field">Client charter copy review reason<textarea required minLength={3} maxLength={2000} value={reason} disabled={busy} onChange={e=>setReason(e.target.value)}/></label><button disabled={busy||reason.trim().length<3}>Confirm client charter copy {action.toLowerCase()}</button><button type="button" disabled={busy} onClick={()=>setAction('')}>Close client charter copy review</button>
+  </form>}
+  <button disabled={busy||blocked||!events.length} onClick={()=>{try{downloadText('private-client-charter-review-history.csv',csvText([['Action ID','Copy ID','Draft version','Action sequence','Action','Actual actor','Recorded time','Reason','Frozen copy JSON','Current charter at action JSON','Canonical request JSON'],...events.map(r=>[r.id,r.copy_id,r.copy_version,r.sequence,r.action,r.actor_id,r.created_at,r.reason,JSON.stringify(r.snapshot),JSON.stringify(r.charter_snapshot),JSON.stringify(r.request)])]));}catch(e:any){onError(e.message);}}}>Export client charter copy review CSV</button>
+  {events.map(r=><details key={r.id}><summary>Client charter copy v{r.copy_version} · {r.action} · {r.actor_id} · {r.created_at} · {r.reason}</summary><pre className="p-pre">{JSON.stringify(r.snapshot,null,2)}</pre><pre className="p-pre">{JSON.stringify(r.charter_snapshot,null,2)}</pre></details>)}
+ </section>;
+}
