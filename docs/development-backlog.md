@@ -1,6 +1,6 @@
 # Remaining portal development backlog
 
-Current development count (17 October 2026): **57 open packages — five in progress and 52 not started; DEV-019 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
+Current development count (17 October 2026): **57 open packages — six in progress and 51 not started; DEV-019 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
 
 Counted on 12 October 2026 (Asia/Karachi) against docs/crm-acceptance.md and docs/workbook-requirements.md, after PR #76 / migration 059.
 
@@ -31,7 +31,7 @@ Start with DEV-028 (BOQ revisions and client approval), implementing its first b
 | DEV-017 | Resources | Pre-delivery and cross-project resource allocation | Pending development |
 | DEV-018 | Resources | Worker skill/capacity/availability rules | Pending development |
 | DEV-019 | Lessons | Cross-project reviewed lesson adoption | Development complete: explicit admin Reviewed-source-to-target-Draft adoption, existing separate target review, immutable provenance/retries/access and scoped CSV deployed in PR #110; client acceptance pending |
-| DEV-020 | Charter and communication | Structured communication recipients/schedules and portal execution tracking | Pending development |
+| DEV-020 | Charter and communication | Structured communication recipients/schedules and portal execution tracking | In progress |
 | DEV-021 | Charter and communication | Client charter publication/sign-off | Pending development |
 | DEV-022 | Surveys | Reviewed structured survey batch imports | Pending development |
 | DEV-023 | Surveys | Survey unit/calculation and template/BOQ linkage | Pending development |
@@ -213,3 +213,9 @@ DEV-019 implementation (16 October 2026, 20:08 PKT): explicit exact-version admi
 DEV-019 validation resume (17 October 2026): fresh 4,618 checks across 96 suites, TypeScript/build/whitespace checks passed. Migration 089 applied once; readonly metadata verifies target-manager SELECT RLS, active admin mutation guard, blocked direct writes/anonymous access, empty search path and zero production adoption/lesson rows. Exact preview/merge/production verification remains pending; do not reapply 065–089.
 
 DEV-019 development closure (17 October 2026, 19:51 PKT): PR #110 / 8793776c90c765d58d6affa2e4a9aff86479fb42 merged; exact production dpl_2QSoxkytBore8cMTbXKBuVo92U2A READY/domain verified, /portal HTTP 200 and recent error/fatal scan empty. Fresh 4,618 checks/96 suites, TypeScript/build and applied migration 089 readonly checks passed. Explicit cross-project reviewed-source sharing into a target Draft, immutable source/review/target provenance and CSV deployed; existing separate target review preserved. DEV-019 development scope closed; standards/template changes remain separate. Original catalogue 58 tracked; OPEN count now 57 (five in progress DEV-028/029/030/042/043, 52 not started), with one development-complete package DEV-019 in this pass. Next inspect DEV-020 manual structured communication/portal tracking; external delivery excluded. Date/office rules remain unanswered and client acceptance remains pending. Both requirements preserve exact resume points. Do not reapply 065–089. Documentation-only release checkpoint.
+
+DEV-020 first increment (17 October 2026): manual structured charter-linked communication drafts, immutable exact-source revision history and scoped CSV prepared under migration 090. Targeted 3,418 database assertions, eight new UI checks, existing charter UI, TypeScript/build passed. Full regression/migration/release pending; both requirement documents preserve precise resume points. 57 open packages, six in progress and 51 not started; DEV-019 complete. Review/return and portal execution tracking remain pending. Client acceptance separate.
+
+Communication draft database checkpoint: migration 090 applied once; readonly metadata confirms execution-manager SELECT RLS, blocked direct writes/anonymous access, empty RPC search path and zero production draft/history rows. Advisor categories unchanged. Full regression/exact release verification pending; do not reapply 065–090.
+
+Communication draft validation checkpoint: full 4,677 checks across 97 suites, TypeScript/build/whitespace passed. Migration 090 applied with readonly permission/empty-table evidence. Exact preview/merge/production verification pending; do not reapply 065–090.
