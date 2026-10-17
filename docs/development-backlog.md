@@ -1,6 +1,6 @@
 # Remaining portal development backlog
 
-Current development count (17 October 2026): **57 open packages — six in progress and 51 not started; DEV-019 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
+Current development count (17 October 2026): **56 open packages — five in progress and 51 not started; DEV-019/020 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
 
 Counted on 12 October 2026 (Asia/Karachi) against docs/crm-acceptance.md and docs/workbook-requirements.md, after PR #76 / migration 059.
 
@@ -31,7 +31,7 @@ Start with DEV-028 (BOQ revisions and client approval), implementing its first b
 | DEV-017 | Resources | Pre-delivery and cross-project resource allocation | Pending development |
 | DEV-018 | Resources | Worker skill/capacity/availability rules | Pending development |
 | DEV-019 | Lessons | Cross-project reviewed lesson adoption | Development complete: explicit admin Reviewed-source-to-target-Draft adoption, existing separate target review, immutable provenance/retries/access and scoped CSV deployed in PR #110; client acceptance pending |
-| DEV-020 | Charter and communication | Structured communication recipients/schedules and portal execution tracking | In progress |
+| DEV-020 | Charter and communication | Structured communication recipients/schedules and portal execution tracking | Development complete: manual structured charter-linked drafts, exact-version administrator review/return, actual occurrence evidence, immutable reasoned corrections/provenance and scoped CSV deployed through PR #115; client acceptance pending |
 | DEV-021 | Charter and communication | Client charter publication/sign-off | Pending development |
 | DEV-022 | Surveys | Reviewed structured survey batch imports | Pending development |
 | DEV-023 | Surveys | Survey unit/calculation and template/BOQ linkage | Pending development |
@@ -233,3 +233,5 @@ DEV-020 communication review release (17 October 2026, 20:46 PKT): PR #113 / d83
 DEV-020 manual execution increment (17 October 2026): actual manually entered occurrence/timezone/channel/participants/outcome/evidence, exact reviewed plan/source snapshots, immutable correction links/retries and scoped CSV prepared under migration 092. Targeted 3,508 database assertions, eight new UI checks, existing draft/charter UI and TypeScript/build passed. Migration 092 applied; readonly permissions/empty occurrence-table evidence passed. Full regression/exact release pending. Close DEV-020 only after verified release, then transparently reduce 57 open to 56 (five in progress, 51 not started; DEV-019/020 development complete). Both requirements preserve precise resume points; client acceptance pending.
 
 Communication execution validation checkpoint: full 4,784 checks across 99 suites, TypeScript/build/whitespace passed. Migration 092 applied with readonly permission/empty occurrence-table evidence. Exact preview/merge/production verification pending; do not reapply 065–092.
+
+DEV-020 development closure (17 October 2026, 21:35 PKT): PR #115 / e3de96b0a0eaf4a6ae3b53c070c160cf6fb490c7 merged; exact production dpl_4M4GfwyJDDz4mYhzMB42dHidbmmi READY/domain verified, /portal HTTP 200 and recent error/fatal scan empty. Full 4,784 checks/99 suites, TypeScript/build and migration 092 readonly checks passed. Manual structured communication planning/review/actual execution evidence, immutable corrections/provenance and scoped CSV deployed through 090–092. DEV-020 development closed for documented manual workflow; external delivery excluded and DEV-021 client publication/sign-off separate. Original catalogue 58 tracked: OPEN count now 56 (five in progress DEV-028/029/030/042/043, 51 not started), two development-complete DEV-019/020. Next inspect DEV-021 against current requirements/access/decision models; ask for missing concrete business definitions or select independent survey/training gap. Both requirements preserve precise resume points. Date/office rules unanswered; full client acceptance pending. Do not reapply 065–092. Documentation-only release checkpoint.
