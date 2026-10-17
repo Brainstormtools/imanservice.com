@@ -1,5 +1,7 @@
 # Remaining portal development backlog
 
+Current development count (17 October 2026): **57 open packages — five in progress and 52 not started; DEV-019 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
+
 Counted on 12 October 2026 (Asia/Karachi) against docs/crm-acceptance.md and docs/workbook-requirements.md, after PR #76 / migration 059.
 
 This is a working breakdown of 58 documented development packages, not 58 modules, release increments, or the 41 acceptance items. Broad requirements are grouped into packages; each can require several small tested releases. It is not a claim that a fresh page-by-page audit of the full original specification found every possible gap. Superseded historical pending entries are excluded where later checkpoints implement them. Newly discovered gaps or approved requirement changes must be recorded and the count revised explicitly.
@@ -28,7 +30,7 @@ Start with DEV-028 (BOQ revisions and client approval), implementing its first b
 | DEV-016 | Resources | Individual physical-tool identities | Pending development |
 | DEV-017 | Resources | Pre-delivery and cross-project resource allocation | Pending development |
 | DEV-018 | Resources | Worker skill/capacity/availability rules | Pending development |
-| DEV-019 | Lessons | Cross-project reviewed lesson adoption | In progress: explicit administrator Reviewed-source-to-target-Draft adoption with immutable source/review/target receipt and scoped CSV prepared; release verification pending |
+| DEV-019 | Lessons | Cross-project reviewed lesson adoption | Development complete: explicit admin Reviewed-source-to-target-Draft adoption, existing separate target review, immutable provenance/retries/access and scoped CSV deployed in PR #110; client acceptance pending |
 | DEV-020 | Charter and communication | Structured communication recipients/schedules and portal execution tracking | Pending development |
 | DEV-021 | Charter and communication | Client charter publication/sign-off | Pending development |
 | DEV-022 | Surveys | Reviewed structured survey batch imports | Pending development |
@@ -209,3 +211,5 @@ DEV-043 date-rule inspection (16 October 2026, 19:54 PKT): current spec pages 26
 DEV-019 implementation (16 October 2026, 20:08 PKT): explicit exact-version administrator cross-project lesson sharing into a target Draft, existing separate manager editing/admin review, immutable origin/target provenance and CSV prepared under migration 089. Targeted 3,367 database assertions, eight new UI checks and TypeScript/build pass; full validation/release pending. Both requirements preserve exact resume points. At preparation 58 open packages, six in progress and 52 not started; close DEV-019 only after verified release for this documented workflow, keeping standards/template changes and client acceptance separate. Date/office business questions remain unanswered.
 
 DEV-019 validation resume (17 October 2026): fresh 4,618 checks across 96 suites, TypeScript/build/whitespace checks passed. Migration 089 applied once; readonly metadata verifies target-manager SELECT RLS, active admin mutation guard, blocked direct writes/anonymous access, empty search path and zero production adoption/lesson rows. Exact preview/merge/production verification remains pending; do not reapply 065–089.
+
+DEV-019 development closure (17 October 2026, 19:51 PKT): PR #110 / 8793776c90c765d58d6affa2e4a9aff86479fb42 merged; exact production dpl_2QSoxkytBore8cMTbXKBuVo92U2A READY/domain verified, /portal HTTP 200 and recent error/fatal scan empty. Fresh 4,618 checks/96 suites, TypeScript/build and applied migration 089 readonly checks passed. Explicit cross-project reviewed-source sharing into a target Draft, immutable source/review/target provenance and CSV deployed; existing separate target review preserved. DEV-019 development scope closed; standards/template changes remain separate. Original catalogue 58 tracked; OPEN count now 57 (five in progress DEV-028/029/030/042/043, 52 not started), with one development-complete package DEV-019 in this pass. Next inspect DEV-020 manual structured communication/portal tracking; external delivery excluded. Date/office rules remain unanswered and client acceptance remains pending. Both requirements preserve exact resume points. Do not reapply 065–089. Documentation-only release checkpoint.
