@@ -1,5 +1,5 @@
 import {createHash} from 'node:crypto';
-import {renderCharterPDF} from './charter-pdf-render';
+import {renderCharterPDF} from './charter-pdf-render.js';
 const checked=(r:any)=>{if(r.error)throw Error('Approval evidence unavailable');return r.data;};
 export async function charterPDF(client:any,approvalId:string,token:string,generate=true,render=renderCharterPDF){
  const args={p_approval:approvalId,p_gateway_token:token};let source=checked(await client.rpc('charter_approval_pdf_source',args));

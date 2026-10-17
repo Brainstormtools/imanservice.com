@@ -295,3 +295,10 @@ DEV-021 locked PDF increment (18 October 2026): immutable stamped server PDF fro
 
 
 PDF test portability checkpoint: the normal npm suite uses Node-only PDF structure/font/hash/service/API checks. Independent pypdf/Poppler extraction and page rendering run only for explicit visual QA, so normal regression does not require Python/Poppler. Final targeted renderer/service/API checks pass; no application behavior changed. Final TypeScript/build/whitespace pass. Exact release remains pending.
+
+
+## DEV-021 production startup repair checkpoint (18 October 2026)
+
+PR #134 merged 63063c5f82a1742237c2dbbb3b92f2970bf2db60, preview READY/Vercel success, production dpl_8V2oM3uLeUHinU8fa8UdaxcqDDXZ READY/domain exact tree 43fafb87112e837724af26de6917a01037bc45b5. Release rejection check caught FUNCTION_INVOCATION_FAILED 500 before PDF API method handling. Do not close DEV-021 or claim successful release at this checkpoint. Provider runtime logs/error aggregation returned no entries despite the observed 500; empty logs alone are not proof of endpoint health. No production approvals/documents were created.
+
+Reproduced locally by compiling server/API TypeScript without bundling and importing with native Node ESM: ERR_MODULE_NOT_FOUND on extensionless server imports. Repair adds emitted .js extensions to the three local imports. New regression imports both unbundled API handlers and asserts GET returns 405; all nine PDF renderer/service/API/native checks, TypeScript/build/whitespace pass. Full regression rerun and repaired exact preview/merge/production/domain/API verification pending. No schema/config/font/business-data changes or migration reapplication. Current OPEN remains 56, seven in progress/49 not started until verified repair; then close DEV-021 as documented and resume DEV-022. Full client acceptance remains pending. Do not reapply 065–101.
