@@ -1,6 +1,6 @@
 # Remaining portal development backlog
 
-Current development count (17 October 2026): **56 open packages — seven in progress (including paused DEV-021) and 49 not started; DEV-019/020 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
+Current development count (18 October 2026): **56 open packages — seven in progress (including paused DEV-021) and 49 not started; DEV-019/020 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
 
 Counted on 12 October 2026 (Asia/Karachi) against docs/crm-acceptance.md and docs/workbook-requirements.md, after PR #76 / migration 059.
 
@@ -263,3 +263,5 @@ DEV-022 first increment (18 October 2026): user paused charter sign-off and sele
 Survey batch database checkpoint: final 3,678 assertions passed (51 new batch checks). Migration 096 applied once; readonly metadata verifies scoped SELECT RLS, blocked direct writes/anonymous access, guarded RPC/empty search path and zero batch/history rows. Full regression/exact release pending; do not reapply 065–096.
 
 Survey batch validation checkpoint: full 4,986 checks across 103 suites, TypeScript/build/whitespace passed. Migration 096 applied with readonly permissions/empty batch-history evidence. Exact preview/merge/production verification pending; do not reapply 065–096.
+
+DEV-022 survey batch staging release (18 October 2026, 02:34 PKT): PR #124 / c4019d8f3e7bcd8f9a6f24865a6f39111f1b73b6 merged; exact production dpl_6CpEGYpQ1Vq6MBnubvH9RP5dcVGi READY/domain verified, /portal HTTP 200 and recent error/fatal scan empty. Full 4,986 checks/103 suites, TypeScript/build and migration 096 readonly checks passed. Manual CSV preview, private ordered batch drafts, atomic row validation, immutable revisions/provenance/retries and private CSV deployed without changing survey registry records. Next exact-version admin batch review/return, then atomic application with existing review semantics and provenance; file/XLSX support pending. DEV-022 stays in progress; DEV-021 paused by user. Both requirements preserve precise resume points. 56 open packages: seven in progress including paused DEV-021, 49 not started; DEV-019/020 complete. Date/office rules unanswered; client acceptance pending. Do not reapply 065–096. Documentation-only release checkpoint.
