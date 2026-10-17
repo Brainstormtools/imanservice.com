@@ -1,9 +1,10 @@
+import {charterPDF} from '../server/charter-pdf-service';
 import {createClient} from '@supabase/supabase-js';
 import {isIP} from 'node:net';
 export const uuid=(v:unknown)=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v);
 // Vercel overwrites this platform header; never accept IP/account/time from JSON or generic proxy headers.
 // https://vercel.com/docs/headers/request-headers#x-vercel-forwarded-for
-export function approvalHandler(env:NodeJS.ProcessEnv=process.env,clientFactory:typeof createClient=createClient){return async(req:any,res:any)=>{
+export function approvalHandler(env:NodeJS.ProcessEnv=process.env,clientFactory:typeof createClient=createClient,archive=charterPDF){return async(req:any,res:any)=>{
  res.setHeader('Cache-Control','private, no-store');res.setHeader('X-Content-Type-Options','nosniff');
  if(req.method!=='POST'){res.setHeader('Allow','POST');return res.status(405).json({error:'POST required'});}
  const authorization=req.headers?.authorization;
@@ -18,7 +19,7 @@ export function approvalHandler(env:NodeJS.ProcessEnv=process.env,clientFactory:
   const {data,error}=await client.auth.getUser(authorization.slice(7));if(error||!data.user)return res.status(401).json({error:'Signed-in client required'});
   const result=await client.rpc('approve_client_charter',{p_id:b.id,p_publication:b.publication_id,p_version:b.version,p_consent:true,p_full_name:b.full_name,p_note:b.note,p_request_ip:ip,p_gateway_token:secret});
   if(result.error)return res.status(409).json({error:'Approval was not saved. Refresh the charter and check your signing authority/version before retrying.'});
-  return res.status(200).json({id:result.data,pdf_status:'Pending generation'});
+  try{const pdf=await archive(client,result.data,secret);return res.status(200).json({id:result.data,pdf_status:'Archived',sha256:pdf.sha256});}catch{console.error('Charter approval saved; PDF generation pending retry');return res.status(200).json({id:result.data,pdf_status:'Pending generation'});}
  }catch{console.error('Charter approval endpoint failed');return res.status(503).json({error:'Approval unavailable; retry the unchanged request after refreshing access'});}
 };}
 export default approvalHandler();

@@ -64,6 +64,12 @@
   "functions": {
     "api/portal-worker.ts": {
       "maxDuration": 60
+    },
+    "api/charter-approval.ts": {
+      "includeFiles": "server/fonts/**"
+    },
+    "api/charter-pdf.ts": {
+      "includeFiles": "server/fonts/**"
     }
   },
   "installCommand": "npm ci",
