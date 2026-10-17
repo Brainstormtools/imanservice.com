@@ -1,5 +1,5 @@
 import {createClient} from '@supabase/supabase-js';
-import {charterPDF} from '../server/charter-pdf-service';
+import {charterPDF} from '../server/charter-pdf-service.js';
 const uuid=(v:unknown)=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v);
 export function pdfHandler(env:NodeJS.ProcessEnv=process.env,factory:typeof createClient=createClient,archive=charterPDF){return async(req:any,res:any)=>{
  res.setHeader('Cache-Control','private, no-store');res.setHeader('X-Content-Type-Options','nosniff');

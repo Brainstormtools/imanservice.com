@@ -1,4 +1,4 @@
-import {charterPDF} from '../server/charter-pdf-service';
+import {charterPDF} from '../server/charter-pdf-service.js';
 import {createClient} from '@supabase/supabase-js';
 import {isIP} from 'node:net';
 export const uuid=(v:unknown)=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v);
