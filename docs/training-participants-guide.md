@@ -71,3 +71,10 @@ In **Project training documentation → Project training authorized signatories*
 Use **Revoke authority** with a fresh reason to remove future authority, or **Restore authority** with a fresh reason when the contact is currently eligible. Earlier decisions remain in immutable history and the private CSV. Disabled contacts or contacts moved to another company are ineligible even if an old authority row exists. Revocation remains possible for them.
 
 Training authority is separate from charter authority. This foundation records who may confirm Client training; the client session confirmation form remains pending, and designation does not confirm attendance or award learning credit.
+
+
+### Client training confirmation
+
+Authorized clients open **Agreements → Client training confirmation**. Refresh and inspect the exact current PM-approved receipt: actual topic/objective, attendee names and actual check-in/out, source/attendance versions and PM approval identity/time. Enter your actual full name, optionally enter a note and tick agreement to this exact receipt. Nothing is prefilled or agreed automatically. The server records your actual account/time and immutable receipt evidence; no drawing or paid signing service or locked training PDF is required.
+
+Only explicitly granted training signing authority for this project permits confirmation. Charter authority alone does not. Stale attendance/source, changed or withdrawn approval, revoked authority and missing/changed submitted proof block confirmation. Refresh after an error; an unchanged failed request retains its identity, while changed input receives a new identity. Existing confirmation suppresses duplicate signing. A new receipt requires fresh review/confirmation; earlier evidence stays historical. Export your saved confirmation receipt CSV. Revoked signatories retain only their own historical evidence while active and still in the project's company; disabled/transferred accounts lose access. Private attendee contact details, staff IDs, proof files and internal review notes are not exposed. This confirmation does not create Internal learning credit.
