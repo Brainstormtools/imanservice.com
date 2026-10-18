@@ -1866,3 +1866,6 @@ Precise next after release: explicit manual association of actual existing Appro
 
 
 Retained-history targeted validation: 4,671 database assertions passed (53 new), ten new private-history UI checks, existing project/Internal/attendance UI checks, TypeScript and production build passed. Includes archived/versioned source evidence retention, exact proof/review/Client-confirmation provenance, replaced registers/times, PM/Internal-review separation, HR selected-proof/coordinator-source separation, revoked/disabled/unassigned scopes, no automatic proof inheritance, changed stored metadata and SECURITY INVOKER/anonymous grant checks. Full regression/release checks remain pending.
+
+
+Retained-history full validation: 6,151 checks across 123 individually recorded distinct suites passed against unchanged source fingerprint 9408bf5705af204cb6aa81e63c614c7705c3a538f334a3871931400837c566f2. Includes 4,671 database assertions (53 new), ten new history UI checks, existing project/Internal/attendance UI, TypeScript and production build. No failed suites remain; this full run required no isolated retry. Migration/merge/exact production verification pending.
