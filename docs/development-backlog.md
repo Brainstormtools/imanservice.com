@@ -1,6 +1,6 @@
 # Remaining portal development backlog
 
-Current development count (18 October 2026): **54 open packages — five in progress and 49 not started; DEV-019/020/021/022 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
+Current development count (18 October 2026): **54 open packages — six in progress and 48 not started; DEV-019/020/021/022 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
 
 Counted on 12 October 2026 (Asia/Karachi) against docs/crm-acceptance.md and docs/workbook-requirements.md, after PR #76 / migration 059.
 
@@ -36,7 +36,7 @@ Start with DEV-028 (BOQ revisions and client approval), implementing its first b
 | DEV-022 | Surveys | Reviewed structured survey batch imports | Development complete: manual CSV/XLSX file mapping, preview/private staging, exact-version administrator review/return and atomic Draft application with immutable provenance deployed through PR #139; client acceptance pending |
 | DEV-023 | Surveys | Survey unit/calculation and template/BOQ linkage | Pending development |
 | DEV-024 | Surveys | Survey instrument/calibration records and evidence uploads | Pending development |
-| DEV-025 | Training | Account-linked participants and verified attendance | Pending development |
+| DEV-025 | Training | Account-linked participants and verified attendance | In progress: immutable explicit project-team account roster drafts; attendance and client/external account participation pending |
 | DEV-026 | Training | Training evidence uploads and approved-activity linkage | Pending development |
 | DEV-027 | Training | Documented competence/certification workflow | Pending development |
 | DEV-028 | Commercial change approvals | Reviewed BOQ revisions and client approval | In progress: offers, client decisions, invoice drafts and reviewed new/existing-workstream tasks; replacement/removal/adoption remain |
@@ -312,3 +312,5 @@ DEV-022 application release verified (18 October 2026, 16:03 PKT): PR #137 / a6f
 DEV-022 file input/mapping (18 October 2026): CSV/XLSX manual blank column choices, ordered canonical rows, mandatory fresh preview, first-sheet values-only reader and bounded invalidation/unmount guards implemented. Eleven new checks and existing batch/survey/business utility checks plus TypeScript/build passed; full regression 5,284 checks/111 suites passed; exact release pending. No migration or production data changes. Current count 55 open until verified release; then documented workflow closes DEV-022 and becomes 54 open. Both requirements preserve scope, local-only original file/mapping limitation and precise next training inspection resume.
 
 DEV-022 development closure (18 October 2026, 16:17 PKT): PR #139 / ecdfe84e2dd1b346742d5c3efb069b2e0139398d, exact READY production dpl_DDzurNcPRCSe15DrRZyNGSyt9qaZ/domain verified, /portal 200 and deployed file-mapping/application bundle verified; recent error/fatal scan empty. Final 5,284 checks/111 suites, TypeScript/build passed. Documented manual CSV/XLSX mapping/preview/private draft/review/atomic Draft application workflow complete; original source file/filename/mapping stay local, saved canonical histories retained. No new migration or production fixtures. Count now 54 open (five in progress DEV-028/029/030/042/043, 49 not started), four complete DEV-019/020/021/022. Next inspect DEV-025 training participant/attendance requirements; separate survey calculation and instruments/evidence packages and full client acceptance pending. Both requirements preserve exact release evidence and resume point.
+
+DEV-025 project-team roster increment (18 October 2026): current Draft training plus explicit manual active assigned staff-account selection, immutable full roster/source/actor/reason/request and real-profile memberships, stale/retry/revocation guards and private CSV implemented under migration 103. 3,963 database assertions (56 new), eight new roster UI checks, eleven training UI checks and TypeScript/build passed; full regression completed 5,349 checks/112 suites (validated 78-suite prefix plus 34-suite continuation); exact release pending. No actual assignments, attendance/hours/costs or production fixtures. Count unchanged 54 open, now six in progress/48 not started; four complete. Both requirements preserve exact resume and separate pending attendance/participant scope.
