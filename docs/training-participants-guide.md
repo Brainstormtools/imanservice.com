@@ -55,3 +55,11 @@ The selected facilitator records actual attendee check-in/out pairs, saves the r
 Open **Overtime & performance → Internal training review** to inspect the frozen source, attendees, times and private proof. HR can review standalone Internal sessions. A creating team lead can review within the existing current facilitator and internal-attendee reporting scope. Choose the actual decision and enter its reason. Returned or withdrawn submissions require a fresh submission; approval withdrawal retains the original approval event. Corrections to source, attendee register or attendance require fresh proof, submission and review. A trainer can withdraw their own pending submission.
 
 This increment covers standalone Internal sessions. Project-linked Internal review, client session confirmation and approved learning-credit integration remain pending. Review records do not yet award learning hours.
+
+### Project-linked Internal attendance review
+
+For a project definition explicitly marked Internal, the selected current facilitator records actual attendee times, saves the exact receipt, uploads actual proof and opens **Internal training attendance submission**. Choose the actual proof files and enter a manual reason. Client definitions continue to use Client submission and assigned-PM review.
+
+Use **Overtime & performance → Internal training review** to review the frozen Internal receipt and selected proof. HR can review project-linked Internal sessions. A team lead needs a current actual assignment to that project and current reporting scope for the facilitator and all registered internal attendees. PM permission alone does not grant Internal approval. The review export includes source kind, actual training ID, project and definition IDs. Standalone sessions retain their existing creating-lead scope. Source, attendee or attendance corrections require fresh proof/submission/review; immutable earlier approvals remain in history.
+
+Client session confirmation and approved internal-staff learning-credit integration remain pending. These attendance approvals do not yet award learning hours.
