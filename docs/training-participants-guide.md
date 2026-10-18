@@ -63,3 +63,11 @@ For a project definition explicitly marked Internal, the selected current facili
 Use **Overtime & performance → Internal training review** to review the frozen Internal receipt and selected proof. HR can review project-linked Internal sessions. A team lead needs a current actual assignment to that project and current reporting scope for the facilitator and all registered internal attendees. PM permission alone does not grant Internal approval. The review export includes source kind, actual training ID, project and definition IDs. Standalone sessions retain their existing creating-lead scope. Source, attendee or attendance corrections require fresh proof/submission/review; immutable earlier approvals remain in history.
 
 Client session confirmation and approved internal-staff learning-credit integration remain pending. These attendance approvals do not yet award learning hours.
+
+### Training-specific authorized client signatories
+
+In **Project training documentation → Project training authorized signatories**, choose the actual project and an eligible active client contact of its company. Enter the actual designation reason and grant training signing authority. Repeat for any additional actual authorized contacts; none is selected automatically. Only an administrator or currently assigned PM can maintain this list.
+
+Use **Revoke authority** with a fresh reason to remove future authority, or **Restore authority** with a fresh reason when the contact is currently eligible. Earlier decisions remain in immutable history and the private CSV. Disabled contacts or contacts moved to another company are ineligible even if an old authority row exists. Revocation remains possible for them.
+
+Training authority is separate from charter authority. This foundation records who may confirm Client training; the client session confirmation form remains pending, and designation does not confirm attendance or award learning credit.
