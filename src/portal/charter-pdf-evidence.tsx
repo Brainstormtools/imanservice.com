@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {db,check,type Row} from './client';
-export function CharterPDFEvidence({approval,onSaved}:{approval:Row;onSaved:()=>void}){
+export function CharterPDFEvidence({approval,onSaved}:{key?:string;approval:Row;onSaved:()=>void}){
  const [busy,setBusy]=useState(false),[error,setError]=useState('');
  const run=async(action:string)=>{if(busy)return;setBusy(true);setError('');try{
   const session=check(await db!.auth.getSession());if(!session?.session?.access_token)throw Error('Sign in again to access this approval PDF');
