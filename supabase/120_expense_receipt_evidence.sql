@@ -15,7 +15,7 @@ create table public.fin_expense_file_history(
 create index expense_file_history_file on public.fin_expense_file_history(file_id);
 create index expense_file_history_actor on public.fin_expense_file_history(actor_id);
 create function portal_private.expense_file_read(p_expense uuid) returns boolean language sql stable security definer set search_path='' as $$
- select auth.uid() is not null and public.is_staff() and portal_private.expense_read(p_expense);
+ select auth.uid() is not null and public.is_staff() and exists(select 1 from public.fin_expenses e where e.id=p_expense) and portal_private.expense_read(p_expense);
 $$;
 create function portal_private.expense_file_edit(p_expense uuid) returns boolean language sql stable security definer set search_path='' as $$
  select portal_private.expense_file_read(p_expense) and exists(select 1 from public.fin_expenses e where e.id=p_expense and e.status in ('Draft','Rejected') and (e.created_by=auth.uid() or portal_private.payables_access()) and portal_private.expense_scope(e.project_id,e.task_id));
@@ -117,7 +117,7 @@ begin
  perform public.finance_ledger_action_before_receipt_files(p_kind,p_id,p_version,p_action,p_note);
  if p_kind='Expense' and p_action in ('Submit','Approve') then
   select * into e from public.fin_expenses where id=p_id;
-  insert into public.fin_expense_file_history(id,expense_id,expense_version,action,request,snapshot,reason,actor_id) values(gen_random_uuid(),e.id,e.version,case p_action when 'Submit' then 'Submitted' else 'Approved' end,jsonb_build_object('version',p_version,'action',p_action,'note',p_note),jsonb_build_object('active_file_ids',e.evidence_files,'files',files,'expense_version',e.version,'status',e.status),coalesce(p_note,''),auth.uid());
+  insert into public.fin_expense_file_history(id,expense_id,expense_version,action,request,snapshot,reason,actor_id) values(gen_random_uuid(),e.id,e.version,case p_action when 'Submit' then 'Submitted' else 'Approved' end,jsonb_build_object('version',p_version,'action',p_action,'note',p_note),jsonb_build_object('expense',to_jsonb(e),'active_file_ids',e.evidence_files,'files',files,'expense_version',e.version,'status',e.status),coalesce(p_note,''),auth.uid());
  end if;
 end$$;
 revoke all on function public.expense_receipt_context(uuid),public.attach_expense_receipt(uuid,uuid,integer,text,text,text),public.change_expense_receipt(uuid,uuid,integer,text,text),public.finance_ledger_action(text,uuid,integer,text,text) from public,anon;
