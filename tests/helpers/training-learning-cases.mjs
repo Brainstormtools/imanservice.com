@@ -1,3 +1,4 @@
+import {activityTadaCases} from './activity-tada-cases.mjs';
 import {trainingActivityAssociationCases} from './training-activity-association-cases.mjs';
 import {trainingReceiptHistoryCases} from './training-receipt-history-cases.mjs';
 export async function trainingLearningCases({pg,fs,q,one,user,eq,deny,x}){
@@ -32,4 +33,5 @@ export async function trainingLearningCases({pg,fs,q,one,user,eq,deny,x}){
  for(const fn of ['portal_private.internal_learning_receipts(uuid)','portal_private.training_learning(uuid,date)','portal_private.hr_month_before_internal_learning(uuid,date)']){await pg.exec('reset role');eq((await one("select has_function_privilege('authenticated',$1,'execute') b",[fn])).b,false,'Private learning helpers cannot bypass public scope checks');}eq((await one("select has_function_privilege('anon','public.training_learning_credit(uuid,date)','execute') b")).b,false,'Anonymous learning credit RPC denied');eq(await q("select id,snapshot,source_hash from hr_monthly where status='Locked' and id<>$1 order by id",[monthly]),lockedBefore,'Existing locked snapshots remain byte-for-byte unchanged through learning corrections');await user(x.a);
  await trainingReceiptHistoryCases({pg,fs,q,one,user,eq,deny,x});
  await trainingActivityAssociationCases({pg,fs,q,one,user,eq,deny,x,make,u,other});
+ await activityTadaCases({pg,fs,q,one,user,eq,deny,x});
 }
