@@ -70,7 +70,7 @@ Actual elapsed time counts once: overlaps with already approved Training activit
 
 ## Acceptance and remaining development
 
-Signed-in workflow, populated exports, private downloads, responsive/device and the full 41-item client acceptance remain client-owned and pending. DEV-025/026 remain in progress while the broader explicit approved-activity association boundary is resolved/implemented. Competence/certification DEV-027 is separate; no certification rules, standards or targets have been invented. Training and the CRM are not complete.
+Signed-in workflow, populated exports, private downloads, responsive/device and the full 41-item client acceptance remain client-owned and pending. DEV-025/026 are development-complete for the confirmed attendance/evidence/activity-association workflow; this does not mark training complete or pass client acceptance. See [the final scope audit](training-lifecycle-reconciliation.md). Competence/certification DEV-027 is separate; no certification rules, standards or targets have been invented. Training and the CRM are not complete.
 
 ## Link an existing Approved Training activity
 
