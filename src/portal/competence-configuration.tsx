@@ -6,17 +6,17 @@ const fresh=()=>({title:'',skill:'',checklist:[] as Step[],quiz_enabled:false,pa
 const emptyAssessor=()=>({user:'',previous:0,designation:'',active:'',reason:''});
 export function CompetenceConfiguration({profile}:{profile:Row}){
  const allowed=profile.role==='admin'&&profile.active!==false;
- const scope=JSON.stringify([profile.id,profile.role,profile.active,profile.crm_permissions]),latestScope=useRef(scope);latestScope.current=scope;
+ const scope=JSON.stringify([profile.id,profile.role,profile.active,profile.crm_permissions]),latestScope=useRef(scope),epoch=useRef(0);latestScope.current=scope;
  const [data,setData]=useState<{scope:string;value:Row}|null>(null),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
  const [editor,setEditor]=useState<{id:string;previous:number}|null>(null),[draft,setDraft]=useState(fresh),[assessor,setAssessor]=useState(emptyAssessor);
  const defAttempt=useRef({hash:'',id:''}),assessorAttempt=useRef({hash:'',id:''});
- useEffect(()=>{latestScope.current=scope;setData(null);setBusy(false);setError('');setNotice('');setEditor(null);setDraft(fresh());setAssessor(emptyAssessor());defAttempt.current={hash:'',id:''};assessorAttempt.current={hash:'',id:''};return()=>{latestScope.current='';};},[scope]);
+ useEffect(()=>{epoch.current++;latestScope.current=scope;setData(null);setBusy(false);setError('');setNotice('');setEditor(null);setDraft(fresh());setAssessor(emptyAssessor());defAttempt.current={hash:'',id:''};assessorAttempt.current={hash:'',id:''};return()=>{epoch.current++;latestScope.current='';};},[scope]);
  const current=data?.scope===scope&&allowed?data.value:null;
- async function load(){setData(null);setError('');setBusy(true);try{const value=check(await db!.rpc('competence_configuration_context'));if(latestScope.current===scope)setData({scope,value});}catch(e:any){if(latestScope.current===scope)setError(e.message);}finally{if(latestScope.current===scope)setBusy(false);}}
+ async function load(){const generation=epoch.current,valid=()=>latestScope.current===scope&&generation===epoch.current;setData(null);setError('');setBusy(true);try{const value=check(await db!.rpc('competence_configuration_context'));if(valid())setData({scope,value});}catch(e:any){if(valid())setError(e.message);}finally{if(valid())setBusy(false);}}
  async function save(name:string,args:Record<string,unknown>,attempt:React.MutableRefObject<{hash:string;id:string}>,done:()=>void){
-  if(busy)return;const hash=JSON.stringify(args);if(attempt.current.hash!==hash)attempt.current={hash,id:crypto.randomUUID()};setBusy(true);setError('');setNotice('');
-  try{check(await db!.rpc(name,{...args,p_id:attempt.current.id}));if(latestScope.current!==scope)return;attempt.current={hash:'',id:''};done();await load();if(latestScope.current===scope)setNotice('Competence configuration revision saved. No assessment, certificate, skill or assignment was created.');}
-  catch(e:any){if(latestScope.current===scope){setData(null);setError(e.message);}}finally{if(latestScope.current===scope)setBusy(false);}
+  if(busy)return;const generation=epoch.current,valid=()=>latestScope.current===scope&&generation===epoch.current;const hash=JSON.stringify(args);if(attempt.current.hash!==hash)attempt.current={hash,id:crypto.randomUUID()};setBusy(true);setError('');setNotice('');
+  try{check(await db!.rpc(name,{...args,p_id:attempt.current.id}));if(!valid())return;attempt.current={hash:'',id:''};done();await load();if(valid())setNotice('Competence configuration revision saved. No assessment, certificate, skill or assignment was created.');}
+  catch(e:any){if(valid()){setData(null);setError(e.message);}}finally{if(valid())setBusy(false);}
  }
  if(!allowed)return null;
  return <section className="p-panel"><h2>Competence configuration</h2>
