@@ -71,3 +71,11 @@ Actual elapsed time counts once: overlaps with already approved Training activit
 ## Acceptance and remaining development
 
 Signed-in workflow, populated exports, private downloads, responsive/device and the full 41-item client acceptance remain client-owned and pending. DEV-025/026 remain in progress while the broader explicit approved-activity association boundary is resolved/implemented. Competence/certification DEV-027 is separate; no certification rules, standards or targets have been invented. Training and the CRM are not complete.
+
+## Link an existing Approved Training activity
+
+In **Internal training attendance review**, open the exact submission and choose **Load activity associations**. The person making or removing a link must currently have review authority for both the Internal training receipt and the work activity. HR or team lead training permission alone does not grant activity review authority; project-manager activity permission alone does not grant Internal training review authority. No reviewer is assigned automatically.
+
+Select an actual existing Approved Training activity for an actual internal attendee account, compare the displayed activity and attendance times, and enter a reason. The list starts blank. This is a manual evidence association, not an automatic assertion that the intervals fully match. The server checks the exact current approved Internal receipt, selected intact proof, actual staff account, activity version, approval and previous association revision again when saving.
+
+The link creates no activity, labour cost, pay or extra learning hours. Existing independent activity approval and distinct-time learning calculations remain in force. Corrections, withdrawn training approval, damaged submitted proof, disabled staff or a voided activity make retained links inactive; history does not become a new approval. Use **Unlink activity association** with a reason to remove a latest link, including an inactive one. A replacement requires an explicit fresh selection/reason after unlinking. Prior actor/server time/reason and frozen receipt/activity/proof references remain available in private history and CSV only within current combined review authority. Refresh after a failure or scope change before another action.
