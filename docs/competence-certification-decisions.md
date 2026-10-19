@@ -15,3 +15,6 @@ DEV-027 independent review increment (19 October 2026; validation/release checkp
 
 
 Certificate issuance increment (19 October 2026): current HR/Admin manually issues only from exact current independently Approved Pass evidence, freezing actual receipt/review/criteria/employee/issuer/account/server time/reason and configured validity/warning. Reasoned immutable revocation and server-evaluated expiry status are included; no automatic renewal or skill/suggestion effect yet. See [Certificate records](competence-certificates-guide.md) and both requirement release checkpoints.
+
+
+Explicit certificate renewal linkage/history is a subsequent bounded DEV-027 increment; see [Certificate renewal history](competence-renewals-guide.md) and both requirement release checkpoints. Current HR/Admin manually links a distinct separately assessed/independently Approved Pass/issued new certificate to an actual earlier certificate for the same employee and competency. Reasoned immutable link/withdraw history preserves both certificates and dates; it never automatically renews, extends, revokes/restores or awards skill/learning credit. Next issued employee skill profiles and Configurator suggestions; actual assignments remain manual and client acceptance pending. Earlier future-work paragraphs describe historical increments.
