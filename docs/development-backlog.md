@@ -8,7 +8,7 @@ This is a working breakdown of 58 documented development packages, not 58 module
 
 User direction: Codex handles development, automated tests, necessary migrations, PR/merge and production deployment verification. The client's team handles signed-in workflow/browser/download/responsive/physical-device acceptance. Client acceptance is tracked separately and is never marked passed without their reported evidence. Business values, legal/commercial approval rules, reviewers, salaries, standards, targets and real assignments are not invented. Ask the user when a missing business decision blocks a concrete package. Optional bonus/scoring packages require business confirmation; their presence below is a documented gap, not activation of a policy. External email/SMS/WhatsApp remains excluded; native mobile remains deferred; full payroll execution is outside the documented scope.
 
-Current focus (20 October 2026): DEV-042 read-only classified-cost register released in PR #211. Next inspect original accepted quotation item/budget/workstream mapping for a bounded product-revenue reference. Broader product financials remain pending; BOQ adoption paused for actual client policies; all 41 client acceptance items pending.
+Current focus (20 October 2026): DEV-042 frozen original accepted product-revenue reference in validation; unresolved/adjustment amounts stay unattributed. Broader product financials pending. BOQ adoption paused for actual client policies; all 41 client acceptance items pending.
 
 | ID | Area | Development package | Status |
 |---|---|---|---|
