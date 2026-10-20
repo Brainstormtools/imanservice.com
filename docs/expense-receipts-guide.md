@@ -1,6 +1,6 @@
 # Private expense receipt files
 
-Open the actual expense in **Work expenses / Finance & expenses**, then choose **Load expense receipts** under **Private expense receipt files**. This register supports ordinary expense records, including activity-linked TADA claims. Loan agreements, cash-movement receipts and vendor-bill file workflows are separate remaining scope. Existing text evidence references stay supported; a file is optional, not a newly imposed approval policy.
+Open the actual expense in **Work expenses / Finance & expenses**, then choose **Load expense receipts** under **Private expense receipt files**. This register supports ordinary expense records, including activity-linked TADA claims. Loan/advance, cash-movement, vendor-payment and vendor-bill files use the separate deployed workflows in [Finance evidence files](finance-evidence-files-guide.md). Existing text evidence references stay supported; a file is optional, not a newly imposed approval policy.
 
 The actual expense author may upload on a current Draft/Rejected expense within their existing work scope. Accounts/admin retain their existing draft-edit authority. A project manager's existing expense read access permits viewing registered receipts but does not grant another author's edit or expense approval powers. Clients, unrelated staff, disabled accounts and revoked scopes do not gain access. This register does not copy activity or training attachments or change expense classification, financial amounts, reviewers or payment rules.
 
