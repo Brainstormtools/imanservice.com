@@ -31,4 +31,5 @@ export async function boqClientRevisionCases({pg,fs,q,one,user,eq,deny,x}){
  for(const f of ['boq_revision_publications()','publish_boq_line_revision(uuid,uuid,uuid,uuid,jsonb,text)','decide_boq_line_revision(uuid,text,text,boolean)'])eq((await one('select has_function_privilege($1,$2,$3) ok',['anon','public.'+f,'execute'])).ok,false,'Anonymous revision API denied '+f);
  for(const t of ['crm_boq_revision_publications','crm_boq_revision_decisions']){eq((await one('select relrowsecurity ok from pg_class where oid=$1::regclass',[t])).ok,true,'Revision evidence RLS enabled '+t);eq((await one('select has_table_privilege($1,$2,$3) ok',['authenticated',t,'INSERT,UPDATE,DELETE'])).ok,false,'No direct client revision writes '+t);}
  await user(x.client);eq((await q('select * from crm_boq_revision_decisions')).length,0,'Client cannot directly read internal decision table');await pg.exec('reset role');
+ await (await import('./boq-scope-correction-cases.mjs')).boqScopeCorrectionCases({pg,fs,q,one,user,eq,deny});
 }
