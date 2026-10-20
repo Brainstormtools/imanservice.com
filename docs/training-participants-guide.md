@@ -91,3 +91,10 @@ Explicit certificate renewal linkage/history is a subsequent bounded DEV-027 inc
 
 
 Issued employee skill profiles and Configurator project worker suggestions are implemented in a subsequent bounded DEV-027 increment; see [Issued employee skills](issued-employee-skills-guide.md) and both requirement release checkpoints. Current own/HR skill projections use actual valid unrevoked/unexpired issued certificates for active staff; project suggestions stay within current assigned-PM/admin and already eligible project-worker scope. Exact skills are selected manually, people/proof deduplicate, and no assignment, ranking, availability/capacity claim or learning/pay credit is created. Confirmed-scope closure follows verified release; all client acceptance remains pending and training/CRM are not complete.
+
+
+### Original BOQ line revision proposals (internal development increment, 20 October 2026)
+
+In Project BOQ change offers, Admin/current assigned PM chooses **BOQ revision project** then **Load original BOQ revision scope**. Select an actual Approved internal change request and exact original Accepted quotation line. Choose Replace and manually enter replacement description, unit, quantity and price, or Remove without replacement; enter the reason and submit immutable evidence. Reload to reconcile the register after submission. Pending/Reviewed evidence prevents duplicate proposals for the same original line; Returned evidence permits a corrected new submission.
+
+Admin explicitly chooses Reviewed or Returned with a reason, then reloads. The private CSV includes original/replacement scope, source/change versions, actual accounts and server times. Reviewed means internal review only: client approval and commercial/execution adoption are not implemented by this increment. Never change invoice/credit/tax, budget, project tasks or assignments because a proposal is Reviewed. Accepted additional-offer lines and dropped products are outside this first original-line proposal form. No external messages are sent. All signed-in/browser/export/device acceptance remains with the client.

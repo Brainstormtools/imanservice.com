@@ -2,6 +2,7 @@ import React,{useEffect,useRef,useState} from 'react';
 import {db,check,type Row} from './client';
 import {workspaceRows} from './workspace';
 import {csvText,downloadText} from './business-utils';
+import {BoqLineProposals} from './boq-line-proposals';
 import {BoqApplicationHistory} from './boq-application-history';
 import {BoqWorkstreams} from './boq-workstreams';
 import {BoqOfferInvoice} from './boq-offer-invoices';
@@ -32,6 +33,7 @@ export function BoqChangeOffers({profile}:{profile:Row}){
  const begin=(o:Row|null)=>{setError('');setEditing(o);setRequest(o?.change_id||'');setItems(o?o.data.lines.map((l:Row)=>({...l})): [blankItem()]);attempt.current={hash:'',id:''};};
  return <section className="p-panel"><h2>{client?'My BOQ change offers':'Project BOQ change offers'}</h2>
   <p>Additional BOQ items are offered separately from the original accepted quotation. Choose an existing workstream or active new project product, then enter scope, quantities, selling prices, tax inputs and terms explicitly. A new product offer does not create executable tasks or a workstream. Client approval records the frozen offer; budget releases, invoice issuance, new product workstreams and execution changes are separate workflows. No external message is sent.</p>
+  {manager&&!loading&&!error&&<BoqLineProposals profile={profile} projects={projects} requests={requests}/>}
   <button disabled={loading||busy} onClick={()=>setRefresh(v=>v+1)}>Refresh BOQ offers</button>
   {loading&&<p role="status">Loading BOQ change offers…</p>}{error&&<p role="alert">BOQ offers unavailable or action failed: {error}</p>}{notice&&<p role="status">{notice}</p>}
   {!loading&&!error&&manager&&<button disabled={busy||!requests.length} onClick={()=>begin(null)}>New additional BOQ offer</button>}
