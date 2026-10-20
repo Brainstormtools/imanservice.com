@@ -28,5 +28,6 @@ export async function boqLineProposalCases({pg,fs,q,one,user,eq,deny,x}){
  eq((await one('select to_jsonb(b) j from crm_quote_publications b where id=$1',[x.baseline])).j,baseline,'Proposal/review leaves accepted baseline unchanged');eq(await one('select (select count(*) from invoices)::int invoices,(select count(*) from tasks)::int tasks,(select count(*) from crm_project_workstreams)::int streams'),before,'Proposal/review creates no invoice, task or workstream');
  for(const f of ['boq_line_proposal_context(uuid)','submit_boq_line_proposal(uuid,uuid,uuid,integer,uuid,integer,integer,jsonb,text,jsonb,text)','review_boq_line_proposal(uuid,text,text)'])eq((await one('select has_function_privilege($1,$2,$3) ok',['anon','public.'+f,'execute'])).ok,false,'No anonymous execution '+f);
  for(const t of ['crm_boq_line_proposals','crm_boq_line_reviews']){eq((await one('select relrowsecurity ok from pg_class where oid=$1::regclass',[t])).ok,true,'RLS enabled '+t);eq((await one('select has_table_privilege($1,$2,$3) ok',['authenticated',t,'INSERT,UPDATE,DELETE'])).ok,false,'No authenticated direct writes '+t);}
+ await (await import('./boq-client-revision-cases.mjs')).boqClientRevisionCases({pg,fs,q,one,user,eq,deny,x});
  await pg.exec('reset role');
 }
