@@ -8,7 +8,7 @@ This is a working breakdown of 58 documented development packages, not 58 module
 
 User direction: Codex handles development, automated tests, necessary migrations, PR/merge and production deployment verification. The client's team handles signed-in workflow/browser/download/responsive/physical-device acceptance. Client acceptance is tracked separately and is never marked passed without their reported evidence. Business values, legal/commercial approval rules, reviewers, salaries, standards, targets and real assignments are not invented. Ask the user when a missing business decision blocks a concrete package. Optional bonus/scoring packages require business confirmation; their presence below is a documented gap, not activation of a policy. External email/SMS/WhatsApp remains excluded; native mobile remains deferred; full payroll execution is outside the documented scope.
 
-Current focus (20 October 2026): DEV-048 six-record finance file scope development-complete after PR #207. Next inspect DEV-042 reviewed Office cost application/report under existing controls. BOQ adoption paused for actual client finance/execution policies; all 41 client acceptance items pending.
+Current focus (20 October 2026): DEV-042 reviewed Office classification application/report in validation; broader product financials remain pending. DEV-048 six-record file scope development-complete. BOQ adoption paused for actual client policies; all 41 client acceptance items pending.
 
 | ID | Area | Development package | Status |
 |---|---|---|---|
