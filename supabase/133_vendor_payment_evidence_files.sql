@@ -46,7 +46,7 @@ declare c public.sc_vendor_payments;files jsonb;history jsonb;
 begin
  if not coalesce(portal_private.vendor_payment_file_read(p_vendor_payment),false) then raise exception 'Current Accounts vendor payment evidence access required';end if;
  select * into c from public.sc_vendor_payments where id=p_vendor_payment;
- select coalesce(jsonb_agg(to_jsonb(f)||jsonb_build_object('stored_metadata_matches',o.id is not null and o.owner_id=f.actor_id::text and o.metadata->>'size'=f.size::text and o.metadata->>'mimetype'=f.mime) order by f.created_at,f.id),'[]'::jsonb) into files from public.sc_vendor_payment_files f left join storage.objects o on o.bucket_id='finance-vendor-payment-evidence' and o.name=f.path where f.vendor_payment_id=c.id;
+ select coalesce(jsonb_agg(to_jsonb(f)||jsonb_build_object('stored_metadata_matches',coalesce(o.id is not null and o.owner_id=f.actor_id::text and o.metadata->>'size'=f.size::text and o.metadata->>'mimetype'=f.mime,false)) order by f.created_at,f.id),'[]'::jsonb) into files from public.sc_vendor_payment_files f left join storage.objects o on o.bucket_id='finance-vendor-payment-evidence' and o.name=f.path where f.vendor_payment_id=c.id;
  select coalesce(jsonb_agg(to_jsonb(h) order by h.created_at,h.id),'[]'::jsonb) into history from public.sc_vendor_payment_file_history h where h.vendor_payment_id=c.id;
  return jsonb_build_object('vendor_payment_id',c.id,'vendor_payment_snapshot',to_jsonb(c),'version',jsonb_array_length(files),'can_add',c.reversed_by is null and jsonb_array_length(files)<20,'files',files,'history',history);
 end$$;
@@ -81,7 +81,7 @@ begin
  if c.id is null then raise exception 'Payment unavailable';end if;
  perform portal_private.bill_lock(c.bill_id,p_bill_version);
  select * into c from public.sc_vendor_payments where id=p_payment for update;
- select coalesce(jsonb_agg(to_jsonb(f)||jsonb_build_object('stored_metadata_matches',o.id is not null and o.owner_id=f.actor_id::text and o.metadata->>'size'=f.size::text and o.metadata->>'mimetype'=f.mime) order by f.created_at,f.id),'[]'::jsonb) into files from public.sc_vendor_payment_files f left join storage.objects o on o.bucket_id='finance-vendor-payment-evidence' and o.name=f.path where f.vendor_payment_id=c.id;
+ select coalesce(jsonb_agg(to_jsonb(f)||jsonb_build_object('stored_metadata_matches',coalesce(o.id is not null and o.owner_id=f.actor_id::text and o.metadata->>'size'=f.size::text and o.metadata->>'mimetype'=f.mime,false)) order by f.created_at,f.id),'[]'::jsonb) into files from public.sc_vendor_payment_files f left join storage.objects o on o.bucket_id='finance-vendor-payment-evidence' and o.name=f.path where f.vendor_payment_id=c.id;
  perform public.reverse_vendor_payment_before_files(p_payment,p_bill_version,p_reason);
  select * into after_payment from public.sc_vendor_payments where id=p_payment;
  insert into public.sc_vendor_payment_file_history(id,vendor_payment_id,action,snapshot,reason,actor_id) values(gen_random_uuid(),c.id,'Reversed',jsonb_build_object('vendor_payment_before',to_jsonb(c),'vendor_payment_after',to_jsonb(after_payment),'supplemental_files',files),trim(p_reason),auth.uid());
