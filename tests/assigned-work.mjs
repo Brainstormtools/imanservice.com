@@ -1,3 +1,4 @@
+import {vendorPaymentEvidenceFileCases} from './helpers/vendor-payment-evidence-file-cases.mjs';
 import {cashEvidenceFileCases} from './helpers/cash-evidence-file-cases.mjs';
 import {loanAgreementFileCases} from './helpers/loan-agreement-file-cases.mjs';
 import {projectBudgetDraftCases} from './helpers/project-budget-draft-cases.mjs';
@@ -361,5 +362,6 @@ await portalAccountsCases({pg,fs,q,one,user,eq,deny,ids});
 await salesLeadScopeCases({pg,fs,q,one,user,eq,deny,ids});
 await loanAgreementFileCases({pg,fs,q,one,user,eq,deny});
 await cashEvidenceFileCases({pg,fs,q,one,user,eq,deny});
+await vendorPaymentEvidenceFileCases({pg,fs,q,one,user,eq,deny});
 console.log(`${passed} assigned-work and portal reminder assertions passed`);
 await pg.close();
