@@ -1,0 +1,13 @@
+# Classified cost register
+
+Active Admin or Accounts (`finance.manage`) opens **Finance → Classified costs**. This is a read-only view of the four existing Expense, Labour, Stock and Office classified-cost reports in one database statement snapshot. It records the actual read time and Pakistan business date. No business data or allocation event is created.
+
+Choose **Cost source scope** explicitly: an actual source project, General office, or all current PKR source scopes. Optionally choose a source family. Scope starts blank and resets on refresh/account/authority changes. The tables show separate source-family subtotals, product splits by family and each actual source once. There is no combined-family cost, revenue or profit total.
+
+Source scope means where the cost originated. An Office expense remains General office even when its manually applied splits target multiple projects. Those frozen targets appear in product splits; the Office remainder remains General office. Filtering a source project does not silently move Office costs into that project. Full Office source amounts are not repeated per target. Unallocated project costs retain their source project without being assigned to a product.
+
+Amounts, allocation state, application IDs and frozen lines come from the existing reports. Their approval, cash-only version, stale-source reconciliation, withdrawal and current source eligibility rules are unchanged. Negative net-stock remainders remain negative. Draft/review evidence alone does not become an applied classification. Missing or invalid source amounts are rejected instead of treated as zero; an empty actual source array is valid and has no export.
+
+**Export classified cost register CSV** contains only currently filtered sources, actual read/business date/currency, source identities/category/amounts, application/state, frozen splits, product group details and report basis. Manual labels are CSV-escaped. Private labour rates/hours, inventory movements and uploaded evidence are not duplicated into this register. Use the existing family allocation screens for immutable application history or source-specific details and any manual changes.
+
+Failed reads or exports clear loaded evidence/exports; refresh and choose scope again. Same-account permission revocation, inactive accounts and late prior-account responses cannot restore an earlier private view. Clients, workers and PM-only accounts do not gain access. The register introduces no approval, assignment, ledger posting, cash movement, automatic distribution, product revenue/profit calculation or new policy. Client signed-in/live/export/device acceptance remains pending.
