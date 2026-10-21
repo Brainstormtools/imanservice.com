@@ -1,5 +1,14 @@
 # Remaining portal development backlog
 
+## Prepared supplementary-invoice/manual WHT increment — 21 October 2026
+
+The next prepared increment adds Accounts issuance of a separate immutable supplementary invoice against the exact independent Manager-approved accepted increase, with copied original line tax rates, manual issue/due/bank details and original-invoice/change-order/project evidence. Existing client credit applies to the newly issued invoice. Explicit signed manual WHT and actual certificate references on approved credit/debit preparations are retained atomically as separate immutable tax evidence; they create no cash/payment claim, automatic WHT reversal or invoice-balance settlement. Operational WHT settlement/broader tax accounting remains open. See [prepared supplementary/WHT guide](boq-debit-wht-guide.md).
+
+Release status: stacked prepared branch/PR depending on [credit-posting PR #223](https://github.com/Brainstormtools/imanservice.com/pull/223), held for the grouped release. Migrations 142 and 143 are **not applied**; production remains migration 141, main `48ada6512ea76a760908c099312d8686ea162f48`, deployment `dpl_Hi6rFu7DdybrfrrfumKsd5jg61jC`. Exact test evidence/prepared head is recorded in the PR. No production business records or reviewer assignments inserted.
+
+Precise resume: validate the stacked source and ordered migration/release preflight, then requested cash refunds with client request/Owner-Director approval, no-payment cancellation/rebilling, and partial/multi-invoice/legacy-credit reconciliation. WHT financial settlement remains open; PM/Operations Manager started-work/removal/return/replacement execution retains final Admin approval. DEV-028 and all 41 client acceptance items remain open; catalogue unchanged at 50 open (six in progress, 44 not started), eight development complete.
+
+
 ## Prepared BOQ credit-posting increment — 21 October 2026
 
 Development resumed after the workspace outage. The pending implementation adds immutable Accounts issuance against exact independent Manager-approved credit preparations, original-line tax evidence, unpaid-balance reduction, excess same-company PKR client credit and default application to later issued invoices. Private posting receipts and client-safe ledger/CSV are separate; settlement applications are explicitly not additional tax credit notes or cash receipts. See [prepared credit-posting guide](boq-credit-posting-guide.md).
