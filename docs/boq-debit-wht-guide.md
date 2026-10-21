@@ -29,3 +29,5 @@ Issued original/supplementary headers, lines, project attribution, posting recei
 Keep both PRs unmerged and migrations 142/143 unapplied until the grouped release. Before that release, verify the stacked source, ordered schema preflight, access/immutability checks, preview build and exact production deployment/assets. Signed-in workflow/export/device acceptance belongs to the client and remains pending.
 
 Next confirmed development: requested cash refunds with actual client request and Owner/Director approval; no-payment cancellation/rebilling retaining the original as Cancelled; partial/multi-invoice and legacy-credit reconciliation. Manual WHT financial settlement/broader tax accounting remains open. PM/Operations Manager started-work changes, removal/return/replacement execution and final Admin adoption remain separate. Catalogue remains 50 open packages (six in progress, 44 not started), eight development complete; all 41 acceptance items pending.
+
+Prepared follow-up: [actual client refund request and Owner/Director approval](client-refund-approval-guide.md). This follow-up records approval only; cash payout/client-credit accounting remains separate.
