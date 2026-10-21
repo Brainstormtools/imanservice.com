@@ -1,5 +1,11 @@
 # CRM acceptance checklist
 
+## BOQ adjustment preparation increment — 21 October 2026
+
+Migration 141 adds private Accounts original-invoice-line credit/debit preparation, copied original tax rates, optional manual WHT certificate evidence and independent explicitly designated Manager approval/return. Actual Manager designations are manual, reasoned and immutable; none are seeded. Approved preparation is not issuance or posting and changes no balance, client credit, invoice, cash or recorded work. See [financial adjustment guide](boq-financial-adjustment-guide.md). Exact validation/release checkpoint follows verification.
+
+Precise resume: post approved adjustments through immutable original-invoice/change-order-linked documents, implement unpaid-balance/excess client-credit accounting and default future-invoice application, then supplementary invoice/manual WHT posting, requested refunds and no-payment rebilling. Reconcile partial/multi-invoice billing explicitly; started-work/removal/return/replacement execution remains separate with final Admin approval. DEV-028 and all 41 client acceptance items remain open; catalogue unchanged (50 open: six in progress, 44 not started; eight development complete).
+
 ## BOQ unstarted-removal increment — 21 October 2026
 
 New confirmed finance/execution decisions are recorded in [BOQ adoption rules](boq-adoption-rules.md) and supersede historical policy pauses for those decisions. Migration 140 implements only manually mapped, frozen PM proposals and Admin adoption of selected unstarted tasks for exact client-Accepted removals, with immutable evidence/CSV and task/child-write guards. Recorded/started/completed work, costs, financial settlement, dependency/phase/handover reconciliation and replacement templates remain separately bounded. No production fixtures or assignments inserted. Validation and exact release checkpoint are recorded in the release entry below.
