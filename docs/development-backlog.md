@@ -1,5 +1,14 @@
 # Remaining portal development backlog
 
+## Prepared BOQ credit-posting increment — 21 October 2026
+
+Development resumed after the workspace outage. The pending implementation adds immutable Accounts issuance against exact independent Manager-approved credit preparations, original-line tax evidence, unpaid-balance reduction, excess same-company PKR client credit and default application to later issued invoices. Private posting receipts and client-safe ledger/CSV are separate; settlement applications are explicitly not additional tax credit notes or cash receipts. See [prepared credit-posting guide](boq-credit-posting-guide.md).
+
+Release status: prepared branch/PR only, held for the grouped release. Migration 142 is local and **not applied**; production remains migration 141 and main `48ada6512ea76a760908c099312d8686ea162f48` / deployment `dpl_Hi6rFu7DdybrfrrfumKsd5jg61jC`. Do not treat this entry as a release or client acceptance. Validation evidence and exact prepared head are recorded with the PR.
+
+Precise resume: complete review/validation of this credit-posting increment; prepare debit/supplementary issuance and manual WHT posting separately, followed by requested refunds/no-payment rebilling and partial/multi-invoice reconciliation. Preserve immutable completed/recorded work and the separate PM/Operations Manager/final Admin execution rules. Catalogue remains 50 open (six in progress, 44 not started), eight development complete; all 41 client acceptance items pending.
+
+
 Current development count (21 October 2026): **50 open packages — six in progress and 44 not started; DEV-019/020/021/022/025/026/027/048 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
 
 Counted on 12 October 2026 (Asia/Karachi) against docs/crm-acceptance.md and docs/workbook-requirements.md, after PR #76 / migration 059.
