@@ -1,5 +1,11 @@
 # Workbook requirements and remaining portal work
 
+## BOQ unstarted-removal increment — 21 October 2026
+
+New confirmed finance/execution decisions are recorded in [BOQ adoption rules](boq-adoption-rules.md) and supersede historical policy pauses for those decisions. Migration 140 implements only manually mapped, frozen PM proposals and Admin adoption of selected unstarted tasks for exact client-Accepted removals, with immutable evidence/CSV and task/child-write guards. Recorded/started/completed work, costs, financial settlement, dependency/phase/handover reconciliation and replacement templates remain separately bounded. No production fixtures or assignments inserted. Validation and exact release checkpoint follow after verification.
+
+Precise resume: line-linked credit/debit preparation → Manager approval, original-line tax rates, excess client-credit accounting/application and manual WHT certificate evidence; then requested refunds/no-payment rebilling and separately PM/Operations Manager started-work adoption. Existing unpaid-balance, recorded-work and final Admin safeguards remain. DEV-028 stays in progress; 50 packages open (six in progress, 44 not started), eight development complete, all 41 client acceptance items pending.
+
 Target: the website repository and `/portal`. All 41 items in `crm-acceptance.md` remain the completion target. Partial releases are checkpoints. External email/SMS/WhatsApp delivery remains excluded; native mobile remains deferred. The nine attached workbooks supplement the CRM specification; their example records and financial balances are not imported or activated automatically.
 
 Read-only inspection covered all 63 sheets, their nonempty cells, stored formulas, validations and defined names. Formula caches are not proof of current recalculation. The supplied workbooks remain unchanged.
