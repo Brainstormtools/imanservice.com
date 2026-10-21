@@ -27,3 +27,7 @@ Adoption atomically records immutable evidence and sets selected tasks to **Canc
 Next implement line-linked credit/debit preparation and Manager approval using original invoice tax rates, with separate excess client-credit accounting/application and manual WHT evidence. Keep legacy unpaid-balance limits until the complete new balance path is tested. Follow with requested-refund approval and no-payment cancellation/rebill. Separately implement PM/Operations Manager started-work proposals, actual quantities, retained cost/billability attribution, removal/return tasks and replacement template adoption, retaining final Admin adoption approval. Reconcile dependency, phase and handover treatment before allowing cancellation to count as completed work; this release does not waive existing completion gates.
 
 DEV-028 remains in progress. Catalogue: 50 open packages (six in progress, 44 not started), eight development complete. All 41 client acceptance items remain pending. The client owns signed-in workflow/browser/export/device acceptance.
+
+## Validation and release
+
+PR #217 / migration 140: 8,210 checks across 146 suites, TypeScript and production build passed. Both requirement documents preserve the exact tested head, migration, production and source/result verification checkpoint. This remains execution-only adoption and leaves the policy extensions listed above pending.
