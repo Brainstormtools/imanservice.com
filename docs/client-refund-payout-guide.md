@@ -33,3 +33,5 @@ Required evidence here is a manually entered actual private proof reference. Thi
 Keep the stacked PRs unmerged and migrations 142–145 unapplied for the grouped release. Ordered schema/deployment preflight and exact preview/production verification remain required; actual business content and assignments stay manual.
 
 Next: no-payment cancellation/rebilling retaining the original as **Cancelled**, never deleted; then partial/multi-invoice/legacy-credit reconciliation and WHT financial settlement. Refund correction/reversal, staged partial payouts and dedicated payout file attachments remain open. PM/Operations Manager started-work changes retain separate final Admin adoption. DEV-028 and the complete CRM are not finished. Catalogue unchanged: 50 open packages, eight development complete; all 41 client acceptance items remain pending.
+
+Prepared follow-up: [supported no-payment cancellation and exact rebilling](boq-invoice-rebill-guide.md). This remains a stacked, unmerged/unapplied increment with explicit reconciliation limits.
