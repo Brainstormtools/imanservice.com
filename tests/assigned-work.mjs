@@ -368,5 +368,6 @@ await vendorPaymentEvidenceFileCases({pg,fs,q,one,user,eq,deny});
 await vendorBillInvoiceFileCases({pg,fs,q,one,user,eq,deny});
 await customerPaymentReceiptCases({pg,fs,q,one,user,eq,deny});
 await (await import('./helpers/boq-removal-adoption-cases.mjs')).boqRemovalAdoptionCases({pg,fs,q,one,user,eq,deny});
+await (await import('./helpers/boq-adjustment-approval-cases.mjs')).boqAdjustmentApprovalCases({pg,fs,q,one,user,eq,deny});
 console.log(`${passed} assigned-work and portal reminder assertions passed`);
 await pg.close();
