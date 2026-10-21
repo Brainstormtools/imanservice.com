@@ -35,3 +35,9 @@ The private CSV retains source, original invoice, change order, line/tax/WHT evi
 Post approved adjustments through separate immutable documents linked to the original invoice and change order, rechecking current source and avoiding duplicate posting. Implement the confirmed unpaid-balance/client-credit split and default future-invoice application before relaxing the old unpaid-balance-only credit safeguard. Integrate debit supplementary invoices, manual WHT ledger entries/certificate evidence, requested cash refunds with Owner/Director approval and no-payment Cancelled-original rebilling. Reconcile partial/multi-invoice billing and reporting explicitly. Started-work, retained change-order costs/billability, removal/returns and replacement-template execution remain separate under the confirmed [adoption rules](boq-adoption-rules.md).
 
 DEV-028 stays in progress; 50 open packages (six in progress, 44 not started), eight development complete. All 41 client acceptance items remain pending. Actual mappings/designations remain manual; signed-in browser/workflow/export/device acceptance belongs to the client.
+
+## Release checkpoint
+
+PR #219 / migration 141: 8,324 checks across 147 suites, TypeScript and production build passed. Both requirement documents preserve exact tested/merged source, migration, READY production and served-asset verification. All saved results/source hashes were reverified unchanged. No actual Manager designations, preparations, reviews, invoices or business fixtures were inserted. Posting/client credit and the integrations listed above remain pending.
+
+PR #220 corrects the designation-only CSV to place Manager history under the twentieth header. Corrected-source full validation: 8,325 checks/147 suites, TypeScript/build; source/result hashes reverified unchanged. Migration 141 was not reapplied. Both requirement documents preserve the follow-up deployment checkpoint and precise posting/client-credit resume point.
