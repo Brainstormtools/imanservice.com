@@ -374,5 +374,6 @@ await (await import('./helpers/boq-debit-wht-cases.mjs')).boqDebitWhtCases({pg,f
 await (await import('./helpers/client-refund-approval-cases.mjs')).clientRefundApprovalCases({pg,fs,q,one,user,eq,deny});
 await (await import('./helpers/client-refund-payout-cases.mjs')).clientRefundPayoutCases({pg,fs,q,one,user,eq,deny});
 await (await import('./helpers/boq-invoice-rebill-cases.mjs')).boqInvoiceRebillCases({pg,fs,q,one,user,eq,deny});
+await (await import('./helpers/boq-invoice-allocation-cases.mjs')).boqInvoiceAllocationCases({pg,fs,q,one,user,eq,deny});
 console.log(`${passed} assigned-work and portal reminder assertions passed`);
 await pg.close();

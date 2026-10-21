@@ -1,5 +1,16 @@
 # CRM acceptance checklist
 
+## Prepared multi-invoice allocation/review increment — 22 October 2026
+
+Accounts can manually allocate one accepted BOQ net difference across actual original invoice lines and an explicit unbilled net remainder. The full accepted net must reconcile exactly; each mapped invoice keeps its original tax rates and current credit-capacity evidence. Unbilled tax is explicitly **unassessed**, not zero/tax-exempt. Complete original invoices and the actual split are frozen for a different explicitly designated Manager's exact-current approval/return, with immutable corrections/history/private CSV. Competing pending/Approved single- and multi-invoice preparations are blocked. See [prepared invoice allocation guide](boq-invoice-allocation-guide.md).
+
+This is private preparation/review only: no invoice/note issuance, balance/client-credit/cash/WHT/contract/work change or capacity reservation. Unmapped issued legacy credits, supplementary/rebill chains and wholly unbilled changes remain separate reconciliation paths; no allocation is guessed. Clients and unrelated staff receive no private allocation evidence.
+
+Release status: stacked prepared branch/PR depending on [PR #227](https://github.com/Brainstormtools/imanservice.com/pull/227) and its predecessors, held for grouped release. Migrations 142–147 are **not applied**. Production remains migration 141, main `48ada6512ea76a760908c099312d8686ea162f48`, deployment `dpl_Hi6rFu7DdybrfrrfumKsd5jg61jC`. Exact validation/prepared head is recorded in the PR; no production business documents, fixtures or assignments inserted.
+
+Precise resume: atomic posting of approved billed allocations as per-original-invoice documents, current line-capacity/payment checks and excess client-credit accounting; unbilled contract/tax adjustment is still not posted. Legacy-credit/rounding/change-chain and WHT financial reconciliation, refund correction/reversal/partial payouts/files, and PM/Operations Manager execution changes remain open. Ordered schema/security/release preflight and exact deployment verification remain required. Catalogue unchanged: 50 open, eight development complete; DEV-028 and all 41 client acceptance items remain open.
+
+
 ## Prepared no-payment cancellation/rebill increment — 22 October 2026
 
 Accounts can apply an exact independent Manager-approved accepted BOQ difference through no-payment cancellation and rebilling. The original is retained as **Cancelled**, with its number, amounts and lines unchanged; positive remaining scope creates a separate issued replacement using original tax rates, actual payment details and immutable original/change/project/approval evidence. Zero remaining scope creates no replacement invoice. Cancelled originals have zero collectible balance and cannot accept claims, be deleted/relabelled or start recurring billing. Issued receivable reports count only the replacement. See [prepared cancellation/rebill guide](boq-invoice-rebill-guide.md).
