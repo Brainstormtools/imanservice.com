@@ -31,3 +31,5 @@ Use **Export refund request and approval evidence CSV** after explicitly loading
 ## Precise resume and limits
 
 The request/approval workflow is prepared for the grouped release and is not merged or applied to production. The next refund increment is actual Accounts payout evidence and cash/client-credit accounting against exact current Owner/Director approval, without inventing bank accounts or assignments. No-payment cancellation/rebilling must retain the original as Cancelled, never delete it. Partial/multi-invoice and legacy-credit reconciliation, WHT financial settlement and PM/Operations Manager execution changes remain separate. All 41 client acceptance items are pending; DEV-028 stays in progress and the package catalogue is unchanged.
+
+Prepared follow-up: [actual approved refund payout records and cash/client-credit accounting](client-refund-payout-guide.md). That stacked increment remains unmerged/unapplied; approval itself still creates no payment.

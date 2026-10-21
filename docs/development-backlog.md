@@ -1,5 +1,14 @@
 # Remaining portal development backlog
 
+## Prepared actual client refund payout increment — 22 October 2026
+
+Accounts can record an actual already-paid refund against an immutable actual client request and exact current Owner/Director approval/credit basis. RFND cash-out evidence and carried-credit consumption are atomic and immutable; duplicates, stale approvals, disabled/transferred requesting clients and unsupported dates/missing proof references are rejected. Future invoices cannot spend refunded credit. Client-safe payout history/CSV, separate dashboard/monthly/project/portfolio cash out and remaining credit liability are prepared. This records actual manual payments; it sends no bank transfer and creates no expense, loan, automatic WHT reversal or extra invoice credit. See [prepared payout guide](client-refund-payout-guide.md).
+
+Release status: stacked prepared branch/PR depending on [PR #225](https://github.com/Brainstormtools/imanservice.com/pull/225), #224 and #223. Held for the grouped release; migrations 142–145 are **not applied**. Production remains migration 141, main `48ada6512ea76a760908c099312d8686ea162f48`, deployment `dpl_Hi6rFu7DdybrfrrfumKsd5jg61jC`. Exact validation/prepared head is recorded in the PR. No actual payment, business fixture, bank details or authority assignment inserted.
+
+Precise resume: no-payment cancellation/rebilling retaining the original as Cancelled; partial/multi-invoice/legacy-credit reconciliation and WHT financial settlement. Refund reversal/correction, staged partial payouts and dedicated refund file attachments remain open: this new source uses a required manual private proof reference and does not inherit prior Cash file-upload coverage. Ordered migration/release preflight and exact deployment verification remain required. PM/Operations Manager execution changes and final Admin adoption remain separate. DEV-028 and all 41 client acceptance items remain open; catalogue unchanged at 50 open, eight development complete.
+
+
 ## Prepared client refund request/approval increment — 21 October 2026
 
 Actual active own-company clients can explicitly request cash refunds against current issued carried credit. Admin manually grants/revokes/restores actual Owner/Director authority; no approver is seeded or inferred from Admin, Accounts, PM or financial Manager roles. Exact-current-credit approval/return, requesting-client withdrawal, immutable actual account/server-time history, client-safe status and scoped CSV are prepared. This increment is **request/approval only**: no payout, cash/payment entry, credit reservation or paid/refunded status. Default future-invoice settlement continues; changed credit makes old approval historical/stale. See [prepared refund approval guide](client-refund-approval-guide.md).
