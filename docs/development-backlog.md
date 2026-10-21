@@ -1,6 +1,6 @@
 # Remaining portal development backlog
 
-Current development count (20 October 2026): **50 open packages — six in progress and 44 not started; DEV-019/020/021/022/025/026/027/048 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
+Current development count (21 October 2026): **50 open packages — six in progress and 44 not started; DEV-019/020/021/022/025/026/027/048 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
 
 Counted on 12 October 2026 (Asia/Karachi) against docs/crm-acceptance.md and docs/workbook-requirements.md, after PR #76 / migration 059.
 
@@ -8,7 +8,7 @@ This is a working breakdown of 58 documented development packages, not 58 module
 
 User direction: Codex handles development, automated tests, necessary migrations, PR/merge and production deployment verification. The client's team handles signed-in workflow/browser/download/responsive/physical-device acceptance. Client acceptance is tracked separately and is never marked passed without their reported evidence. Business values, legal/commercial approval rules, reviewers, salaries, standards, targets and real assignments are not invented. Ask the user when a missing business decision blocks a concrete package. Optional bonus/scoring packages require business confirmation; their presence below is a documented gap, not activation of a policy. External email/SMS/WhatsApp remains excluded; native mobile remains deferred; full payroll execution is outside the documented scope.
 
-Current focus (20 October 2026): DEV-042 original accepted product-revenue reference released in PR #213. Next reconcile remaining scope and stable-workstream revenue/cost coverage, retaining unmatched/unattributed and separate family values. Broader product financials pending; BOQ adoption paused for actual client policies; all 41 client acceptance items pending.
+Current focus (21 October 2026): DEV-042 stable-workstream product reference coverage in validation. Separate original/cost-family values and unmatched/unattributed evidence; broader operative distribution/product financials pending. BOQ adoption paused for actual client policies; all 41 acceptance items pending.
 
 | ID | Area | Development package | Status |
 |---|---|---|---|
