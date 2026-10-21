@@ -1,5 +1,16 @@
 # CRM acceptance checklist
 
+## Prepared no-payment cancellation/rebill increment — 22 October 2026
+
+Accounts can apply an exact independent Manager-approved accepted BOQ difference through no-payment cancellation and rebilling. The original is retained as **Cancelled**, with its number, amounts and lines unchanged; positive remaining scope creates a separate issued replacement using original tax rates, actual payment details and immutable original/change/project/approval evidence. Zero remaining scope creates no replacement invoice. Cancelled originals have zero collectible balance and cannot accept claims, be deleted/relabelled or start recurring billing. Issued receivable reports count only the replacement. See [prepared cancellation/rebill guide](boq-invoice-rebill-guide.md).
+
+This bounded path rejects any payment-claim/credit/posting/recurring history, manual WHT, mismatched rounding and repeated rebill chains rather than guessing reconciliation. It is an alternative to posting an adjustment note, not an additional adjustment. Client-safe history/CSV and unchanged work/costs are preserved.
+
+Release status: stacked prepared branch/PR depending on [PR #226](https://github.com/Brainstormtools/imanservice.com/pull/226) and #225/#224/#223, held for the grouped release. Migrations 142–146 are **not applied**. Production remains migration 141, main `48ada6512ea76a760908c099312d8686ea162f48`, deployment `dpl_Hi6rFu7DdybrfrrfumKsd5jg61jC`. Exact validation/prepared head is recorded in the PR; no production invoices/fixtures/assignments inserted.
+
+Precise resume: partial/multi-invoice/legacy-credit/rounding/change-chain reconciliation and WHT financial settlement; refund reversal/correction, staged partial payouts and dedicated refund files remain open. Ordered migration/release preflight and exact deployment verification remain required before grouped release. PM/Operations Manager started-work changes and final Admin adoption stay separate. Catalogue unchanged at 50 open, eight development complete; DEV-028 and all 41 client acceptance items remain open.
+
+
 ## Prepared actual client refund payout increment — 22 October 2026
 
 Accounts can record an actual already-paid refund against an immutable actual client request and exact current Owner/Director approval/credit basis. RFND cash-out evidence and carried-credit consumption are atomic and immutable; duplicates, stale approvals, disabled/transferred requesting clients and unsupported dates/missing proof references are rejected. Future invoices cannot spend refunded credit. Client-safe payout history/CSV, separate dashboard/monthly/project/portfolio cash out and remaining credit liability are prepared. This records actual manual payments; it sends no bank transfer and creates no expense, loan, automatic WHT reversal or extra invoice credit. See [prepared payout guide](client-refund-payout-guide.md).
