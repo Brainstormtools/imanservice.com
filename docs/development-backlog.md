@@ -1,5 +1,14 @@
 # Remaining portal development backlog
 
+## Prepared client refund request/approval increment — 21 October 2026
+
+Actual active own-company clients can explicitly request cash refunds against current issued carried credit. Admin manually grants/revokes/restores actual Owner/Director authority; no approver is seeded or inferred from Admin, Accounts, PM or financial Manager roles. Exact-current-credit approval/return, requesting-client withdrawal, immutable actual account/server-time history, client-safe status and scoped CSV are prepared. This increment is **request/approval only**: no payout, cash/payment entry, credit reservation or paid/refunded status. Default future-invoice settlement continues; changed credit makes old approval historical/stale. See [prepared refund approval guide](client-refund-approval-guide.md).
+
+Release status: stacked prepared branch/PR depending on [PR #224](https://github.com/Brainstormtools/imanservice.com/pull/224) and [PR #223](https://github.com/Brainstormtools/imanservice.com/pull/223), held for the grouped release. Migrations 142/143/144 are **not applied**. Production remains migration 141, main `48ada6512ea76a760908c099312d8686ea162f48`, deployment `dpl_Hi6rFu7DdybrfrrfumKsd5jg61jC`. Exact validation/prepared head is recorded in the PR; no production fixtures, cash entries or authority assignments inserted.
+
+Precise resume: actual Accounts refund payout evidence plus atomic cash/client-credit-liability accounting against exact current Owner/Director approval; then no-payment cancellation/rebilling retaining the original as Cancelled, partial/multi-invoice/legacy-credit reconciliation and WHT financial settlement. Ordered migration/release preflight and exact deployment verification remain required before the grouped release. PM/Operations Manager started-work changes and final Admin adoption stay separate. Catalogue unchanged: 50 open (six in progress, 44 not started), eight development complete; DEV-028 and all 41 client acceptance items remain open.
+
+
 ## Prepared supplementary-invoice/manual WHT increment — 21 October 2026
 
 The next prepared increment adds Accounts issuance of a separate immutable supplementary invoice against the exact independent Manager-approved accepted increase, with copied original line tax rates, manual issue/due/bank details and original-invoice/change-order/project evidence. Existing client credit applies to the newly issued invoice. Explicit signed manual WHT and actual certificate references on approved credit/debit preparations are retained atomically as separate immutable tax evidence; they create no cash/payment claim, automatic WHT reversal or invoice-balance settlement. Operational WHT settlement/broader tax accounting remains open. See [prepared supplementary/WHT guide](boq-debit-wht-guide.md).
