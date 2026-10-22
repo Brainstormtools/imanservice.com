@@ -1,3 +1,4 @@
+import {websiteSubmission, websiteAcquisition} from './website-submission';
 import React, { useState } from 'react';
 import { COMPANY_INFO } from '../data/companyData';
 import { 
@@ -22,6 +23,7 @@ export const ContactSection: React.FC = () => {
   const [phone, setPhone] = useState('');
   const [subject, setSubject] = useState('Existing Network Audit');
   const [message, setMessage] = useState('');
+  const [submission, setSubmission] = useState<{payload:string;requestId:string}|null>(null);
   const [honeypot, setHoneypot] = useState('');
   
   const [submitted, setSubmitted] = useState(false);
@@ -43,13 +45,17 @@ export const ContactSection: React.FC = () => {
         phone: phone.trim(),
         category: subject,
         message: message.trim(),
-        honeypot
+        honeypot,
+        acquisition: websiteAcquisition()
       };
+
+      const identity = websiteSubmission(submission, payload);
+      setSubmission(identity);
 
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({...payload, requestId:identity.requestId})
       });
 
       const data = await res.json();
@@ -61,7 +67,8 @@ export const ContactSection: React.FC = () => {
         throw new Error(data.message || 'Delivery to consultation dispatch failed. Please call our Lahore desk.');
       }
 
-      // Delivery confirmed by webhook response
+      // The backend confirmed enquiry recording.
+      setSubmission(null);
       setDeliveryConfirmedAt(data.receivedAt || new Date().toISOString());
       setSubmitted(true);
       try {
@@ -394,7 +401,7 @@ export const ContactSection: React.FC = () => {
                 
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100/80 text-emerald-800 text-xs font-bold uppercase tracking-wider">
                   <Check className="w-3.5 h-3.5" />
-                  <span>Webhook Delivery Confirmed</span>
+                  <span>Enquiry Recorded</span>
                 </div>
 
                 <h4 className="text-2xl font-bold text-slate-900 font-display">
@@ -402,12 +409,12 @@ export const ContactSection: React.FC = () => {
                 </h4>
                 
                 <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                  Thank you, <strong>{name}</strong>. Your consultation enquiry has been confirmed and routed to our Lahore engineering dispatch team. We will reach out via <strong>{email || phone}</strong> shortly.
+                  Thank you, <strong>{name}</strong>. Your consultation enquiry has been recorded for our Lahore engineering team. We will reach out via <strong>{email || phone}</strong> shortly.
                 </p>
 
                 {deliveryConfirmedAt && (
                   <div className="p-3 rounded-lg bg-[#F4FAF8] border border-slate-200 text-xs text-slate-500 max-w-sm mx-auto">
-                    Confirmed Dispatch Time: {new Date(deliveryConfirmedAt).toLocaleString()}
+                    Recorded at: {new Date(deliveryConfirmedAt).toLocaleString()}
                   </div>
                 )}
 

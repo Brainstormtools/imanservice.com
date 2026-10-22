@@ -1,5 +1,13 @@
 # Remaining portal development backlog
 
+## Phase 1 priority and website intake reconciliation — 22 October 2026
+
+The client now requests completion and live release of SRS build Phase 1 before Phase 2–6, with reasonable documented assumptions instead of waiting for business answers. Actual people, assignments, credentials and business records remain manual; confirmed decisions still apply. Client acceptance remains separate and all 41 items remain pending. See [Phase 1 progress and closure rules](phase-one-progress.md).
+
+Website contact/proposal → Raw Lead Board persistence is being restored from an earlier unreleased branch. Hosted intake objects were inspected and already exist, but main still had the old webhook-only handlers; no website-intake migration history entry was found. A new reconciliation migration preserves receipts, adds durable server-origin abuse limiting and in-app notice to eligible actual triage/owner accounts, without assigning an owner or exposing private contact existence. Validation: **8,364 checks / 149 suites**, including 28 isolated website database checks and 11 API/browser-helper checks; TypeScript and production build passed. All saved results and 644 source/test/config hashes were verified unchanged, fingerprint `1e74862c712d34a844687f466827aa70f88b949f663b20c306aa5d277fc29fba`. Migration `supabase/migrations/20261022004541_phase_one_website_intake.sql` SHA256 is recorded in the PR. This checkpoint is not yet a release or Phase 1 completion.
+
+Next: verify and release this website increment, then API-key intake, Meta intake, explicit administrator-configured routing and the remaining detailed Module 1/2 quotation audit. Meta provider credentials are not configured; implement the integration without inventing an account connection. The prepared finance stack [PRs #223–229](https://github.com/Brainstormtools/imanservice.com/pull/229) and migrations 142–148 remain held/unmerged/unapplied; this Phase 1 branch starts from main and does not include them. No later phase or client acceptance is marked complete. Current catalogue: 50 open packages (seven in progress, 43 not started), eight development complete; starting DEV-001 changes its status, not the total.
+
 Current development count (21 October 2026): **50 open packages — six in progress and 44 not started; DEV-019/020/021/022/025/026/027/048 development complete.** The original catalogue tracks 58 packages. Client acceptance remains separate and pending.
 
 Counted on 12 October 2026 (Asia/Karachi) against docs/crm-acceptance.md and docs/workbook-requirements.md, after PR #76 / migration 059.
@@ -8,11 +16,11 @@ This is a working breakdown of 58 documented development packages, not 58 module
 
 User direction: Codex handles development, automated tests, necessary migrations, PR/merge and production deployment verification. The client's team handles signed-in workflow/browser/download/responsive/physical-device acceptance. Client acceptance is tracked separately and is never marked passed without their reported evidence. Business values, legal/commercial approval rules, reviewers, salaries, standards, targets and real assignments are not invented. Ask the user when a missing business decision blocks a concrete package. Optional bonus/scoring packages require business confirmation; their presence below is a documented gap, not activation of a policy. External email/SMS/WhatsApp remains excluded; native mobile remains deferred; full payroll execution is outside the documented scope.
 
-Current focus (21 October 2026): DEV-028 unstarted-removal adoption released in PR #217; Accounts original-line credit/debit preparation and explicit independent Manager approval released in PR #219, designation-only CSV corrected in PR #220. Next immutable financial posting/client-credit accounting and default application before changing legacy unpaid-balance guards. Partial/multi-invoice, WHT/refund/rebill and started-work execution remain. See [financial adjustment guide](boq-financial-adjustment-guide.md). All 41 client acceptance items remain pending.
+Historical focus (21 October 2026): DEV-028 unstarted-removal adoption released in PR #217; Accounts original-line credit/debit preparation and explicit independent Manager approval released in PR #219, designation-only CSV corrected in PR #220. Next immutable financial posting/client-credit accounting and default application before changing legacy unpaid-balance guards. Partial/multi-invoice, WHT/refund/rebill and started-work execution remain. See [financial adjustment guide](boq-financial-adjustment-guide.md). All 41 client acceptance items remain pending.
 
 | ID | Area | Development package | Status |
 |---|---|---|---|
-| DEV-001 | Sales intake | Website lead intake | Pending development |
+| DEV-001 | Sales intake | Website lead intake | In progress |
 | DEV-002 | Sales intake | Meta lead intake | Pending development |
 | DEV-003 | Sales intake | API lead intake | Pending development |
 | DEV-004 | Sales intake | Automatic lead routing | Pending development |

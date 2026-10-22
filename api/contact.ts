@@ -1,3 +1,4 @@
+import {readIntakeBody, recordWebsiteLead, IntakeError} from '../server/website-lead-intake.js';
 import type { IncomingMessage, ServerResponse } from 'http';
 
 interface VercelRequest extends IncomingMessage {
@@ -38,38 +39,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     // 2. Parse request body if not already parsed
-    let body = req.body;
-    if (typeof body === 'string') {
-      try {
-        body = JSON.parse(body);
-      } catch {
-        return res.status(400).json({
-          success: false,
-          error: 'Bad Request',
-          message: 'Invalid JSON payload.'
-        });
-      }
-    } else if (!body && typeof req.on === 'function') {
-      // In case body wasn't pre-parsed by the runner
-      const buffers: Buffer[] = [];
-      for await (const chunk of req) {
-        buffers.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
-      }
-      const raw = Buffer.concat(buffers).toString('utf8');
-      if (raw) {
-        try {
-          body = JSON.parse(raw);
-        } catch {
-          return res.status(400).json({
-            success: false,
-            error: 'Bad Request',
-            message: 'Invalid JSON payload format.'
-          });
-        }
-      }
-    }
-
-    body = body || {};
+    const body = await readIntakeBody(req);
 
     // 3. Honeypot anti-spam verification
     if (body.honeypot && String(body.honeypot).trim().length > 0) {
@@ -106,6 +76,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       errors.message = 'Please provide details about your inquiry (between 5 and 3000 characters).';
     }
 
+    if (category.length > 100) errors.category = 'Please shorten the category.';
+
     if (Object.keys(errors).length > 0) {
       return res.status(422).json({
         success: false,
@@ -115,15 +87,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    // 6. Check consultation webhook configuration
+    await recordWebsiteLead('contact', body, {name:fullName,email,phone,company:'',message:['Contact: '+fullName,'Phone: '+phone,'Category: '+category,'',message].join('\n')}, req);
     const webhookUrl = process.env.CONSULTATION_WEBHOOK_URL;
-    if (!webhookUrl || !webhookUrl.trim()) {
-      return res.status(503).json({
-        success: false,
-        error: 'Service Unavailable',
-        message: 'The consultation webhook endpoint is not configured on this server. Please call our hotline directly at +92 314 9020008 or reach out via WhatsApp.'
-      });
-    }
 
     // 7. Client metadata
     const forwarded = req.headers['x-forwarded-for'];
@@ -148,34 +113,37 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
     };
 
-    const webhookResponse = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': 'iManService-Vercel-Serverless/1.0'
-      },
-      body: JSON.stringify(webhookPayload)
-    });
+    if (webhookUrl?.trim()) {
+      const webhookResponse = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Idempotency-Key': body.requestId,
+          'User-Agent': 'iManService-Vercel-Serverless/1.0'
+        },
+        signal: AbortSignal.timeout(10000),
+        body: JSON.stringify({...webhookPayload, requestId:body.requestId})
+      }).catch(() => { throw new IntakeError(502,'Your enquiry is recorded, but consultation delivery is unconfirmed. Retry the same submission.'); });
 
-    if (!webhookResponse.ok) {
-      const errorText = await webhookResponse.text().catch(() => '');
-      console.error(`Webhook delivery failed with status ${webhookResponse.status}:`, errorText);
-      return res.status(502).json({
-        success: false,
-        error: 'Bad Gateway',
-        message: `Delivery to consultation backend failed (HTTP ${webhookResponse.status}). Please contact us directly at +92 314 9020008.`
-      });
+      if (!webhookResponse.ok) {
+
+        return res.status(502).json({
+          success: false,
+          error: 'Bad Gateway',
+          message: 'Your enquiry is recorded, but consultation delivery is unconfirmed. Retry the same submission or call +92 314 9020008.'
+        });
+      }
     }
 
-    // 9. Confirmed delivery success
+    // CRM persistence is confirmed; optional webhook delivery has also succeeded.
     return res.status(200).json({
       success: true,
-      message: 'Your inquiry has been successfully delivered to our Lahore infrastructure lead. We will contact you shortly.',
+      message: 'Your inquiry has been recorded. We will contact you shortly.',
       receivedAt: new Date().toISOString()
     });
 
   } catch (err: any) {
-    console.error('Unhandled error in /api/contact handler:', err);
+    if (err instanceof IntakeError) return res.status(err.status).json({success:false,message:err.message});
     return res.status(500).json({
       success: false,
       error: 'Internal Server Error',
