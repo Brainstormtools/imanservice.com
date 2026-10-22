@@ -1,5 +1,16 @@
 # Phase 1 SRS implementation and release coverage
 
+## Phase 1 final implementation merged; production held — 23 October 2026
+
+[PR #243](https://github.com/Brainstormtools/imanservice.com/pull/243) merged at `69de53f7b1815797bf83725896cb52f4f5506cac`, tested head `4033846f2a1c32f3acd8b663f7d602cb3c5bb3bd`, exact tree `3d31ad3d330f2e65d242091f40accdd9937fbcef`; tested head → merge has zero changed files. Final implementation passed **9,016 checks / 174 suites**, TypeScript and production build. Original tested fingerprint including actual logo: `d0f419d49669eccc31c5f17b9a3986f8b43e605c5b014aabb12a46e4ceb886c7` (705 files). The release checkpoint aligns only the newly applied migration filename/test reference; final aligned fingerprint is `84d8bc36490477a86027136509d388598abc18d522c7f89e1cc5984f6c65d15e`. See [SRS coverage](phase-one-srs-coverage.md) for precise implementation boundaries.
+
+Quote-scope/current-authority guard applied **once** as `20261022223747`, name `phase_one_quote_scope_versions`; original scaffold `20261022193927`, unchanged SQL SHA256 `124d573c89bedf2caf1bb1e932872140ecad862a923835d4f10f32c8221f2e1d`. Native checks confirmed current Deal/product authority guards, active-scope/catalog duplicate checks and unchanged empty search paths. This checkpoint aligns its filename/test reference without another SQL application. Earlier intake/routing/board/List/stage/product/file migrations remain applied once; do not reapply. Finance 142–148 remain held/unapplied. No actual business fixtures, assignments, external deliveries or client acceptance records were created.
+
+**Phase 1 is not yet complete and live.** Vercel reports `failure` / `build-rate-limit` for the final implementation head; no exact-main production deployment is visible. Last verified production remains cumulative PR #240, main `2b7eb47dfe1de396d581a51a8058a50639e7b962`, deployment `dpl_DtZQL78piBP9dSNnxjRkHpTU86dj`. Product-scope, lead-file and final closure increments remain release-pending. No billing/protection changes, capped manual deployment retries or Preview promotion were performed.
+
+Precise resume: verify the final checkpoint's saved regression/source results, then let ordinary Git production deployment resume when provider capacity permits; verify exact final main READY, production alias and portal/logo assets before marking the software released. Actual Meta app/Page/account authorization remains unavailable and **all 41 client-owned live/browser/export/device acceptance checks remain pending**. Catalogue remains **66 packages: 50 open (ten in progress, 40 not started), 16 development complete** until release verification. Do not claim training, later phases or the CRM complete; finish Phase 1 delivery before starting Phase 2.
+
+
 This maps the uploaded SRS's **Phase 1 — Leads, deals & quotation** to current implementation and automated evidence. Completion of the software implementation is separate from actual business setup, external account activation and client-owned live acceptance. Final release status is recorded at the top of both requirement documents and `phase-one-progress.md`; do not infer production release from a prepared branch or a READY preview.
 
 | Phase 1 behavior | Implementation | Automated evidence |
