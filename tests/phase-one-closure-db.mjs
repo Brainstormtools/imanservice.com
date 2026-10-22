@@ -32,6 +32,6 @@ try{
  await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022190605_phase_one_stage_entry_actions.sql',import.meta.url),'utf8'));
  await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022192444_phase_one_product_scope.sql',import.meta.url),'utf8'));
  await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022194610_phase_one_lead_files.sql',import.meta.url),'utf8'));
- await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022193927_phase_one_quote_scope_versions.sql',import.meta.url),'utf8'));
+ await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022223747_phase_one_quote_scope_versions.sql',import.meta.url),'utf8'));
  await phaseOneClosureCases({pg,fs,q,one,user,eq,deny,ids});console.log(`${passed} integrated Phase 1 closure database assertions passed`);
 }finally{await pg.close();}
