@@ -1,3 +1,4 @@
+import {websiteSubmission, websiteAcquisition} from './website-submission';
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   X, 
@@ -38,6 +39,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
   const [servers, setServers] = useState<number>(2);
   const [urgency, setUrgency] = useState<string>('planned');
   const [notes, setNotes] = useState<string>('');
+  const [submission, setSubmission] = useState<{payload:string;requestId:string}|null>(null);
   const [honeypot, setHoneypot] = useState<string>('');
   
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -134,13 +136,17 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
         servers: Number(servers),
         timeline: urgency,
         notes: notes.trim(),
-        honeypot
+        honeypot,
+        acquisition: websiteAcquisition()
       };
+
+      const identity = websiteSubmission(submission, payload);
+      setSubmission(identity);
 
       const res = await fetch('/api/proposal', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({...payload, requestId:identity.requestId})
       });
 
       const data = await res.json();
@@ -152,6 +158,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
         throw new Error(data.message || 'Delivery failure: Proposal request could not be dispatched.');
       }
 
+      setSubmission(null);
       setDeliveryConfirmedAt(data.receivedAt || new Date().toISOString());
       setIsSubmitted(true);
       try {
@@ -487,7 +494,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-2">
               <Check className="w-3.5 h-3.5" />
-              <span>Proposal Dispatch Confirmed</span>
+              <span>Proposal Request Recorded</span>
             </div>
 
             <h3 className="text-2xl font-bold text-slate-900 font-display mt-2">
@@ -495,12 +502,12 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
             </h3>
 
             <p className="text-sm text-slate-600 mt-2 max-w-md mx-auto leading-relaxed">
-              Your proposal request for <strong>{companyName || 'your organisation'}</strong> has been confirmed and routed to our Lahore Infrastructure Engineering Lead. We will contact you at <strong>{email || phone}</strong> with your customised scope.
+              Your proposal request for <strong>{companyName || 'your organisation'}</strong> has been recorded for our Lahore infrastructure engineering team. We will contact you at <strong>{email || phone}</strong> with your customised scope.
             </p>
 
             {deliveryConfirmedAt && (
               <div className="mt-2 text-xs text-slate-400">
-                Delivered to consultation desk: {new Date(deliveryConfirmedAt).toLocaleTimeString()}
+                Recorded at: {new Date(deliveryConfirmedAt).toLocaleTimeString()}
               </div>
             )}
 
