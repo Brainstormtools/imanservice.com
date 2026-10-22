@@ -27,6 +27,6 @@ try{
  await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022103855_phase_one_meta_intake.sql',import.meta.url),'utf8'));
  await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022104422_phase_one_lead_routing.sql',import.meta.url),'utf8'));
  await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022111906_phase_one_board_fields.sql',import.meta.url),'utf8'));
- await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022112524_phase_one_board_number_precision.sql',import.meta.url),'utf8'));
+ await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022113632_phase_one_board_number_precision.sql',import.meta.url),'utf8'));
  await boardFieldCases({pg,q,one,user,eq,deny,ids});console.log(`${passed} isolated board/field database assertions passed`);
 }finally{await pg.close();}
