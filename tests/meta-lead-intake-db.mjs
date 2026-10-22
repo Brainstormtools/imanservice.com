@@ -23,7 +23,7 @@ try{
  await q('insert into auth.users values($1),($2)',[ids.admin,ids.clientA]);await q("insert into companies(id,name) values($1,'QA isolated website company')",[company]);await q("insert into profiles(id,name,role,company_id) values($1,'QA admin','admin',null),($2,'QA client','client',$3)",[ids.admin,ids.clientA,company]);
  await q('insert into auth.users values($1)',[ids.worker]);await q("insert into profiles(id,name,role) values($1,'QA unrelated worker','team')",[ids.worker]);
  await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022005821_phase_one_website_intake.sql',import.meta.url),'utf8'));
- await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022010819_phase_one_api_intake.sql',import.meta.url),'utf8'));
- await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022093715_phase_one_meta_intake.sql',import.meta.url),'utf8'));
+ await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022103801_phase_one_api_intake.sql',import.meta.url),'utf8'));
+ await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022103855_phase_one_meta_intake.sql',import.meta.url),'utf8'));
  await metaLeadIntakeCases({pg,q,one,user,eq,deny,ids});console.log(`${passed} isolated Meta intake database assertions passed`);
 }finally{await pg.close();}

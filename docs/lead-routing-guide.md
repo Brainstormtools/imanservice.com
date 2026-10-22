@@ -1,8 +1,8 @@
 # Optional administrator-configured lead routing
 
-This Phase 1 increment is prepared on a separate branch following merged Meta intake [PR #233](https://github.com/Brainstormtools/imanservice.com/pull/233), which follows merged API intake [PR #232](https://github.com/Brainstormtools/imanservice.com/pull/232). Its new migration `20261022101932_phase_one_lead_routing.sql` is unapplied. Production remains the earlier verified deployment; newly discovered exact API/Meta automatic previews are READY, so normal Git-based release is being verified after final regression/merge. This is not live routing or completion of Phase 1.
+This Phase 1 implementation is released in merged PR #234 after API #232 and Meta #233. Exact production `dpl_956wrMDekweeTMWWb3nGMS6H7SVq` is READY and its public domain/assets are verified. Migration `20261022104422_phase_one_lead_routing.sql` applied once, originally scaffolded as `20261022101932`. Its source filename now matches actual history with identical SQL bytes; do not rerun it. No actual rule or owner assignment was created. Phase 1 remains incomplete.
 
-## Configure actual rules after release
+## Configure actual rules
 
 An active Administrator opens **Sales board configuration → Optional lead routing**, then explicitly loads the current register. No rules, owners, boards, business criteria or follow-up intervals are seeded or preselected. With no enabled matching rule, existing intake behavior remains unchanged.
 
@@ -36,6 +36,6 @@ Routing authority and evidence tables are private with RLS and no direct browser
 
 ## Release and next step
 
-API/Meta migrations have now applied once as actual database versions `20261022103801`/`20261022103855` after PR merge, with source scaffolds `20261022010819`/`20261022093715`. Do not reapply either scaffold or run automatic CLI migration push before history alignment. This routing migration remains unapplied until its PR is merged. Do not reapply website migration `20261022005821` or apply held finance migrations 142–148. Use the normal Git-based release path only after final regression and PR merge; verify the actual production deployment and alias. Do not retry the earlier capped manual deployment endpoint or change billing/protection settings. Actual Meta activation still needs actual account authorization.
+Website/API/Meta/routing migrations applied once at actual versions `20261022005821`, `20261022103801`, `20261022103855`, `20261022104422`; source filenames match these versions with identical SQL bytes. Do not reapply them or held finance migrations 142–148. Complete legacy history must be checked before any automatic CLI push. Production was released through normal Git/PR merges; no manual capped deployment retry, billing change or credential-protection bypass occurred. Actual Meta activation still needs actual account authorization.
 
 Next implement the detailed Phase 1 sales/quotation gaps recorded in [Phase 1 progress](phase-one-progress.md), beginning with actual Administrator board creation/custom fields and the missing List actions. Phase 1 is incomplete and all 41 client-owned signed-in/live/browser/export/device acceptance items remain pending.
