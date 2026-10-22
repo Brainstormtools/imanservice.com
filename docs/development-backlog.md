@@ -1,5 +1,19 @@
 # Remaining portal development backlog
 
+## Phase 1 actual board creation and per-board fields — 22 October 2026
+
+Validation: **8,689 automated checks across 159 suites passed**, including 70 isolated board/field database and 14 UI checks; TypeScript and production build passed. All 670 source/test/config files and every saved result were verified unchanged at `6ca858fade47347464785dc23c6598ba8e676990072a0a64b3bac235a6a60410`. Earlier focused SQL parse/type errors were corrected before the complete run. A partial earlier regression is retained; the final run includes the additional authority checks after transaction locks. No production fixtures or application-test assertions were discarded.
+
+Prepared actual active-Administrator board creation using an explicitly selected existing board's exact stage snapshot. Product name/code, color, outcome, inactivity highlight interval, source board, reason and confirmation are manual; new boards start inactive unless explicitly enabled. No members, fields/values, assignments or project templates are copied. Current hosted metadata shows seven existing boards, preserved without assuming the original six-board seed is the current business register.
+
+Prepared optional per-board Text/Number/Date/Yes-No/Single-choice definitions and scoped actual product-line values, exact schema/receipt versions, reasoned immutable definition/value history and private CSV. Existing key/type/board scope and option meaning cannot be overwritten; archive/replacement preserves original evidence. A shared Deal does not grant access to another board's fields. Current authority is rechecked after transaction locks; closed Deals, dropped products and inactive boards retain values read-only. No required-field gate, default business value, unit, financial/rounding/working-hour policy or client-visible data is inferred. See [product board/field guide](product-board-fields-guide.md).
+
+New CLI scaffold `20261022105756_phase_one_board_fields.sql` remains unapplied pending PR merge after the full regression passed. Existing applied website/API/Meta/routing migrations `20261022005821`, `20261022103801`, `20261022103855`, `20261022104422` must not be rerun; finance migrations 142–148 remain separate/unapplied. The main checkpoint is merged PR #235 at `eb85818269f4dd74df7324fd8194e4fa64590f3a`, exact production `dpl_DNHjVVCcpaQH6si6vkcYJBNUWvkK` READY and www domain/assets verified. No production boards, fields, values or fixtures were inserted by this increment. Actual Meta authorization is still unavailable.
+
+The fresh detailed SRS audit adds one explicit package, **DEV-059 — actual board creation and per-board custom fields**, rather than silently treating the original catalogue as exhaustive. The catalogue now contains 59 packages: **48 open (eight in progress, 40 not started), 11 development complete** while DEV-059 is prepared/release-pending. It is not the full remaining Phase 1 gap count. Phase 1 remains incomplete; all 41 client-owned acceptance items remain pending.
+
+Precise next: preserve the exact tested board/field PR, merge before applying its new migration once, verify production, record actual applied history and align the source filename without rerunning SQL. Then continue advanced sales List sorting/column/inline/bulk/filter behavior and the remaining lead timer/stage action/sales/quotation audit. Do not resume later-phase finance work or invent actual business setup.
+
 ## Phase 1 intake/routing production release — 22 October 2026
 
 Final aligned-source verification: **8,605 checks / 157 suites passed again**, with all 665 source/test/config files and every saved result verified unchanged against `706b666db75d992c19c2f0f82dc271b8a64585588d542d65ef9eb0b8a0534417`. SQL bytes are identical across all three migration renames; only local test path references changed. TypeScript/build application sources remain byte-identical to the passing build. This checkpoint changes no application behavior and applies no SQL.
@@ -149,6 +163,7 @@ Historical focus (21 October 2026): DEV-028 unstarted-removal adoption released 
 | DEV-056 | HR/performance | Project allocation of overtime premiums | Pending development |
 | DEV-057 | HR/performance | Holiday calendar feeds | Pending development |
 | DEV-058 | Design | Remaining specified design-system alignment | Pending development |
+| DEV-059 | Sales boards | Actual Administrator board creation and per-board custom fields | In progress — implementation prepared; regression/release pending |
 
 
 DEV-028 checkpoint: migration 060 and additional-item offer workflow implemented and automatically tested; release verification is recorded in the requirement documents. This does not complete the whole package. Backlog remains 58 open packages: one in progress and 57 not started in this numbered development pass. Existing implemented functionality is preserved; client acceptance is separate.
