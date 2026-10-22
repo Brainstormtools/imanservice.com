@@ -1,5 +1,16 @@
 # CRM acceptance checklist
 
+## Phase 2 development proceeds while deployment waits — 23 October 2026
+
+The user explicitly authorized sequential development through the SRS build phases while Vercel deployment is unavailable. This supersedes the earlier Phase 1 production gate for starting Phase 2 implementation. “Offline development” means implementation/testing without deployment, not a claim that offline business-data capture or sync works. Development-complete, merged, database-applied, deployed and client-accepted remain separate states.
+
+First bounded Phase 2 increment hardens Configurator/Won-conversion UI access: inactive/client roles issue no private reads; actual account/role/permission and Deal version/owner scope changes remount local state; delayed old-scope reads cannot populate the new scope; failed reads remove private server snapshots. Existing templates, standards, parameters and successful conversion behavior are retained. This is a frontend guard alongside existing server authorization, not a replacement for it. No new database migration, live business record, assignment or external delivery is created. See [Phase 2 development checkpoint](phase-two-development.md).
+
+Phase 1 remains development-tested but final production release pending. Main `8287ef63560931122f522b8a513222152d167f97` is the saved Phase 1 target; last verified production remains PR #240 / `dpl_DtZQL78piBP9dSNnxjRkHpTU86dj`. The user's manual deployment confirmed `api-deployments-free-per-day`, with provider guidance to retry in 24 hours; no reset time is guaranteed. Existing migrations must not be reapplied. Future increments are prepared in PRs without deployment retries while the cap persists. Actual Meta authorization and all 41 client-owned acceptance checks remain pending.
+
+Precise next development step: finish the current-authority audit of the latest `convert_crm_won` overrides and implement bounded DEV-006 actual Accounts routing, followed by customer-link/create conflict handling (DEV-007) and later payment drafts (DEV-005). Do not claim these packages, Phase 2 or later phases complete from this UI increment. Catalogue counts/statuses remain unchanged: 66 packages, 50 open, 16 development complete. Development continues without waiting for production verification; release verification still precedes any “live” claim.
+
+
 ## Phase 1 final implementation merged; production held — 23 October 2026
 
 [PR #243](https://github.com/Brainstormtools/imanservice.com/pull/243) merged at `69de53f7b1815797bf83725896cb52f4f5506cac`, tested head `4033846f2a1c32f3acd8b663f7d602cb3c5bb3bd`, exact tree `3d31ad3d330f2e65d242091f40accdd9937fbcef`; tested head → merge has zero changed files. Final implementation passed **9,016 checks / 174 suites**, TypeScript and production build. Original tested fingerprint including actual logo: `d0f419d49669eccc31c5f17b9a3986f8b43e605c5b014aabb12a46e4ceb886c7` (705 files). The release checkpoint aligns only the newly applied migration filename/test reference; final aligned fingerprint is `84d8bc36490477a86027136509d388598abc18d522c7f89e1cc5984f6c65d15e`. See [SRS coverage](phase-one-srs-coverage.md) for precise implementation boundaries.
