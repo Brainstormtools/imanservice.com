@@ -30,6 +30,6 @@ try{
  await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022113632_phase_one_board_number_precision.sql',import.meta.url),'utf8'));
  await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022184714_phase_one_sales_list_actions.sql',import.meta.url),'utf8'));
  await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022190605_phase_one_stage_entry_actions.sql',import.meta.url),'utf8'));
- await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022190143_phase_one_product_scope.sql',import.meta.url),'utf8'));
+ await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022192444_phase_one_product_scope.sql',import.meta.url),'utf8'));
  await productScopeCases({pg,q,one,user,eq,deny,ids});console.log(`${passed} isolated product-scope database assertions passed`);
 }finally{await pg.close();}
