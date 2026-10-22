@@ -26,6 +26,10 @@ Use **Export private invoice allocation evidence CSV** for the permitted frozen 
 
 Preparation and approval create no invoice, credit/debit note, client-credit application, cash/refund entry, WHT posting, unbilled contract adjustment, work/cost change or invoice-capacity reservation. A different approved change may consume capacity later; future issuance must revalidate it atomically. This increment does not move an already approved single-invoice document into a split or guess attribution for an existing generic credit. It does not automatically bill or cancel the unbilled remainder.
 
-## Precise resume
+## Follow-up prepared issuance
+
+The following prepared migration 148 adds atomic **billed debit** issuance after this independent approval. See [billed debit issuance guide](boq-allocation-debit-guide.md). The unbilled remainder remains unposted and credit allocation issuance remains pending. This preparation/review guide describes the financial effect of those actions alone. Migrations 142–148 remain unapplied.
+
+## Historical resume at migration 147
 
 Keep the stacked PRs unmerged and migrations 142–147 unapplied for the grouped release. Next implement atomic issuance of the approved billed portions with per-original-invoice documents, current capacity/payment checks, original tax rates and default excess client-credit accounting, without treating the unbilled classification as a posted contract/tax adjustment. Complete explicit legacy-credit/rounding/change-chain reconciliation and WHT financial settlement separately. Refund correction/reversal, partial payouts and dedicated refund files, and PM/Operations Manager execution changes remain open. Ordered schema/security/source and exact deployment verification remain required before release. Catalogue unchanged: 50 open packages, eight development complete; DEV-028 and all 41 client acceptance items remain open.
