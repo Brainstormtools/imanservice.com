@@ -1,6 +1,6 @@
 # Meta lead-ad intake and contact review
 
-This Phase 1 increment is prepared in source, not released or connected to a real Meta account. It depends on API-intake draft [PR #232](https://github.com/Brainstormtools/imanservice.com/pull/232). Its migration `20261022093715_phase_one_meta_intake.sql` remains unapplied. Production still serves the earlier deployment while the Vercel daily build limit blocks release. Do not call this an operational Facebook/Instagram connection or mark DEV-002 complete.
+This Phase 1 code is deployed through merged PRs #232–234, but is not connected to a real Meta account. Actual app/Page credentials remain unavailable and no connection was invented. Migration `20261022103855_phase_one_meta_intake.sql` is applied once, originally scaffolded as `20261022093715`; its renamed source has identical SQL bytes and must not be rerun. Do not call this an operational Facebook/Instagram connection or mark DEV-002 complete.
 
 ## Actual provider setup after release
 
@@ -44,4 +44,4 @@ The private CSV exports only the loaded review page, including original evidence
 
 ## Resume and release boundaries
 
-Complete regression, preserve a branch/draft PR stacked on #232, then implement explicit Administrator routing and finish the detailed Phase 1 sales/quotation audit. Keep both new intake migrations unapplied until a supported release is ready. Never reapply the already-applied website migration `20261022005821` or apply held finance migrations 142–148. Restore legitimate deployment capacity before production release; do not retry the blocked manual deployment endpoint, bypass protection or change billing. All 41 signed-in/live/browser/export/device acceptance checks remain client-owned and pending.
+API/Meta/routing implementation is now merged, migrations applied once and exact production verified. Source files match actual migration history versions without reapplying SQL. Never reapply website `20261022005821`, API `20261022103801`, Meta `20261022103855` or routing `20261022104422`; held finance migrations 142–148 remain separate/unapplied. Next actual board creation/custom fields, advanced List actions and the detailed Phase 1 sales/quotation audit. Actual Meta account authorization still needs the authorized account owner's configuration; do not invent credentials or submit provider test fixtures to production. All 41 signed-in/live/browser/export/device acceptance checks remain client-owned and pending.

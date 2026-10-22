@@ -1,6 +1,6 @@
 # Phase 1 — server-to-server lead API
 
-This is a development increment. It is not evidence that Phase 1 is complete or that the current production deployment contains this code. See [Phase 1 progress](phase-one-progress.md) and the exact release checkpoint in both requirement documents.
+This implementation is deployed through merged PRs #232–234 on the production portal. Actual source configuration remains manual; no sources/keys were seeded. This is not evidence that Phase 1 or client acceptance is complete. See [Phase 1 progress](phase-one-progress.md) and the exact release checkpoint in both requirement documents.
 
 ## Configure an actual source
 
@@ -49,4 +49,4 @@ Do not use API calls with invented business records as production tests. Develop
 
 ## Remaining Phase 1 work
 
-Meta lead ads/provider authorization, explicit administrator routing and detailed sales/quotation SRS audit remain separate. The provider daily build limit currently blocks new production releases. Do not reapply the already applied website reconciliation migration; its tracked filename is aligned to the actual `20261022005821` history version in this increment without rerunning that SQL. Held finance migrations 142–148 are not prerequisites and remain unapplied.
+Actual Meta provider authorization remains pending; its intake/private-review code and explicit Administrator routing are now deployed. Next actual board creation/custom fields, advanced List actions and the detailed sales/quotation SRS audit. The earlier build-capacity hold was resolved through successful normal Git deployments; no capped manual deployment retry or billing/protection change occurred. Website/API/Meta/routing migrations applied once at `20261022005821`, `20261022103801`, `20261022103855`, `20261022104422`; tracked source filenames now match actual history with identical SQL bytes. Never reapply them. Held finance migrations 142–148 remain separate/unapplied. Phase 1 and all 41 client-owned acceptance checks remain open.
