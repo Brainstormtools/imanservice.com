@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),{build}=require('esbuild');
+(async()=>{const dir=fs.mkdtempSync(path.join(os.tmpdir(),'board-field-numbers-'));try{await build({entryPoints:['src/portal/board-field-numbers.ts'],bundle:true,platform:'node',format:'cjs',outfile:path.join(dir,'numbers.cjs')});const {actualBoardNumber:n}=require(path.join(dir,'numbers.cjs'));
+ for(const [raw,expected]of [['0',0],['-12.5',-12.5],['0.1',0.1],['.5',0.5]])assert.equal(n(raw),expected);console.log('PASS Actual zero signed decimal and ordinary fractional entries survive unchanged');
+ for(const [raw,expected]of [[' 12.50 ',12.5],['00012.5000',12.5],['+.50',0.5],['0.10000000000000000',0.1]])assert.equal(n(raw),expected);console.log('PASS Insignificant decimal zeros and whitespace do not invent a rounding policy');
+ for(const [raw,expected]of [['1e3',1000],['1e-7',1e-7],['0.1e1',1],['-2.50e2',-250]])assert.equal(n(raw),expected);console.log('PASS Actual scientific notation compares exact decimal meaning across JSON conversion');
+ assert.equal(n(String(Number.MAX_SAFE_INTEGER)),Number.MAX_SAFE_INTEGER);assert.equal(String(n('9007199254740992')),'9007199254740992');for(const raw of ['9007199254740993','10000000000000001'])assert.throws(()=>n(raw),/lose precision/);console.log('PASS Non-round-trippable actual integers are rejected instead of silently changed');
+ for(const raw of ['0.10000000000000001','1.234567890123456789','-1.000000000000000000001'])assert.throws(()=>n(raw),/lose precision/);console.log('PASS Actual high-precision fractional digits cannot be silently discarded');
+ for(const raw of ['1e309','1e-324','','NaN','Infinity','0x10','0b10','1_000','actual'])assert.throws(()=>n(raw));console.log('PASS Overflow underflow nondecimal and nonnumeric inputs fail closed');
+ assert.throws(()=>n('0'.repeat(101)));console.log('PASS Technical input budget rejects unbounded numeric representations');
+ for(const value of [Math.PI,1/3,Number.MAX_SAFE_INTEGER,0.0012,-12.5,2.2250738585072014e-308])assert.equal(n(String(value)),value);console.log('PASS Already round-trippable JSON numbers retain their actual values without new arithmetic');
+ }finally{fs.rmSync(dir,{recursive:true,force:true});}})().catch(e=>{console.error(e);process.exit(1)});

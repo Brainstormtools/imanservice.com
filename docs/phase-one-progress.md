@@ -15,7 +15,7 @@ The client authorizes reasonable documented assumptions instead of waiting for u
 | Facebook/Instagram lead-ad intake | DEV-002 in progress: signed capture, bounded Graph retrieval, immutable receipts and reasoned private review deployed. Actual Meta credentials/authorization remain unconfigured; no operational provider connection claimed. See [Meta guide](meta-lead-intake-guide.md). |
 | Optional administrator-configured automatic routing | DEV-004 implementation released: actual explicit rules/boards/fixed or ordered round-robin owners, eligibility checks and immutable configuration/outcomes. Zero rules seeded; no existing lead reassigned. See [routing guide](lead-routing-guide.md). |
 | Raw Lead Board statuses, List/Kanban, filters, saved views and bulk assignment | Existing implementation; verify detailed SRS behavior before phase closure. |
-| Product boards, memberships, stage rules, activities, multi-product deals and Won/Lost | Actual board creation/per-board fields are passed 8,689 checks/159 suites under DEV-059; release pending; product changes and other detailed SRS audit findings remain open. |
+| Product boards, memberships, stage rules, activities, multi-product deals and Won/Lost | DEV-059 actual board creation/per-board fields released through PR #236; product changes and other detailed SRS audit findings remain open. |
 | Product catalogue, combined quotation/BOQ, document versions and roles | Existing core implementation; detailed Phase 1 requirement-to-test audit remains open. Later project execution/finance adoption work is not substituted for this audit. |
 
 This is the initial Phase 1 map, not a claim that the four intake packages cover every sentence of the SRS. Check the detailed module 1/2 and quotation requirements before declaring Phase 1 complete. Record newly discovered development gaps explicitly.
@@ -50,7 +50,7 @@ The original 58-package catalogue is not a fresh complete SRS audit. Its current
 
 | SRS behavior | Current evidence / remaining work |
 | --- | --- |
-| Create additional product boards and per-board custom fields | `configure_sales_board` in `supabase/015_crm_sales.sql` updates an existing exact-version board; `crm-sales.tsx` renders existing boards. DEV-059 now implements a separate explicit Admin creation/definition register and private board-scoped actual value receipts, passed 8,689 checks/159 suites; release pending. No seeded business content. |
+| Create additional product boards and per-board custom fields | `configure_sales_board` in `supabase/015_crm_sales.sql` updates an existing exact-version board; `crm-sales.tsx` renders existing boards. DEV-059 actual Admin creation/definition register and private board-scoped value receipts are now implemented/tested/released through PR #236. No seeded business content. |
 | Spreadsheet-style List: sorting, column chooser, inline changes, bulk owner/stage/tag/export and date/tag/value filters | The current product List in `src/portal/crm-sales.tsx` is a fixed five-column table. Existing raw bulk product assignment is not evidence of all listed List actions. Add and test the missing actions with the same current role/version/stage safeguards. |
 | Raw Lead first-response elapsed timer | The sales lead records/history currently expose creation time; ticket-specific first-response tables belong to a later module and do not implement a Raw Lead timer. Define a documented measured-event default rather than invent a response target or business-hour policy. |
 | Configurable stage-entry actions | Current stage configuration handles names/order/probabilities and fixed system stages. A general stage-entry action/review-task configuration was not found. Require actual Admin configuration and actual eligible recipients; no invented manager assignment. |
@@ -78,3 +78,15 @@ DEV-059 is the newly recorded SRS gap package, prepared on a branch from the ver
 The catalogue explicitly expands from the historical 58 to 59 packages: 48 open (eight in progress/40 not started), 11 complete while DEV-059 is release-pending. This does not close other Phase 1 gaps or client acceptance. Next advanced List actions and the remaining audit after this bounded release.
 
 Board/field final validation: 8,689 checks/159 suites, TypeScript/build passed; all 670 source/test/config hashes and saved results reverified unchanged at `6ca858fade47347464785dc23c6598ba8e676990072a0a64b3bac235a6a60410`. New migration remains unapplied until the tested PR merges.
+
+## Latest board/field production checkpoint
+
+PR #236 merged at `8677f76765c57a7dff30a5f1f2a90316070f15df`; production `dpl_HCiQfUgmVtYVXi7grAvwWZkSboji` READY, alias/portal/assets verified. DEV-059 is development-complete: exact-stage actual board creation, optional typed definitions and board-scoped actual product-line receipts, private immutable history/CSV, current-authority/stale-value guards. 8,689 checks/159 suites and TypeScript/build passed; final filename-aligned source validation is recorded in both requirement documents.
+
+New migration applied once at database version `20261022111906`, original CLI scaffold `20261022105756`, source filename now aligned with identical SQL bytes. No SQL rerun; prior migrations and held finance 142–148 remain untouched. Seven existing boards remain; zero new board/field/value records inserted. Catalogue explicitly 59 packages: 47 open (seven in progress/40 not started), 12 complete. Actual Meta activation remains unavailable, Phase 1 incomplete, all 41 client acceptance items pending. Next advanced List features, then remaining lead timer/stage actions and sales/quotation audit.
+
+Final board/field aligned source passed 8,689 checks/159 suites again; all 670 source/test/config hashes and saved results verified unchanged at `f9c49080a6b6514e8870b0a06c30e35fdc807e3baf87d6f10b7227c4d68f533d`. One SQL filename and local test reference aligned; SQL bytes/application sources unchanged, no SQL reapplied. Resume advanced List features.
+
+Board-field precision follow-up: browser/server reject unsafe numeric conversions instead of silently changing actual digits. Text preserves exact long identifiers. New migration scaffold `20261022112524` is prepared; existing applied `20261022111906` is filename-aligned only, not rerun. The follow-up is undergoing complete regression before PR/merge/release; Phase 1 and client acceptance remain open.
+
+Exact-number follow-up validation passed 8,701 checks/160 suites, TypeScript/build; all 673 source/test/config hashes and saved results verified unchanged at `fbb5e8fe052f899497fcd68ba297aff4c4120eac86b9533d80e8a6e03284d2eb`. New precision migration `20261022112524` is still unapplied pending tested PR merge.
