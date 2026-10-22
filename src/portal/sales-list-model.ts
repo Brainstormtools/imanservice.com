@@ -1,0 +1,27 @@
+export type SalesListOptions={from:string;to:string;tag:string;min:string;max:string;currency:string;sort:string;direction:'asc'|'desc';columns:string[]};
+export const initialSalesListOptions=():SalesListOptions=>({from:'',to:'',tag:'',min:'',max:'',currency:'',sort:'',direction:'asc',columns:[]});
+export type SalesListRow={id:string;title:string;company:string;products:string;stage:string;owner:string;source:string;created:string;tags:string[];value:string|number|null;currency:string;followup:string;response:string};
+export const salesListColumns=[['title','Name'],['company','Company'],['products','Products'],['stage','Stage / status'],['owner','Owner'],['source','Source'],['created','Created UTC'],['tags','Tags'],['value','Estimated value'],['currency','Currency'],['followup','Next follow-up UTC'],['response','First response']] as const;
+const keys=new Set<string>(salesListColumns.map(([key])=>key));
+export function restoreSalesListOptions(value:unknown):SalesListOptions{
+ const v=value&&typeof value==='object'?value as Record<string,unknown>:{};const base=initialSalesListOptions();
+ for(const key of ['from','to','tag','min','max','currency'] as const)if(typeof v[key]==='string'&&v[key].length<=200)base[key]=v[key];
+ base.sort=typeof v.sort==='string'&&keys.has(v.sort)?v.sort:'';base.direction=v.direction==='desc'?'desc':'asc';base.columns=Array.isArray(v.columns)?[...new Set(v.columns.filter((x):x is string=>typeof x==='string'&&keys.has(x)))]:[];return base;
+}
+export function moneyCents(value:unknown):bigint|null{const text=String(value??'');if(!/^\d{1,12}(?:\.\d{1,2})?$/.test(text))return null;const [whole,fraction='']=text.split('.');return BigInt(whole)*100n+BigInt(fraction.padEnd(2,'0'));}
+function validDay(value:string){if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;const date=new Date(value+'T00:00:00Z');return Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===value;}
+export function salesListError(o:SalesListOptions){if(o.from&&!validDay(o.from)||o.to&&!validDay(o.to))return 'Choose valid created dates.';if(o.from&&o.to&&o.from>o.to)return 'Created-from date must not exceed created-to date.';if([o.min,o.max].some(x=>x!==''&&moneyCents(x)===null))return 'Use non-negative values with at most two decimal places and 12 whole digits.';if(o.min!==''&&o.max!==''&&moneyCents(o.min)!>moneyCents(o.max)!)return 'Minimum value must not exceed maximum value.';return '';}
+export function salesListRows(rows:SalesListRow[],o:SalesListOptions):SalesListRow[]{
+ if(salesListError(o))return [];const min=o.min===''?null:moneyCents(o.min),max=o.max===''?null:moneyCents(o.max);
+ const filtered=rows.filter(r=>{const date=r.created.slice(0,10),amount=moneyCents(r.value);return (!o.from||date!==''&&date>=o.from)&&(!o.to||date!==''&&date<=o.to)&&(!o.tag||r.tags.some(t=>t.toLocaleLowerCase()===o.tag.trim().toLocaleLowerCase()))&&(!o.currency||r.currency===o.currency)&&(min===null||amount!==null&&amount>=min)&&(max===null||amount!==null&&amount<=max);});
+ if(!keys.has(o.sort))return filtered;
+ return filtered.slice().sort((a,b)=>{const av=a[o.sort as keyof SalesListRow],bv=b[o.sort as keyof SalesListRow];const missing=(v:unknown)=>v===null||v===undefined||v===''||Array.isArray(v)&&!v.length;if(missing(av)!==missing(bv))return missing(av)?1:-1;let c=0;if(o.sort==='value'){const x=moneyCents(av),y=moneyCents(bv);c=x===y?0:x===null?1:y===null?-1:x<y?-1:1;}else c=String(av??'').localeCompare(String(bv??''),undefined,{numeric:true,sensitivity:'base'});return (o.direction==='desc'?-c:c)||a.id.localeCompare(b.id);});
+}
+export function firstResponse(created:string,activities:{kind:string;created_at:string}[],now:number):string{
+ const start=Date.parse(created);if(!Number.isFinite(start))return 'Creation time unavailable';const times=activities.filter(a=>['Call','Meeting'].includes(a.kind)).map(a=>Date.parse(a.created_at)).filter(t=>Number.isFinite(t)&&t>=start&&t<=now);const responded=times.length>0,end=responded?times.reduce((a,b)=>Math.min(a,b),now):now;if(end<start)return 'Creation time is in the future';const minutes=Math.floor((end-start)/60000),days=Math.floor(minutes/1440),hours=Math.floor(minutes%1440/60),mins=minutes%60;return `${responded?'Responded':'Waiting'} · ${days?days+'d ':''}${hours?hours+'h ':''}${mins}m`;
+}
+export function weightedForecast(deals:{id:string;stage:string;currency:string}[],lines:{deal_id:string;board_id:string;status:string;estimated_value:unknown}[],boards:{id:string;name:string}[],stages:{board_id:string;code:string;probability:number}[]){
+ const groups=new Map<string,{board:string;currency:string;scaled:bigint;missing:number}>();
+ for(const d of deals.filter(d=>!['won','lost'].includes(d.stage)))for(const l of lines.filter(l=>l.deal_id===d.id&&l.status==='Active')){const key=l.board_id+':'+d.currency,g=groups.get(key)||{board:boards.find(b=>b.id===l.board_id)?.name||'Product board',currency:d.currency,scaled:0n,missing:0};const amount=moneyCents(l.estimated_value),probability=stages.find(s=>s.board_id===l.board_id&&s.code===d.stage)?.probability;if(amount===null||!Number.isInteger(probability)||probability!<0||probability!>100)g.missing++;else g.scaled+=amount*BigInt(probability!);groups.set(key,g);}
+ return [...groups.values()].map(g=>{const digits=g.scaled.toString().padStart(5,'0'),fraction=digits.slice(-4).replace(/0+$/,'').padEnd(2,'0');return {...g,value:digits.slice(0,-4)+'.'+fraction};});
+}
