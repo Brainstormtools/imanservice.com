@@ -1,0 +1,5 @@
+let logoPromise:Promise<string>|null=null;
+export function quotationBrandLogo():Promise<string>{
+ if(logoPromise)return logoPromise;
+ logoPromise=new Promise<string>((resolve,reject)=>{if(typeof Image==='undefined'||typeof document==='undefined'){reject(Error('Open the quotation PDF export in your browser.'));return;}const image=new Image(),timeout=window.setTimeout(()=>{image.onload=null;image.onerror=null;reject(Error('The company logo could not load. Retry the quotation PDF export.'));},10000);image.onload=()=>{window.clearTimeout(timeout);try{const canvas=document.createElement('canvas');canvas.width=1040;canvas.height=320;const context=canvas.getContext('2d');if(!context)throw Error('Browser image rendering is unavailable.');context.drawImage(image,0,0,1040,320);resolve(canvas.toDataURL('image/png'));}catch(e){reject(e);}};image.onerror=()=>{window.clearTimeout(timeout);reject(Error('The company logo could not load. Retry the quotation PDF export.'));};image.src='/logo.svg';}).catch(e=>{logoPromise=null;throw e;});return logoPromise;
+}
