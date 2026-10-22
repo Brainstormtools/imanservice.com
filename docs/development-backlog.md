@@ -1,5 +1,19 @@
 # Remaining portal development backlog
 
+## Verified board-field release checkpoint — 22 October 2026
+
+Board creation and board-scoped custom fields are live through [PR #236](https://github.com/Brainstormtools/imanservice.com/pull/236) and the exact-number safeguard in [PR #237](https://github.com/Brainstormtools/imanservice.com/pull/237). Current application main is `97c665777ac28eb70e7b17c8d673de5f1f04f6d5`; tested head `bf4f81efbc671444cbd9da32cff42c0ac803a1a6`, tested/merged tree `4aa527c80a563bb421fd70ae52760c1aedec7c1e`, zero changed files between tested head and merge.
+
+Production `dpl_794iQva9nrb4rsaBVU3TnmzqzzQC` is **READY**, production target, exact merge SHA, no alias error; `www.imanservice.com` points to it. Public portal and deployed feature/precision guards verified: entry `/assets/index-BYJB5mp4.js`, portal `/assets/Portal-HxdtNsk1.js`, portal SHA256 `ed4d47b95b205f5d9a34d3a0636ce2bc361ebec85f0e1d81240c1f7607d4b0ec`.
+
+Final filename-aligned verification: **8,701 checks / 160 suites passed**, 673 source/test/config files and all saved results unchanged at `67b77d76ebf0d67e52a78a3fd67e934e6aa9d395a836b7037935f75da3344447`. TypeScript and production build passed for identical application/SQL bytes; this checkpoint only aligns the applied precision migration filename/test path and records release evidence.
+
+Applied exactly once: board fields `20261022111906` (original scaffold `20261022105756`, SQL SHA256 `7bedc992788d9f8f15aee1fce454e5b2b372c914d56f25c451596dc795b33f56`) and precision guard `20261022113632` (original scaffold `20261022112524`, SQL SHA256 `bce1ac0eb3f1f28c528d38188fedce3bf3334b057971f9aedbe8965f419d0f88`). Source filenames now match actual applied versions, with identical SQL bytes. **Do not reapply either migration** or earlier website/API/Meta/routing migrations. Finance migrations 142–148 remain held/unapplied. Server metadata verifies the precision guard and fixed function configuration; anonymous/service-key writes remain denied.
+
+Seven actual existing boards remain unchanged; zero field definitions/value receipts or production fixtures were inserted. Actual content, options, members and assignments stay manual. Unsafe numeric conversion is rejected without rounding; immutable receipts, schema/version checks and board-specific authority remain enforced. Actual Meta authorization remains pending.
+
+DEV-059 is development-complete. Catalogue: **59 packages, 47 open (seven in progress, 40 not started), 12 development complete**. **Phase 1 remains incomplete; all 41 client-owned acceptance items remain pending.** Precise resume: advanced sales List sorting, column chooser, inline editing, bulk actions and filters, then the remaining Phase 1 lead timer, stage actions and quotation/SRS audit. Continue bounded tested PR/merge/deploy increments, without resuming later-phase finance work. This current record supersedes the preparation and historical deployment states below.
+
 ## Board-field exact-number follow-up — 22 October 2026
 
 Final precision validation: **8,701 checks across 160 suites passed**, including 73 database, 15 UI and eight numeric transport checks; TypeScript and production build passed. All 673 source/test/config files and saved results verified unchanged at `fbb5e8fe052f899497fcd68ba297aff4c4120eac86b9533d80e8a6e03284d2eb`. Current production still has zero field definitions/value receipts; no existing entries were affected. The new precision migration remains unapplied until the tested PR merges.
