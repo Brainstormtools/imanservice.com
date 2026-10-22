@@ -1,12 +1,13 @@
+import {quotationBrandLogo} from './quotation-logo';
 export type ReportSection={title:string;headers:string[];rows:unknown[][]};
 // Loaded only when exporting, so the PDF library does not delay portal startup.
-export async function createReportPDF(title:string,context:string,sections:ReportSection[]) {
+export async function createReportPDF(title:string,context:string,sections:ReportSection[],options:{brandLogo?:boolean}={}) {
  const {jsPDF}=await import('jspdf');
  const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
  const width=doc.internal.pageSize.getWidth(),height=doc.internal.pageSize.getHeight(),margin=14;
  let y=20;
  const line=(value:string,size=9,bold=false)=>{doc.setFont('helvetica',bold?'bold':'normal');doc.setFontSize(size);const lines=doc.splitTextToSize(value,width-2*margin);for(const l of lines){if(y>height-20){doc.addPage();y=20;}doc.text(l,margin,y);y+=size*.45+1.5;}};
- line('i Man Service',12,true);line(title,18,true);line(context);line(`Generated UTC: ${new Date().toISOString()}`);y+=5;
+ if(options.brandLogo){doc.addImage(await quotationBrandLogo(),'PNG',margin,8,52,16);y=30;}else line('i Man Service',12,true);line(title,18,true);line(context);line(`Generated UTC: ${new Date().toISOString()}`);y+=5;
  for(const section of sections){if(y>height-35){doc.addPage();y=20;}line(section.title,12,true);if(!section.rows.length){line('No records in this scope.');continue;}
  const columnWidth=(width-2*margin)/section.headers.length;
  const drawRow=(values:unknown[],heading=false)=>{doc.setFont('helvetica',heading?'bold':'normal');doc.setFontSize(8);const cells=values.map(v=>doc.splitTextToSize(String(v??'—'),columnWidth-4));const rowHeight=Math.max(...cells.map(c=>c.length))*4+5;if(rowHeight>height-40){
@@ -21,6 +22,6 @@ export async function createReportPDF(title:string,context:string,sections:Repor
  const pages=doc.getNumberOfPages();for(let p=1;p<=pages;p++){doc.setPage(p);doc.setFontSize(8);doc.setFont('helvetica','normal');doc.text(`i Man Service · ${p} / ${pages}`,margin,height-8);}
  return doc;
 }
-export async function downloadReportPDF(filename:string,title:string,context:string,sections:ReportSection[]) {
- (await createReportPDF(title,context,sections)).save(filename.replace(/[^a-zA-Z0-9._-]/g,'_'));
+export async function downloadReportPDF(filename:string,title:string,context:string,sections:ReportSection[],options:{brandLogo?:boolean}={}) {
+ (await createReportPDF(title,context,sections,options)).save(filename.replace(/[^a-zA-Z0-9._-]/g,'_'));
 }

@@ -1,5 +1,5 @@
-export async function quoteCases({pg,fs,q,one,user,eq,deny,ids,deal,boardA,boardB,expert}){
-await pg.exec("reset role");await pg.exec(await fs.readFile(new URL('../../supabase/016_crm_quotations.sql',import.meta.url),'utf8'));
+export async function quoteCases({pg,fs,q,one,user,eq,deny,ids,deal,boardA,boardB,expert,installed=false}){
+await pg.exec("reset role");if(!installed)await pg.exec(await fs.readFile(new URL('../../supabase/016_crm_quotations.sql',import.meta.url),'utf8'));
 await user(ids.admin);
 await q('select set_sales_board_member($1,$2,true)',[boardA,expert]);
 const products=await q('select * from crm_product_lines where deal_id=$1 order by board_id',[deal]);const product=products.find(p=>p.board_id===boardA),other=products.find(p=>p.board_id===boardB);
