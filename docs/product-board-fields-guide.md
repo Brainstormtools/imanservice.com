@@ -1,10 +1,10 @@
 # Product board creation and board-specific fields
 
-This Phase 1 increment is prepared for a tested PR/release. It is not live until the exact merged production deployment is verified. New migration scaffold `20261022105756_phase_one_board_fields.sql` is unapplied. Existing boards, people, assignments and business records are preserved; no product, member, field or value is seeded. The current database has seven existing boards; do not assume the original six-board seed is the current business register.
+This Phase 1 implementation is released through merged PR #236 at `8677f76765c57a7dff30a5f1f2a90316070f15df`. Exact production `dpl_HCiQfUgmVtYVXi7grAvwWZkSboji` is READY; www alias, public portal and deployed board/field assets are verified. Migration `20261022111906_phase_one_board_fields.sql` applied once, originally scaffolded as `20261022105756`. Its renamed source is byte-identical and must not be reapplied. Seven actual existing boards are preserved; no products, members, fields/values or other business fixtures were seeded. DEV-059 implementation is released; Phase 1 and client acceptance remain open.
 
 ## Create an actual product board
 
-An active Administrator opens **Sales board configuration → Product board definitions and fields**, then explicitly loads the register. Enter the actual unique lowercase code, name, badge color, Won outcome and days-without-activity highlight interval. All inputs start blank. Choose the actual existing board whose exact stage definitions should be copied, inspect the stage preview, enter a creation reason and tick the confirmation. New boards start inactive unless the Administrator explicitly checks the enable action.
+An active Administrator opens **Sales board configuration → Product board definitions and fields**, then explicitly loads the register. Enter the actual unique lowercase code (2–50 characters), name, badge color, Won outcome and days-without-activity highlight interval. All inputs start blank. Choose the actual existing board whose exact stage definitions should be copied, inspect the stage preview, enter a creation reason and tick the confirmation. New boards start inactive unless the Administrator explicitly checks the enable action.
 
 The copied stage snapshot includes actual source board/stage identities and versions, names, sequence, probabilities and active actions. An intervening source change rejects the stale request. Active New, Won and Lost system stages are required; Won/Lost retain their existing system semantics. Copying a selected stage layout does not invent a product's commercial/execution policy. Select the appropriate actual source and review/configure its new stages using the existing controls.
 
@@ -14,12 +14,12 @@ Existing boards are preserved without inventing historical creators or backfilli
 
 ## Define optional fields for an actual board
 
-The same Administrator register has a blank **Create actual field** form per actual board. Enter a unique lowercase key and actual label, choose a type, explicitly enable when intended, supply a reason and confirm. New fields are inactive unless explicitly enabled. Nothing inserts a business value or marks an existing enquiry qualified.
+The same Administrator register has a blank **Create actual field** form per actual board. Enter a unique lowercase key (2–50 characters) and actual label, choose a type, explicitly enable when intended, supply a reason and confirm. New fields are inactive unless explicitly enabled. Nothing inserts a business value or marks an existing enquiry qualified.
 
 | Type | Actual entry |
 | --- | --- |
 | Text | Up to 2,000 characters. |
-| Number | A JSON number, including zero or decimals; no inferred unit, cost, target or rounding policy. |
+| Number | An unchanged JSON-round-trippable number, including zero or decimals. Unsafe large/high-precision entries are rejected; use Text to preserve exact digits. No inferred unit, cost, target or rounding policy. |
 | Date | Actual ISO calendar date; no timezone or working-day inference. |
 | Yes/No | Explicit Yes, No or unset; No is retained as false, not missing. |
 | Single choice | One of 1–50 actual distinct Administrator-entered options, or unset. No sample choices are seeded. |
@@ -40,6 +40,8 @@ Each accepted receipt freezes actual field definitions/versions and resulting va
 
 ## Release and next work
 
-Apply the new migration once only after its tested PR is merged. Record the actual connected-tool history version, then align its source filename with identical SQL bytes; never reapply the file to align a filename. Prior applied website/API/Meta/routing migrations remain unchanged, and finance migrations 142–148 stay separate/unapplied. Use normal Git-based deployment and verify exact production/domain/assets. Do not retry blocked CLI status telemetry or the capped manual deployment endpoint, bypass credentials or change billing/protection.
+The new migration is already applied once at `20261022111906`; original source scaffold `20261022105756` was renamed with identical SQL bytes. Never reapply SQL to align a filename, or rerun the earlier website/API/Meta/routing migrations. Finance migrations 142–148 remain separate/unapplied. The current source-file alignment updates only local test paths and release records; it changes no application behavior. Release used normal Git/PR merges; no blocked CLI status retry, manual capped deployment retry, credential/billing/protection change or production test fixture occurred.
 
 Next Phase 1 work is advanced sales List sorting/columns/inline/bulk/filter behavior, then the remaining lead-timer, stage-action and sales/quotation SRS audit. Actual Meta account activation remains unavailable. Phase 1 is not complete and all 41 client-owned acceptance items remain pending.
+
+Exact-number follow-up: independent browser/server guards reject lossy JSON-number conversion rather than silently rounding. New precision migration scaffold `20261022112524` is prepared/unapplied; original board/field `20261022111906` remains applied once and byte-identical. This follow-up passed 8,701 checks/160 suites, TypeScript/build; PR merge and its new migration must precede production verification.
