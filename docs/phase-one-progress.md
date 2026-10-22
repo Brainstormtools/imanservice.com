@@ -10,7 +10,7 @@ The client authorizes reasonable documented assumptions instead of waiting for u
 | --- | --- |
 | Manual lead entry and mapped CSV/Excel import | Existing implementation; included in regression verification. |
 | Normalization, phone/email deduplication and repeat enquiry history | Existing manual/import path; website path being reconciled and tested. Preserve actual ownership and original acquisition. Conflicting contacts/customer matches require private review. |
-| Website enquiry capture | Contact/proposal handlers and browser submission identity restored from an earlier unreleased branch, reconciled through a new migration. New durable abuse limiting and eligible in-app notification. Release verification pending. |
+| Website enquiry capture | Contact/proposal handlers and browser submission identity restored from an earlier unreleased branch, reconciled through a new migration. New durable abuse limiting and eligible in-app notification. PR #230 merged; migration applied once. Exact preview verified. Production build is blocked by the Vercel daily limit, so this is not live-complete. |
 | API-key lead capture | DEV-003 remains pending. Build controlled source connections and ingestion; never expose a service-role key. |
 | Facebook/Instagram lead-ad intake | DEV-002 remains pending. Implement verified webhook/retrieval and source mapping. No Meta credential bindings were found in the target Vercel project; actual provider activation requires an authorized account/app connection. |
 | Optional administrator-configured automatic routing | DEV-004 remains pending. Only actual administrator-selected boards/eligible owners; no invented assignments or silently seeded rules. |
@@ -33,3 +33,7 @@ The earlier hosted-only `capture_website_crm_lead` function and private receipt 
 ## Closure rule
 
 Say **“Phase 1 development is complete and live on the portal”** only after its remaining SRS requirements are implemented, tested, merged through PRs, deployed to the intended production project, and the exact release is verified. Provider setup that remains unavailable must be disclosed; a READY build alone does not verify an operational Meta connection. Client acceptance stays separate.
+
+## Current release checkpoint
+
+PR #230 is merged at `40ee65207a834a2fffb833b91360e6770a2fcf16`; 8,364 automated checks/149 suites and TypeScript/build pass. Migration version `20261022005821` (`phase_one_website_intake`) is applied once; do not reapply the source scaffold. Exact preview `dpl_E5vgWkPLyBjXTuGiar36QQhCmqh5` is READY and its portal/form guards were verified. The manual deployment API and Git-based production status both report the provider daily build/deployment limit. Production remains the previous release; Phase 1 is not complete. Continue remaining Phase 1 development while waiting for provider capacity.

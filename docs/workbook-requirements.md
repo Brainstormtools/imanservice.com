@@ -1,5 +1,17 @@
 # Workbook requirements and remaining portal work
 
+## Website increment verification and production blocker — 22 October 2026
+
+[PR #230](https://github.com/Brainstormtools/imanservice.com/pull/230) merged as `40ee65207a834a2fffb833b91360e6770a2fcf16`, tested head `7dc19fb1897320e50d8969f5520af6d45f084e38`, exact tested/merged tree `ac0a0d88d78d361f1377922f26f1a316d6b7708d`; comparison reports no file changes. Validation remains **8,364 checks / 149 suites**, TypeScript/build, with all 644 source/test/config hashes and saved results reverified unchanged (`1e74862c712d34a844687f466827aa70f88b949f663b20c306aa5d277fc29fba`).
+
+The new reconciliation migration applied once as `20261022005821` / `phase_one_website_intake`; source scaffold `supabase/migrations/20261022004541_phase_one_website_intake.sql`, SHA256 `cf4cf09f82d203672cd62cb7581bd54adbfe9aba9f7b439095195de8d83b5f64`. These are the connected-tool migration version and CLI source scaffold respectively, not two migrations. Do not apply the file again or run automatic migration push; existing history must be reconciled before any future CLI-based migration workflow. Metadata verified private RLS, no direct service/browser table access, service-only v2 RPC execution, fixed empty search path, and zero enquiry receipts/limit buckets. No actual contacts, assignments, business documents or test fixtures were inserted.
+
+Exact automatic GitHub preview `dpl_E5vgWkPLyBjXTuGiar36QQhCmqh5` is READY for the tested head, with no alias error. Authenticated platform fetch verified `/portal` HTTP 200 and both form handlers HTTP 405 with POST-only headers, proving module loading without submitting fake business enquiries. Positive database/duplicate/notification/limiter workflows were tested only in isolated local databases. Signed-in/live business acceptance remains client-owned.
+
+**Production release is blocked.** An explicit additional deployment request returned HTTP 402, `api-deployments-free-per-day`, more than 100 deployments/day, retry-after 86400. The project's existing Git-based production flow was then checked; Vercel also marked the merge commit failed with its build-rate-limit status. No production deployment exists for this merge. Main contains the code; the public production portal still serves the earlier release. Do not describe website intake or Phase 1 as live-complete. No billing changes, quota evasion or credential bypass were attempted.
+
+Precise resume: continue Phase 1 API-key intake, Meta adapter/setup, explicit administrator routing and the detailed sales/quotation audit. After the provider's limit resets (or its account owner changes the plan), verify the actual current main tree, reuse any legitimate exact READY deployment if available, deploy the intended production source, confirm domain/assets and form guards, and record the verified release. Do not reapply the website migration or held finance migrations 142–148. DEV-001 stays in progress; Phase 1 and all 41 client acceptance checks remain open.
+
 ## Phase 1 priority and website intake reconciliation — 22 October 2026
 
 The client now requests completion and live release of SRS build Phase 1 before Phase 2–6, with reasonable documented assumptions instead of waiting for business answers. Actual people, assignments, credentials and business records remain manual; confirmed decisions still apply. Client acceptance remains separate and all 41 items remain pending. See [Phase 1 progress and closure rules](phase-one-progress.md).
