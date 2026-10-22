@@ -1,6 +1,6 @@
 export async function websiteLeadIntakeCases({pg,fs,q,one,user,eq,deny,ids}){
  await pg.exec('reset role');
- await pg.exec(await fs.readFile(new URL('../../supabase/migrations/20261022004541_phase_one_website_intake.sql',import.meta.url),'utf8'));
+ await pg.exec(await fs.readFile(new URL('../../supabase/migrations/20261022005821_phase_one_website_intake.sql',import.meta.url),'utf8'));
  const call='select capture_website_crm_lead($1,$2,$3,$4,$5,$6,$7,$8)',request=crypto.randomUUID();
  const args=[request,'contact',' Web Customer ','WEB.INTAKE@example.test','+923009991122','QA Company','Website enquiry',JSON.stringify({utm_campaign:'Launch'})];
  await user(ids.admin);await deny(call,args,'Even an authenticated administrator cannot invoke the server-only website intake');
