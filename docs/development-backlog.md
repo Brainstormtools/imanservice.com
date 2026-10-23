@@ -1,5 +1,20 @@
 # Remaining portal development backlog
 
+## Phase 2 actual project acceptance-criteria definitions — implemented, release pending 23 October 2026
+
+The first bounded DEV-009 increment adds a private, versioned criteria-definition register in the Configurator. An active Admin or the actual current assigned PM with project authority explicitly selects an actual project and enters each criterion, expected result and verification method. All business content and the revision reason remain manual, with explicit confirmation. Criteria rows have no prefilled standards, thresholds, reviewers or assignments. This defines requirements only; it does not approve work, record pass/fail results, grant client acceptance, change tasks/costs or close the project.
+
+A dedicated server path enforces current account/role/department/PM scope under locks, exact expected revision and stable actor-bound request identity. Changed-meaning retries, stale versions, project rebinding and invalid/partial criteria are rejected. Definitions capture actual actor/server time/reason and immutable original content. Current Admin/assigned PM can read ordered history and export formula-safe CSV; clients, unrelated staff and direct private-table access are denied. Reassignment, revoked authority or inactive accounts block even exact definition retries. Completed projects retain readable history but cannot receive retrospective new definitions. An exact authorized retry can still retrieve its original historical receipt without creating a new version.
+
+The UI starts with blank actual-project/content/reason/review inputs. Revising an existing definition requires explicit opening of its editor and a fresh reason/confirmation. Failed reads/writes clear private projects, definition details and exports; epoch/account keys suppress delayed cross-account reads. A technical bound of 1–100 criteria with three bounded text fields controls payload size, not business acceptance policy. No production business fixtures, standards, people or assignments were created.
+
+Focused validation passed: 32 isolated database checks, nine UI checks and existing planning UI; TypeScript/build passed. Cumulative regression and unchanged-source verification are recorded with the increment PR checkpoint. New local scaffold `20261023114118_phase_two_project_criteria.sql` is **UNAPPLIED**, following pending QA reuse `20261023113008`; CLI binary availability remains unresolved, so hold both for coordinated release review. Prior six migrations are already applied at their documented versions; do not reapply them, Phase 1 or held finance 142–148.
+
+This increment is stacked after open PR #254, based on merged main PR #253 / `949c0daf0ecc241afcf730166312563c8c91867c`. Keep the two new migration/UI PRs open until coordinated release. Last verified production remains PR #248 / READY `dpl_CKVDhcRZmmS3CJ36ZhnFaZaCHqKK`; the combined main release is still recorded as Vercel build-rate-limited. Do not retry the capped manual endpoint or claim pending criteria/payment/QA features production-verified.
+
+Precise resume: separate criteria-definition review and execution evidence against frozen versions, then audit remaining Configurator parameter/import, route/device, task/dependency/resource/calendar/PWA gaps. DEV-009 is partial/in progress, not complete. Phase 2 remains incomplete. Catalogue remains 66 packages, 50 open and 16 development-complete under the release-count convention; now 15 in progress and 35 not started. All 41 client-owned acceptance checks and actual Meta authorization remain pending. Development can continue independently of deployment capacity.
+
+
 ## Phase 2 reviewed QA/SOP planning references — implemented, release pending 23 October 2026
 
 DEV-008 now supports explicit Admin selection of a current available master QA/SOP version and an actual uniquely keyed task in an unsaved project-template draft. Source, target, actual reason and confirmation start blank. The full ordered source text is shown before attachment. References remain separate from ordinary QA checklist and procedure/precondition fields; no steps are silently truncated, no existing checklist is replaced and no compliance/completion or project acceptance decision is inferred. Actual template/task/standards content remains manual. A technical maximum of ten source references per task bounds the request payload.
@@ -344,7 +359,7 @@ Historical focus (21 October 2026): DEV-028 unstarted-removal adoption released 
 | DEV-006 | Conversion and payment scheduling | Accounts routing during conversion | In progress — implemented/tested, migration applied and PR #247 included in verified PR #248 production; explicit actual recipient, immutable atomic evidence and in-portal reminder |
 | DEV-007 | Conversion and payment scheduling | Customer creation during conversion | In progress — reviewed pre-publication creation/linking prerequisite implemented/tested; migration applied and PR #248 production verified; accepted identities preserved |
 | DEV-008 | Planning and execution | General master QA/SOP templates | In progress — reviewed master library merged/database-applied; explicit frozen planning-reference reuse implemented/tested with new migration unapplied; production release remains rate-limited |
-| DEV-009 | Planning and execution | Project-specific acceptance criteria | Pending development |
+| DEV-009 | Planning and execution | Project-specific acceptance criteria | In progress — immutable actual definitions/history/CSV implemented/tested, migration unapplied and release pending; separate review/execution evidence remains |
 | DEV-010 | Planning and execution | Structured route/containment register | Pending development |
 | DEV-011 | Planning and execution | Device-specific register attributes | Pending development |
 | DEV-012 | Planning and execution | Route-linked execution work | Pending development |
