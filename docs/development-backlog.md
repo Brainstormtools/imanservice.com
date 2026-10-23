@@ -1,5 +1,27 @@
 # Remaining portal development backlog
 
+## Coordinated release checkpoint — partially deployed, 23 October 2026
+
+The user authorized release of the completed reviewed work. PRs #247–#252 were retargeted/merged into main in order. Combined application commit is `ad22848894a49066f2a2eb578e4fd066abcf6043`; GitHub comparison against tested PR #252 head `6a1f3932b3882f0e45fb19a2ecbbefd5ace44d00` has zero changed files. Its saved 9,390 checks/186 suites were verified against unchanged 734 source files at `af91c3113140e092469a6c1e86f70bbfe61c3b01faf516d2ef54a5135de48a0c`; TypeScript and production build passed.
+
+All six new migrations were applied once through connected database tools. Existing Phase 1 migrations and held finance 142–148 were not reapplied. An attempted Advance application hit a connector-generated migration timestamp collision and rolled back; schema/history inspection confirmed it absent before the successful application. Applied versions are authoritative:
+
+| Applied version | Migration | Original scaffold version |
+| --- | --- | --- |
+| 20261023111828 | phase_two_conversion_accounts | 20261023000245 |
+| 20261023111830 | phase_two_customer_identity | 20261023001126 |
+| 20261023111846 | phase_two_advance_balance_drafts | 20261023100725 |
+| 20261023111850 | phase_two_milestone_drafts | 20261023103434 |
+| 20261023111852 | phase_two_monthly_drafts | 20261023105307 |
+| 20261023111855 | phase_two_qa_library | 20261023110507 |
+
+Repository migration filenames and six database-suite references now match applied versions; SQL contents are unchanged. Full regression/source verification for that alignment is retained with the release checkpoint PR. Private tables have RLS and no direct anon/authenticated SELECT grants; access remains through guarded RPCs. The security advisor's private-table/no-policy information and authenticated SECURITY DEFINER warnings are expected for this guarded design; no blanket public policies or privilege changes were introduced. No production business fixtures, standards or assignments were inserted.
+
+**Production is only partially updated.** Exact custom-domain deployment `dpl_CKVDhcRZmmS3CJ36ZhnFaZaCHqKK` is READY and serves `www.imanservice.com`, source `d72495d0ad72548d26fbf036e69fcb68cbea824b` / PR #248. Accounts routing and reviewed customer identity are included. GitHub's Vercel status for combined commit `ad22848894a49066f2a2eb578e4fd066abcf6043` is failure with `upgradeToPro=build-rate-limit`; no final combined deployment was produced. Advance/Milestone/Monthly drafts and the QA/SOP library are merged and database-ready but are not yet production-verified. Do not promote arbitrary previews or retry the capped manual deployment endpoint. Resume deployment after the limit reset or a user-arranged plan upgrade, using the latest reviewed main, then verify exact READY/source/custom domain and actual portal assets before claiming the combined release live.
+
+Precise development resume remains explicit reviewed QA/SOP version reuse into unsaved project/task drafts with source evidence, then DEV-009 project acceptance criteria. DEV-005/DEV-008 and Phase 2 remain incomplete; catalogue closure counts are retained pending cumulative release review (66 packages, 50 open, 16 development-complete; 14 in progress and 36 not started). All 41 client-owned signed-in/browser/export/device acceptance checks and actual Meta authorization remain pending. Development can continue independently of the deployment cap.
+
+
 ## Phase 2 master QA/SOP library — implemented, release pending 23 October 2026
 
 The first bounded DEV-008 increment adds a separate master QA/SOP library to the Project Configurator. Actual active Admins enter a name, choose QA or SOP, type the actual ordered steps, decide availability, give a reason and explicitly confirm review. New content/kind/reason/review choices start blank; availability starts off. No standards, policies, procedure content, people or assignments are seeded. This records Admin review of entered content; it does not claim external standards certification or client approval.
@@ -303,10 +325,10 @@ Historical focus (21 October 2026): DEV-028 unstarted-removal adoption released 
 | DEV-002 | Sales intake | Meta lead intake | In progress — signed capture/private review prepared; actual provider connection and release pending |
 | DEV-003 | Sales intake | API lead intake | Development complete — implemented/tested/released through PR #234; actual configuration remains manual, client acceptance pending |
 | DEV-004 | Sales intake | Automatic lead routing | Development complete — implemented/tested/released through PR #234; actual configuration remains manual, client acceptance pending |
-| DEV-005 | Conversion and payment scheduling | Later scheduled payment drafts | In progress — finite Advance, Milestone and Monthly drafts implemented/tested; new migrations unapplied and coordinated release pending; broader schedule/reconciliation review remains |
-| DEV-006 | Conversion and payment scheduling | Accounts routing during conversion | In progress — implemented/tested, new migration unapplied and release pending; explicit actual recipient, immutable atomic evidence and in-portal reminder |
-| DEV-007 | Conversion and payment scheduling | Customer creation during conversion | In progress — reviewed pre-publication creation/linking prerequisite implemented/tested; new migration unapplied, release pending; accepted identities preserved |
-| DEV-008 | Planning and execution | General master QA/SOP templates | In progress — reviewed versioned master library implemented/tested, migration unapplied and release pending; explicit draft reuse remains |
+| DEV-005 | Conversion and payment scheduling | Later scheduled payment drafts | In progress — finite Advance, Milestone and Monthly drafts implemented/tested; migrations applied and PRs merged; final production build rate-limited; broader schedule/reconciliation review remains |
+| DEV-006 | Conversion and payment scheduling | Accounts routing during conversion | In progress — implemented/tested, migration applied and PR #247 included in verified PR #248 production; explicit actual recipient, immutable atomic evidence and in-portal reminder |
+| DEV-007 | Conversion and payment scheduling | Customer creation during conversion | In progress — reviewed pre-publication creation/linking prerequisite implemented/tested; migration applied and PR #248 production verified; accepted identities preserved |
+| DEV-008 | Planning and execution | General master QA/SOP templates | In progress — reviewed versioned master library implemented/tested, migration applied and PR #252 merged; final production build rate-limited; explicit draft reuse remains |
 | DEV-009 | Planning and execution | Project-specific acceptance criteria | Pending development |
 | DEV-010 | Planning and execution | Structured route/containment register | Pending development |
 | DEV-011 | Planning and execution | Device-specific register attributes | Pending development |
