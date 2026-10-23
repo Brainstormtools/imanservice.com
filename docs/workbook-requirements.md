@@ -1,5 +1,16 @@
 # Workbook requirements and remaining portal work
 
+## Phase 2 Accounts routing — implemented, release pending 23 October 2026
+
+DEV-006 now has an explicit blank/required Accounts recipient in Won conversion. Candidates are actual active staff/Admin accounts with current `finance.manage` authority, queried only for a Deal the actor can currently convert. Conversion rechecks the actor after Deal lock waits and locks/rechecks relevant profile, board, membership, role and team authority. It rejects missing/ineligible/revoked recipients for a new conversion; records immutable recipient/actor/server-time/Deal/sale/first-invoice evidence atomically; and queues a generic in-portal reminder to the authorized Finance workspace, honoring notification opt-out. An exact retry creates no duplicate routing or reminder and cannot change the original recipient. Existing sales receive no backfilled assignment. Routing does not approve/issue an invoice, grant project membership or send external messages.
+
+Focused validation passed: 19 isolated database checks plus 18 existing/extended planning UI and 11 access UI checks; TypeScript/production build passed. Full regression and exact source fingerprint are recorded in the increment PR. No live business data or assignments were created. New CLI scaffold `20261023000245_phase_two_conversion_accounts.sql` is **UNAPPLIED**. Release the matching UI and migration together: the new recipient-list RPC is required by that UI; do not deploy newer main without first coordinating this new migration. Never reapply existing Phase 1 migrations. Do not apply held finance 142–148.
+
+Phase 2 remains incomplete. Catalogue remains 66 packages, 50 open and 16 development-complete under the existing release-count convention; DEV-006 changes from not-started to in-progress/release-pending, giving 11 in progress and 39 not started. No later payment schedule or customer merge/create behavior is invented. Both are separate next increments, DEV-007 then DEV-005. See [Phase 2 checkpoint](phase-two-development.md).
+
+Precise resume: verify saved full regression/source evidence; coordinate only this new migration when preparing the cumulative release, then verify exact READY/domain/assets before any live claim. In the meantime continue Phase 2 development without deployment. Prior PR #246 access hardening merged at `51105a6cfcf4f01ebd7b43467d7f7650023b94ef` with 9,027 checks/175 suites, TypeScript/build, unchanged 706 files at `cc30e15a878f54942ae0cf9ee54787007f5281920983146adf41522bcfdfdd65`. Last verified production remains PR #240; Phase 1 saved target remains PR #244 if releasing it separately. Actual Meta authorization and all 41 client-owned acceptance checks remain pending.
+
+
 ## Phase 2 development proceeds while deployment waits — 23 October 2026
 
 The user explicitly authorized sequential development through the SRS build phases while Vercel deployment is unavailable. This supersedes the earlier Phase 1 production gate for starting Phase 2 implementation. “Offline development” means implementation/testing without deployment, not a claim that offline business-data capture or sync works. Development-complete, merged, database-applied, deployed and client-accepted remain separate states.
