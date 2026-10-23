@@ -1,5 +1,18 @@
 # Phase 2 development checkpoint
 
+## Phase 2 master QA/SOP library — implemented, release pending 23 October 2026
+
+The first bounded DEV-008 increment adds a separate master QA/SOP library to the Project Configurator. Actual active Admins enter a name, choose QA or SOP, type the actual ordered steps, decide availability, give a reason and explicitly confirm review. New content/kind/reason/review choices start blank; availability starts off. No standards, policies, procedure content, people or assignments are seeded. This records Admin review of entered content; it does not claim external standards certification or client approval.
+
+Each save creates an immutable version with actual actor/server time and reason. Exact request retries cannot change meaning or duplicate a version; stale revision writes are rejected under locks. Admin can inspect historical versions and export the selected history as formula-safe CSV. Currently authorized planners see only current available versions; deactivation removes future choices while preserving history. Clients, unrelated/inactive staff and direct private-table access are denied. Failed reads/writes and account/permission changes clear private UI history and exports. Existing task checklists, running projects and acceptance criteria are unchanged.
+
+Focused checks passed: 24 isolated database checks and nine UI checks; TypeScript and production build passed. Full regression and unchanged-source evidence are recorded with the PR checkpoint. New migration `20261023110507_phase_two_qa_library.sql` is **UNAPPLIED**, sixth after pending Accounts routing, customer identity, Advance balance, Milestone and Monthly drafts. The CLI scaffold command was unavailable because its published binary package could not be obtained; the local UTC-named SQL scaffold is held unapplied for coordinated release review. No production mutation, test fixture or deployment was made.
+
+This increment is stacked after PR #251, then #250/#249/#248/#247. Keep the stack open for coordinated new-migration/merge/UI release; retarget children to main after each parent merges. Do not reapply Phase 1 migrations, apply held finance 142–148, or retry the capped deployment endpoint. Last verified production remains PR #240.
+
+Precise resume: complete explicit selection/reuse of reviewed QA/SOP versions into unsaved project/task planning drafts with source evidence, then DEV-009 project-specific acceptance criteria; audit parameter/import, route/device, task/dependency/resource/calendar/PWA gaps afterward. DEV-008 is partial/in progress, not complete. Phase 2 remains incomplete. Catalogue stays 66 packages, 50 open and 16 development-complete under the release-count convention; now 14 in progress and 36 not started. All 41 client-owned acceptance checks and actual Meta authorization remain pending. Continue development without waiting for deployment, and verify the exact cumulative release before any live claim.
+
+
 ## Phase 2 finite Monthly drafts — implemented, release pending 23 October 2026
 
 DEV-005 now includes later invoice Drafts for actual converted Monthly sales, using the recorded conversion period count and first-invoice percentage. Existing conversion permits 1–120 periods; one-period sales offer no later draft. The original first invoice remains unchanged. Non-final allocations reuse its recorded percentage and existing two-decimal calculation; the final period is the exact accepted quotation remainder. Invalid/overallocated plans and incompatible tax remainders stop for Accounts review. No separate client acceptance of the structured conversion terms is inferred, and no new rounding or calendar policy is introduced.
