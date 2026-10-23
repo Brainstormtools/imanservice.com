@@ -1,5 +1,16 @@
 # Phase 2 development checkpoint
 
+## Phase 2 finite Milestone drafts — implemented, release pending 23 October 2026
+
+DEV-005 now prepares later invoice Drafts for an actual converted Milestones sale, in the order of its recorded conversion titles and percentages. Accepted quotation amounts provide the finite total; no separate client approval of the structured conversion schedule is inferred. The original first invoice remains unchanged. Accounts/Admin explicitly chooses the sale and later installment, enters actual billing/due dates and reason, and confirms the reviewed source. No milestone completion, automatic billing date, invoice issue, payment or assignment is inferred.
+
+Server authority and exact source are checked under locks. Unique sale/installment and stable request identity prevent skipping, duplicate creation and retries with changed meaning. Earlier invoices must still match their recorded amounts and tax classifications. Changed/voided prior invoices, credits, accepted commercial changes, existing recurrence or incompatible tax remainders require separate review. Final allocation uses the accepted remainder without adding a rounding policy. Immutable evidence retains actual actor, server time, original derivation and manual dates/reason; receipts survive later invoice changes and cannot regenerate a voided installment. UI failures and account/permission changes clear private choices and exports. No production business records or fixtures were inserted.
+
+New scaffold `20261023103434_phase_two_milestone_drafts.sql` is **UNAPPLIED**, fourth after pending Accounts routing `20261023000245`, customer identity `20261023001126` and Advance balance `20261023100725`. Keep this increment stacked after PR #249, itself after #248 and #247, for coordinated migration/merge/UI release. Do not reapply Phase 1 migrations or apply held finance 142–148. Deployment remains deferred; last verified production remains PR #240. Focused database and UI checks passed; full regression, TypeScript/build and unchanged-source evidence are retained with the PR checkpoint.
+
+Precise resume: finite Monthly payment periods next, using recorded terms and manual dates, without repurposing unbounded recurrence. DEV-005 and Phase 2 remain incomplete. Catalogue remains 66 packages, 50 open (13 in progress, 37 not started) and 16 development-complete under the existing release-count convention. All 41 client-owned acceptance checks and actual Meta authorization remain pending. Continue development without waiting for deployment; verify the exact cumulative release before any live claim.
+
+
 ## Phase 2 finite Advance balance draft — implemented, release pending 23 October 2026
 
 The first bounded DEV-005 increment prepares one later invoice Draft for an actual converted **Advance** sale. It derives the remaining gross/net/tax from the frozen accepted quotation less the original advance, reusing existing monetary precision and tax rates. It is remaining unbilled scope, not the unpaid balance of the first invoice; payments against the first invoice do not reduce it. Actual billing date, due date, reason and confirmation are entered manually, with no preselected dates or recurring cadence. A future-dated draft remains Draft until the existing ordinary invoice workflow acts on it.
