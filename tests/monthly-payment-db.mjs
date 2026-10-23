@@ -35,11 +35,11 @@ try{
  await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022192444_phase_one_product_scope.sql',import.meta.url),'utf8'));
  await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022194610_phase_one_lead_files.sql',import.meta.url),'utf8'));
  await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261022223747_phase_one_quote_scope_versions.sql',import.meta.url),'utf8'));
- await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261023000245_phase_two_conversion_accounts.sql',import.meta.url),'utf8'));
- await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261023001126_phase_two_customer_identity.sql',import.meta.url),'utf8'));
- await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261023100725_phase_two_advance_balance_drafts.sql',import.meta.url),'utf8'));
- await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261023103434_phase_two_milestone_drafts.sql',import.meta.url),'utf8'));
- await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261023105307_phase_two_monthly_drafts.sql',import.meta.url),'utf8'));
+ await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261023111828_phase_two_conversion_accounts.sql',import.meta.url),'utf8'));
+ await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261023111830_phase_two_customer_identity.sql',import.meta.url),'utf8'));
+ await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261023111846_phase_two_advance_balance_drafts.sql',import.meta.url),'utf8'));
+ await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261023111850_phase_two_milestone_drafts.sql',import.meta.url),'utf8'));
+ await pg.exec(await fs.readFile(new URL('../supabase/migrations/20261023111852_phase_two_monthly_drafts.sql',import.meta.url),'utf8'));
  await advanceBalanceCases({pg,fs,q,one,user,eq,deny,ids});
  await milestonePaymentCases({pg,fs,q,one,user,eq,deny,ids});
  await monthlyPaymentCases({pg,fs,q,one,user,eq,deny,ids});console.log(`${passed} integrated Advance, Milestone and Monthly database assertions passed`);
