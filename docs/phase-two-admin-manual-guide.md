@@ -1,10 +1,10 @@
-# Phase 2 — Admin manual operating guide
+# Phase 2 — interim Admin manual operating guide
 
-Status: **software complete for the user-approved Admin manual operating scope** (28 October 2026). The user explicitly replaced the remaining Phase 2 automation/integration work with an Admin manual method. Existing deployed software supports the operations below. This is a scope decision, not a claim that the original full SRS automation was implemented. Actual project work, business setup and all 41 client acceptance checks remain separate.
+**Interim only: the original Phase 2 SRS is active and incomplete.** The user clarified that the original requirements must be fulfilled. This guide provides temporary manual operating options; it neither closes Phase 2 nor removes any software requirement. Earlier manual-only completion claims are superseded. Actual project work, permissions and client acceptance remain separate.
 
 ## Manual operating steps
 
-| Work | Admin method in the existing portal | Automation deferred |
+| Work | Admin method in the existing portal | Original software still required |
 |---|---|---|
 | Route/device work tasks | In the actual project's **Tasks and team**, use **Add task**, enter the actual task, select an actual authorized assignee if appropriate, set priority/deadline and add the actual checklist. Record route/device identity in the task title or checklist. Before work starts, use the Configurator's task-route reference panel to explicitly link the actual route revision. | Automatic task generation per route/device and route-level aggregate execution reporting. |
 | Task hierarchy and predecessors | Keep the actual grouping, parent/child task IDs and predecessor order in a manually maintained project plan. The existing project change record's proposed scope/schedule-impact/evidence fields can record the actual plan and revision reference. Follow its existing review rules when a change requires approval. Admin checks readiness/predecessors before manually scheduling the successor. Task names/checklists can carry the actual grouping reference. | Structured editable hierarchy/dependency graph and automatic predecessor enforcement. Text references are not machine-enforced relationships. |
@@ -15,10 +15,7 @@ Status: **software complete for the user-approved Admin manual operating scope**
 
 Manual operation preserves current permissions, required reviews, immutable evidence and protection of started/completed work. It grants no new authority, makes no assignments and changes no production business record by itself. Admin must not rewrite recorded work/cost or use the manual procedure to bypass approval, eligibility, booking or handover guards. A manually checked dependency or resource register is not a new server guarantee.
 
-## Completion and remaining work
 
-The **Phase 2 Admin manual software milestone is complete**. The deployed application was verified through PRs #265/#266 with 10,053 passing checks across 209 suites, TypeScript and production build. The documentation release records this approved operating scope; it introduces no application or database change. All seventeen existing Phase 2 migrations are already applied and must not be reapplied.
+## Current completion status
 
-The original automation packages remain recorded as future/deferred extensions, with their existing implementation statuses. They are not relabelled implemented merely because Admin now performs the operation manually. The global catalogue still contains 66 packages: 47 open, 19 development-complete. Full original automated Phase 2 scope remains deferred; the accepted manual milestone may now close without waiting for those extensions.
-
-Phase 1 software remains complete/live. Client live/browser/export/device acceptance, actual Meta activation, actual project completion and training acceptance are not inferred. Phase 2 PWA installation/push/camera support is separate from native mobile offline synchronization, which the SRS assigns to Phase 6. The next phase can proceed against the remaining Phase 3 requirements; reopen Phase 2 automation only as a separately tracked extension.
+Phase 2 is incomplete. Continue the original required software development before advancing to Phase 3. Manual procedures do not implement structured relationships, automatic scheduling, integrated signed snapshots, import formats or resource optimization. All 41 client acceptance checks and actual Meta activation remain pending. All eighteen recorded Phase 2 migrations are already applied; never reapply them.

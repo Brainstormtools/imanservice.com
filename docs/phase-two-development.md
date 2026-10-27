@@ -1,6 +1,18 @@
 # Phase 2 development checkpoint
 
-## Phase 2 Admin manual software scope — complete, 28 October 2026
+## Original Phase 2 SRS restored — incomplete, active development
+
+The user clarified: **“Yes, I want the original requirements fulfilled.”** The manual-only closure in PR #267 is superseded. **Phase 2 remains incomplete until its original software requirements are implemented, tested, merged and verified in production.** The Admin manual guide is interim operational help; it does not replace required handover integration, route/node task generation/reporting, structured hierarchy/dependencies, scheduling/baseline revisions, parameterized imports or resource/tool/capacity integration. Do not advance to Phase 3 or call missing original features deferred merely because an Admin can perform a manual procedure.
+
+Current verified application production is PR #267 / main `73520bf7e137e6c1dd975d25b4cde703a92dd2f9`, READY `dpl_B8E1JZ52MwMy8StfVsCGNbK65gHD`. That unchanged application had 10,053 passing checks across 209 suites. Phase 1 software remains complete/live. All 41 client-owned acceptance checks and actual Meta activation remain pending.
+
+DEV-015 development prepared a dedicated Admin-reviewed parameterized-standard CSV/XLSX import, exact decimal definitions/references, inactive atomic batch receipts and a template-copy precision fix. Focused checks passed locally: 34 database, 20 mapper/reuse, 10 new UI, 10 legacy import UI and 17 planning UI checks, plus TypeScript. **The development workspace then became unavailable during full regression/release preparation. The final cumulative results cannot currently be verified, and no new application code has been merged or claimed live.** See [precise recovery checkpoint](phase-two-original-srs-resume.md).
+
+New migration `20261027202933_phase_two_parameterized_import.sql` was already applied once through connected database tools and is preserved in this repository. It adds the guarded dedicated import RPC; current live fixed-only UI is unchanged. Native checks deny anonymous/service-role direct execution and retain current active Admin validation and the existing fixed importer. Do not reapply this migration or the prior seventeen Phase 2 migrations, Phase 1 or held finance migrations. No production business/test fixtures, assignments or invented policies were inserted.
+
+Current catalogue remains 66 packages: 47 open (16 in progress, 31 not started), 19 development-complete; DEV-015 is in progress, not complete. Restore the workspace, recover the prepared branch without discarding its changes, verify full tests against unchanged source, then release the original-scope implementation increment through a new PR. Continue all remaining original Phase 2 requirements afterward. Native mobile offline sync remains the SRS Phase 6 scope, separate from Phase 2 PWA installation/push/camera support.
+
+## Historical manual-only interpretation — superseded by original SRS restoration
 
 The user explicitly instructed: **“Mark Admin use manuall method and complete it.”** Remaining Phase 2 automatic handover integration, route/device task generation, structured hierarchy/dependency enforcement, automatic rescheduling/baseline comparison, broader imports and resource optimization are therefore deferred extensions. **Phase 2 software is complete for the approved Admin manual operating scope.** This does not claim that the original full automated SRS functionality was implemented. [Admin manual operating guide](phase-two-admin-manual-guide.md) maps each operation to existing deployed portal controls, identifies manual/external planning responsibilities and preserves existing approval/access/history/work-protection rules. Actual business values, assignees, dates, resources and review decisions remain manual.
 
