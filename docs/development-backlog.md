@@ -1,5 +1,17 @@
 # Remaining portal development backlog
 
+## Verified Phase 2 parameterized-import release — 28 October 2026
+
+[PR #269](https://github.com/Brainstormtools/imanservice.com/pull/269) merged at `673f0194d863753d13d0055b4c0dc44b625267c1`; reviewed head `fe0618fab6f8573a4b5c714c262df9c78ca1360b` and merge have zero changed files, exact tree `669d15f18f30463f1c7ccbb9d884869f521496d9`. Production deployment `dpl_A7fm448Q1s2jF9ogjKcJHmsh9j6V` is **READY**, with `www.imanservice.com` pointing to that exact deployment. Public `/portal`, entry JavaScript/CSS, actual lazy Portal chunk `/assets/Portal-DIdLkKAj.js` (SHA256 `6a40c4b9b6c84de333182dedb30dd35542ce10e7499e4b40b1081a404cf835f3`), PDF chunk and logo returned HTTP 200. Actual Portal assets contain the new dedicated import controls and retained Phase 1/Phase 2 controls. GitHub write access is restored; no credential extraction or protection bypass was used.
+
+DEV-015 reviewed parameterized task-standard import is **development-complete and released**. Admin reviews actual CSV/XLSX parameter definitions, quantity/factor/inclusion references and precise decimal values, then explicitly saves an atomic inactive batch. Activation/adoption remain separate explicit actions. Exact retry receipts, authoritative access/input checks and exact template-copy conflict comparison are verified. No actual standards, assignments, live plans or production fixtures were inserted. Migration `20261027202933` was already applied through PR #268; no migration was reapplied for this release. All eighteen recorded Phase 2 migrations remain applied.
+
+The recovered full regression and saved results were verified against all 798 unchanged source/test/config/logo files: **10,117 checks across 212 suites**, fingerprint `c5d4b95c540fac4feac7a5a5980978ea1892e946f0a6fbfe16d64404febcca7b`; TypeScript and production build passed. Full results survived the earlier workspace disconnect and were verified rather than assumed. Both the workspace and repository-write blockers are resolved.
+
+Current catalogue is **66 packages: 46 open (15 in progress, 31 not started), 20 development-complete**. DEV-015 moves from in progress to complete; this closes only that package. **The original Phase 2 SRS remains active and Phase 2 remains incomplete.** Manual methods are interim options only. All 41 client-owned signed-in/browser/export/device acceptance checks and actual Meta activation remain pending; Phase 1 software remains complete/live.
+
+Precise resume: implement DEV-009 integration of current project criteria and necessary approved evidence into future signed handover snapshots without changing earlier signed snapshots or exposing private file records unnecessarily. Then continue DEV-012 route/node-level generation/reporting, DEV-013 hierarchy/dependencies, DEV-014 calendar-driven baselines/rescheduling and DEV-016/017/018 tools/resources/capacity, auditing existing implementations first. Do not advance to Phase 3 or claim Phase 2/training/whole-CRM completion. Never reapply existing migrations or retry blocked CLI telemetry/capped manual deployment endpoints.
+
 ## Phase 2 parameterized task-standard import — tested release, 28 October 2026
 
 The workspace has recovered. The prepared DEV-015 application/test changes were preserved and reconciled with merged original-scope correction PR #268 (`ebff87346fc3055545bac2019b3b361e6d33b417`). **The original Phase 2 SRS remains active and Phase 2 remains incomplete.** The manual guide is interim help only; required automation/integration is not deferred or replaced by manual operation.
@@ -576,7 +588,7 @@ Historical focus (21 October 2026): DEV-028 unstarted-removal adoption released 
 | DEV-012 | Planning and execution | Route-linked execution work | In progress — manual task references and immutable new-activity route capture/private report/CSV implemented/tested/released in PR #265; route/node-level generation/reporting remains |
 | DEV-013 | Planning and execution | Broader task scope, parent-child and dependency changes | Pending development |
 | DEV-014 | Planning and execution | Schedule baselines/revisions and automatic rescheduling | Pending development |
-| DEV-015 | Planning and execution | Reviewed parameterized task-standard import | In progress — implementation prepared locally and new migration applied; workspace recovery, full-regression verification and application release pending |
+| DEV-015 | Planning and execution | Reviewed parameterized task-standard import | Development complete — reviewed parameterized CSV/XLSX import, inactive atomic receipts and exact template reuse released in PR #269; client acceptance pending |
 | DEV-016 | Resources | Individual physical-tool identities | Pending development |
 | DEV-017 | Resources | Pre-delivery and cross-project resource allocation | Pending development |
 | DEV-018 | Resources | Worker skill/capacity/availability rules | Pending development |
