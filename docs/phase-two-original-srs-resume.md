@@ -1,5 +1,11 @@
 # Original Phase 2 recovery checkpoint
 
+## Recovery resolved — 28 October 2026
+
+The workspace and staged application/test changes survived. Reconciled with PR #268. The completed full regression and saved results were verified against all 798 unchanged source files: 10,117 checks / 212 suites, fingerprint `c5d4b95c540fac4feac7a5a5980978ea1892e946f0a6fbfe16d64404febcca7b`. TypeScript and production build passed. Release the recovered parameterized-import code through its new reviewed PR; no migration reapplication. Then continue the original Phase 2 requirements. Phase 2 remains incomplete and manual methods remain interim only.
+
+## Historical disconnect checkpoint (superseded)
+
 The user's current instruction is to fulfil the **original SRS**, not substitute manual methods. Phase 2 is incomplete. PR #267 manual-only closure is superseded; its guide remains interim only. Phase 3 must not start on the strength of that closure.
 
 ## Applied migration — do not repeat
