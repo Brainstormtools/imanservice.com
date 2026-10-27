@@ -1,5 +1,9 @@
 # Original Phase 2 recovery checkpoint
 
+## Current release resolved — PR #269
+
+The recovered application release is merged and production verified READY at `673f0194d863753d13d0055b4c0dc44b625267c1` / `dpl_A7fm448Q1s2jF9ogjKcJHmsh9j6V`. GitHub access and workspace blockers are resolved. The full 10,117 checks/212 suites and all 798 unchanged source files were verified. DEV-015 is released. Next: original Phase 2 handover integration, generation/dependency/schedule and resource/tool/capacity requirements. Phase 2 remains incomplete. Never reapply the eighteen existing Phase 2 migrations.
+
 ## Recovery resolved — 28 October 2026
 
 The workspace and staged application/test changes survived. Reconciled with PR #268. The completed full regression and saved results were verified against all 798 unchanged source files: 10,117 checks / 212 suites, fingerprint `c5d4b95c540fac4feac7a5a5980978ea1892e946f0a6fbfe16d64404febcca7b`. TypeScript and production build passed. Release the recovered parameterized-import code through its new reviewed PR; no migration reapplication. Then continue the original Phase 2 requirements. Phase 2 remains incomplete and manual methods remain interim only.
